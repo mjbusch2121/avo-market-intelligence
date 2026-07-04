@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avocado Market Intelligence</title>
+<meta name="description" content="Weekly avocado market intelligence: USDA volume and FOB pricing, truck rates, diesel, and growing-region weather.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Spline+Sans+Mono:wght@400;600&family=Spline+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥑</text></svg>">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+<script src="dashboard.js" defer></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">Avocado Market Intelligence</span>
+  </div>
+  <div class="stamp">
+    <span id="week-label">—</span>
+    <span class="stamp-sep">·</span>
+    <span id="updated">loading…</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- The wire: auto-generated weekly headline -->
+  <section class="wire" aria-labelledby="wire-eyebrow">
+    <p class="eyebrow" id="wire-eyebrow">The week on one line</p>
+    <h1 class="headline" id="headline">Loading this week's market read…</h1>
+  </section>
+
+  <section class="kpis" id="kpis" aria-label="Key indicators"></section>
+
+  <section class="signals-panel" id="signals-panel" hidden>
+    <p class="eyebrow">What to watch</p>
+    <ul class="signals" id="signals"></ul>
+  </section>
+
+  <section class="panel" id="supply-panel">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">USDA AMS · Movement</p>
+        <h2>Supply — weekly arrivals</h2>
+      </div>
+      <p class="panel-sub">Pounds crossing or arriving per week, vs the 3-year seasonal pace</p>
+    </div>
+    <div class="supply-grid">
+      <div class="chart-box tall"><canvas id="supplyChart" role="img" aria-label="Weekly avocado arrival volume by region"></canvas></div>
+      <div class="supply-side">
+        <div id="supply-regions"></div>
+        <h3 class="side-title">Mexico crossings by port</h3>
+        <div id="crossings"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="pricing-panel">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">USDA AMS · FOB / shipping point</p>
+        <h2>Pricing — Hass 48s benchmark</h2>
+      </div>
+      <p class="panel-sub" id="pricing-sub">Weekly mostly-price midpoint vs its 3-year seasonal band</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="chart-box tall"><canvas id="priceChart" role="img" aria-label="Benchmark FOB price vs 3-year band"></canvas></div>
+      <div id="price-tables" class="price-tables"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="freight-panel">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">USDA AMS · FVWTRK truck rates</p>
+        <h2>Freight — spot rates into key markets</h2>
+      </div>
+      <p class="panel-sub" id="freight-sub">Per-load refrigerated spot rates; change vs prior Tuesday in parentheses</p>
+    </div>
+    <div class="lanes" id="lanes"></div>
+    <div class="availability" id="availability"></div>
+  </section>
+
+  <div class="duo">
+    <section class="panel" id="diesel-panel">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">EIA · Weekly retail diesel</p>
+          <h2>Diesel context</h2>
+        </div>
+      </div>
+      <div class="chart-box"><canvas id="dieselChart" role="img" aria-label="Diesel price trend by region"></canvas></div>
+      <div class="diesel-latest" id="diesel-latest"></div>
+    </section>
+
+    <section class="panel" id="weather-panel">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">NOAA/NWS + Open-Meteo · Outlook</p>
+          <h2>Growing-region weather</h2>
+        </div>
+        <p class="panel-sub">A leading indicator: what happens in the orchards now shows up in arrivals in 2–4 weeks</p>
+      </div>
+      <div class="weather-grid" id="weather"></div>
+    </section>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-notes" id="foot-notes"></div>
+  <div class="foot-sources" id="foot-sources"></div>
+  <p class="foot-line">Updated automatically every Tuesday · Built with USDA AMS Market News, EIA, and NOAA public data ·
+    <a href="https://github.com/mjbusch2121/avo-market-intelligence" id="repo-link">source</a></p>
+</footer>
+
+</body>
+</html>

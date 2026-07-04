@@ -1,0 +1,963 @@
+{
+ "report_date": "2026-06-30",
+ "source": "https://www.ams.usda.gov/mnreports/fvwtrk.pdf",
+ "sections": [
+  {
+   "district": "MEXICO CROSSINGS THROUGH NOGALES ARIZONA",
+   "rows": [
+    {
+     "dest": "Atlanta",
+     "availability": "Slight Surplus",
+     "low": 6500,
+     "high": 6800,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 8,
+     "wow_reported": true,
+     "commodities": "HONEYDEWS, MANGOES, TOMATOES AND TOMATOES, PLUM TYPE"
+    },
+    {
+     "dest": "Baltimore",
+     "availability": "Slight Surplus",
+     "low": 8400,
+     "high": 8700,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "HONEYDEWS, MANGOES, TOMATOES AND TOMATOES, PLUM TYPE"
+    },
+    {
+     "dest": "Boston",
+     "availability": "Slight Surplus",
+     "low": 9400,
+     "high": 9700,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "HONEYDEWS, MANGOES, TOMATOES AND TOMATOES, PLUM TYPE"
+    },
+    {
+     "dest": "Chicago",
+     "availability": "Slight Surplus",
+     "low": 5200,
+     "high": 5400,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 1,
+     "wow_reported": true,
+     "commodities": "HONEYDEWS, MANGOES, TOMATOES AND TOMATOES, PLUM TYPE"
+    },
+    {
+     "dest": "Dallas",
+     "availability": "Slight Surplus",
+     "low": 3000,
+     "high": 3200,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": -3,
+     "wow_reported": true,
+     "commodities": "HONEYDEWS, MANGOES, TOMATOES AND TOMATOES, PLUM TYPE"
+    },
+    {
+     "dest": "Los Angeles",
+     "availability": "Slight Surplus",
+     "low": 1500,
+     "high": 1600,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": -24,
+     "wow_reported": true,
+     "commodities": "HONEYDEWS, MANGOES, TOMATOES AND TOMATOES, PLUM TYPE"
+    },
+    {
+     "dest": "New York",
+     "availability": "Slight Surplus",
+     "low": 8800,
+     "high": 9300,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": -1,
+     "wow_reported": true,
+     "commodities": "HONEYDEWS, MANGOES, TOMATOES AND TOMATOES, PLUM TYPE"
+    },
+    {
+     "dest": "Philadelphia",
+     "availability": "Slight Surplus",
+     "low": 8500,
+     "high": 8700,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": -4,
+     "wow_reported": true,
+     "commodities": "HONEYDEWS, MANGOES, TOMATOES AND TOMATOES, PLUM TYPE"
+    }
+   ]
+  },
+  {
+   "district": "IMPERIAL, COACHELLA VALLEYS CA, CENTRAL AND WESTERN AZ, MEXICO CROSSINGS THROUGH CALEXICO AND SAN LUIS",
+   "rows": [
+    {
+     "dest": "Atlanta",
+     "availability": "Adequate",
+     "low": 9800,
+     "high": 10400,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 24,
+     "wow_reported": true,
+     "commodities": "ANISE, ARTICHOKES, BEETS, BLACKBERRIES, BLUEBERRIES, BOK CHOY, BROCCOLI, BRUSSELS SPROUTS, CABBAGE, CAULIFLOWER, CELERY, CHINESE CABBAGE, CILANTRO, GREENS, KALE, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE, PARSLEY, RASPBERRIES AND SPINACH"
+    },
+    {
+     "dest": "Baltimore",
+     "availability": "Adequate",
+     "low": 10500,
+     "high": 11000,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 5,
+     "wow_reported": true,
+     "commodities": "ANISE, ARTICHOKES, BEETS, BLACKBERRIES, BLUEBERRIES, BOK CHOY, BROCCOLI, BRUSSELS SPROUTS, CABBAGE, CAULIFLOWER, CELERY, CHINESE CABBAGE, CILANTRO, GREENS, KALE, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE, PARSLEY, RASPBERRIES AND SPINACH"
+    },
+    {
+     "dest": "Boston",
+     "availability": "Adequate",
+     "low": 12600,
+     "high": 13200,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 8,
+     "wow_reported": true,
+     "commodities": "ANISE, ARTICHOKES, BEETS, BLACKBERRIES, BLUEBERRIES, BOK CHOY, BROCCOLI, BRUSSELS SPROUTS, CABBAGE, CAULIFLOWER, CELERY, CHINESE CABBAGE, CILANTRO, GREENS, KALE, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE, PARSLEY, RASPBERRIES AND SPINACH"
+    },
+    {
+     "dest": "Chicago",
+     "availability": "Adequate",
+     "low": 7400,
+     "high": 7800,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": -1,
+     "wow_reported": true,
+     "commodities": "ANISE, ARTICHOKES, BEETS, BLACKBERRIES, BLUEBERRIES, BOK CHOY, BROCCOLI, BRUSSELS SPROUTS, CABBAGE, CAULIFLOWER, CELERY, CHINESE CABBAGE, CILANTRO, GREENS, KALE, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE, PARSLEY, RASPBERRIES AND SPINACH"
+    },
+    {
+     "dest": "Dallas",
+     "availability": "Adequate",
+     "low": 5400,
+     "high": 6000,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": -12,
+     "wow_reported": true,
+     "commodities": "ANISE, ARTICHOKES, BEETS, BLACKBERRIES, BLUEBERRIES, BOK CHOY, BROCCOLI, BRUSSELS SPROUTS, CABBAGE, CAULIFLOWER, CELERY, CHINESE CABBAGE, CILANTRO, GREENS, KALE, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE, PARSLEY, RASPBERRIES AND SPINACH"
+    },
+    {
+     "dest": "Miami",
+     "availability": "Adequate",
+     "low": 10300,
+     "high": 10700,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": -3,
+     "wow_reported": true,
+     "commodities": "ANISE, ARTICHOKES, BEETS, BLACKBERRIES, BLUEBERRIES, BOK CHOY, BROCCOLI, BRUSSELS SPROUTS, CABBAGE, CAULIFLOWER, CELERY, CHINESE CABBAGE, CILANTRO, GREENS, KALE, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE, PARSLEY, RASPBERRIES AND SPINACH"
+    },
+    {
+     "dest": "New York",
+     "availability": "Adequate",
+     "low": 12900,
+     "high": 13500,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 16,
+     "wow_reported": true,
+     "commodities": "ANISE, ARTICHOKES, BEETS, BLACKBERRIES, BLUEBERRIES, BOK CHOY, BROCCOLI, BRUSSELS SPROUTS, CABBAGE, CAULIFLOWER, CELERY, CHINESE CABBAGE, CILANTRO, GREENS, KALE, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE, PARSLEY, RASPBERRIES AND SPINACH"
+    },
+    {
+     "dest": "Philadelphia",
+     "availability": "Adequate",
+     "low": 11700,
+     "high": 12600,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 9,
+     "wow_reported": true,
+     "commodities": "ANISE, ARTICHOKES, BEETS, BLACKBERRIES, BLUEBERRIES, BOK CHOY, BROCCOLI, BRUSSELS SPROUTS, CABBAGE, CAULIFLOWER, CELERY, CHINESE CABBAGE, CILANTRO, GREENS, KALE, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE, PARSLEY, RASPBERRIES AND SPINACH"
+    },
+    {
+     "dest": "Seattle",
+     "availability": "Adequate",
+     "low": 6800,
+     "high": 7200,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 24,
+     "wow_reported": true,
+     "commodities": "ANISE, ARTICHOKES, BEETS, BLACKBERRIES, BLUEBERRIES, BOK CHOY, BROCCOLI, BRUSSELS SPROUTS, CABBAGE, CAULIFLOWER, CELERY, CHINESE CABBAGE, CILANTRO, GREENS, KALE, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE, PARSLEY, RASPBERRIES AND SPINACH"
+    }
+   ]
+  },
+  {
+   "district": "KERN DISTRICT CALIFORNIA",
+   "rows": [
+    {
+     "dest": "Baltimore",
+     "availability": "Adequate",
+     "low": 11200,
+     "high": 12100,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 6,
+     "wow_reported": true,
+     "commodities": "CARROTS"
+    },
+    {
+     "dest": "Chicago",
+     "availability": "Adequate",
+     "low": 7400,
+     "high": 7900,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 8,
+     "wow_reported": true,
+     "commodities": "CARROTS"
+    },
+    {
+     "dest": "New York",
+     "availability": "Adequate",
+     "low": 11500,
+     "high": 12500,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 2,
+     "wow_reported": true,
+     "commodities": "CARROTS"
+    },
+    {
+     "dest": "Philadelphia",
+     "availability": "Adequate",
+     "low": 11300,
+     "high": 11900,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 2,
+     "wow_reported": true,
+     "commodities": "CARROTS"
+    }
+   ]
+  },
+  {
+   "district": "OXNARD DISTRICT CALIFORNIA",
+   "rows": [
+    {
+     "dest": "Baltimore",
+     "availability": "Adequate",
+     "low": 12000,
+     "high": 12800,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 12,
+     "wow_reported": true,
+     "commodities": "CELERY, CILANTRO, GREENS, KALE, PARSLEY AND STRAWBERRIES"
+    },
+    {
+     "dest": "Philadelphia",
+     "availability": "Adequate",
+     "low": 11700,
+     "high": 12300,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 6,
+     "wow_reported": true,
+     "commodities": "CELERY, CILANTRO, GREENS, KALE, PARSLEY AND STRAWBERRIES"
+    }
+   ]
+  },
+  {
+   "district": "SALINAS-WATSONVILLE CALIFORNIA",
+   "rows": [
+    {
+     "dest": "Baltimore",
+     "availability": "Adequate",
+     "low": 11300,
+     "high": 11900,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 3,
+     "wow_reported": true,
+     "commodities": "BROCCOLI, CAULIFLOWER, LETTUCE, BOSTON, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE AND STRAWBERRIES"
+    },
+    {
+     "dest": "Chicago",
+     "availability": "Adequate",
+     "low": 6500,
+     "high": 7000,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": -5,
+     "wow_reported": true,
+     "commodities": "BROCCOLI, CAULIFLOWER, LETTUCE, BOSTON, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE AND STRAWBERRIES"
+    },
+    {
+     "dest": "New York",
+     "availability": "Adequate",
+     "low": 11800,
+     "high": 12500,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 1,
+     "wow_reported": true,
+     "commodities": "BROCCOLI, CAULIFLOWER, LETTUCE, BOSTON, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE AND STRAWBERRIES"
+    },
+    {
+     "dest": "Philadelphia",
+     "availability": "Adequate",
+     "low": 11700,
+     "high": 12600,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 4,
+     "wow_reported": true,
+     "commodities": "BROCCOLI, CAULIFLOWER, LETTUCE, BOSTON, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE AND STRAWBERRIES"
+    }
+   ]
+  },
+  {
+   "district": "SANTA MARIA CALIFORNIA",
+   "rows": [
+    {
+     "dest": "Atlanta",
+     "availability": "Adequate",
+     "low": 11100,
+     "high": 12000,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 47,
+     "wow_reported": true,
+     "commodities": "BROCCOLI, CAULIFLOWER, CELERY, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE AND STRAWBERRIES"
+    },
+    {
+     "dest": "Baltimore",
+     "availability": "Adequate",
+     "low": 11000,
+     "high": 11500,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "BROCCOLI, CAULIFLOWER, CELERY, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE AND STRAWBERRIES"
+    },
+    {
+     "dest": "Boston",
+     "availability": "Adequate",
+     "low": 12000,
+     "high": 12900,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 9,
+     "wow_reported": true,
+     "commodities": "BROCCOLI, CAULIFLOWER, CELERY, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE AND STRAWBERRIES"
+    },
+    {
+     "dest": "Chicago",
+     "availability": "Adequate",
+     "low": 6800,
+     "high": 7400,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "BROCCOLI, CAULIFLOWER, CELERY, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE AND STRAWBERRIES"
+    },
+    {
+     "dest": "Dallas",
+     "availability": "Adequate",
+     "low": 6000,
+     "high": 6400,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": -5,
+     "wow_reported": true,
+     "commodities": "BROCCOLI, CAULIFLOWER, CELERY, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE AND STRAWBERRIES"
+    },
+    {
+     "dest": "Miami",
+     "availability": "Adequate",
+     "low": 11900,
+     "high": 12800,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 14,
+     "wow_reported": true,
+     "commodities": "BROCCOLI, CAULIFLOWER, CELERY, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE AND STRAWBERRIES"
+    },
+    {
+     "dest": "Philadelphia",
+     "availability": "Adequate",
+     "low": 11500,
+     "high": 12300,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 7,
+     "wow_reported": true,
+     "commodities": "BROCCOLI, CAULIFLOWER, CELERY, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE AND STRAWBERRIES"
+    },
+    {
+     "dest": "Seattle",
+     "availability": "Adequate",
+     "low": 6100,
+     "high": 6600,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 7,
+     "wow_reported": true,
+     "commodities": "BROCCOLI, CAULIFLOWER, CELERY, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE AND STRAWBERRIES"
+    }
+   ]
+  },
+  {
+   "district": "SOUTH AND CENTRAL DISTRICT CALIFORNIA",
+   "rows": [
+    {
+     "dest": "Baltimore",
+     "availability": "Adequate",
+     "low": 12000,
+     "high": 12600,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 10,
+     "wow_reported": true,
+     "commodities": "ANISE, ARTICHOKES, AVOCADOS, BOK CHOY, BROCCOLI, BRUSSELS SPROUTS, CABBAGE, CAULIFLOWER, CELERY, CILANTRO, GRAPEFRUIT, GREENS, KALE, LEMONS, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE, RADISHES AND SPINACH"
+    },
+    {
+     "dest": "Chicago",
+     "availability": "Adequate",
+     "low": 6800,
+     "high": 7400,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ANISE, ARTICHOKES, AVOCADOS, BOK CHOY, BROCCOLI, BRUSSELS SPROUTS, CABBAGE, CAULIFLOWER, CELERY, CILANTRO, GRAPEFRUIT, GREENS, KALE, LEMONS, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE, RADISHES AND SPINACH"
+    },
+    {
+     "dest": "New York",
+     "availability": "Adequate",
+     "low": 11500,
+     "high": 12400,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 2,
+     "wow_reported": true,
+     "commodities": "ANISE, ARTICHOKES, AVOCADOS, BOK CHOY, BROCCOLI, BRUSSELS SPROUTS, CABBAGE, CAULIFLOWER, CELERY, CILANTRO, GRAPEFRUIT, GREENS, KALE, LEMONS, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE, RADISHES AND SPINACH"
+    },
+    {
+     "dest": "Philadelphia",
+     "availability": "Adequate",
+     "low": 12200,
+     "high": 12700,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 8,
+     "wow_reported": true,
+     "commodities": "ANISE, ARTICHOKES, AVOCADOS, BOK CHOY, BROCCOLI, BRUSSELS SPROUTS, CABBAGE, CAULIFLOWER, CELERY, CILANTRO, GRAPEFRUIT, GREENS, KALE, LEMONS, LETTUCE, GREEN LEAF, LETTUCE, ICEBERG, LETTUCE, RED LEAF, LETTUCE, ROMAINE, RADISHES AND SPINACH"
+    },
+    {
+     "dest": "Atlanta",
+     "availability": "Slight Shortage",
+     "low": 7900,
+     "high": 9400,
+     "mostly_low": 8600,
+     "mostly_high": 9200,
+     "wow_pct": 0,
+     "wow_reported": false,
+     "commodities": "GRAPEFRUIT, LEMONS AND ORANGES"
+    },
+    {
+     "dest": "Baltimore",
+     "availability": "Slight Shortage",
+     "low": 9400,
+     "high": 11500,
+     "mostly_low": 10300,
+     "mostly_high": 11100,
+     "wow_pct": 0,
+     "wow_reported": false,
+     "commodities": "GRAPEFRUIT, LEMONS AND ORANGES"
+    },
+    {
+     "dest": "Boston",
+     "availability": "Slight Shortage",
+     "low": 10100,
+     "high": 12400,
+     "mostly_low": 10800,
+     "mostly_high": 11600,
+     "wow_pct": 0,
+     "wow_reported": false,
+     "commodities": "GRAPEFRUIT, LEMONS AND ORANGES"
+    },
+    {
+     "dest": "Chicago",
+     "availability": "Slight Shortage",
+     "low": 6200,
+     "high": 7400,
+     "mostly_low": 6800,
+     "mostly_high": 7400,
+     "wow_pct": 0,
+     "wow_reported": false,
+     "commodities": "GRAPEFRUIT, LEMONS AND ORANGES"
+    },
+    {
+     "dest": "Dallas",
+     "availability": "Slight Shortage",
+     "low": 5600,
+     "high": 6600,
+     "mostly_low": 5900,
+     "mostly_high": 6300,
+     "wow_pct": 0,
+     "wow_reported": false,
+     "commodities": "GRAPEFRUIT, LEMONS AND ORANGES"
+    },
+    {
+     "dest": "Miami",
+     "availability": "Slight Shortage",
+     "low": 9100,
+     "high": 11000,
+     "mostly_low": 9600,
+     "mostly_high": 10400,
+     "wow_pct": 0,
+     "wow_reported": false,
+     "commodities": "GRAPEFRUIT, LEMONS AND ORANGES"
+    },
+    {
+     "dest": "New York",
+     "availability": "Slight Shortage",
+     "low": 9800,
+     "high": 11900,
+     "mostly_low": 10900,
+     "mostly_high": 11700,
+     "wow_pct": 0,
+     "wow_reported": false,
+     "commodities": "GRAPEFRUIT, LEMONS AND ORANGES"
+    },
+    {
+     "dest": "Philadelphia",
+     "availability": "Slight Shortage",
+     "low": 9700,
+     "high": 11500,
+     "mostly_low": 10200,
+     "mostly_high": 11300,
+     "wow_pct": 0,
+     "wow_reported": false,
+     "commodities": "GRAPEFRUIT, LEMONS AND ORANGES"
+    },
+    {
+     "dest": "Seattle",
+     "availability": "Slight Shortage",
+     "low": 4800,
+     "high": 5800,
+     "mostly_low": 5100,
+     "mostly_high": 5500,
+     "wow_pct": 0,
+     "wow_reported": false,
+     "commodities": "GRAPEFRUIT, LEMONS AND ORANGES"
+    }
+   ]
+  },
+  {
+   "district": "GEORGIA",
+   "rows": [
+    {
+     "dest": "Atlanta",
+     "availability": "Shortage",
+     "low": 1700,
+     "high": 1900,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 6,
+     "wow_reported": true,
+     "commodities": "TOMATOES, TOMATOES, CHERRY, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    },
+    {
+     "dest": "Baltimore",
+     "availability": "Shortage",
+     "low": 4700,
+     "high": 4900,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 4,
+     "wow_reported": true,
+     "commodities": "TOMATOES, TOMATOES, CHERRY, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    },
+    {
+     "dest": "Boston",
+     "availability": "Shortage",
+     "low": 6400,
+     "high": 6600,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 8,
+     "wow_reported": true,
+     "commodities": "TOMATOES, TOMATOES, CHERRY, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    },
+    {
+     "dest": "Chicago",
+     "availability": "Shortage",
+     "low": 4100,
+     "high": 4300,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 17,
+     "wow_reported": true,
+     "commodities": "TOMATOES, TOMATOES, CHERRY, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    },
+    {
+     "dest": "New York",
+     "availability": "Shortage",
+     "low": 5900,
+     "high": 6100,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 7,
+     "wow_reported": true,
+     "commodities": "TOMATOES, TOMATOES, CHERRY, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    },
+    {
+     "dest": "Philadelphia",
+     "availability": "Shortage",
+     "low": 5300,
+     "high": 5500,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 7,
+     "wow_reported": true,
+     "commodities": "TOMATOES, TOMATOES, CHERRY, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    }
+   ]
+  },
+  {
+   "district": "VIDALIA DISTRICT GEORGIA",
+   "rows": [
+    {
+     "dest": "Atlanta",
+     "availability": "Adequate",
+     "low": 1500,
+     "high": 1900,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ONIONS, DRY"
+    },
+    {
+     "dest": "Baltimore",
+     "availability": "Adequate",
+     "low": 3200,
+     "high": 4400,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ONIONS, DRY"
+    },
+    {
+     "dest": "Boston",
+     "availability": "Adequate",
+     "low": 4800,
+     "high": 6200,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ONIONS, DRY"
+    },
+    {
+     "dest": "Chicago",
+     "availability": "Adequate",
+     "low": 3200,
+     "high": 4000,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ONIONS, DRY"
+    },
+    {
+     "dest": "Dallas",
+     "availability": "Adequate",
+     "low": 3000,
+     "high": 4000,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ONIONS, DRY"
+    },
+    {
+     "dest": "Los Angeles",
+     "availability": "Adequate",
+     "low": 5000,
+     "high": 7000,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ONIONS, DRY"
+    },
+    {
+     "dest": "Miami",
+     "availability": "Adequate",
+     "low": 2200,
+     "high": 3200,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ONIONS, DRY"
+    },
+    {
+     "dest": "New York",
+     "availability": "Adequate",
+     "low": 4500,
+     "high": 5800,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ONIONS, DRY"
+    },
+    {
+     "dest": "Philadelphia",
+     "availability": "Adequate",
+     "low": 4000,
+     "high": 4800,
+     "mostly_low": null,
+     "mostly_high": null,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ONIONS, DRY"
+    }
+   ]
+  },
+  {
+   "district": "MEXICO CROSSINGS THROUGH SOUTH TEXAS",
+   "rows": [
+    {
+     "dest": "Atlanta",
+     "availability": "Slight Shortage",
+     "low": 3400,
+     "high": 4400,
+     "mostly_low": 4000,
+     "mostly_high": 4400,
+     "wow_pct": 2,
+     "wow_reported": true,
+     "commodities": "ASPARAGUS, BROCCOLI, CARROTS, CHAYOTE, CILANTRO, CUCUMBERS, GRAPEFRUIT, LIMES, ORANGES, PAPAYA, PEPPERS, ANAHEIM, PEPPERS, BELL TYPE, PEPPERS, HABANERO, PEPPERS, JALAPENO, PEPPERS, POBLANO, PEPPERS, SERRANO, PINEAPPLES, TOMATILLOS, TOMATOES, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    },
+    {
+     "dest": "Baltimore",
+     "availability": "Slight Shortage",
+     "low": 6400,
+     "high": 7300,
+     "mostly_low": 6600,
+     "mostly_high": 6800,
+     "wow_pct": 3,
+     "wow_reported": true,
+     "commodities": "ASPARAGUS, BROCCOLI, CARROTS, CHAYOTE, CILANTRO, CUCUMBERS, GRAPEFRUIT, LIMES, ORANGES, PAPAYA, PEPPERS, ANAHEIM, PEPPERS, BELL TYPE, PEPPERS, HABANERO, PEPPERS, JALAPENO, PEPPERS, POBLANO, PEPPERS, SERRANO, PINEAPPLES, TOMATILLOS, TOMATOES, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    },
+    {
+     "dest": "Boston",
+     "availability": "Slight Shortage",
+     "low": 8200,
+     "high": 8800,
+     "mostly_low": 8400,
+     "mostly_high": 8800,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ASPARAGUS, BROCCOLI, CARROTS, CHAYOTE, CILANTRO, CUCUMBERS, GRAPEFRUIT, LIMES, ORANGES, PAPAYA, PEPPERS, ANAHEIM, PEPPERS, BELL TYPE, PEPPERS, HABANERO, PEPPERS, JALAPENO, PEPPERS, POBLANO, PEPPERS, SERRANO, PINEAPPLES, TOMATILLOS, TOMATOES, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    },
+    {
+     "dest": "Chicago",
+     "availability": "Slight Shortage",
+     "low": 4000,
+     "high": 4800,
+     "mostly_low": 4400,
+     "mostly_high": 4600,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ASPARAGUS, BROCCOLI, CARROTS, CHAYOTE, CILANTRO, CUCUMBERS, GRAPEFRUIT, LIMES, ORANGES, PAPAYA, PEPPERS, ANAHEIM, PEPPERS, BELL TYPE, PEPPERS, HABANERO, PEPPERS, JALAPENO, PEPPERS, POBLANO, PEPPERS, SERRANO, PINEAPPLES, TOMATILLOS, TOMATOES, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    },
+    {
+     "dest": "Dallas",
+     "availability": "Slight Shortage",
+     "low": 2000,
+     "high": 2400,
+     "mostly_low": 2100,
+     "mostly_high": 2200,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ASPARAGUS, BROCCOLI, CARROTS, CHAYOTE, CILANTRO, CUCUMBERS, GRAPEFRUIT, LIMES, ORANGES, PAPAYA, PEPPERS, ANAHEIM, PEPPERS, BELL TYPE, PEPPERS, HABANERO, PEPPERS, JALAPENO, PEPPERS, POBLANO, PEPPERS, SERRANO, PINEAPPLES, TOMATILLOS, TOMATOES, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    },
+    {
+     "dest": "Los Angeles",
+     "availability": "Slight Shortage",
+     "low": 3600,
+     "high": 4600,
+     "mostly_low": 4000,
+     "mostly_high": 4400,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ASPARAGUS, BROCCOLI, CARROTS, CHAYOTE, CILANTRO, CUCUMBERS, GRAPEFRUIT, LIMES, ORANGES, PAPAYA, PEPPERS, ANAHEIM, PEPPERS, BELL TYPE, PEPPERS, HABANERO, PEPPERS, JALAPENO, PEPPERS, POBLANO, PEPPERS, SERRANO, PINEAPPLES, TOMATILLOS, TOMATOES, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    },
+    {
+     "dest": "Miami",
+     "availability": "Slight Shortage",
+     "low": 5000,
+     "high": 5800,
+     "mostly_low": 5600,
+     "mostly_high": 5800,
+     "wow_pct": 1,
+     "wow_reported": true,
+     "commodities": "ASPARAGUS, BROCCOLI, CARROTS, CHAYOTE, CILANTRO, CUCUMBERS, GRAPEFRUIT, LIMES, ORANGES, PAPAYA, PEPPERS, ANAHEIM, PEPPERS, BELL TYPE, PEPPERS, HABANERO, PEPPERS, JALAPENO, PEPPERS, POBLANO, PEPPERS, SERRANO, PINEAPPLES, TOMATILLOS, TOMATOES, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    },
+    {
+     "dest": "New York",
+     "availability": "Slight Shortage",
+     "low": 7000,
+     "high": 7600,
+     "mostly_low": 7200,
+     "mostly_high": 7600,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ASPARAGUS, BROCCOLI, CARROTS, CHAYOTE, CILANTRO, CUCUMBERS, GRAPEFRUIT, LIMES, ORANGES, PAPAYA, PEPPERS, ANAHEIM, PEPPERS, BELL TYPE, PEPPERS, HABANERO, PEPPERS, JALAPENO, PEPPERS, POBLANO, PEPPERS, SERRANO, PINEAPPLES, TOMATILLOS, TOMATOES, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    },
+    {
+     "dest": "Philadelphia",
+     "availability": "Slight Shortage",
+     "low": 6600,
+     "high": 7400,
+     "mostly_low": 6800,
+     "mostly_high": 7200,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "ASPARAGUS, BROCCOLI, CARROTS, CHAYOTE, CILANTRO, CUCUMBERS, GRAPEFRUIT, LIMES, ORANGES, PAPAYA, PEPPERS, ANAHEIM, PEPPERS, BELL TYPE, PEPPERS, HABANERO, PEPPERS, JALAPENO, PEPPERS, POBLANO, PEPPERS, SERRANO, PINEAPPLES, TOMATILLOS, TOMATOES, TOMATOES, GRAPE TYPE, TOMATOES, PLUM TYPE AND WATERMELONS"
+    }
+   ]
+  },
+  {
+   "district": "YAKIMA VALLEY AND WENATCHEE DISTRICT WASHINGTON",
+   "rows": [
+    {
+     "dest": "Baltimore",
+     "availability": "Slight Shortage",
+     "low": 7300,
+     "high": 9100,
+     "mostly_low": 8100,
+     "mostly_high": 8800,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "APPLES, ASPARAGUS, BLUEBERRIES, CHERRIES, PEARS AND RHUBARB"
+    },
+    {
+     "dest": "Atlanta",
+     "availability": "Slight Shortage",
+     "low": 6900,
+     "high": 8600,
+     "mostly_low": 7900,
+     "mostly_high": 8600,
+     "wow_pct": 10,
+     "wow_reported": true,
+     "commodities": "APPLES, BLUEBERRIES, CHERRIES, PEARS AND RHUBARB"
+    },
+    {
+     "dest": "Boston",
+     "availability": "Slight Shortage",
+     "low": 8400,
+     "high": 9600,
+     "mostly_low": 8700,
+     "mostly_high": 9300,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "APPLES, BLUEBERRIES, CHERRIES, PEARS AND RHUBARB"
+    },
+    {
+     "dest": "Chicago",
+     "availability": "Slight Shortage",
+     "low": 5800,
+     "high": 6600,
+     "mostly_low": 5800,
+     "mostly_high": 6200,
+     "wow_pct": 7,
+     "wow_reported": true,
+     "commodities": "APPLES, BLUEBERRIES, CHERRIES, PEARS AND RHUBARB"
+    },
+    {
+     "dest": "Dallas",
+     "availability": "Slight Shortage",
+     "low": 5600,
+     "high": 6600,
+     "mostly_low": 6100,
+     "mostly_high": 6600,
+     "wow_pct": 6,
+     "wow_reported": true,
+     "commodities": "APPLES, BLUEBERRIES, CHERRIES, PEARS AND RHUBARB"
+    },
+    {
+     "dest": "Los Angeles",
+     "availability": "Slight Shortage",
+     "low": 2500,
+     "high": 3200,
+     "mostly_low": 2600,
+     "mostly_high": 3000,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "APPLES, BLUEBERRIES, CHERRIES, PEARS AND RHUBARB"
+    },
+    {
+     "dest": "Miami",
+     "availability": "Slight Shortage",
+     "low": 8300,
+     "high": 9800,
+     "mostly_low": 9200,
+     "mostly_high": 9800,
+     "wow_pct": 0,
+     "wow_reported": true,
+     "commodities": "APPLES, BLUEBERRIES, CHERRIES, PEARS AND RHUBARB"
+    },
+    {
+     "dest": "New York",
+     "availability": "Slight Shortage",
+     "low": 8800,
+     "high": 10500,
+     "mostly_low": 9000,
+     "mostly_high": 9800,
+     "wow_pct": 1,
+     "wow_reported": true,
+     "commodities": "APPLES, BLUEBERRIES, CHERRIES, PEARS AND RHUBARB"
+    },
+    {
+     "dest": "Philadelphia",
+     "availability": "Slight Shortage",
+     "low": 8600,
+     "high": 10000,
+     "mostly_low": 8800,
+     "mostly_high": 9400,
+     "wow_pct": 3,
+     "wow_reported": true,
+     "commodities": "APPLES, BLUEBERRIES, CHERRIES, PEARS AND RHUBARB"
+    },
+    {
+     "dest": "Seattle",
+     "availability": "Slight Shortage",
+     "low": 900,
+     "high": 1400,
+     "mostly_low": 1100,
+     "mostly_high": 1300,
+     "wow_pct": 17,
+     "wow_reported": true,
+     "commodities": "APPLES, BLUEBERRIES, CHERRIES, PEARS AND RHUBARB"
+    }
+   ]
+  }
+ ]
+}
