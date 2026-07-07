@@ -5,16 +5,23 @@
    "name": "Michoac\u00e1n (Uruapan)",
    "country": "MX",
    "role": "Primary Mexican Hass source (~80% of exports)",
-   "past7": null,
-   "next14": {
-    "days": 10,
-    "rain_mm": 78.5,
-    "tmax_avg_c": 22.7,
-    "tmin_avg_c": 14.5,
-    "tmax_peak_c": 24.8,
-    "tmin_low_c": 13.4
+   "past7": {
+    "days": 7,
+    "rain_mm": 32.2,
+    "tmax_avg_c": 23.9,
+    "tmin_avg_c": 14.2,
+    "tmax_peak_c": 25.6,
+    "tmin_low_c": 12.4
    },
-   "source": "met.no",
+   "next14": {
+    "days": 14,
+    "rain_mm": 69.7,
+    "tmax_avg_c": 23.8,
+    "tmin_avg_c": 13.8,
+    "tmax_peak_c": 25.3,
+    "tmin_low_c": 12.2
+   },
+   "source": "open-meteo",
    "flag": "normal",
    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
    "available": true
@@ -24,16 +31,23 @@
    "name": "Jalisco (Cd. Guzm\u00e1n)",
    "country": "MX",
    "role": "Second Mexican export state",
-   "past7": null,
-   "next14": {
-    "days": 10,
-    "rain_mm": 57.1,
-    "tmax_avg_c": 24.8,
+   "past7": {
+    "days": 7,
+    "rain_mm": 25.0,
+    "tmax_avg_c": 27.8,
     "tmin_avg_c": 17.0,
-    "tmax_peak_c": 27.6,
-    "tmin_low_c": 15.9
+    "tmax_peak_c": 29.1,
+    "tmin_low_c": 16.3
    },
-   "source": "met.no",
+   "next14": {
+    "days": 14,
+    "rain_mm": 36.0,
+    "tmax_avg_c": 25.7,
+    "tmin_avg_c": 16.2,
+    "tmax_peak_c": 28.4,
+    "tmin_low_c": 15.0
+   },
+   "source": "open-meteo",
    "flag": "normal",
    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
    "available": true
@@ -43,40 +57,54 @@
    "name": "Ventura Co. (Oxnard)",
    "country": "US",
    "role": "California coastal belt",
-   "past7": null,
-   "next14": {
-    "days": 10,
-    "rain_mm": 0.1,
-    "tmax_avg_c": 23.2,
-    "tmin_avg_c": 13.7,
-    "tmax_peak_c": 24.8,
-    "tmin_low_c": 11.5
+   "past7": {
+    "days": 7,
+    "rain_mm": 0,
+    "tmax_avg_c": 23.9,
+    "tmin_avg_c": 13.8,
+    "tmax_peak_c": 26.0,
+    "tmin_low_c": 12.3
    },
-   "source": "met.no",
-   "flag": "normal",
-   "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+   "next14": {
+    "days": 14,
+    "rain_mm": 0,
+    "tmax_avg_c": 31.8,
+    "tmin_avg_c": 19.9,
+    "tmax_peak_c": 37.2,
+    "tmin_low_c": 13.2
+   },
+   "source": "open-meteo",
+   "flag": "watch",
+   "note": "Heat spike forecast (37\u00b0C peak) \u2014 watch for fruit stress and accelerated maturity.",
    "available": true,
-   "nws_narrative": "Tonight: Patchy fog after 11pm. Mostly cloudy, with a low around 54. North wind 0 to 5 mph."
+   "nws_narrative": "This Afternoon: Sunny, with a high near 78. West southwest wind around 10 mph."
   },
   {
    "key": "san_diego",
    "name": "San Diego Co. (Fallbrook)",
    "country": "US",
    "role": "California southern belt",
-   "past7": null,
-   "next14": {
-    "days": 10,
-    "rain_mm": 0.0,
-    "tmax_avg_c": 27.8,
-    "tmin_avg_c": 14.7,
-    "tmax_peak_c": 30.8,
-    "tmin_low_c": 13.7
+   "past7": {
+    "days": 7,
+    "rain_mm": 0,
+    "tmax_avg_c": 27.5,
+    "tmin_avg_c": 15.9,
+    "tmax_peak_c": 30.4,
+    "tmin_low_c": 15.3
    },
-   "source": "met.no",
+   "next14": {
+    "days": 14,
+    "rain_mm": 1.2,
+    "tmax_avg_c": 30.4,
+    "tmin_avg_c": 17.4,
+    "tmax_peak_c": 36.4,
+    "tmin_low_c": 13.2
+   },
+   "source": "open-meteo",
    "flag": "normal",
    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
    "available": true,
-   "nws_narrative": "Tonight: Patchy fog after 2am. Mostly cloudy, with a low around 57. Southeast wind 0 to 5 mph."
+   "nws_narrative": "This Afternoon: Sunny, with a high near 82. Southwest wind 10 to 15 mph, with gusts as high as 20 mph."
   }
  ]
 }
