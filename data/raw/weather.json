@@ -7,19 +7,19 @@
    "role": "Primary Mexican Hass source (~80% of exports)",
    "past7": {
     "days": 7,
-    "rain_mm": 32.2,
-    "tmax_avg_c": 23.9,
-    "tmin_avg_c": 14.2,
-    "tmax_peak_c": 25.6,
-    "tmin_low_c": 12.4
+    "rain_mm": 33.1,
+    "tmax_avg_c": 24.6,
+    "tmin_avg_c": 14.7,
+    "tmax_peak_c": 25.8,
+    "tmin_low_c": 14.2
    },
    "next14": {
     "days": 14,
-    "rain_mm": 69.7,
-    "tmax_avg_c": 23.8,
-    "tmin_avg_c": 13.8,
-    "tmax_peak_c": 25.3,
-    "tmin_low_c": 12.2
+    "rain_mm": 74.4,
+    "tmax_avg_c": 23.4,
+    "tmin_avg_c": 13.3,
+    "tmax_peak_c": 25.4,
+    "tmin_low_c": 11.2
    },
    "source": "open-meteo",
    "flag": "normal",
@@ -33,19 +33,19 @@
    "role": "Second Mexican export state",
    "past7": {
     "days": 7,
-    "rain_mm": 25.0,
-    "tmax_avg_c": 27.8,
-    "tmin_avg_c": 17.0,
-    "tmax_peak_c": 29.1,
-    "tmin_low_c": 16.3
+    "rain_mm": 29.0,
+    "tmax_avg_c": 26.2,
+    "tmin_avg_c": 17.2,
+    "tmax_peak_c": 28.8,
+    "tmin_low_c": 16.1
    },
    "next14": {
     "days": 14,
-    "rain_mm": 36.0,
-    "tmax_avg_c": 25.7,
-    "tmin_avg_c": 16.2,
-    "tmax_peak_c": 28.4,
-    "tmin_low_c": 15.0
+    "rain_mm": 48.8,
+    "tmax_avg_c": 25.3,
+    "tmin_avg_c": 15.7,
+    "tmax_peak_c": 26.9,
+    "tmin_low_c": 14.7
    },
    "source": "open-meteo",
    "flag": "normal",
@@ -60,24 +60,24 @@
    "past7": {
     "days": 7,
     "rain_mm": 0,
-    "tmax_avg_c": 23.9,
-    "tmin_avg_c": 13.8,
-    "tmax_peak_c": 26.0,
-    "tmin_low_c": 12.3
+    "tmax_avg_c": 26.0,
+    "tmin_avg_c": 15.4,
+    "tmax_peak_c": 27.5,
+    "tmin_low_c": 13.4
    },
    "next14": {
     "days": 14,
     "rain_mm": 0,
-    "tmax_avg_c": 31.8,
-    "tmin_avg_c": 19.9,
-    "tmax_peak_c": 37.2,
-    "tmin_low_c": 13.2
+    "tmax_avg_c": 31.0,
+    "tmin_avg_c": 20.1,
+    "tmax_peak_c": 34.5,
+    "tmin_low_c": 16.9
    },
    "source": "open-meteo",
-   "flag": "watch",
-   "note": "Heat spike forecast (37\u00b0C peak) \u2014 watch for fruit stress and accelerated maturity.",
+   "flag": "normal",
+   "note": "No weather-driven supply disruption signals in the 2-4 week window.",
    "available": true,
-   "nws_narrative": "This Afternoon: Sunny, with a high near 78. West southwest wind around 10 mph."
+   "nws_narrative": "This Afternoon: Sunny, with a high near 81. Southwest wind around 10 mph."
   },
   {
    "key": "san_diego",
@@ -87,24 +87,24 @@
    "past7": {
     "days": 7,
     "rain_mm": 0,
-    "tmax_avg_c": 27.5,
-    "tmin_avg_c": 15.9,
-    "tmax_peak_c": 30.4,
-    "tmin_low_c": 15.3
+    "tmax_avg_c": 28.7,
+    "tmin_avg_c": 16.4,
+    "tmax_peak_c": 31.4,
+    "tmin_low_c": 15.0
    },
    "next14": {
     "days": 14,
-    "rain_mm": 1.2,
-    "tmax_avg_c": 30.4,
-    "tmin_avg_c": 17.4,
-    "tmax_peak_c": 36.4,
-    "tmin_low_c": 13.2
+    "rain_mm": 0,
+    "tmax_avg_c": 29.7,
+    "tmin_avg_c": 17.8,
+    "tmax_peak_c": 33.1,
+    "tmin_low_c": 16.8
    },
    "source": "open-meteo",
    "flag": "normal",
    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
    "available": true,
-   "nws_narrative": "This Afternoon: Sunny, with a high near 82. Southwest wind 10 to 15 mph, with gusts as high as 20 mph."
+   "nws_narrative": "This Afternoon: Sunny, with a high near 88. Southwest wind 10 to 15 mph, with gusts as high as 25 mph."
   }
  ]
 }
