@@ -1,11 +1,11 @@
 {
- "report_date": "2026-07-21",
+ "report_date": "2026-07-27",
  "prior_report_dates": [
-  "2026-07-20",
-  "2026-07-17",
-  "2026-07-16",
-  "2026-07-15",
-  "2026-07-14"
+  "2026-07-24",
+  "2026-07-23",
+  "2026-07-22",
+  "2026-07-21",
+  "2026-07-20"
  ],
  "rows": [
   {
@@ -16,11 +16,11 @@
    "organic": "Y",
    "low": 45.25,
    "high": 51.25,
-   "mostly_low": 46.25,
-   "mostly_high": 48.25,
-   "market_tone": "About Steady",
+   "mostly_low": 48.25,
+   "mostly_high": 50.25,
+   "market_tone": "Conventional 32s-40s and Organic 48s higher, others about steady.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "SOUTH DISTRICT CALIFORNIA",
@@ -28,13 +28,13 @@
    "package": "cartons 2 layer",
    "size": "48s",
    "organic": "Y",
-   "low": 56.25,
-   "high": 60.25,
-   "mostly_low": 56.25,
-   "mostly_high": 58.25,
-   "market_tone": "About Steady",
+   "low": 46.25,
+   "high": 52.25,
+   "mostly_low": 48.5,
+   "mostly_high": 50.25,
+   "market_tone": "Conventional 32s-40s Higher, 48s-84s and Organic 48s Lower.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-40s and Organic 48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "MEXICO CROSSINGS THROUGH TEXAS",
@@ -46,9 +46,9 @@
    "high": 24.25,
    "mostly_low": 20.25,
    "mostly_high": 22.25,
-   "market_tone": "About Steady",
+   "market_tone": "Conventional 32s-40s and Organic 48s higher, others about steady.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "MEXICO CROSSINGS THROUGH TEXAS",
@@ -60,9 +60,9 @@
    "high": 28.25,
    "mostly_low": 22.25,
    "mostly_high": 24.25,
-   "market_tone": "About Steady",
+   "market_tone": "Conventional 32s-40s and Organic 48s higher, others about steady.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "MEXICO CROSSINGS THROUGH TEXAS",
@@ -74,9 +74,9 @@
    "high": 28.25,
    "mostly_low": 24.25,
    "mostly_high": 26.25,
-   "market_tone": "About Steady",
+   "market_tone": "Conventional 32s-40s and Organic 48s higher, others about steady.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "MEXICO CROSSINGS THROUGH TEXAS",
@@ -84,13 +84,13 @@
    "package": "cartons 2 layer",
    "size": "48s",
    "organic": "N",
-   "low": 36.25,
-   "high": 40.25,
-   "mostly_low": 38.25,
-   "mostly_high": 40.25,
-   "market_tone": "About Steady",
+   "low": 42.25,
+   "high": 48.25,
+   "mostly_low": 44.25,
+   "mostly_high": 46.25,
+   "market_tone": "Conventional 32s-40s and Organic 48s higher, others about steady.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "MEXICO CROSSINGS THROUGH TEXAS",
@@ -98,13 +98,13 @@
    "package": "cartons 2 layer",
    "size": "40s",
    "organic": "N",
-   "low": 40.25,
-   "high": 48.25,
-   "mostly_low": 42.25,
-   "mostly_high": 44.25,
-   "market_tone": "About Steady",
+   "low": 44.25,
+   "high": 50.25,
+   "mostly_low": 46.25,
+   "mostly_high": 48.25,
+   "market_tone": "Conventional 32s-40s and Organic 48s higher, others about steady.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "MEXICO CROSSINGS THROUGH TEXAS",
@@ -112,13 +112,13 @@
    "package": "cartons 2 layer",
    "size": "36s",
    "organic": "N",
-   "low": 42.25,
+   "low": 44.25,
    "high": 50.25,
-   "mostly_low": 44.25,
-   "mostly_high": 46.25,
-   "market_tone": "About Steady",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25,
+   "market_tone": "Conventional 32s-40s and Organic 48s higher, others about steady.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "MEXICO CROSSINGS THROUGH TEXAS",
@@ -126,13 +126,13 @@
    "package": "cartons 2 layer",
    "size": "32s",
    "organic": "N",
-   "low": 42.25,
+   "low": 44.25,
    "high": 50.25,
-   "mostly_low": 44.25,
-   "mostly_high": 46.25,
-   "market_tone": "About Steady",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25,
+   "market_tone": "Conventional 32s-40s and Organic 48s higher, others about steady.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "SOUTH DISTRICT CALIFORNIA",
@@ -141,12 +141,12 @@
    "size": "48s",
    "organic": "N",
    "low": 42.25,
-   "high": 48.25,
-   "mostly_low": 46.25,
-   "mostly_high": 48.25,
-   "market_tone": "About Steady",
+   "high": 49.25,
+   "mostly_low": 42.25,
+   "mostly_high": 44.25,
+   "market_tone": "Conventional 32s-40s Higher, 48s-84s and Organic 48s Lower.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-40s and Organic 48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "SOUTH DISTRICT CALIFORNIA",
@@ -154,13 +154,13 @@
    "package": "cartons 2 layer",
    "size": "60s",
    "organic": "N",
-   "low": 34.25,
-   "high": 38.25,
-   "mostly_low": 34.25,
-   "mostly_high": 36.25,
-   "market_tone": "About Steady",
+   "low": 26.25,
+   "high": 34.25,
+   "mostly_low": 26.25,
+   "mostly_high": 28.25,
+   "market_tone": "Conventional 32s-40s Higher, 48s-84s and Organic 48s Lower.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-40s and Organic 48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "SOUTH DISTRICT CALIFORNIA",
@@ -168,13 +168,13 @@
    "package": "cartons 2 layer",
    "size": "70s",
    "organic": "N",
-   "low": 28.25,
-   "high": 34.25,
-   "mostly_low": 30.25,
-   "mostly_high": 32.25,
-   "market_tone": "About Steady",
+   "low": 21.25,
+   "high": 30.25,
+   "mostly_low": 22.25,
+   "mostly_high": 24.25,
+   "market_tone": "Conventional 32s-40s Higher, 48s-84s and Organic 48s Lower.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-40s and Organic 48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "SOUTH DISTRICT CALIFORNIA",
@@ -182,13 +182,13 @@
    "package": "cartons 2 layer",
    "size": "84s",
    "organic": "N",
-   "low": 26.25,
-   "high": 30.25,
-   "mostly_low": 28.25,
-   "mostly_high": 30.25,
-   "market_tone": "About Steady",
+   "low": 20.25,
+   "high": 26.25,
+   "mostly_low": 20.25,
+   "mostly_high": 22.25,
+   "market_tone": "Conventional 32s-40s Higher, 48s-84s and Organic 48s Lower.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-40s and Organic 48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "SOUTH DISTRICT CALIFORNIA",
@@ -196,13 +196,13 @@
    "package": "cartons 2 layer",
    "size": "32s",
    "organic": "N",
-   "low": 42.25,
-   "high": 48.25,
+   "low": 46.25,
+   "high": 52.25,
    "mostly_low": 46.25,
    "mostly_high": 48.25,
-   "market_tone": "About Steady",
+   "market_tone": "Conventional 32s-40s Higher, 48s-84s and Organic 48s Lower.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-40s and Organic 48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "SOUTH DISTRICT CALIFORNIA",
@@ -210,13 +210,13 @@
    "package": "cartons 2 layer",
    "size": "36s",
    "organic": "N",
-   "low": 42.25,
-   "high": 48.25,
+   "low": 46.25,
+   "high": 52.25,
    "mostly_low": 46.25,
    "mostly_high": 48.25,
-   "market_tone": "About Steady",
+   "market_tone": "Conventional 32s-40s Higher, 48s-84s and Organic 48s Lower.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-40s and Organic 48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   },
   {
    "district": "SOUTH DISTRICT CALIFORNIA",
@@ -224,17 +224,657 @@
    "package": "cartons 2 layer",
    "size": "40s",
    "organic": "N",
-   "low": 42.25,
-   "high": 48.25,
+   "low": 46.25,
+   "high": 52.25,
    "mostly_low": 46.25,
    "mostly_high": 48.25,
-   "market_tone": "About Steady",
+   "market_tone": "Conventional 32s-40s Higher, 48s-84s and Organic 48s Lower.",
    "supply_tone": null,
-   "demand_tone": "Conventional 32s-40s and Organic 48s Fairly Light at Higher prices, Others Fairly Light."
+   "demand_tone": "FAIRLY LIGHT"
   }
  ],
  "recent_rows": [
   {
+   "report_date": "2026-07-27",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "Y",
+   "mostly_low": 48.25,
+   "mostly_high": 50.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "Y",
+   "mostly_low": 48.5,
+   "mostly_high": 50.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "84s",
+   "organic": "N",
+   "mostly_low": 20.25,
+   "mostly_high": 22.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "70s",
+   "organic": "N",
+   "mostly_low": 22.25,
+   "mostly_high": 24.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "60s",
+   "organic": "N",
+   "mostly_low": 24.25,
+   "mostly_high": 26.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "N",
+   "mostly_low": 44.25,
+   "mostly_high": 46.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "40s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "36s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "32s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "N",
+   "mostly_low": 42.25,
+   "mostly_high": 44.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "60s",
+   "organic": "N",
+   "mostly_low": 26.25,
+   "mostly_high": 28.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "70s",
+   "organic": "N",
+   "mostly_low": 22.25,
+   "mostly_high": 24.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "84s",
+   "organic": "N",
+   "mostly_low": 20.25,
+   "mostly_high": 22.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "32s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "36s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-27",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "40s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "Y",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "Y",
+   "mostly_low": 56.25,
+   "mostly_high": 58.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "84s",
+   "organic": "N",
+   "mostly_low": 20.25,
+   "mostly_high": 22.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "70s",
+   "organic": "N",
+   "mostly_low": 22.25,
+   "mostly_high": 24.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "60s",
+   "organic": "N",
+   "mostly_low": 24.25,
+   "mostly_high": 26.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "N",
+   "mostly_low": 44.25,
+   "mostly_high": 46.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "40s",
+   "organic": "N",
+   "mostly_low": 44.25,
+   "mostly_high": 46.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "36s",
+   "organic": "N",
+   "mostly_low": 44.25,
+   "mostly_high": 46.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "32s",
+   "organic": "N",
+   "mostly_low": 44.25,
+   "mostly_high": 46.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "60s",
+   "organic": "N",
+   "mostly_low": 34.25,
+   "mostly_high": 36.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "70s",
+   "organic": "N",
+   "mostly_low": 30.25,
+   "mostly_high": 32.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "84s",
+   "organic": "N",
+   "mostly_low": 28.25,
+   "mostly_high": 30.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "32s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "36s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-24",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "40s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "Y",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "Y",
+   "mostly_low": 56.25,
+   "mostly_high": 58.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "84s",
+   "organic": "N",
+   "mostly_low": 20.25,
+   "mostly_high": 22.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "70s",
+   "organic": "N",
+   "mostly_low": 22.25,
+   "mostly_high": 24.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "60s",
+   "organic": "N",
+   "mostly_low": 24.25,
+   "mostly_high": 26.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "N",
+   "mostly_low": 44.25,
+   "mostly_high": 46.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "40s",
+   "organic": "N",
+   "mostly_low": 44.25,
+   "mostly_high": 46.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "36s",
+   "organic": "N",
+   "mostly_low": 44.25,
+   "mostly_high": 46.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "32s",
+   "organic": "N",
+   "mostly_low": 44.25,
+   "mostly_high": 46.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "60s",
+   "organic": "N",
+   "mostly_low": 34.25,
+   "mostly_high": 36.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "70s",
+   "organic": "N",
+   "mostly_low": 30.25,
+   "mostly_high": 32.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "84s",
+   "organic": "N",
+   "mostly_low": 28.25,
+   "mostly_high": 30.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "32s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "36s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-23",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "40s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "Y",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "Y",
+   "mostly_low": 56.25,
+   "mostly_high": 58.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "84s",
+   "organic": "N",
+   "mostly_low": 20.25,
+   "mostly_high": 22.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "70s",
+   "organic": "N",
+   "mostly_low": 22.25,
+   "mostly_high": 24.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "60s",
+   "organic": "N",
+   "mostly_low": 24.25,
+   "mostly_high": 26.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "N",
+   "mostly_low": 44.25,
+   "mostly_high": 46.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "40s",
+   "organic": "N",
+   "mostly_low": 44.25,
+   "mostly_high": 46.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "36s",
+   "organic": "N",
+   "mostly_low": 44.25,
+   "mostly_high": 46.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "32s",
+   "organic": "N",
+   "mostly_low": 44.25,
+   "mostly_high": 46.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "60s",
+   "organic": "N",
+   "mostly_low": 34.25,
+   "mostly_high": 36.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "70s",
+   "organic": "N",
+   "mostly_low": 30.25,
+   "mostly_high": 32.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "84s",
+   "organic": "N",
+   "mostly_low": 28.25,
+   "mostly_high": 30.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "32s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "36s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
+   "report_date": "2026-07-22",
+   "district": "SOUTH DISTRICT CALIFORNIA",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "40s",
+   "organic": "N",
+   "mostly_low": 46.25,
+   "mostly_high": 48.25
+  },
+  {
    "report_date": "2026-07-21",
    "district": "MEXICO CROSSINGS THROUGH TEXAS",
    "variety": "HASS",
@@ -913,1006 +1553,6 @@
    "organic": "N",
    "mostly_low": 42.25,
    "mostly_high": 44.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "Y",
-   "mostly_low": 46.25,
-   "mostly_high": 48.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "Y",
-   "mostly_low": 48.25,
-   "mostly_high": 50.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "N",
-   "mostly_low": 24.25,
-   "mostly_high": 26.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "N",
-   "mostly_low": 24.25,
-   "mostly_high": 26.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "N",
-   "mostly_low": 36.25,
-   "mostly_high": 38.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "40s",
-   "organic": "N",
-   "mostly_low": 40.25,
-   "mostly_high": 42.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "36s",
-   "organic": "N",
-   "mostly_low": 42.25,
-   "mostly_high": 44.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "32s",
-   "organic": "N",
-   "mostly_low": 42.25,
-   "mostly_high": 44.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "84s",
-   "organic": "N",
-   "mostly_low": 22.25,
-   "mostly_high": 24.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "84s",
-   "organic": "N",
-   "mostly_low": 28.25,
-   "mostly_high": 30.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "N",
-   "mostly_low": 30.25,
-   "mostly_high": 32.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "N",
-   "mostly_low": 34.25,
-   "mostly_high": 36.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "N",
-   "mostly_low": 40.25,
-   "mostly_high": 42.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "32s",
-   "organic": "N",
-   "mostly_low": 42.25,
-   "mostly_high": 44.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "36s",
-   "organic": "N",
-   "mostly_low": 42.25,
-   "mostly_high": 44.25
-  },
-  {
-   "report_date": "2026-07-15",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "40s",
-   "organic": "N",
-   "mostly_low": 42.25,
-   "mostly_high": 44.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "Y",
-   "mostly_low": 46.25,
-   "mostly_high": 48.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "Y",
-   "mostly_low": 48.25,
-   "mostly_high": 50.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "40s",
-   "organic": "N",
-   "mostly_low": 40.25,
-   "mostly_high": 42.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "36s",
-   "organic": "N",
-   "mostly_low": 42.25,
-   "mostly_high": 44.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "32s",
-   "organic": "N",
-   "mostly_low": 42.25,
-   "mostly_high": 44.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "84s",
-   "organic": "N",
-   "mostly_low": 23.25,
-   "mostly_high": 25.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "N",
-   "mostly_low": 24.25,
-   "mostly_high": 26.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "N",
-   "mostly_low": 26.25,
-   "mostly_high": 28.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "N",
-   "mostly_low": 36.25,
-   "mostly_high": 38.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "N",
-   "mostly_low": 40.25,
-   "mostly_high": 42.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "N",
-   "mostly_low": 34.25,
-   "mostly_high": 36.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "N",
-   "mostly_low": 30.25,
-   "mostly_high": 32.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "84s",
-   "organic": "N",
-   "mostly_low": 28.25,
-   "mostly_high": 30.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "32s",
-   "organic": "N",
-   "mostly_low": 42.25,
-   "mostly_high": 44.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "36s",
-   "organic": "N",
-   "mostly_low": 42.25,
-   "mostly_high": 44.25
-  },
-  {
-   "report_date": "2026-07-14",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "40s",
-   "organic": "N",
-   "mostly_low": 42.25,
-   "mostly_high": 44.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "Y",
-   "mostly_low": 48.25,
-   "mostly_high": 50.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "Y",
-   "mostly_low": 46.25,
-   "mostly_high": 48.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "84s",
-   "organic": "N",
-   "mostly_low": 28.25,
-   "mostly_high": 30.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "32s",
-   "organic": "N",
-   "mostly_low": 40.25,
-   "mostly_high": 42.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "36s",
-   "organic": "N",
-   "mostly_low": 40.25,
-   "mostly_high": 42.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "40s",
-   "organic": "N",
-   "mostly_low": 40.25,
-   "mostly_high": 42.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "N",
-   "mostly_low": 24.25,
-   "mostly_high": 26.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "N",
-   "mostly_low": 26.25,
-   "mostly_high": 28.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "N",
-   "mostly_low": 36.25,
-   "mostly_high": 38.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "40s",
-   "organic": "N",
-   "mostly_low": 38.25,
-   "mostly_high": 40.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "36s",
-   "organic": "N",
-   "mostly_low": 40.25,
-   "mostly_high": 42.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "32s",
-   "organic": "N",
-   "mostly_low": 40.25,
-   "mostly_high": 42.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "84s",
-   "organic": "N",
-   "mostly_low": 23.25,
-   "mostly_high": 25.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "N",
-   "mostly_low": 30.25,
-   "mostly_high": 32.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "N",
-   "mostly_low": 34.25,
-   "mostly_high": 36.25
-  },
-  {
-   "report_date": "2026-07-13",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "N",
-   "mostly_low": 40.25,
-   "mostly_high": 42.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "Y",
-   "mostly_low": 54.25,
-   "mostly_high": 56.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "Y",
-   "mostly_low": 56.25,
-   "mostly_high": 58.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "N",
-   "mostly_low": 28.25,
-   "mostly_high": 30.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "N",
-   "mostly_low": 28.25,
-   "mostly_high": 30.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "N",
-   "mostly_low": 34.25,
-   "mostly_high": 36.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "40s",
-   "organic": "N",
-   "mostly_low": 38.25,
-   "mostly_high": 40.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "36s",
-   "organic": "N",
-   "mostly_low": 40.25,
-   "mostly_high": 42.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "32s",
-   "organic": "N",
-   "mostly_low": 40.25,
-   "mostly_high": 42.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "84s",
-   "organic": "N",
-   "mostly_low": 24.25,
-   "mostly_high": 26.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "N",
-   "mostly_low": 35.25,
-   "mostly_high": 37.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "N",
-   "mostly_low": 30.25,
-   "mostly_high": 32.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "84s",
-   "organic": "N",
-   "mostly_low": 28.25,
-   "mostly_high": 30.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "32s",
-   "organic": "N",
-   "mostly_low": 38.25,
-   "mostly_high": 40.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "36s",
-   "organic": "N",
-   "mostly_low": 38.25,
-   "mostly_high": 40.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "40s",
-   "organic": "N",
-   "mostly_low": 38.25,
-   "mostly_high": 40.25
-  },
-  {
-   "report_date": "2026-07-10",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "N",
-   "mostly_low": 38.25,
-   "mostly_high": 40.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "Y",
-   "mostly_low": 54.25,
-   "mostly_high": 56.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "Y",
-   "mostly_low": 56.25,
-   "mostly_high": 58.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "Y",
-   "mostly_low": null,
-   "mostly_high": null
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "N",
-   "mostly_low": 28.25,
-   "mostly_high": 30.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "N",
-   "mostly_low": 28.25,
-   "mostly_high": 30.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "N",
-   "mostly_low": 34.25,
-   "mostly_high": 36.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "40s",
-   "organic": "N",
-   "mostly_low": 38.25,
-   "mostly_high": 40.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "36s",
-   "organic": "N",
-   "mostly_low": 40.25,
-   "mostly_high": 42.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "32s",
-   "organic": "N",
-   "mostly_low": 40.25,
-   "mostly_high": 42.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "84s",
-   "organic": "N",
-   "mostly_low": 26.25,
-   "mostly_high": 28.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "N",
-   "mostly_low": 35.25,
-   "mostly_high": 37.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "N",
-   "mostly_low": 30.25,
-   "mostly_high": 32.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "84s",
-   "organic": "N",
-   "mostly_low": 28.25,
-   "mostly_high": 30.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "32s",
-   "organic": "N",
-   "mostly_low": 38.25,
-   "mostly_high": 40.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "36s",
-   "organic": "N",
-   "mostly_low": 38.25,
-   "mostly_high": 40.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "40s",
-   "organic": "N",
-   "mostly_low": 38.25,
-   "mostly_high": 40.25
-  },
-  {
-   "report_date": "2026-07-09",
-   "district": "SOUTH DISTRICT CALIFORNIA",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "N",
-   "mostly_low": 38.25,
-   "mostly_high": 40.25
   }
  ]
 }
