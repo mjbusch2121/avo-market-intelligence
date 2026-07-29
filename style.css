@@ -293,6 +293,18 @@ h1, h2, h3 { font-family: var(--display); margin: 0; }
 .badge.alert { border-color: var(--clay); color: var(--clay); }
 .badge.normal { border-color: var(--green); color: var(--green); }
 
+/* Season states */
+.stat-row.season-off .stat-name { opacity: 0.5; }
+.stat-row.season-warn { border-left: 2px solid var(--clay); padding-left: 8px; }
+.season-note {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  text-align: right;
+  max-width: 60%;
+}
+.stat-row.season-warn .season-note { color: var(--clay); }
+
 /* ---------- pricing ---------- */
 
 .pricing-grid {
