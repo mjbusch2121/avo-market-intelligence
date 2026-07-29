@@ -13,6 +13,7 @@ import json
 import statistics
 from datetime import date, datetime, timedelta
 from pathlib import Path
+from seasonality import classify, any_unexpected_gaps
 
 ROOT = Path(__file__).parent
 RAW = ROOT / "data" / "raw"
@@ -137,7 +138,14 @@ def build_supply(movement: dict, notes: list) -> dict:
     def trailing_median(key):
         prior_vals = [weekly[w][key] for w in weeks[-5:-1]]
         return statistics.median(prior_vals) if prior_vals else 0
-
+    def last_reported_week(key):
+        """Most recent week where THIS region actually had volume.
+        Returns None if it has never reported."""
+        for w in reversed(weeks):
+            if weekly[w][key] > 0:
+                return w
+        return None
+    
     partial_keys = set()
     regions = []
     for key, name in (("mx", "Mexico crossings"),
@@ -158,6 +166,7 @@ def build_supply(movement: dict, notes: list) -> dict:
             "partial": partial,
             "wow_pct": None if partial else pct(cur, pri),
             "vs_3yr_pct": None if partial or not avg else pct(cur, avg),
+            "season": classify(key, last_reported_week(key)),
         })
 
     crossings = []
@@ -511,6 +520,16 @@ def main():
     print("HEADLINE:", data["headline"])
     for n in notes:
         print("NOTE:", n)
+
+    # Season check — fail the Action if a region that should be
+    # reporting has gone dark (USDA slug change, broken parser, etc.)
+    season_blocks = {r["key"]: r["season"] for r in supply.get("regions", [])}
+    gaps = any_unexpected_gaps(season_blocks)
+    for key, block in season_blocks.items():
+        if block["status"] != "active":
+            print(f"SEASON [{block['status']}] {key}: {block['message']}")
+    if gaps:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

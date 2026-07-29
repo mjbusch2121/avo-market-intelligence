@@ -1,0 +1,45 @@
+{
+  "_comment": "Single source of truth for regional season windows. Dates are month-day (MM-DD); windows may wrap the new year. 'grace_weeks' = how many weeks past window edges data may still trickle in before a gap counts as unexpected. Edit this file at the March/September checkpoints — nothing else needs to change for a normal season transition.",
+  "regions": [
+    {
+      "key": "mx",
+      "name": "Mexico crossings",
+      "window": { "start": "01-01", "end": "12-31" },
+      "grace_weeks": 0,
+      "resume_hint": null,
+      "notes": "Year-round. A gap here is ALWAYS unexpected — investigate immediately."
+    },
+    {
+      "key": "ca",
+      "name": "California (South District)",
+      "window": { "start": "03-15", "end": "09-30" },
+      "grace_weeks": 3,
+      "resume_hint": "resumes ~spring",
+      "notes": "CA harvest typically spring through late summer. USDA reporting often trails the field by a couple weeks on both ends — hence the grace window."
+    },
+    {
+      "key": "ports",
+      "name": "Seaport/other imports",
+      "window": { "start": "01-01", "end": "12-31" },
+      "grace_weeks": 2,
+      "resume_hint": null,
+      "notes": "Aggregate of all seaborne arrivals (Peru, Colombia, Chile, DR...). Some origin is almost always shipping, so treated as year-round but with grace since the mix shifts."
+    },
+    {
+      "key": "peru",
+      "name": "Peru imports",
+      "window": { "start": "05-15", "end": "09-15" },
+      "grace_weeks": 2,
+      "resume_hint": "resumes ~late May",
+      "notes": "FUTURE — not yet a separately tracked region. Window included now so the config is ready when a fetcher is added. See SEASONAL_INTEGRATION.md, Future Elements."
+    },
+    {
+      "key": "colombia",
+      "name": "Colombia imports",
+      "window": { "start": "01-01", "end": "12-31" },
+      "grace_weeks": 4,
+      "resume_hint": null,
+      "notes": "FUTURE — Colombia ships in multiple flushes with variable timing; treated year-round with a wide grace window rather than hard edges."
+    }
+  ]
+}

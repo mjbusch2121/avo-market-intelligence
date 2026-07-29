@@ -69,3 +69,21 @@ The same two keys live as GitHub Actions secrets (`MARS_API_KEY`,
 - FVWTRK publishes Tuesday-survey rates on Wednesday, so the freight panel
   always shows the most recent completed survey.
 - All data is public U.S. government data (USDA AMS, EIA, NOAA).
+
+## Seasonal maintenance checklist
+
+The dashboard is season-aware (`seasons.json` + `seasonality.py` — see
+`SEASONAL_INTEGRATION.md`), but twice a year it needs 15 minutes of human
+attention. **Mid-March and mid-September**, at the season shoulders:
+
+- [ ] Confirm USDA report slugs/IDs haven't changed (run each fetcher locally, check for empty output)
+- [ ] Verify the FVWTRK PDF still parses — layout changes without notice and this is the most fragile piece (`python fetch_freight_pdf.py`)
+- [ ] Update `seasons.json` if actual season timing shifted vs. the configured windows
+- [ ] Refresh the 3-year historical window (confirm `history/*.json` rolled forward past the oldest year)
+- [ ] Spring only: ~4 weeks before Peru's season (mid-May), check USDA import report availability if activating Peru/Colombia tracking (see SEASONAL_INTEGRATION.md, Item 6)
+- [ ] Eyeball the live site: any region showing an ⚠ unexpected-gap warning needs investigation now, not later
+
+If the Tuesday Action goes red between checkpoints, the most likely causes in
+order: transient GitHub/Pages hiccup (re-run the job), USDA posted late
+(re-run tomorrow), report slug changed (check fetcher output), PDF layout
+changed (fix the parser).
