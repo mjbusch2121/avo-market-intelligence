@@ -7,19 +7,19 @@
    "role": "Primary Mexican Hass source (~80% of exports)",
    "past7": {
     "days": 7,
-    "rain_mm": 33.9,
-    "tmax_avg_c": 24.6,
-    "tmin_avg_c": 14.0,
-    "tmax_peak_c": 26.3,
-    "tmin_low_c": 13.1
+    "rain_mm": 30.8,
+    "tmax_avg_c": 24.4,
+    "tmin_avg_c": 13.1,
+    "tmax_peak_c": 25.7,
+    "tmin_low_c": 12.0
    },
    "next14": {
     "days": 14,
-    "rain_mm": 56.1,
-    "tmax_avg_c": 23.9,
-    "tmin_avg_c": 13.2,
-    "tmax_peak_c": 25.8,
-    "tmin_low_c": 11.6
+    "rain_mm": 69.0,
+    "tmax_avg_c": 24.1,
+    "tmin_avg_c": 13.3,
+    "tmax_peak_c": 25.7,
+    "tmin_low_c": 11.7
    },
    "source": "open-meteo",
    "flag": "normal",
@@ -33,19 +33,19 @@
    "role": "Second Mexican export state",
    "past7": {
     "days": 7,
-    "rain_mm": 24.9,
-    "tmax_avg_c": 27.0,
-    "tmin_avg_c": 16.9,
-    "tmax_peak_c": 28.6,
-    "tmin_low_c": 16.1
+    "rain_mm": 15.8,
+    "tmax_avg_c": 26.2,
+    "tmin_avg_c": 16.3,
+    "tmax_peak_c": 28.2,
+    "tmin_low_c": 15.0
    },
    "next14": {
     "days": 14,
-    "rain_mm": 41.6,
-    "tmax_avg_c": 25.3,
-    "tmin_avg_c": 16.2,
-    "tmax_peak_c": 27.6,
-    "tmin_low_c": 15.5
+    "rain_mm": 37.4,
+    "tmax_avg_c": 26.2,
+    "tmin_avg_c": 16.3,
+    "tmax_peak_c": 28.5,
+    "tmin_low_c": 15.3
    },
    "source": "open-meteo",
    "flag": "normal",
@@ -60,24 +60,24 @@
    "past7": {
     "days": 7,
     "rain_mm": 0,
-    "tmax_avg_c": 28.2,
-    "tmin_avg_c": 17.9,
-    "tmax_peak_c": 29.4,
-    "tmin_low_c": 16.8
+    "tmax_avg_c": 27.0,
+    "tmin_avg_c": 16.6,
+    "tmax_peak_c": 27.8,
+    "tmin_low_c": 15.2
    },
    "next14": {
     "days": 14,
     "rain_mm": 0,
-    "tmax_avg_c": 30.7,
-    "tmin_avg_c": 18.9,
-    "tmax_peak_c": 32.5,
-    "tmin_low_c": 14.8
+    "tmax_avg_c": 29.8,
+    "tmin_avg_c": 19.0,
+    "tmax_peak_c": 32.7,
+    "tmin_low_c": 16.3
    },
    "source": "open-meteo",
    "flag": "normal",
    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
    "available": true,
-   "nws_narrative": "This Afternoon: Sunny, with a high near 80. West southwest wind around 10 mph."
+   "nws_narrative": "This Afternoon: Mostly sunny, with a high near 79. West southwest wind around 10 mph."
   },
   {
    "key": "san_diego",
@@ -87,24 +87,24 @@
    "past7": {
     "days": 7,
     "rain_mm": 0,
-    "tmax_avg_c": 31.6,
+    "tmax_avg_c": 31.4,
     "tmin_avg_c": 18.8,
-    "tmax_peak_c": 33.1,
-    "tmin_low_c": 17.6
+    "tmax_peak_c": 33.9,
+    "tmin_low_c": 17.4
    },
    "next14": {
     "days": 14,
-    "rain_mm": 0.6,
-    "tmax_avg_c": 29.5,
-    "tmin_avg_c": 16.7,
-    "tmax_peak_c": 31.7,
-    "tmin_low_c": 15.2
+    "rain_mm": 0,
+    "tmax_avg_c": 29.3,
+    "tmin_avg_c": 16.5,
+    "tmax_peak_c": 33.1,
+    "tmin_low_c": 13.6
    },
    "source": "open-meteo",
    "flag": "normal",
    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
    "available": true,
-   "nws_narrative": "This Afternoon: Sunny, with a high near 87. Southwest wind around 10 mph, with gusts as high as 20 mph."
+   "nws_narrative": "This Afternoon: Sunny, with a high near 86. Southwest wind 10 to 15 mph, with gusts as high as 25 mph."
   }
  ]
 }
