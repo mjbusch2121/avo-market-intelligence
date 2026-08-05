@@ -363,8 +363,16 @@ function renderFreight(data) {
       "Freight report unavailable this week.";
     return;
   }
-  document.getElementById("freight-sub").textContent =
-    `FVWTRK report for ${f.report_date} — per-load refrigerated spot rates`;
+  const fsub = document.getElementById("freight-sub");
+  const fStale = f.stale_days !== null && f.stale_days !== undefined && f.stale_days > 10;
+  if (fStale || f.fetch_error) {
+    fsub.innerHTML =
+      `<span class="stale-warn">⚠ FVWTRK report for ${f.report_date} — ` +
+      `${f.stale_days} days old; USDA feed may be unavailable</span>`;
+  } else {
+    fsub.textContent =
+      `FVWTRK report for ${f.report_date} — per-load refrigerated spot rates`;
+  }
 
   const lanesBox = document.getElementById("lanes");
   f.lanes.forEach((l) => {

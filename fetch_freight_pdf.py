@@ -18,7 +18,7 @@
 import json
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, date
 from pathlib import Path
 
 import pdfplumber
@@ -146,9 +146,16 @@ def main():
         r.raise_for_status()
         pdf_path.write_bytes(r.content)
     except Exception as e:
-        print(f"FATAL: could not download FVWTRK PDF: {e}", file=sys.stderr)
-        # leave any previously parsed freight.json in place
-        sys.exit(0 if (RAW_DIR / "freight.json").exists() else 1)
+        msg = f"could not download FVWTRK PDF: {e}"
+        print(f"FREIGHT FETCH FAILED: {msg}", file=sys.stderr)
+        prev_path = RAW_DIR / "freight.json"
+        if not prev_path.exists():
+            sys.exit(1)          # nothing to fall back on — hard stop
+        prev = json.loads(prev_path.read_text(encoding="utf-8"))
+        prev["fetch_error"] = msg
+        prev["fetch_attempted"] = date.today().isoformat()
+        prev_path.write_text(json.dumps(prev, indent=1), encoding="utf-8")
+        sys.exit(0)   # let the rest of the pipeline run; build_summary raises the alarm
 
     data = parse_pdf(pdf_path)
     n_rows = sum(len(s["rows"]) for s in data["sections"])

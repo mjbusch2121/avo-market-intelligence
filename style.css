@@ -292,6 +292,7 @@ h1, h2, h3 { font-family: var(--display); margin: 0; }
 .badge.watch { border-color: var(--seed); color: var(--seed); }
 .badge.alert { border-color: var(--clay); color: var(--clay); }
 .badge.normal { border-color: var(--green); color: var(--green); }
+.stale-warn { color: var(--clay); }
 
 /* Season states */
 .stat-row.season-off .stat-name { opacity: 0.5; }
@@ -501,3 +502,4 @@ footer {
 }
 
 :focus-visible { outline: 2px solid var(--flesh); outline-offset: 2px; }
+

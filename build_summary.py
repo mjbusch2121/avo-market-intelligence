@@ -21,6 +21,15 @@ HIST = ROOT / "history"
 
 TREND_WEEKS = 52
 
+FREIGHT_STALE_AFTER_DAYS = 10   # report is weekly; 10 days = missed a cycle
+
+
+def freight_stale_days(report_date):
+    """How many days old the freight report is. None if unknown."""
+    if not report_date:
+        return None
+    return (date.today() - date.fromisoformat(report_date)).days
+
 # Freight lanes to feature: destination -> fallback destination.
 FREIGHT_DESTS = [("Los Angeles", None), ("Dallas", None),
                  ("Miami", None), ("Philadelphia", "Baltimore")]
@@ -486,6 +495,8 @@ def main():
     supply = build_supply(movement, notes)
     pricing = build_pricing(price_hist, current, notes)
     freight = build_freight(freight_raw, notes)
+    freight["stale_days"] = freight_stale_days(freight.get("report_date"))
+    freight["fetch_error"] = freight_raw.get("fetch_error")
     diesel = build_diesel(diesel_raw)
     weather = build_weather(weather_raw)
 
@@ -528,9 +539,17 @@ def main():
     for key, block in season_blocks.items():
         if block["status"] != "active":
             print(f"SEASON [{block['status']}] {key}: {block['message']}")
-    if gaps:
-        raise SystemExit(1)
+    # Freight freshness
+    fe = freight.get("fetch_error")
+    sd = freight.get("stale_days")
+    freight_stale = sd is not None and sd > FREIGHT_STALE_AFTER_DAYS
+    if fe:
+        print(f"FREIGHT [error] {fe}")
+    if freight_stale:
+        print(f"FREIGHT [stale] report is {sd} days old ({freight.get('report_date')})")
 
+    if gaps or fe or freight_stale:
+        raise SystemExit(1)
 
 if __name__ == "__main__":
     main()
