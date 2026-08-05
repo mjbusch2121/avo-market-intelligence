@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-08-04T21:09:02Z",
+ "generated_at": "2026-08-05T20:59:25Z",
  "week": {
   "end": "2026-08-01",
   "label": "Week ending Aug 01, 2026"
  },
- "headline": "Mexico crossing volume up 10% week-over-week; Texas-crossing Hass 48s FOB firmed 5% at $44.25; LA/Dallas freight flat/flat; diesel up 0.04 at $5.35/gal.",
+ "headline": "Mexico crossing volume up 10% week-over-week; Texas-crossing Hass 48s FOB firmed 5% at $44.25; LA/Dallas freight soft/soft; diesel up 0.04 at $5.35/gal.",
  "signals": [
   "Total arrivals are running 13% above the 3-year seasonal average (52.3M lbs this week).",
   "Seaport imports (Peru/Colombia/DR season) moved down 37% to 11.0M lbs \u2014 watch East Coast spot pressure.",
@@ -32,8 +32,8 @@
   },
   {
    "label": "Freight \u2192 LA",
-   "value": "$3,800\u20134,200",
-   "delta_pct": null,
+   "value": "$3,400\u20134,000",
+   "delta_pct": -8,
    "sub": "S. Texas crossings (McAllen/Pharr)"
   },
   {
@@ -864,18 +864,18 @@
   ]
  },
  "freight": {
-  "report_date": "2026-07-21",
+  "report_date": "2026-07-28",
   "lanes": [
    {
     "dest": "Los Angeles",
     "origin": "MEXICO CROSSINGS THROUGH SOUTH TEXAS",
     "origin_short": "S. Texas crossings (McAllen/Pharr)",
     "availability": "Surplus",
-    "low": 3800,
-    "high": 4200,
-    "mostly_low": 3800,
-    "mostly_high": 4000,
-    "wow_pct": 0,
+    "low": 3400,
+    "high": 4000,
+    "mostly_low": 3400,
+    "mostly_high": 3800,
+    "wow_pct": -8,
     "wow_reported": true
    },
    {
@@ -884,10 +884,10 @@
     "origin_short": "S. Texas crossings (McAllen/Pharr)",
     "availability": "Surplus",
     "low": 2000,
-    "high": 2300,
+    "high": 2200,
     "mostly_low": 2000,
-    "mostly_high": 2200,
-    "wow_pct": 0,
+    "mostly_high": 2100,
+    "wow_pct": -2,
     "wow_reported": true
    },
    {
@@ -907,11 +907,11 @@
     "origin": "MEXICO CROSSINGS THROUGH SOUTH TEXAS",
     "origin_short": "S. Texas crossings (McAllen/Pharr)",
     "availability": "Surplus",
-    "low": 6800,
-    "high": 7400,
-    "mostly_low": 6800,
-    "mostly_high": 7000,
-    "wow_pct": 0,
+    "low": 6400,
+    "high": 7200,
+    "mostly_low": 6400,
+    "mostly_high": 6800,
+    "wow_pct": -4,
     "wow_reported": true
    }
   ],
@@ -922,13 +922,15 @@
    },
    {
     "district": "South & Central CA",
-    "status": "Slight Shortage"
+    "status": "Shortage"
    },
    {
     "district": "Oxnard district CA",
     "status": "Adequate"
    }
-  ]
+  ],
+  "stale_days": 8,
+  "fetch_error": null
  },
  "diesel": {
   "available": true,
