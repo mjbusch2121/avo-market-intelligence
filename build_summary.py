@@ -417,18 +417,61 @@ def build_headline(supply, pricing, freight, diesel, weather) -> str:
     return "; ".join(parts) + "." if parts else "Data pending first full refresh."
 
 
+def active_import_origins() -> str:
+    """Which import origins are plausibly shipping right now, per
+    seasons.json. Replaces the hardcoded 'Peru/Colombia/DR season'
+    string, which would have been wrong half the year.
+
+    Returns e.g. 'Peru/Colombia' or '' if none are in window.
+    """
+    from seasonality import load_seasons, in_window
+    from datetime import date
+
+    today = date.today()
+    seasons = load_seasons()
+    names = {"peru": "Peru", "colombia": "Colombia", "chile": "Chile",
+             "dr": "DR", "dominican": "DR"}
+    active = [label for key, label in names.items()
+              if key in seasons and in_window(seasons[key], today)]
+    return "/".join(dict.fromkeys(active))
+
+
 def build_signals(supply, pricing, freight, diesel, weather) -> list:
+    """Surface only what's UNUSUAL this week.
+
+    Every signal is gated behind a threshold, so a quiet week produces a
+    short list (or none) rather than four sentences restating normal
+    conditions. A short 'What to watch' box is itself information: it
+    means nothing is out of line.
+    """
     sig = []
+
+    # --- Thresholds (tune these if the box feels too noisy/quiet) ---
+    SUPPLY_VS_3YR = 10      # % from seasonal average worth mentioning
+    PORTS_WOW = 20          # % week-over-week swing in seaport arrivals
+    # FOB: flagged only outside the 25-75 percentile band (see below)
+
+    # 1. Supply vs seasonal norm — only when meaningfully off-pace
     if supply and supply.get("total_vs_3yr_pct") is not None:
         v = supply["total_vs_3yr_pct"]
-        sig.append(f"Total arrivals are {direction_word(v, 'running', 'running')} "
-                   f"{'above' if v > 0 else 'below'} the 3-year seasonal average "
-                   f"({supply['total_lbs'] / 1e6:.1f}M lbs this week).")
-    ports = next((r for r in (supply or {}).get("regions", []) if r["key"] == "ports"), None)
+        if abs(v) >= SUPPLY_VS_3YR:
+            sig.append(f"Total arrivals are running {abs(v):.0f}% "
+                       f"{'above' if v > 0 else 'below'} the 3-year seasonal "
+                       f"average ({supply['total_lbs'] / 1e6:.1f}M lbs this week).")
+
+    # 2. Seaport imports — only on a real swing, with season-aware origins
+    ports = next((r for r in (supply or {}).get("regions", [])
+                  if r["key"] == "ports"), None)
     if ports and ports["lbs"] > 0 and ports.get("wow_pct") is not None:
-        sig.append(f"Seaport imports (Peru/Colombia/DR season) moved "
-                   f"{direction_word(ports['wow_pct'])} to {ports['lbs'] / 1e6:.1f}M lbs — "
-                   "watch East Coast spot pressure.")
+        w = ports["wow_pct"]
+        if abs(w) >= PORTS_WOW:
+            origins = active_import_origins()
+            who = f" ({origins})" if origins else ""
+            sig.append(f"Seaport imports{who} moved "
+                       f"{direction_word(w)} to {ports['lbs'] / 1e6:.1f}M lbs — "
+                       "watch East Coast spot pressure.")
+
+    # 3. Benchmark FOB — only when genuinely cheap or expensive for the week
     bm = (pricing or {}).get("benchmark") or {}
     if bm.get("band_position_pct") is not None:
         p = bm["band_position_pct"]
@@ -438,20 +481,38 @@ def build_signals(supply, pricing, freight, diesel, weather) -> list:
         elif p > 100:
             sig.append("Benchmark Hass 48s FOB is trading ABOVE its 3-year "
                        "seasonal range — historically expensive for this week.")
-        else:
-            where = ("near the top of" if p >= 75
-                     else "near the bottom of" if p <= 25 else "inside")
-            sig.append(f"Benchmark Hass 48s FOB sits {where} its 3-year seasonal "
-                       f"range ({p}th percentile of the band).")
+        elif p >= 75:
+            sig.append(f"Benchmark Hass 48s FOB is near the top of its 3-year "
+                       f"seasonal range ({p}th percentile) — firm for this week.")
+        elif p <= 25:
+            sig.append(f"Benchmark Hass 48s FOB is near the bottom of its 3-year "
+                       f"seasonal range ({p}th percentile) — soft for this week.")
+        # 26-74 = unremarkable, say nothing
+
+    # 4. Truck shortages — already conditional, left as-is
     shortages = [a for a in (freight or {}).get("availability", [])
                  if "Shortage" in a["status"]]
     if shortages:
         sig.append("Truck availability tight out of " +
                    ", ".join(a["district"] for a in shortages) +
                    " — expect upward rate pressure.")
+
+    # 5. Freight data staleness — if the USDA feed is behind, say so here too
+    sd = (freight or {}).get("stale_days")
+    if (freight or {}).get("fetch_error") or (sd is not None and sd > 10):
+        sig.append(f"Freight rates shown are {sd} days old — the USDA truck "
+                   "rate report has not refreshed; treat lane costs as indicative.")
+
+    # 6. Weather — already event-driven, left as-is
     for r in (weather or {}).get("regions", []):
         if r.get("flag") in ("watch", "alert"):
             sig.append(f"{r['name']}: {r['note']}")
+
+    # Quiet week: say so explicitly rather than showing an empty box
+    if not sig:
+        sig.append("No notable deviations this week — supply, pricing, and "
+                   "freight are all tracking near seasonal norms.")
+
     return sig[:5]
 
 
