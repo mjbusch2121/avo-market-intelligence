@@ -11,7 +11,7 @@
 
 import json
 import statistics
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from seasonality import classify, any_unexpected_gaps
 
@@ -21,7 +21,12 @@ HIST = ROOT / "history"
 
 TREND_WEEKS = 52
 
+SEASONAL_WINDOW_WEEKS = 2      # +/- N ISO weeks around the target week
+BASELINE_MIN_SAMPLES = 8       # below this, suppress the percentile signal
+RECENCY_CUTOFF_DAYS = 180      # unchanged; was hardcoded as timedelta(days=180)
+
 FREIGHT_STALE_AFTER_DAYS = 10   # report is weekly; 10 days = missed a cycle
+FETCH_STALE_AFTER_DAYS = 8      # weekly Action; 8 days = missed a cycle
 
 
 def freight_stale_days(report_date):
@@ -29,6 +34,19 @@ def freight_stale_days(report_date):
     if not report_date:
         return None
     return (date.today() - date.fromisoformat(report_date)).days
+
+
+def fetch_age_days(fetched_at):
+    """Days since the feed was last fetched. None if unknown."""
+    if not fetched_at:
+        return None
+    try:
+        ts = datetime.fromisoformat(fetched_at)
+    except ValueError:
+        return None
+    if ts.tzinfo is None:
+        ts = ts.replace(tzinfo=timezone.utc)
+    return (datetime.now(timezone.utc) - ts).days
 
 # Freight lanes to feature: destination -> fallback destination.
 FREIGHT_DESTS = [("Los Angeles", None), ("Dallas", None),
@@ -122,22 +140,31 @@ def build_supply(movement: dict, notes: list) -> dict:
     def total(w):
         return sum(weekly[w].values()) if w else 0
 
-    def seasonal_avg(week_str, series_fn):
-        """3-yr average of same ISO week from prior seasons."""
+    def seasonal_sample(week_str, series_fn):
+        """Prior-season values from the same point in the season (+/- SEASONAL_WINDOW_WEEKS).
+
+        Uses mean (not median) in seasonal_avg — supply volumes are driven by
+        predictable crop cycles without single-season price extremes.
+        """
         wn = iso_week(week_str)
-        cutoff = date.fromisoformat(week_str) - timedelta(days=180)
-        vals = [series_fn(w) for w in weeks
-                if iso_week(w) == wn and date.fromisoformat(w) < cutoff]
+        cutoff = date.fromisoformat(week_str) - timedelta(days=RECENCY_CUTOFF_DAYS)
+        return [series_fn(w) for w in weeks
+                if _iso_week_distance(iso_week(w), wn) <= SEASONAL_WINDOW_WEEKS
+                and date.fromisoformat(w) < cutoff]
+
+    def seasonal_avg(week_str, series_fn):
+        vals = seasonal_sample(week_str, series_fn)
         return statistics.mean(vals) if vals else None
 
     trend = []
     for w in weeks[-TREND_WEEKS:]:
+        _avg = seasonal_avg(w, total)
         trend.append({
             "week": w,
             "mx": weekly[w]["mx"],
             "ca": weekly[w]["ca"],
             "ports": weekly[w]["ports"],
-            "avg3yr": round(seasonal_avg(w, total)) if seasonal_avg(w, total) else None,
+            "avg3yr": round(_avg) if _avg else None,
         })
 
     # USDA posts some districts late (CA domestic movement especially), so
@@ -164,7 +191,13 @@ def build_supply(movement: dict, notes: list) -> dict:
         pri = weekly[prior_w][key] if prior_w else 0
         avg = seasonal_avg(cur_w, lambda w, k=key: weekly[w][k])
         med = trailing_median(key)
-        partial = med > 1e6 and cur < 0.3 * med
+        season = classify(key, last_reported_week(key))
+
+        # An out-of-season region reporting near zero is a KNOWN zero, not a
+        # missing report. Only an in-season region can be "partially reported".
+        looks_low = med > 1e6 and cur < 0.3 * med
+        partial = looks_low and season["status"] != "out_of_season"
+
         if partial:
             partial_keys.add(key)
             notes.append(f"{name} movement for the latest week appears "
@@ -175,7 +208,7 @@ def build_supply(movement: dict, notes: list) -> dict:
             "partial": partial,
             "wow_pct": None if partial else pct(cur, pri),
             "vs_3yr_pct": None if partial or not avg else pct(cur, avg),
-            "season": classify(key, last_reported_week(key)),
+            "season": season,
         })
 
     crossings = []
@@ -196,13 +229,25 @@ def build_supply(movement: dict, notes: list) -> dict:
         return sum(weekly[w][k] for k in ("mx", "ca", "ports")
                    if k not in partial_keys)
 
-    avg_rel = seasonal_avg(cur_w, total_reliable)
+    rel_sample = seasonal_sample(cur_w, total_reliable)
+    avg_rel = statistics.mean(rel_sample) if rel_sample else None
+    baseline_n = len(rel_sample)
+    wn_cur = iso_week(cur_w)
+    cutoff_cur = date.fromisoformat(cur_w) - timedelta(days=RECENCY_CUTOFF_DAYS)
+    baseline_years = len({date.fromisoformat(w).year for w in weeks
+                          if _iso_week_distance(iso_week(w), wn_cur) <= SEASONAL_WINDOW_WEEKS
+                          and date.fromisoformat(w) < cutoff_cur})
+    excluded = sorted(partial_keys)
     return {
         "week_end": cur_w,
-        "total_lbs": total(cur_w),
+        "total_lbs": total_reliable(cur_w),
+        "total_lbs_all_regions": total(cur_w),
+        "total_excludes": excluded,
         "total_wow_pct": pct(total_reliable(cur_w), total_reliable(prior_w))
                          if prior_w else None,
         "total_vs_3yr_pct": pct(total_reliable(cur_w), avg_rel) if avg_rel else None,
+        "baseline_n": baseline_n,
+        "baseline_years": baseline_years,
         "partial_regions": sorted(partial_keys),
         "regions": regions,
         "crossings": crossings,
@@ -232,14 +277,17 @@ def build_pricing(price_hist: dict, current: dict, notes: list) -> dict:
         notes.append("No benchmark pricing history found.")
         return {}
 
-    def band(week_str):
+    def seasonal_sample(week_str):
+        """Prior-year (week, value) pairs from the same point in the season."""
         wn = iso_week(week_str)
-        cutoff = date.fromisoformat(week_str) - timedelta(days=180)
-        vals = [v for w, v in mx.items()
-                if iso_week(w) == wn and date.fromisoformat(w) < cutoff]
-        if not vals:
-            return None, None
-        return min(vals), max(vals)
+        cutoff = date.fromisoformat(week_str) - timedelta(days=RECENCY_CUTOFF_DAYS)
+        return [(w, v) for w, v in mx.items()
+                if _iso_week_distance(iso_week(w), wn) <= SEASONAL_WINDOW_WEEKS
+                and date.fromisoformat(w) < cutoff]
+
+    def band(week_str):
+        """(low, high) quartile band for the trend chart."""
+        return _quartile_band([v for _, v in seasonal_sample(week_str)])
 
     trend = []
     for w in all_weeks[-TREND_WEEKS:]:
@@ -278,10 +326,14 @@ def build_pricing(price_hist: dict, current: dict, notes: list) -> dict:
         })
 
     latest_mx = mx[mx_weeks[-1]] if mx_weeks else None
-    b_lo, b_hi = band(mx_weeks[-1]) if mx_weeks else (None, None)
+
+    raw_sample = seasonal_sample(mx_weeks[-1]) if mx_weeks else []
+    sample = [v for _, v in raw_sample]
+    baseline_n = len(sample)
+    baseline_years = len({date.fromisoformat(w).year for w, _ in raw_sample})
     band_position = None
-    if latest_mx is not None and b_lo is not None and b_hi and b_hi > b_lo:
-        band_position = round((latest_mx - b_lo) / (b_hi - b_lo) * 100)
+    if latest_mx is not None and baseline_n >= BASELINE_MIN_SAMPLES:
+        band_position = _percentile_rank(sample, latest_mx)
 
     return {
         "benchmark": {
@@ -289,6 +341,8 @@ def build_pricing(price_hist: dict, current: dict, notes: list) -> dict:
             "mx_latest": latest_mx, "ca_latest": ca[ca_weeks[-1]] if ca_weeks else None,
             "wow_mx_pct": wow_mx, "wow_ca_pct": wow_ca,
             "band_position_pct": band_position,
+            "baseline_n": baseline_n,
+            "baseline_years": baseline_years,
         },
         "report_date": current.get("report_date"),
         "table": table,
@@ -322,7 +376,9 @@ def build_freight(freight: dict, notes: list) -> dict:
             if candidates:
                 r = candidates[0]
                 found = {"dest": r["dest"], "origin": origin,
-                         "origin_short": origin_short, **{k: r[k] for k in
+                         "origin_short": origin_short,
+                         "origin_is_preferred": origin == FREIGHT_ORIGINS[0][0],
+                         **{k: r[k] for k in
                          ("availability", "low", "high", "mostly_low",
                           "mostly_high", "wow_pct", "wow_reported")}}
                 break
@@ -435,8 +491,51 @@ def active_import_origins() -> str:
               if key in seasons and in_window(seasons[key], today)]
     return "/".join(dict.fromkeys(active))
 
+def _iso_week_distance(a, b):
+    """Circular distance between two ISO week numbers.
 
-def build_signals(supply, pricing, freight, diesel, weather) -> list:
+    Handles the year boundary: week 52 and week 1 are 2 apart, not 51.
+    """
+    d = abs(a - b)
+    return min(d, 53 - d)
+
+
+def _percentile_rank(vals, x):
+    """True percentile rank of x within vals, 0-100.
+
+    Uses the midpoint convention for ties so that a value equal to every
+    observation scores 50 rather than 0 or 100.
+    """
+    if not vals:
+        return None
+    below = sum(1 for v in vals if v < x)
+    ties = sum(1 for v in vals if v == x)
+    return round((below + 0.5 * ties) / len(vals) * 100)
+
+
+def _quartile_band(vals):
+    """25th/75th percentiles, for the trend chart band.
+
+    Falls back to min/max when there are too few points for quantiles.
+    """
+    if not vals:
+        return None, None
+    if len(vals) < 4:
+        return min(vals), max(vals)
+    q = statistics.quantiles(vals, n=4, method="inclusive")
+    return q[0], q[2]
+
+
+def _ordinal(n):
+    """Turn 23 into '23rd', 11 into '11th', 1 into '1st'."""
+    n = int(n)
+    if 10 <= n % 100 <= 20:
+        suffix = "th"
+    else:
+        suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+    return f"{n}{suffix}"
+
+def build_signals(supply, pricing, freight, diesel, weather, feeds=None) -> list:
     """Surface only what's UNUSUAL this week.
 
     Every signal is gated behind a threshold, so a quiet week produces a
@@ -455,8 +554,9 @@ def build_signals(supply, pricing, freight, diesel, weather) -> list:
     if supply and supply.get("total_vs_3yr_pct") is not None:
         v = supply["total_vs_3yr_pct"]
         if abs(v) >= SUPPLY_VS_3YR:
+            yrs = supply.get("baseline_years", 3)
             sig.append(f"Total arrivals are running {abs(v):.0f}% "
-                       f"{'above' if v > 0 else 'below'} the 3-year seasonal "
+                       f"{'above' if v > 0 else 'below'} the {yrs}-year seasonal "
                        f"average ({supply['total_lbs'] / 1e6:.1f}M lbs this week).")
 
     # 2. Seaport imports — only on a real swing, with season-aware origins
@@ -475,35 +575,69 @@ def build_signals(supply, pricing, freight, diesel, weather) -> list:
     bm = (pricing or {}).get("benchmark") or {}
     if bm.get("band_position_pct") is not None:
         p = bm["band_position_pct"]
-        if p < 0:
-            sig.append("Benchmark Hass 48s FOB is trading BELOW its 3-year "
-                       "seasonal range — historically cheap for this week.")
-        elif p > 100:
-            sig.append("Benchmark Hass 48s FOB is trading ABOVE its 3-year "
-                       "seasonal range — historically expensive for this week.")
+        yrs_p = bm.get("baseline_years", 3)
+        if p <= 5:
+            sig.append(f"Benchmark Hass 48s FOB is at the very bottom of its {yrs_p}-year "
+                       f"seasonal range ({_ordinal(p)} percentile) — historically "
+                       f"cheap for this week.")
+        elif p >= 95:
+            sig.append(f"Benchmark Hass 48s FOB is at the very top of its {yrs_p}-year "
+                       f"seasonal range ({_ordinal(p)} percentile) — historically "
+                       f"expensive for this week.")
         elif p >= 75:
-            sig.append(f"Benchmark Hass 48s FOB is near the top of its 3-year "
-                       f"seasonal range ({p}th percentile) — firm for this week.")
+            sig.append(f"Benchmark Hass 48s FOB is near the top of its {yrs_p}-year "
+                       f"seasonal range ({_ordinal(p)} percentile) — firm for this week.")
         elif p <= 25:
-            sig.append(f"Benchmark Hass 48s FOB is near the bottom of its 3-year "
-                       f"seasonal range ({p}th percentile) — soft for this week.")
+            sig.append(f"Benchmark Hass 48s FOB is near the bottom of its {yrs_p}-year "
+                       f"seasonal range ({_ordinal(p)} percentile) — soft for this week.")
         # 26-74 = unremarkable, say nothing
 
-    # 4. Truck shortages — already conditional, left as-is
+    # 4. Truck shortages — scoped to origin; check whether lane rates agree
     shortages = [a for a in (freight or {}).get("availability", [])
                  if "Shortage" in a["status"]]
     if shortages:
-        sig.append("Truck availability tight out of " +
-                   ", ".join(a["district"] for a in shortages) +
-                   " — expect upward rate pressure.")
+        districts = ", ".join(a["district"] for a in shortages)
+        lanes = [l for l in (freight or {}).get("lanes", [])
+                 if l.get("wow_pct") is not None]
+        softening = [l for l in lanes if l["wow_pct"] < -1]
+        if softening and len(softening) >= len(lanes) / 2:
+            sig.append(f"Truck availability is tight out of {districts}, but quoted lane "
+                       "rates softened this week — capacity pressure has not yet reached "
+                       "spot rates. Watch for a lag.")
+        else:
+            sig.append(f"Truck availability tight out of {districts} — "
+                       "expect upward rate pressure on lanes from this origin.")
+
+    # 4b. Fallback lane — when S. Texas has no quote, the card flips origin silently
+    fallback_lanes = [l for l in (freight or {}).get("lanes", [])
+                      if not l.get("origin_is_preferred")]
+    if fallback_lanes:
+        names = ", ".join(f"{l['dest']} (from {l['origin_short']})" for l in fallback_lanes)
+        sig.append(f"No S. Texas lane quoted into {names} this week — "
+                   "rates shown are from an alternate origin and are not "
+                   "comparable to prior weeks.")
 
     # 5. Freight data staleness — if the USDA feed is behind, say so here too
     sd = (freight or {}).get("stale_days")
-    if (freight or {}).get("fetch_error") or (sd is not None and sd > 10):
+    fe = (freight or {}).get("fetch_error")
+    if fe:
+        sig.append("Freight rates could not be refreshed from USDA this week — "
+                   "lane costs shown are carried over from the last successful "
+                   "fetch; treat as indicative.")
+    elif sd is not None and sd > FREIGHT_STALE_AFTER_DAYS:
         sig.append(f"Freight rates shown are {sd} days old — the USDA truck "
                    "rate report has not refreshed; treat lane costs as indicative.")
 
-    # 6. Weather — already event-driven, left as-is
+    # 6. Feed freshness — warn when individual feeds missed a cycle
+    if feeds:
+        named = {k: v for k, v in feeds.items() if not k.startswith("_")}
+        lagging = [n for n, f in named.items() if f["stale"] and n != "freight"]
+        if lagging:
+            display = ["USDA" if n in ("supply", "pricing") else n for n in lagging]
+            sig.append(f"Data feeds not refreshed this cycle: {', '.join(sorted(set(display)))} "
+                       "— figures from these sources may not reflect the current week.")
+
+    # 7. Weather — already event-driven, left as-is
     for r in (weather or {}).get("regions", []):
         if r.get("flag") in ("watch", "alert"):
             sig.append(f"{r['name']}: {r['note']}")
@@ -523,16 +657,25 @@ def build_kpis(supply, pricing, freight, diesel) -> list:
         kpis.append({"label": "MX crossing volume", "value": f"{mx['lbs'] / 1e6:.1f}M lbs",
                      "delta_pct": mx["wow_pct"], "sub": "vs prior week"})
     if supply and supply.get("total_vs_3yr_pct") is not None:
-        kpis.append({"label": "Total vs 3-yr avg", "value": f"{supply['total_vs_3yr_pct']:+.0f}%",
-                     "delta_pct": None, "sub": "seasonal pace"})
+        excl = supply.get("total_excludes") or []
+        excl_note = f" (excl. {', '.join(e.upper() for e in excl)} — pending)" if excl else ""
+        kpis.append({
+            "label": f"Total arrivals vs {supply.get('baseline_years', 3)}-yr avg",
+            "value": f"{supply['total_vs_3yr_pct']:+.0f}%",
+            "delta_pct": None,
+            "sub": f"{supply['total_lbs']/1e6:.1f}M lbs this week{excl_note}",
+        })
     bm = (pricing or {}).get("benchmark") or {}
     if bm.get("mx_latest") is not None:
         kpis.append({"label": "Hass 48s FOB (TX)", "value": f"${bm['mx_latest']:.2f}",
                      "delta_pct": bm.get("wow_mx_pct"), "sub": "vs prior week"})
     la = next((l for l in (freight or {}).get("lanes", []) if l["dest"] == "Los Angeles"), None)
     if la:
-        kpis.append({"label": "Freight → LA", "value": f"${la['low']:,}–{la['high']:,}",
-                     "delta_pct": la["wow_pct"] or None, "sub": la["origin_short"]})
+        origin_label = la["origin_short"].split(" (")[0]
+        kpis.append({"label": f"Freight: {origin_label} → LA",
+                     "value": f"${la['low']:,}–{la['high']:,}",
+                     "delta_pct": la["wow_pct"] or None,
+                     "sub": la["origin_short"]})
     nat = ((diesel or {}).get("latest") or {}).get("national")
     if nat:
         kpis.append({"label": "US diesel", "value": f"${nat['value']:.2f}/gal",
@@ -558,8 +701,23 @@ def main():
     freight = build_freight(freight_raw, notes)
     freight["stale_days"] = freight_stale_days(freight.get("report_date"))
     freight["fetch_error"] = freight_raw.get("fetch_error")
+    freight["stale_after_days"] = FREIGHT_STALE_AFTER_DAYS
     diesel = build_diesel(diesel_raw)
     weather = build_weather(weather_raw)
+
+    # Build feeds freshness block before signals (signals reads it)
+    feeds = {}
+    for name, raw in (("supply", current), ("pricing", current),
+                      ("freight", freight_raw), ("diesel", diesel_raw),
+                      ("weather", weather_raw)):
+        age = fetch_age_days(raw.get("fetched_at"))
+        feeds[name] = {
+            "fetched_at": raw.get("fetched_at"),
+            "fetch_age_days": age,
+            "stale": age is None or age > FETCH_STALE_AFTER_DAYS,
+            "fetch_error": raw.get("fetch_error"),
+        }
+    feeds["_stale_after_days"] = FETCH_STALE_AFTER_DAYS
 
     week_end = supply.get("week_end")
     label = (datetime.fromisoformat(week_end).strftime("Week ending %b %d, %Y")
@@ -569,8 +727,9 @@ def main():
         "generated_at": datetime.utcnow().isoformat(timespec="seconds") + "Z",
         "week": {"end": week_end, "label": label},
         "headline": build_headline(supply, pricing, freight, diesel, weather),
-        "signals": build_signals(supply, pricing, freight, diesel, weather),
+        "signals": build_signals(supply, pricing, freight, diesel, weather, feeds),
         "kpis": build_kpis(supply, pricing, freight, diesel),
+        "feeds": feeds,
         "supply": supply,
         "pricing": pricing,
         "freight": freight,
@@ -609,7 +768,13 @@ def main():
     if freight_stale:
         print(f"FREIGHT [stale] report is {sd} days old ({freight.get('report_date')})")
 
-    if gaps or fe or freight_stale:
+    # All-feeds freshness — fail only when every feed has gone dark
+    named_feeds = {k: v for k, v in feeds.items() if not k.startswith("_")}
+    all_stale = all(f["stale"] for f in named_feeds.values())
+    if all_stale:
+        print("FEEDS [error] every feed is stale — automation appears to have stopped")
+
+    if gaps or fe or freight_stale or all_stale:
         raise SystemExit(1)
 
 if __name__ == "__main__":

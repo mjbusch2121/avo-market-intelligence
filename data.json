@@ -1,52 +1,90 @@
 {
- "generated_at": "2026-08-16T16:42:47Z",
+ "generated_at": "2026-08-19T01:06:57Z",
  "week": {
-  "end": "2026-08-08",
-  "label": "Week ending Aug 08, 2026"
+  "end": "2026-08-15",
+  "label": "Week ending Aug 15, 2026"
  },
- "headline": "Mexico crossing volume up 10% week-over-week; Texas-crossing Hass 48s FOB softened 2% at $43.25; LA/Dallas freight soft/soft; diesel down 0.09 at $5.26/gal.",
+ "headline": "Mexico crossing volume up 5% week-over-week; Texas-crossing Hass 48s FOB softened 5% at $41.25; LA/Dallas freight soft/soft; diesel up 0.20 at $5.45/gal.",
  "signals": [
-  "Total arrivals are running 18% above the 3-year seasonal average (54.5M lbs this week).",
-  "Benchmark Hass 48s FOB is near the bottom of its 3-year seasonal range (25th percentile) \u2014 soft for this week.",
-  "Truck availability tight out of South & Central CA \u2014 expect upward rate pressure."
+  "Total arrivals are running 16% above the 4-year seasonal average (54.7M lbs this week).",
+  "Truck availability is tight out of South & Central CA, but quoted lane rates softened this week \u2014 capacity pressure has not yet reached spot rates. Watch for a lag."
  ],
  "kpis": [
   {
    "label": "MX crossing volume",
-   "value": "43.8M lbs",
-   "delta_pct": 9.8,
+   "value": "45.8M lbs",
+   "delta_pct": 4.6,
    "sub": "vs prior week"
   },
   {
-   "label": "Total vs 3-yr avg",
-   "value": "+18%",
+   "label": "Total arrivals vs 4-yr avg",
+   "value": "+16%",
    "delta_pct": null,
-   "sub": "seasonal pace"
+   "sub": "54.7M lbs this week (excl. CA \u2014 pending)"
   },
   {
    "label": "Hass 48s FOB (TX)",
-   "value": "$43.25",
-   "delta_pct": -2.3,
+   "value": "$41.25",
+   "delta_pct": -4.6,
    "sub": "vs prior week"
   },
   {
-   "label": "Freight \u2192 LA",
+   "label": "Freight: S. Texas crossings \u2192 LA",
    "value": "$3,000\u20133,800",
    "delta_pct": -6,
    "sub": "S. Texas crossings (McAllen/Pharr)"
   },
   {
    "label": "US diesel",
-   "value": "$5.26/gal",
-   "delta_pct": -1.7,
+   "value": "$5.45/gal",
+   "delta_pct": 3.7,
    "sub": "weekly retail"
   }
  ],
+ "feeds": {
+  "supply": {
+   "fetched_at": "2026-08-19T01:06:57+00:00",
+   "fetch_age_days": 0,
+   "stale": false,
+   "fetch_error": null
+  },
+  "pricing": {
+   "fetched_at": "2026-08-19T01:06:57+00:00",
+   "fetch_age_days": 0,
+   "stale": false,
+   "fetch_error": null
+  },
+  "freight": {
+   "fetched_at": "2026-08-19T01:06:57+00:00",
+   "fetch_age_days": 0,
+   "stale": false,
+   "fetch_error": null
+  },
+  "diesel": {
+   "fetched_at": "2026-08-19T01:06:57+00:00",
+   "fetch_age_days": 0,
+   "stale": false,
+   "fetch_error": null
+  },
+  "weather": {
+   "fetched_at": "2026-08-19T01:06:57+00:00",
+   "fetch_age_days": 0,
+   "stale": false,
+   "fetch_error": null
+  },
+  "_stale_after_days": 8
+ },
  "supply": {
-  "week_end": "2026-08-08",
-  "total_lbs": 54520120,
-  "total_wow_pct": 4.8,
-  "total_vs_3yr_pct": 18.1,
+  "week_end": "2026-08-15",
+  "total_lbs": 54686789,
+  "total_lbs_all_regions": 56859071,
+  "total_excludes": [
+   "ca"
+  ],
+  "total_wow_pct": 2.6,
+  "total_vs_3yr_pct": 16.0,
+  "baseline_n": 20,
+  "baseline_years": 4,
   "partial_regions": [
    "ca"
   ],
@@ -54,40 +92,40 @@
    {
     "key": "mx",
     "name": "Mexico crossings",
-    "lbs": 43804011,
+    "lbs": 45803579,
     "partial": false,
-    "wow_pct": 9.8,
-    "vs_3yr_pct": 62.3,
+    "wow_pct": 4.6,
+    "vs_3yr_pct": 41.3,
     "season": {
      "status": "active",
      "message": null,
-     "last_reported": "2026-08-08"
+     "last_reported": "2026-08-15"
     }
    },
    {
     "key": "ca",
     "name": "California",
-    "lbs": 1234631,
+    "lbs": 2172282,
     "partial": true,
     "wow_pct": null,
     "vs_3yr_pct": null,
     "season": {
      "status": "active",
      "message": null,
-     "last_reported": "2026-08-08"
+     "last_reported": "2026-08-15"
     }
    },
    {
     "key": "ports",
     "name": "Seaport/other imports",
-    "lbs": 9481478,
+    "lbs": 8883210,
     "partial": false,
-    "wow_pct": -13.5,
-    "vs_3yr_pct": -47.6,
+    "wow_pct": -6.3,
+    "vs_3yr_pct": -39.6,
     "season": {
      "status": "active",
      "message": null,
-     "last_reported": "2026-08-08"
+     "last_reported": "2026-08-15"
     }
    }
   ],
@@ -95,770 +133,895 @@
    {
     "district": "MEXICO CROSSINGS THROUGH PHARR TEXAS",
     "short": "Pharr, TX",
-    "lbs": 25959463,
-    "wow_pct": 7.7
+    "lbs": 26510952,
+    "wow_pct": 2.1
    },
    {
     "district": "MEXICO CROSSINGS THROUGH LAREDO TEXAS",
     "short": "Laredo, TX",
-    "lbs": 17183360,
-    "wow_pct": 13.6
+    "lbs": 18496122,
+    "wow_pct": 7.6
    },
    {
     "district": "MEXICO CROSSINGS THROUGH OTAY MESA CALIFORNIA",
     "short": "Otay Mesa, CA",
-    "lbs": 347281,
-    "wow_pct": -13.3
+    "lbs": 398910,
+    "wow_pct": 14.9
    },
    {
     "district": "MEXICO CROSSINGS THROUGH NOGALES ARIZONA",
     "short": "Nogales, AZ",
-    "lbs": 313907,
-    "wow_pct": 18.8
+    "lbs": 397595,
+    "wow_pct": 26.7
    }
   ],
   "trend": [
-   {
-    "week": "2025-08-16",
-    "mx": 31586479,
-    "ca": 8722012,
-    "ports": 11930442,
-    "avg3yr": 58179768
-   },
    {
     "week": "2025-08-23",
     "mx": 42471761,
     "ca": 9158073,
     "ports": 12933960,
-    "avg3yr": 56518314
+    "avg3yr": 53203683
    },
    {
     "week": "2025-08-30",
     "mx": 43697450,
     "ca": 7907060,
     "ports": 10080457,
-    "avg3yr": 53850179
+    "avg3yr": 53249190
    },
    {
     "week": "2025-09-06",
     "mx": 39552417,
     "ca": 7320420,
     "ports": 7564408,
-    "avg3yr": 42666541
+    "avg3yr": 51595634
    },
    {
     "week": "2025-09-13",
     "mx": 50606265,
     "ca": 7649434,
     "ports": 9970305,
-    "avg3yr": 55031150
+    "avg3yr": 50317309
    },
    {
     "week": "2025-09-20",
     "mx": 47759054,
     "ca": 5692380,
     "ports": 10020766,
-    "avg3yr": 49911985
+    "avg3yr": 50178455
    },
    {
     "week": "2025-09-27",
     "mx": 47338358,
     "ca": 5626192,
     "ports": 6714153,
-    "avg3yr": 50126691
+    "avg3yr": 52081502
    },
    {
     "week": "2025-10-04",
     "mx": 43436310,
     "ca": 4733328,
     "ports": 5674396,
-    "avg3yr": 53155908
+    "avg3yr": 51296672
    },
    {
     "week": "2025-10-11",
     "mx": 57174028,
     "ca": 4959412,
     "ports": 3621878,
-    "avg3yr": 52181776
+    "avg3yr": 52230013
    },
    {
     "week": "2025-10-18",
     "mx": 46357443,
     "ca": 2326822,
     "ports": 3187901,
-    "avg3yr": 51107003
+    "avg3yr": 53887463
    },
    {
     "week": "2025-10-25",
     "mx": 60773128,
     "ca": 3201173,
     "ports": 2722901,
-    "avg3yr": 54578689
+    "avg3yr": 54288025
    },
    {
     "week": "2025-11-01",
     "mx": 58713284,
     "ca": 2009336,
     "ports": 3225140,
-    "avg3yr": 58413940
+    "avg3yr": 54229410
    },
    {
     "week": "2025-11-08",
     "mx": 55719359,
     "ca": 1846626,
     "ports": 3641378,
-    "avg3yr": 55158718
+    "avg3yr": 55741880
    },
    {
     "week": "2025-11-15",
     "mx": 49323643,
     "ca": 92189,
     "ports": 2588386,
-    "avg3yr": 51888702
+    "avg3yr": 54179198
    },
    {
     "week": "2025-11-22",
     "mx": 59280935,
     "ca": 605639,
     "ports": 4351260,
-    "avg3yr": 58669354
+    "avg3yr": 52476804
    },
    {
     "week": "2025-11-29",
     "mx": 53689896,
     "ca": 92189,
     "ports": 2565510,
-    "avg3yr": 46765278
+    "avg3yr": 53021611
    },
    {
     "week": "2025-12-06",
     "mx": 56937673,
     "ca": 506944,
     "ports": 3308429,
-    "avg3yr": 49901969
+    "avg3yr": 53845722
    },
    {
     "week": "2025-12-13",
     "mx": 65967588,
     "ca": 421535,
     "ports": 3656792,
-    "avg3yr": 57882754
+    "avg3yr": 50880915
    },
    {
     "week": "2025-12-20",
     "mx": 54593879,
     "ca": 180523,
     "ports": 3220945,
-    "avg3yr": 56009254
+    "avg3yr": 51909825
    },
    {
     "week": "2025-12-27",
     "mx": 39317851,
     "ca": 282781,
     "ports": 2399582,
-    "avg3yr": 43845322
+    "avg3yr": 49385855
    },
    {
     "week": "2026-01-03",
     "mx": 36405001,
     "ca": 688424,
     "ports": 2472897,
-    "avg3yr": 39806089
+    "avg3yr": 49033008
    },
    {
     "week": "2026-01-10",
     "mx": 73702514,
     "ca": 930200,
     "ports": 3532241,
-    "avg3yr": 64722228
+    "avg3yr": 56173164
    },
    {
     "week": "2026-01-17",
     "mx": 53738431,
     "ca": 1078846,
     "ports": 3904738,
-    "avg3yr": 47758392
+    "avg3yr": 60203000
    },
    {
     "week": "2026-01-24",
     "mx": 60957142,
     "ca": 777168,
     "ports": 2184943,
-    "avg3yr": 72405946
+    "avg3yr": 66104666
    },
    {
     "week": "2026-01-31",
     "mx": 92028032,
     "ca": 1215203,
     "ports": 4639511,
-    "avg3yr": 76322346
+    "avg3yr": 65400816
    },
    {
     "week": "2026-02-07",
     "mx": 76617542,
     "ca": 189809,
     "ports": 3424580,
-    "avg3yr": 69314420
+    "avg3yr": 63988177
    },
    {
     "week": "2026-02-14",
     "mx": 58203007,
     "ca": 301978,
     "ports": 3219980,
-    "avg3yr": 61202976
+    "avg3yr": 62910790
    },
    {
     "week": "2026-02-21",
     "mx": 47130259,
     "ca": 83805,
     "ports": 1179557,
-    "avg3yr": 40695198
+    "avg3yr": 59815758
    },
    {
     "week": "2026-02-28",
     "mx": 70155258,
     "ca": 1517160,
     "ports": 3872267,
-    "avg3yr": 67019011
+    "avg3yr": 57893541
    },
    {
     "week": "2026-03-07",
     "mx": 59358032,
     "ca": 2592011,
     "ports": 2947356,
-    "avg3yr": 60847185
+    "avg3yr": 58201902
    },
    {
     "week": "2026-03-14",
     "mx": 61221705,
     "ca": 3000219,
     "ports": 3150642,
-    "avg3yr": 59703336
+    "avg3yr": 63738008
    },
    {
     "week": "2026-03-21",
     "mx": 74129317,
     "ca": 4812987,
     "ports": 4025014,
-    "avg3yr": 62744778
+    "avg3yr": 64075141
    },
    {
     "week": "2026-03-28",
     "mx": 68551242,
     "ca": 7776367,
     "ports": 2446381,
-    "avg3yr": 68375731
+    "avg3yr": 65679978
    },
    {
     "week": "2026-04-04",
     "mx": 69639791,
     "ca": 10048544,
     "ports": 4533319,
-    "avg3yr": 68704676
+    "avg3yr": 65170351
    },
    {
     "week": "2026-04-11",
     "mx": 75140656,
     "ca": 13613812,
     "ports": 3784432,
-    "avg3yr": 68871370
+    "avg3yr": 66163271
    },
    {
     "week": "2026-04-18",
     "mx": 46006137,
     "ca": 13145525,
     "ports": 3293168,
-    "avg3yr": 57155201
+    "avg3yr": 66543018
    },
    {
     "week": "2026-04-25",
     "mx": 62221887,
     "ca": 13444140,
     "ports": 2027680,
-    "avg3yr": 67709377
+    "avg3yr": 66612475
    },
    {
     "week": "2026-05-02",
     "mx": 65010289,
     "ca": 14468853,
     "ports": 2686997,
-    "avg3yr": 70274463
+    "avg3yr": 65397479
    },
    {
     "week": "2026-05-09",
     "mx": 59341703,
     "ca": 14146762,
     "ports": 3124021,
-    "avg3yr": 69051964
+    "avg3yr": 67045635
    },
    {
     "week": "2026-05-16",
     "mx": 48484477,
     "ca": 0,
     "ports": 3223613,
-    "avg3yr": 62796391
+    "avg3yr": 63574190
    },
    {
     "week": "2026-05-23",
     "mx": 50522963,
     "ca": 15722938,
     "ports": 3620250,
-    "avg3yr": 65395981
+    "avg3yr": 62695038
    },
    {
     "week": "2026-05-30",
     "mx": 39842943,
     "ca": 16385662,
     "ports": 3258534,
-    "avg3yr": 50352150
+    "avg3yr": 60425753
    },
    {
     "week": "2026-06-06",
     "mx": 41137433,
     "ca": 33962738,
     "ports": 6062175,
-    "avg3yr": 65878702
+    "avg3yr": 59307988
    },
    {
     "week": "2026-06-13",
     "mx": 48275777,
     "ca": 19917207,
     "ports": 9292178,
-    "avg3yr": 57705540
+    "avg3yr": 59371076
    },
    {
     "week": "2026-06-20",
     "mx": 27871415,
     "ca": 19073819,
     "ports": 7700715,
-    "avg3yr": 57207566
+    "avg3yr": 58538401
    },
    {
     "week": "2026-06-27",
     "mx": 33820148,
     "ca": 18829780,
     "ports": 13965761,
-    "avg3yr": 64126337
+    "avg3yr": 58680010
    },
    {
     "week": "2026-07-04",
     "mx": 39180447,
     "ca": 14742134,
     "ports": 15092167,
-    "avg3yr": 49068010
+    "avg3yr": 59760396
    },
    {
     "week": "2026-07-11",
     "mx": 35495650,
     "ca": 13394071,
     "ports": 16465596,
-    "avg3yr": 64680869
+    "avg3yr": 59453168
    },
    {
     "week": "2026-07-18",
     "mx": 41897985,
     "ca": 26380609,
     "ports": 13771779,
-    "avg3yr": 63080988
+    "avg3yr": 57959295
    },
    {
     "week": "2026-07-25",
     "mx": 36226491,
     "ca": 12523675,
     "ports": 17279718,
-    "avg3yr": 56309636
+    "avg3yr": 59320287
    },
    {
     "week": "2026-08-01",
     "mx": 39895434,
     "ca": 19880289,
     "ports": 10956058,
-    "avg3yr": 56656971
+    "avg3yr": 57723025
    },
    {
     "week": "2026-08-08",
     "mx": 43804011,
-    "ca": 1234631,
+    "ca": 10975726,
     "ports": 9481478,
-    "avg3yr": 55872971
+    "avg3yr": 56812764
+   },
+   {
+    "week": "2026-08-15",
+    "mx": 45803579,
+    "ca": 2172282,
+    "ports": 8883210,
+    "avg3yr": 56712612
    }
   ]
  },
  "pricing": {
   "benchmark": {
    "label": "Hass 48s, 2-layer cartons (conventional), FOB/shipping point",
-   "mx_latest": 43.25,
+   "mx_latest": 41.25,
    "ca_latest": 45.25,
-   "wow_mx_pct": -2.3,
+   "wow_mx_pct": -4.6,
    "wow_ca_pct": 0.0,
-   "band_position_pct": 25
+   "band_position_pct": 50,
+   "baseline_n": 20,
+   "baseline_years": 4
   },
-  "report_date": "2026-08-11",
-  "table": [],
-  "trend": [
+  "report_date": "2026-08-18",
+  "table": [
    {
-    "week": "2025-08-16",
-    "mx_mid": 31.75,
-    "ca_mid": 41.25,
-    "band_low": 35.25,
-    "band_high": 72.25
+    "district": "MEXICO CROSSINGS THROUGH TEXAS",
+    "display": "Mexico Crossings \u2014 Texas",
+    "package": "cartons 2 layer",
+    "sizes": [
+     {
+      "size": "32s",
+      "low": 44.25,
+      "high": 50.25,
+      "mostly_low": 46.25,
+      "mostly_high": 48.25
+     },
+     {
+      "size": "36s",
+      "low": 44.25,
+      "high": 50.25,
+      "mostly_low": 46.25,
+      "mostly_high": 48.25
+     },
+     {
+      "size": "40s",
+      "low": 38.25,
+      "high": 44.25,
+      "mostly_low": 38.25,
+      "mostly_high": 40.25
+     },
+     {
+      "size": "48s",
+      "low": 28.25,
+      "high": 40.25,
+      "mostly_low": 34.25,
+      "mostly_high": 36.25
+     },
+     {
+      "size": "60s",
+      "low": 28.25,
+      "high": 34.25,
+      "mostly_low": 30.25,
+      "mostly_high": 32.25
+     },
+     {
+      "size": "70s",
+      "low": 26.25,
+      "high": 30.25,
+      "mostly_low": 28.25,
+      "mostly_high": 30.25
+     },
+     {
+      "size": "84s",
+      "low": 23.25,
+      "high": 30.25,
+      "mostly_low": 26.25,
+      "mostly_high": 28.25
+     }
+    ],
+    "tone": {
+     "market": "Conventional 60s Higher, 70s lower, others about steady.",
+     "supply": null,
+     "demand": "FAIRLY LIGHT"
+    }
    },
+   {
+    "district": "SOUTH DISTRICT CALIFORNIA",
+    "display": "South District California",
+    "package": "cartons 2 layer",
+    "sizes": [
+     {
+      "size": "32s",
+      "low": 46.25,
+      "high": 52.25,
+      "mostly_low": 48.25,
+      "mostly_high": 50.25
+     },
+     {
+      "size": "36s",
+      "low": 46.25,
+      "high": 52.25,
+      "mostly_low": 48.25,
+      "mostly_high": 50.25
+     },
+     {
+      "size": "40s",
+      "low": 46.25,
+      "high": 52.25,
+      "mostly_low": 46.25,
+      "mostly_high": 48.25
+     },
+     {
+      "size": "48s",
+      "low": 42.25,
+      "high": 52.25,
+      "mostly_low": 42.25,
+      "mostly_high": 44.25
+     },
+     {
+      "size": "60s",
+      "low": 28.25,
+      "high": 34.25,
+      "mostly_low": 32.25,
+      "mostly_high": 34.25
+     },
+     {
+      "size": "70s",
+      "low": 22.25,
+      "high": 32.25,
+      "mostly_low": 28.25,
+      "mostly_high": 30.25
+     },
+     {
+      "size": "84s",
+      "low": 22.25,
+      "high": 30.25,
+      "mostly_low": 26.25,
+      "mostly_high": 28.25
+     }
+    ],
+    "tone": {
+     "market": "Conventional 48s-84s Higher, 32s-40s lower, others about steady",
+     "supply": null,
+     "demand": "FAIRLY LIGHT"
+    }
+   }
+  ],
+  "trend": [
    {
     "week": "2025-08-23",
     "mx_mid": 30.75,
     "ca_mid": 41.25,
-    "band_low": 32.25,
-    "band_high": 68.25
+    "band_low": 36.75,
+    "band_high": 68.0
    },
    {
     "week": "2025-08-30",
     "mx_mid": 27.25,
     "ca_mid": 38.75,
-    "band_low": 29.75,
-    "band_high": 65.25
+    "band_low": 33.75,
+    "band_high": 63.75
    },
    {
     "week": "2025-09-06",
     "mx_mid": 26.75,
     "ca_mid": 36.25,
-    "band_low": 27.25,
-    "band_high": 62.25
+    "band_low": 31.0,
+    "band_high": 58.25
    },
    {
     "week": "2025-09-13",
     "mx_mid": 25.75,
     "ca_mid": 36.25,
-    "band_low": 26.25,
-    "band_high": 56.25
+    "band_low": 28.75,
+    "band_high": 51.75
    },
    {
     "week": "2025-09-20",
     "mx_mid": 24.25,
     "ca_mid": 35.75,
-    "band_low": 25.25,
-    "band_high": 50.75
+    "band_low": 28.75,
+    "band_high": 50.0
    },
    {
     "week": "2025-09-27",
     "mx_mid": 23.75,
     "ca_mid": 33.25,
-    "band_low": 27.75,
-    "band_high": 49.25
+    "band_low": 29.5,
+    "band_high": 50.0
    },
    {
     "week": "2025-10-04",
     "mx_mid": 24.25,
     "ca_mid": 31.75,
-    "band_low": 29.75,
-    "band_high": 51.25
+    "band_low": 29.5,
+    "band_high": 50.0
    },
    {
     "week": "2025-10-11",
     "mx_mid": 23.25,
     "ca_mid": 31.75,
-    "band_low": 29.25,
-    "band_high": 51.25
+    "band_low": 29.5,
+    "band_high": 50.25
    },
    {
     "week": "2025-10-18",
     "mx_mid": 25.75,
     "ca_mid": 31.75,
-    "band_low": 28.75,
-    "band_high": 53.25
+    "band_low": 29.5,
+    "band_high": 51.25
    },
    {
     "week": "2025-10-25",
     "mx_mid": 27.25,
     "ca_mid": 31.75,
-    "band_low": 28.25,
-    "band_high": 54.25
+    "band_low": 29.0,
+    "band_high": 52.25
    },
    {
     "week": "2025-11-01",
     "mx_mid": 27.25,
     "ca_mid": 31.75,
-    "band_low": 27.75,
-    "band_high": 53.75
+    "band_low": 28.5,
+    "band_high": 53.5
    },
    {
     "week": "2025-11-08",
     "mx_mid": 27.25,
     "ca_mid": null,
-    "band_low": 27.25,
+    "band_low": 28.0,
     "band_high": 53.75
    },
    {
     "week": "2025-11-15",
     "mx_mid": 25.25,
     "ca_mid": null,
-    "band_low": 24.75,
-    "band_high": 54.75
+    "band_low": 27.5,
+    "band_high": 53.75
    },
    {
     "week": "2025-11-22",
     "mx_mid": 24.75,
     "ca_mid": null,
-    "band_low": 24.25,
-    "band_high": 55.25
+    "band_low": 27.0,
+    "band_high": 54.25
    },
    {
     "week": "2025-11-29",
     "mx_mid": 24.25,
     "ca_mid": null,
-    "band_low": 25.25,
-    "band_high": 57.25
+    "band_low": 26.75,
+    "band_high": 53.5
    },
    {
     "week": "2025-12-06",
     "mx_mid": 23.25,
     "ca_mid": null,
     "band_low": 26.75,
-    "band_high": 56.25
+    "band_high": 51.25
    },
    {
     "week": "2025-12-13",
     "mx_mid": 22.75,
     "ca_mid": null,
     "band_low": 26.75,
-    "band_high": 52.25
+    "band_high": 51.25
    },
    {
     "week": "2025-12-20",
     "mx_mid": 22.75,
     "ca_mid": null,
     "band_low": 26.75,
-    "band_high": 50.25
+    "band_high": 50.75
    },
    {
     "week": "2025-12-27",
     "mx_mid": 22.75,
     "ca_mid": null,
     "band_low": 26.75,
-    "band_high": 53.25
+    "band_high": 50.75
    },
    {
     "week": "2026-01-03",
     "mx_mid": 23.25,
     "ca_mid": null,
-    "band_low": 25.75,
-    "band_high": 58.75
+    "band_low": 26.5,
+    "band_high": 54.625
    },
    {
     "week": "2026-01-10",
     "mx_mid": 25.75,
     "ca_mid": null,
-    "band_low": 24.25,
-    "band_high": 67.25
+    "band_low": 25.5,
+    "band_high": 60.875
    },
    {
     "week": "2026-01-17",
     "mx_mid": 27.75,
     "ca_mid": null,
-    "band_low": 24.75,
-    "band_high": 74.25
+    "band_low": 25.25,
+    "band_high": 63.0
    },
    {
     "week": "2026-01-24",
     "mx_mid": 27.25,
     "ca_mid": null,
     "band_low": 24.75,
-    "band_high": 73.75
+    "band_high": 64.75
    },
    {
     "week": "2026-01-31",
     "mx_mid": 24.75,
     "ca_mid": null,
-    "band_low": 23.75,
-    "band_high": 68.75
+    "band_low": 25.75,
+    "band_high": 65.5
    },
    {
     "week": "2026-02-07",
     "mx_mid": 24.25,
     "ca_mid": null,
-    "band_low": 24.75,
-    "band_high": 62.25
+    "band_low": 28.75,
+    "band_high": 65.5
    },
    {
     "week": "2026-02-14",
     "mx_mid": 24.25,
     "ca_mid": null,
-    "band_low": 26.75,
-    "band_high": 72.25
+    "band_low": 31.75,
+    "band_high": 65.5
    },
    {
     "week": "2026-02-21",
     "mx_mid": 25.75,
     "ca_mid": null,
-    "band_low": 30.75,
-    "band_high": 74.75
+    "band_low": 33.5,
+    "band_high": 66.75
    },
    {
     "week": "2026-02-28",
     "mx_mid": 27.25,
     "ca_mid": null,
-    "band_low": 32.75,
-    "band_high": 71.25
+    "band_low": 34.0,
+    "band_high": 71.5
    },
    {
     "week": "2026-03-07",
     "mx_mid": 28.25,
     "ca_mid": null,
-    "band_low": 34.25,
-    "band_high": 71.75
+    "band_low": 34.0,
+    "band_high": 71.5
    },
    {
     "week": "2026-03-14",
     "mx_mid": 28.25,
     "ca_mid": null,
-    "band_low": 33.75,
-    "band_high": 73.75
+    "band_low": 34.0,
+    "band_high": 71.5
    },
    {
     "week": "2026-03-21",
     "mx_mid": 28.25,
     "ca_mid": null,
-    "band_low": 32.75,
-    "band_high": 73.25
+    "band_low": 34.0,
+    "band_high": 69.5
    },
    {
     "week": "2026-03-28",
     "mx_mid": 28.75,
     "ca_mid": null,
-    "band_low": 31.25,
-    "band_high": 71.75
+    "band_low": 33.25,
+    "band_high": 66.75
    },
    {
     "week": "2026-04-04",
     "mx_mid": 30.25,
     "ca_mid": 35.75,
-    "band_low": 29.75,
-    "band_high": 67.25
+    "band_low": 32.0,
+    "band_high": 66.25
    },
    {
     "week": "2026-04-11",
     "mx_mid": 30.75,
     "ca_mid": 35.75,
-    "band_low": 29.75,
-    "band_high": 66.25
+    "band_low": 30.5,
+    "band_high": 66.0
    },
    {
     "week": "2026-04-18",
     "mx_mid": 29.75,
     "ca_mid": 34.25,
     "band_low": 29.75,
-    "band_high": 66.25
+    "band_high": 65.0
    },
    {
     "week": "2026-04-25",
     "mx_mid": 30.25,
     "ca_mid": 35.75,
     "band_low": 29.75,
-    "band_high": 65.75
+    "band_high": 63.5
    },
    {
     "week": "2026-05-02",
     "mx_mid": 30.25,
     "ca_mid": 35.75,
-    "band_low": 28.75,
-    "band_high": 64.25
+    "band_low": 29.75,
+    "band_high": 62.0
    },
    {
     "week": "2026-05-09",
     "mx_mid": 30.75,
     "ca_mid": 34.25,
-    "band_low": 27.75,
-    "band_high": 62.75
+    "band_low": 30.25,
+    "band_high": 60.5
    },
    {
     "week": "2026-05-16",
     "mx_mid": 34.75,
     "ca_mid": 35.75,
-    "band_low": 28.75,
-    "band_high": 61.25
+    "band_low": 31.5,
+    "band_high": 59.5
    },
    {
     "week": "2026-05-23",
     "mx_mid": 45.25,
     "ca_mid": 41.75,
-    "band_low": 30.75,
-    "band_high": 59.75
+    "band_low": 32.5,
+    "band_high": 59.25
    },
    {
     "week": "2026-05-30",
     "mx_mid": 63.75,
     "ca_mid": 63.25,
-    "band_low": 32.25,
+    "band_low": 33.75,
     "band_high": 59.25
    },
    {
     "week": "2026-06-06",
     "mx_mid": 59.75,
     "ca_mid": 59.25,
-    "band_low": 32.75,
+    "band_low": 40.5,
     "band_high": 59.25
    },
    {
     "week": "2026-06-13",
     "mx_mid": 51.75,
     "ca_mid": 56.75,
-    "band_low": 34.75,
-    "band_high": 59.25
+    "band_low": 50.75,
+    "band_high": 59.875
    },
    {
     "week": "2026-06-20",
     "mx_mid": 43.25,
     "ca_mid": 53.25,
-    "band_low": 57.75,
-    "band_high": 61.75
+    "band_low": 52.25,
+    "band_high": 61.25
    },
    {
     "week": "2026-06-27",
     "mx_mid": 36.25,
     "ca_mid": 41.25,
-    "band_low": 52.25,
-    "band_high": 78.75
+    "band_low": 53.875,
+    "band_high": 60.875
    },
    {
     "week": "2026-07-04",
     "mx_mid": 34.75,
     "ca_mid": 39.25,
-    "band_low": 48.25,
-    "band_high": 61.25
+    "band_low": 50.25,
+    "band_high": 60.5
    },
    {
     "week": "2026-07-11",
     "mx_mid": 35.25,
     "ca_mid": 39.25,
-    "band_low": 46.75,
-    "band_high": 58.25
+    "band_low": 47.5,
+    "band_high": 60.125
    },
    {
     "week": "2026-07-18",
     "mx_mid": 37.25,
     "ca_mid": 42.25,
-    "band_low": 42.75,
-    "band_high": 57.75
+    "band_low": 45.375,
+    "band_high": 58.625
    },
    {
     "week": "2026-07-25",
     "mx_mid": 42.25,
     "ca_mid": 47.25,
-    "band_low": 38.75,
-    "band_high": 63.25
+    "band_low": 41.75,
+    "band_high": 57.875
    },
    {
     "week": "2026-08-01",
     "mx_mid": 44.25,
     "ca_mid": 45.25,
-    "band_low": 34.25,
-    "band_high": 73.25
+    "band_low": 38.625,
+    "band_high": 64.375
    },
    {
     "week": "2026-08-08",
     "mx_mid": 43.25,
     "ca_mid": 45.25,
+    "band_low": 35.0,
+    "band_high": 67.875
+   },
+   {
+    "week": "2026-08-15",
+    "mx_mid": 41.25,
+    "ca_mid": 45.25,
     "band_low": 32.25,
-    "band_high": 75.75
+    "band_high": 67.875
    }
   ]
  },
@@ -869,6 +1032,7 @@
     "dest": "Los Angeles",
     "origin": "MEXICO CROSSINGS THROUGH SOUTH TEXAS",
     "origin_short": "S. Texas crossings (McAllen/Pharr)",
+    "origin_is_preferred": true,
     "availability": "Surplus",
     "low": 3000,
     "high": 3800,
@@ -881,6 +1045,7 @@
     "dest": "Dallas",
     "origin": "MEXICO CROSSINGS THROUGH SOUTH TEXAS",
     "origin_short": "S. Texas crossings (McAllen/Pharr)",
+    "origin_is_preferred": true,
     "availability": "Surplus",
     "low": 1800,
     "high": 2200,
@@ -893,6 +1058,7 @@
     "dest": "Miami",
     "origin": "MEXICO CROSSINGS THROUGH SOUTH TEXAS",
     "origin_short": "S. Texas crossings (McAllen/Pharr)",
+    "origin_is_preferred": true,
     "availability": "Surplus",
     "low": 4600,
     "high": 5400,
@@ -905,6 +1071,7 @@
     "dest": "Philadelphia",
     "origin": "MEXICO CROSSINGS THROUGH SOUTH TEXAS",
     "origin_short": "S. Texas crossings (McAllen/Pharr)",
+    "origin_is_preferred": true,
     "availability": "Surplus",
     "low": 6000,
     "high": 6800,
@@ -928,39 +1095,36 @@
     "status": "Adequate"
    }
   ],
-  "stale_days": 5,
-  "fetch_error": null
+  "stale_days": 7,
+  "fetch_error": null,
+  "stale_after_days": 10
  },
  "diesel": {
   "available": true,
   "latest": {
    "national": {
-    "period": "2026-08-10",
-    "value": 5.257,
-    "wow": -0.091
+    "period": "2026-08-17",
+    "value": 5.454,
+    "wow": 0.197
    },
    "west_coast": {
-    "period": "2026-08-10",
-    "value": 6.033,
-    "wow": -0.097
+    "period": "2026-08-17",
+    "value": 6.203,
+    "wow": 0.17
    },
    "gulf_coast": {
-    "period": "2026-08-10",
-    "value": 5.044,
-    "wow": -0.097
+    "period": "2026-08-17",
+    "value": 5.237,
+    "wow": 0.193
    },
    "east_coast": {
-    "period": "2026-08-10",
-    "value": 5.193,
-    "wow": -0.106
+    "period": "2026-08-17",
+    "value": 5.34,
+    "wow": 0.147
    }
   },
   "series": {
    "national": [
-    {
-     "period": "2026-02-16",
-     "value": 3.711
-    },
     {
      "period": "2026-02-23",
      "value": 3.809
@@ -1060,13 +1224,13 @@
     {
      "period": "2026-08-10",
      "value": 5.257
+    },
+    {
+     "period": "2026-08-17",
+     "value": 5.454
     }
    ],
    "west_coast": [
-    {
-     "period": "2026-02-16",
-     "value": 4.383
-    },
     {
      "period": "2026-02-23",
      "value": 4.465
@@ -1166,13 +1330,13 @@
     {
      "period": "2026-08-10",
      "value": 6.033
+    },
+    {
+     "period": "2026-08-17",
+     "value": 6.203
     }
    ],
    "gulf_coast": [
-    {
-     "period": "2026-02-16",
-     "value": 3.412
-    },
     {
      "period": "2026-02-23",
      "value": 3.489
@@ -1272,13 +1436,13 @@
     {
      "period": "2026-08-10",
      "value": 5.044
+    },
+    {
+     "period": "2026-08-17",
+     "value": 5.237
     }
    ],
    "east_coast": [
-    {
-     "period": "2026-02-16",
-     "value": 3.763
-    },
     {
      "period": "2026-02-23",
      "value": 3.843
@@ -1378,6 +1542,10 @@
     {
      "period": "2026-08-10",
      "value": 5.193
+    },
+    {
+     "period": "2026-08-17",
+     "value": 5.34
     }
    ]
   }

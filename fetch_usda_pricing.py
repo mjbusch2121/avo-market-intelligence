@@ -19,7 +19,7 @@ import json
 import os
 import sys
 import time
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import requests
@@ -29,6 +29,10 @@ try:
     load_dotenv()
 except ImportError:
     pass  # GitHub Actions injects env vars directly
+
+def _now_iso():
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
 
 BASE = "https://marsapi.ams.usda.gov/services/v3.1/marketTypes"
 API_KEY = os.getenv("MARS_API_KEY")
@@ -190,7 +194,8 @@ def fetch_pricing_current():
                     f"group=Fruits;commodity=Avocados;report_date={start}:{mmdd(date.today())}")
     if not rows:
         print("Pricing current: no daily rows in window")
-        save_json(RAW_DIR / "usda_current.json", {"report_date": None, "rows": []})
+        save_json(RAW_DIR / "usda_current.json",
+                  {"report_date": None, "rows": [], "fetched_at": _now_iso()})
         return
 
     latest = max(rows, key=lambda r: to_iso(r["report_date"]))["report_date"]
@@ -200,6 +205,7 @@ def fetch_pricing_current():
                           if r["report_date"] != latest}, reverse=True)
 
     save_json(RAW_DIR / "usda_current.json", {
+        "fetched_at": _now_iso(),
         "report_date": to_iso(latest),
         "prior_report_dates": prior_dates[:5],
         "rows": [{

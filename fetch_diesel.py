@@ -14,9 +14,14 @@
 import json
 import os
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
+
+
+def _now_iso():
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 try:
     from dotenv import load_dotenv
@@ -62,7 +67,8 @@ def main():
     if not API_KEY:
         print("WARNING: EIA_API_KEY not set — diesel panel will show as unavailable")
         out_path.write_text(json.dumps({"available": False,
-                                        "reason": "EIA_API_KEY not configured"}))
+                                        "reason": "EIA_API_KEY not configured",
+                                        "fetched_at": _now_iso()}))
         return
 
     out = {"available": True, "series": {}}
@@ -79,6 +85,7 @@ def main():
             return
         out = {"available": False, "reason": str(e)}
 
+    out["fetched_at"] = _now_iso()
     out_path.write_text(json.dumps(out, indent=1), encoding="utf-8")
 
 

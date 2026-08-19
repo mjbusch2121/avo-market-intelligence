@@ -184,7 +184,7 @@ function renderSupply(data) {
         },
         {
           type: "line",
-          label: "3-yr seasonal avg (total)",
+          label: `${s.baseline_years || 3}-yr seasonal avg (total)`,
           data: s.trend.map((t) => t.avg3yr),
           borderColor: C.muted,
           borderDash: [5, 4],
@@ -230,8 +230,11 @@ function renderSupply(data) {
 function renderPricing(data) {
   const p = data.pricing;
   if (!p?.trend) return;
+  const bYrs = p.benchmark.baseline_years || 3;
+  const bandLowLabel = `${bYrs}-yr seasonal 25th percentile`;
+  const bandHighLabel = `${bYrs}-yr seasonal 25th–75th percentile`;
   document.getElementById("pricing-sub").textContent =
-    p.benchmark.label + " — vs its 3-year seasonal band";
+    p.benchmark.label + ` — vs its ${bYrs}-yr seasonal 25th–75th percentile band`;
 
   new Chart(document.getElementById("priceChart"), {
     type: "line",
@@ -239,7 +242,7 @@ function renderPricing(data) {
       labels: p.trend.map((t) => t.week),
       datasets: [
         {
-          label: "3-yr band low",
+          label: bandLowLabel,
           data: p.trend.map((t) => t.band_low),
           borderWidth: 0,
           pointRadius: 0,
@@ -247,7 +250,7 @@ function renderPricing(data) {
           spanGaps: true,
         },
         {
-          label: "3-yr seasonal band",
+          label: bandHighLabel,
           data: p.trend.map((t) => t.band_high),
           borderWidth: 0,
           pointRadius: 0,
@@ -297,7 +300,7 @@ function renderPricing(data) {
           labels: {
             boxWidth: 10,
             boxHeight: 10,
-            filter: (item) => item.text !== "3-yr band low",
+            filter: (item) => item.text !== bandLowLabel,
           },
         },
         tooltip: {
@@ -364,7 +367,8 @@ function renderFreight(data) {
     return;
   }
   const fsub = document.getElementById("freight-sub");
-  const fStale = f.stale_days !== null && f.stale_days !== undefined && f.stale_days > 10;
+  const staleAfter = f.stale_after_days ?? 10;
+  const fStale = f.stale_days !== null && f.stale_days !== undefined && f.stale_days > staleAfter;
   if (fStale || f.fetch_error) {
     fsub.innerHTML =
       `<span class="stale-warn">⚠ FVWTRK report for ${f.report_date} — ` +
@@ -532,6 +536,16 @@ function renderWeather(data) {
 
 function renderFooter(data) {
   const notes = document.getElementById("foot-notes");
+  if (data.feeds) {
+    const staleFeedNames = Object.entries(data.feeds)
+      .filter(([k, v]) => !k.startsWith("_") && v.stale && k !== "freight")
+      .map(([k]) => (k === "supply" || k === "pricing") ? "USDA" : k);
+    const unique = [...new Set(staleFeedNames)].sort();
+    if (unique.length) {
+      notes.appendChild(el("p", "stale-warn",
+        `⚠ Data feeds not refreshed this cycle: ${unique.join(", ")} — figures may not reflect the current week.`));
+    }
+  }
   (data.meta.notes || []).forEach((n) =>
     notes.appendChild(el("p", null, "⚠ " + n)),
   );

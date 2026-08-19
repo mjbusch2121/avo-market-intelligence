@@ -18,9 +18,14 @@
 import json
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
+
+
+def _now_iso():
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 ROOT = Path(__file__).parent
 RAW_DIR = ROOT / "data" / "raw"
@@ -193,7 +198,8 @@ def main():
         print("All regions failed — keeping previous weather.json")
         return
 
-    out_path.write_text(json.dumps({"regions": regions_out}, indent=1), encoding="utf-8")
+    out_path.write_text(json.dumps({"fetched_at": _now_iso(), "regions": regions_out},
+                                   indent=1), encoding="utf-8")
     print(f"Weather: {len(REGIONS) - failures}/{len(REGIONS)} regions ok")
 
 

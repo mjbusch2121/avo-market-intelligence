@@ -151,7 +151,7 @@ def narrative_regions(season_blocks: dict) -> list[str]:
 
 def suppress_historical_band(season_block: dict) -> bool:
     """Item 5 (baseline matching): if a region is out of season,
-    its 3-year band should not be plotted against a missing line.
+    its prior-season percentile band should not be plotted against a missing line.
     dashboard.js reads the same status; this exists so the Python
     side can also zero out band data before it ships."""
     return season_block["status"] != "active"

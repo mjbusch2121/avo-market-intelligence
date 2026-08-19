@@ -18,11 +18,15 @@
 import json
 import re
 import sys
-from datetime import datetime, date
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pdfplumber
 import requests
+
+def _now_iso():
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
 
 PDF_URL = "https://www.ams.usda.gov/mnreports/fvwtrk.pdf"
 ROOT = Path(__file__).parent
@@ -153,17 +157,30 @@ def main():
             sys.exit(1)          # nothing to fall back on — hard stop
         prev = json.loads(prev_path.read_text(encoding="utf-8"))
         prev["fetch_error"] = msg
-        prev["fetch_attempted"] = date.today().isoformat()
+        prev["fetch_attempted"] = _now_iso()
         prev_path.write_text(json.dumps(prev, indent=1), encoding="utf-8")
         sys.exit(0)   # let the rest of the pipeline run; build_summary raises the alarm
 
-    data = parse_pdf(pdf_path)
-    n_rows = sum(len(s["rows"]) for s in data["sections"])
+    try:
+        data = parse_pdf(pdf_path)
+        n_rows = sum(len(s["rows"]) for s in data["sections"])
+        if n_rows == 0:
+            raise ValueError("parsed zero lanes — PDF layout may have changed")
+    except Exception as e:
+        msg = f"could not parse FVWTRK PDF: {e}"
+        print(f"FREIGHT PARSE FAILED: {msg}", file=sys.stderr)
+        prev_path = RAW_DIR / "freight.json"
+        if not prev_path.exists():
+            sys.exit(1)
+        prev = json.loads(prev_path.read_text(encoding="utf-8"))
+        prev["fetch_error"] = msg
+        prev["fetch_attempted"] = _now_iso()
+        prev_path.write_text(json.dumps(prev, indent=1), encoding="utf-8")
+        sys.exit(0)
+
+    data["fetched_at"] = _now_iso()
     print(f"Freight: report {data['report_date']}, "
           f"{len(data['sections'])} districts, {n_rows} lanes")
-    if n_rows == 0:
-        print("WARNING: parsed zero lanes — PDF layout may have changed", file=sys.stderr)
-
     (RAW_DIR / "freight.json").write_text(json.dumps(data, indent=1), encoding="utf-8")
 
 
