@@ -1,73 +1,72 @@
 {
- "generated_at": "2026-08-19T01:17:51Z",
+ "generated_at": "2026-08-25T20:23:56Z",
  "week": {
-  "end": "2026-08-15",
-  "label": "Week ending Aug 15, 2026"
+  "end": "2026-08-22",
+  "label": "Week ending Aug 22, 2026"
  },
- "headline": "Mexico crossing volume up 5% week-over-week; Texas-crossing Hass 48s FOB softened 5% at $41.25; LA/Dallas freight soft/soft; diesel up 0.20 at $5.45/gal.",
+ "headline": "Mexico crossing volume down 37% week-over-week; Texas-crossing Hass 48s FOB softened 22% at $32.25; LA/Dallas freight soft/soft; diesel up 0.20 at $5.65/gal.",
  "signals": [
-  "Total arrivals are running 16% above the 4-year seasonal average (54.7M lbs this week).",
-  "Truck availability is tight out of South & Central CA, but quoted lane rates softened this week \u2014 capacity pressure has not yet reached spot rates. Watch for a lag."
+  "Total arrivals are running 20% below the 4-year seasonal average (37.2M lbs this week)."
  ],
  "kpis": [
   {
    "label": "MX crossing volume",
-   "value": "45.8M lbs",
-   "delta_pct": 4.6,
+   "value": "29.0M lbs",
+   "delta_pct": -36.6,
    "sub": "vs prior week"
   },
   {
    "label": "Total arrivals vs 4-yr avg",
-   "value": "+16%",
+   "value": "-20%",
    "delta_pct": null,
-   "sub": "54.7M lbs this week (excl. CA \u2014 pending)"
+   "sub": "37.2M lbs this week (excl. CA \u2014 pending)"
   },
   {
    "label": "Hass 48s FOB (TX)",
-   "value": "$41.25",
-   "delta_pct": -4.6,
+   "value": "$32.25",
+   "delta_pct": -21.8,
    "sub": "vs prior week"
   },
   {
    "label": "Freight: S. Texas crossings \u2192 LA",
-   "value": "$3,000\u20133,800",
-   "delta_pct": -6,
+   "value": "$3,000\u20133,400",
+   "delta_pct": -3,
    "sub": "S. Texas crossings (McAllen/Pharr)"
   },
   {
    "label": "US diesel",
-   "value": "$5.45/gal",
-   "delta_pct": 3.7,
+   "value": "$5.65/gal",
+   "delta_pct": 3.6,
    "sub": "weekly retail"
   }
  ],
  "feeds": {
   "supply": {
-   "fetched_at": "2026-08-19T01:17:24+00:00",
+   "fetched_at": "2026-08-25T20:23:50+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "pricing": {
-   "fetched_at": "2026-08-19T01:17:24+00:00",
+   "fetched_at": "2026-08-25T20:23:50+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "freight": {
-   "fetched_at": "2026-08-19T01:06:57+00:00",
+   "fetched_at": "2026-08-25T20:23:51+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "diesel": {
-   "fetched_at": "2026-08-19T01:06:57+00:00",
+   "fetched_at": "2026-08-25T20:23:53+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "weather": {
-   "fetched_at": "2026-08-19T01:06:57+00:00",
+   "fetched_at": "2026-08-25T20:23:56+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
@@ -75,14 +74,14 @@
   "_stale_after_days": 8
  },
  "supply": {
-  "week_end": "2026-08-15",
-  "total_lbs": 54686789,
-  "total_lbs_all_regions": 56859071,
+  "week_end": "2026-08-22",
+  "total_lbs": 37154061,
+  "total_lbs_all_regions": 39047484,
   "total_excludes": [
    "ca"
   ],
-  "total_wow_pct": 2.6,
-  "total_vs_3yr_pct": 16.0,
+  "total_wow_pct": -32.1,
+  "total_vs_3yr_pct": -19.6,
   "baseline_n": 20,
   "baseline_years": 4,
   "partial_regions": [
@@ -92,40 +91,40 @@
    {
     "key": "mx",
     "name": "Mexico crossings",
-    "lbs": 45803579,
+    "lbs": 29045097,
     "partial": false,
-    "wow_pct": 4.6,
-    "vs_3yr_pct": 41.3,
+    "wow_pct": -36.6,
+    "vs_3yr_pct": -13.3,
     "season": {
      "status": "active",
      "message": null,
-     "last_reported": "2026-08-15"
+     "last_reported": "2026-08-22"
     }
    },
    {
     "key": "ca",
     "name": "California",
-    "lbs": 2172282,
+    "lbs": 1893423,
     "partial": true,
     "wow_pct": null,
     "vs_3yr_pct": null,
     "season": {
      "status": "active",
      "message": null,
-     "last_reported": "2026-08-15"
+     "last_reported": "2026-08-22"
     }
    },
    {
     "key": "ports",
     "name": "Seaport/other imports",
-    "lbs": 8883210,
+    "lbs": 8108964,
     "partial": false,
-    "wow_pct": -6.3,
-    "vs_3yr_pct": -39.6,
+    "wow_pct": -8.7,
+    "vs_3yr_pct": -36.4,
     "season": {
      "status": "active",
      "message": null,
-     "last_reported": "2026-08-15"
+     "last_reported": "2026-08-22"
     }
    }
   ],
@@ -133,36 +132,29 @@
    {
     "district": "MEXICO CROSSINGS THROUGH PHARR TEXAS",
     "short": "Pharr, TX",
-    "lbs": 26510952,
-    "wow_pct": 2.1
+    "lbs": 17460051,
+    "wow_pct": -34.1
    },
    {
     "district": "MEXICO CROSSINGS THROUGH LAREDO TEXAS",
     "short": "Laredo, TX",
-    "lbs": 18496122,
-    "wow_pct": 7.6
+    "lbs": 11002101,
+    "wow_pct": -40.5
    },
    {
     "district": "MEXICO CROSSINGS THROUGH OTAY MESA CALIFORNIA",
     "short": "Otay Mesa, CA",
-    "lbs": 398910,
-    "wow_pct": 14.9
+    "lbs": 304794,
+    "wow_pct": -23.6
    },
    {
     "district": "MEXICO CROSSINGS THROUGH NOGALES ARIZONA",
     "short": "Nogales, AZ",
-    "lbs": 397595,
-    "wow_pct": 26.7
+    "lbs": 278151,
+    "wow_pct": -30.0
    }
   ],
   "trend": [
-   {
-    "week": "2025-08-23",
-    "mx": 42471761,
-    "ca": 9158073,
-    "ports": 12933960,
-    "avg3yr": 53203683
-   },
    {
     "week": "2025-08-30",
     "mx": 43697450,
@@ -516,156 +508,33 @@
    {
     "week": "2026-08-15",
     "mx": 45803579,
-    "ca": 2172282,
+    "ca": 12257277,
     "ports": 8883210,
     "avg3yr": 56712612
+   },
+   {
+    "week": "2026-08-22",
+    "mx": 29045097,
+    "ca": 1893423,
+    "ports": 8108964,
+    "avg3yr": 54503061
    }
   ]
  },
  "pricing": {
   "benchmark": {
    "label": "Hass 48s, 2-layer cartons (conventional), FOB/shipping point",
-   "mx_latest": 41.25,
-   "ca_latest": 45.25,
-   "wow_mx_pct": -4.6,
-   "wow_ca_pct": 0.0,
-   "band_position_pct": 50,
+   "mx_latest": 32.25,
+   "ca_latest": 41.25,
+   "wow_mx_pct": -21.8,
+   "wow_ca_pct": -8.8,
+   "band_position_pct": 35,
    "baseline_n": 20,
    "baseline_years": 4
   },
-  "report_date": "2026-08-18",
-  "table": [
-   {
-    "district": "MEXICO CROSSINGS THROUGH TEXAS",
-    "display": "Mexico Crossings \u2014 Texas",
-    "package": "cartons 2 layer",
-    "sizes": [
-     {
-      "size": "32s",
-      "low": 44.25,
-      "high": 50.25,
-      "mostly_low": 46.25,
-      "mostly_high": 48.25
-     },
-     {
-      "size": "36s",
-      "low": 44.25,
-      "high": 50.25,
-      "mostly_low": 46.25,
-      "mostly_high": 48.25
-     },
-     {
-      "size": "40s",
-      "low": 38.25,
-      "high": 44.25,
-      "mostly_low": 38.25,
-      "mostly_high": 40.25
-     },
-     {
-      "size": "48s",
-      "low": 28.25,
-      "high": 40.25,
-      "mostly_low": 34.25,
-      "mostly_high": 36.25
-     },
-     {
-      "size": "60s",
-      "low": 28.25,
-      "high": 34.25,
-      "mostly_low": 30.25,
-      "mostly_high": 32.25
-     },
-     {
-      "size": "70s",
-      "low": 26.25,
-      "high": 30.25,
-      "mostly_low": 28.25,
-      "mostly_high": 30.25
-     },
-     {
-      "size": "84s",
-      "low": 23.25,
-      "high": 30.25,
-      "mostly_low": 26.25,
-      "mostly_high": 28.25
-     }
-    ],
-    "tone": {
-     "market": "Conventional 60s Higher, 70s lower, others about steady.",
-     "supply": null,
-     "demand": "FAIRLY LIGHT"
-    }
-   },
-   {
-    "district": "SOUTH DISTRICT CALIFORNIA",
-    "display": "South District California",
-    "package": "cartons 2 layer",
-    "sizes": [
-     {
-      "size": "32s",
-      "low": 46.25,
-      "high": 52.25,
-      "mostly_low": 48.25,
-      "mostly_high": 50.25
-     },
-     {
-      "size": "36s",
-      "low": 46.25,
-      "high": 52.25,
-      "mostly_low": 48.25,
-      "mostly_high": 50.25
-     },
-     {
-      "size": "40s",
-      "low": 46.25,
-      "high": 52.25,
-      "mostly_low": 46.25,
-      "mostly_high": 48.25
-     },
-     {
-      "size": "48s",
-      "low": 42.25,
-      "high": 52.25,
-      "mostly_low": 42.25,
-      "mostly_high": 44.25
-     },
-     {
-      "size": "60s",
-      "low": 28.25,
-      "high": 34.25,
-      "mostly_low": 32.25,
-      "mostly_high": 34.25
-     },
-     {
-      "size": "70s",
-      "low": 22.25,
-      "high": 32.25,
-      "mostly_low": 28.25,
-      "mostly_high": 30.25
-     },
-     {
-      "size": "84s",
-      "low": 22.25,
-      "high": 30.25,
-      "mostly_low": 26.25,
-      "mostly_high": 28.25
-     }
-    ],
-    "tone": {
-     "market": "Conventional 48s-84s Higher, 32s-40s lower, others about steady",
-     "supply": null,
-     "demand": "FAIRLY LIGHT"
-    }
-   }
-  ],
+  "report_date": "2026-08-25",
+  "table": [],
   "trend": [
-   {
-    "week": "2025-08-23",
-    "mx_mid": 30.75,
-    "ca_mid": 41.25,
-    "band_low": 36.75,
-    "band_high": 68.0
-   },
    {
     "week": "2025-08-30",
     "mx_mid": 27.25,
@@ -1022,11 +891,18 @@
     "ca_mid": 45.25,
     "band_low": 32.25,
     "band_high": 67.875
+   },
+   {
+    "week": "2026-08-22",
+    "mx_mid": 32.25,
+    "ca_mid": 41.25,
+    "band_low": 31.5,
+    "band_high": 65.875
    }
   ]
  },
  "freight": {
-  "report_date": "2026-08-11",
+  "report_date": "2026-08-18",
   "lanes": [
    {
     "dest": "Los Angeles",
@@ -1035,10 +911,10 @@
     "origin_is_preferred": true,
     "availability": "Surplus",
     "low": 3000,
-    "high": 3800,
+    "high": 3400,
     "mostly_low": 3200,
-    "mostly_high": 3600,
-    "wow_pct": -6,
+    "mostly_high": 3400,
+    "wow_pct": -3,
     "wow_reported": true
    },
    {
@@ -1047,11 +923,11 @@
     "origin_short": "S. Texas crossings (McAllen/Pharr)",
     "origin_is_preferred": true,
     "availability": "Surplus",
-    "low": 1800,
-    "high": 2200,
-    "mostly_low": 1800,
-    "mostly_high": 2000,
-    "wow_pct": -7,
+    "low": 1500,
+    "high": 2100,
+    "mostly_low": 1700,
+    "mostly_high": 1900,
+    "wow_pct": -5,
     "wow_reported": true
    },
    {
@@ -1060,11 +936,11 @@
     "origin_short": "S. Texas crossings (McAllen/Pharr)",
     "origin_is_preferred": true,
     "availability": "Surplus",
-    "low": 4600,
-    "high": 5400,
+    "low": 4500,
+    "high": 5000,
     "mostly_low": 4800,
-    "mostly_high": 5200,
-    "wow_pct": -6,
+    "mostly_high": 5000,
+    "wow_pct": -2,
     "wow_reported": true
    },
    {
@@ -1073,11 +949,11 @@
     "origin_short": "S. Texas crossings (McAllen/Pharr)",
     "origin_is_preferred": true,
     "availability": "Surplus",
-    "low": 6000,
-    "high": 6800,
+    "low": 4800,
+    "high": 6400,
     "mostly_low": 6000,
-    "mostly_high": 6400,
-    "wow_pct": -6,
+    "mostly_high": 6200,
+    "wow_pct": -2,
     "wow_reported": true
    }
   ],
@@ -1088,7 +964,7 @@
    },
    {
     "district": "South & Central CA",
-    "status": "Slight Shortage"
+    "status": "Adequate"
    },
    {
     "district": "Oxnard district CA",
@@ -1103,32 +979,28 @@
   "available": true,
   "latest": {
    "national": {
-    "period": "2026-08-17",
-    "value": 5.454,
-    "wow": 0.197
+    "period": "2026-08-24",
+    "value": 5.652,
+    "wow": 0.198
    },
    "west_coast": {
-    "period": "2026-08-17",
-    "value": 6.203,
-    "wow": 0.17
+    "period": "2026-08-24",
+    "value": 6.407,
+    "wow": 0.204
    },
    "gulf_coast": {
-    "period": "2026-08-17",
-    "value": 5.237,
-    "wow": 0.193
+    "period": "2026-08-24",
+    "value": 5.481,
+    "wow": 0.244
    },
    "east_coast": {
-    "period": "2026-08-17",
-    "value": 5.34,
-    "wow": 0.147
+    "period": "2026-08-24",
+    "value": 5.498,
+    "wow": 0.158
    }
   },
   "series": {
    "national": [
-    {
-     "period": "2026-02-23",
-     "value": 3.809
-    },
     {
      "period": "2026-03-02",
      "value": 3.897
@@ -1228,13 +1100,13 @@
     {
      "period": "2026-08-17",
      "value": 5.454
+    },
+    {
+     "period": "2026-08-24",
+     "value": 5.652
     }
    ],
    "west_coast": [
-    {
-     "period": "2026-02-23",
-     "value": 4.465
-    },
     {
      "period": "2026-03-02",
      "value": 4.534
@@ -1334,13 +1206,13 @@
     {
      "period": "2026-08-17",
      "value": 6.203
+    },
+    {
+     "period": "2026-08-24",
+     "value": 6.407
     }
    ],
    "gulf_coast": [
-    {
-     "period": "2026-02-23",
-     "value": 3.489
-    },
     {
      "period": "2026-03-02",
      "value": 3.598
@@ -1440,13 +1312,13 @@
     {
      "period": "2026-08-17",
      "value": 5.237
+    },
+    {
+     "period": "2026-08-24",
+     "value": 5.481
     }
    ],
    "east_coast": [
-    {
-     "period": "2026-02-23",
-     "value": 3.843
-    },
     {
      "period": "2026-03-02",
      "value": 3.924
@@ -1546,6 +1418,10 @@
     {
      "period": "2026-08-17",
      "value": 5.34
+    },
+    {
+     "period": "2026-08-24",
+     "value": 5.498
     }
    ]
   }
@@ -1560,19 +1436,19 @@
     "role": "Primary Mexican Hass source (~80% of exports)",
     "past7": {
      "days": 7,
-     "rain_mm": 15.5,
-     "tmax_avg_c": 26.4,
-     "tmin_avg_c": 14.3,
+     "rain_mm": 19.3,
+     "tmax_avg_c": 26.0,
+     "tmin_avg_c": 14.7,
      "tmax_peak_c": 27.4,
-     "tmin_low_c": 13.0
+     "tmin_low_c": 13.9
     },
     "next14": {
      "days": 14,
-     "rain_mm": 69.2,
-     "tmax_avg_c": 24.2,
-     "tmin_avg_c": 14.0,
-     "tmax_peak_c": 27.0,
-     "tmin_low_c": 11.8
+     "rain_mm": 51.6,
+     "tmax_avg_c": 24.1,
+     "tmin_avg_c": 13.4,
+     "tmax_peak_c": 25.2,
+     "tmin_low_c": 12.0
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -1586,19 +1462,19 @@
     "role": "Second Mexican export state",
     "past7": {
      "days": 7,
-     "rain_mm": 11.4,
-     "tmax_avg_c": 27.2,
-     "tmin_avg_c": 16.6,
-     "tmax_peak_c": 29.1,
-     "tmin_low_c": 15.9
+     "rain_mm": 28.4,
+     "tmax_avg_c": 26.3,
+     "tmin_avg_c": 16.2,
+     "tmax_peak_c": 28.1,
+     "tmin_low_c": 15.2
     },
     "next14": {
      "days": 14,
-     "rain_mm": 38.3,
-     "tmax_avg_c": 25.5,
-     "tmin_avg_c": 16.3,
-     "tmax_peak_c": 28.4,
-     "tmin_low_c": 15.9
+     "rain_mm": 37.4,
+     "tmax_avg_c": 25.7,
+     "tmin_avg_c": 15.9,
+     "tmax_peak_c": 27.8,
+     "tmin_low_c": 13.7
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -1613,24 +1489,24 @@
     "past7": {
      "days": 7,
      "rain_mm": 0,
-     "tmax_avg_c": 26.2,
-     "tmin_avg_c": 17.4,
-     "tmax_peak_c": 27.5,
-     "tmin_low_c": 15.5
+     "tmax_avg_c": 29.9,
+     "tmin_avg_c": 17.0,
+     "tmax_peak_c": 32.4,
+     "tmin_low_c": 15.8
     },
     "next14": {
      "days": 14,
      "rain_mm": 0,
-     "tmax_avg_c": 31.5,
-     "tmin_avg_c": 19.7,
-     "tmax_peak_c": 33.5,
-     "tmin_low_c": 15.8
+     "tmax_avg_c": 28.9,
+     "tmin_avg_c": 18.7,
+     "tmax_peak_c": 35.2,
+     "tmin_low_c": 14.9
     },
     "source": "open-meteo",
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "available": true,
-    "nws_narrative": "This Afternoon: Mostly sunny, with a high near 83. West southwest wind 5 to 10 mph."
+    "nws_narrative": "This Afternoon: Sunny, with a high near 88. West southwest wind 5 to 10 mph."
    },
    {
     "key": "san_diego",
@@ -1640,24 +1516,24 @@
     "past7": {
      "days": 7,
      "rain_mm": 0,
-     "tmax_avg_c": 29.1,
-     "tmin_avg_c": 18.9,
-     "tmax_peak_c": 31.3,
-     "tmin_low_c": 17.0
+     "tmax_avg_c": 34.6,
+     "tmin_avg_c": 18.6,
+     "tmax_peak_c": 38.0,
+     "tmin_low_c": 17.1
     },
     "next14": {
      "days": 14,
-     "rain_mm": 2.0,
-     "tmax_avg_c": 31.2,
-     "tmin_avg_c": 17.1,
-     "tmax_peak_c": 33.6,
-     "tmin_low_c": 14.8
+     "rain_mm": 0,
+     "tmax_avg_c": 29.1,
+     "tmin_avg_c": 16.1,
+     "tmax_peak_c": 35.2,
+     "tmin_low_c": 11.3
     },
     "source": "open-meteo",
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "available": true,
-    "nws_narrative": "This Afternoon: Mostly sunny, with a high near 89. Southwest wind around 10 mph, with gusts as high as 25 mph."
+    "nws_narrative": "This Afternoon: Sunny, with a high near 95. Southwest wind 10 to 15 mph, with gusts as high as 25 mph."
    }
   ]
  },
