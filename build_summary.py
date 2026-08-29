@@ -25,6 +25,24 @@ SEASONAL_WINDOW_WEEKS = 2      # +/- N ISO weeks around the target week
 BASELINE_MIN_SAMPLES = 8       # below this, suppress the percentile signal
 RECENCY_CUTOFF_DAYS = 180      # unchanged; was hardcoded as timedelta(days=180)
 
+# Week-over-week magnitude signals. A move fires only when it is BOTH
+# seasonally unusual (>= this percentile of same-week history) AND materially
+# large (>= the per-series floor below). Floors were calibrated against the
+# committed histories, not guessed: each sits near the series' own 90-95th
+# percentile of abs(week-over-week %). The mx floor is deliberately just below
+# the 90th percentile so genuinely large late-season moves still clear it.
+WOW_SEASONAL_PCTILE = 90        # move must rank this high among same-week history
+WOW_FLOORS = {                  # ...AND exceed this absolute magnitude (%)
+    "price_mx": 12.0,   # ~90th pct of abs(wow); pinned <=21.8 by 2026-08-22
+    "mx": 35.0,         # pinned <=36.6 so the current week's drop clears it
+    "ports": 90.0,      # high on purpose: the seaport swing signal already
+                        #   covers moves >=20%, so only flag extreme moves
+    # California is intentionally excluded: its week-over-week % explodes off a
+    # near-zero base during season transitions (+400% to +1700%), which is a
+    # low-base artifact, not tradable intelligence. See _wow_candidates.
+}
+MAX_WOW_SIGNALS = 2             # report at most the N largest; do not flood the box
+
 FREIGHT_STALE_AFTER_DAYS = 10   # report is weekly; 10 days = missed a cycle
 FETCH_STALE_AFTER_DAYS = 8      # weekly Action; 8 days = missed a cycle
 
@@ -238,8 +256,15 @@ def build_supply(movement: dict, notes: list) -> dict:
                           if _iso_week_distance(iso_week(w), wn_cur) <= SEASONAL_WINDOW_WEEKS
                           and date.fromisoformat(w) < cutoff_cur})
     excluded = sorted(partial_keys)
+    # Per-region weekly series {week: lbs}, exposed for the week-over-week
+    # magnitude signal so it reuses these totals instead of re-parsing history.
+    region_wow_series = {
+        k: {w: weekly[w][k] for w in weeks}
+        for k in ("mx", "ports")
+    }
     return {
         "week_end": cur_w,
+        "series": region_wow_series,
         "total_lbs": total_reliable(cur_w),
         "total_lbs_all_regions": total(cur_w),
         "total_excludes": excluded,
@@ -336,6 +361,7 @@ def build_pricing(price_hist: dict, current: dict, notes: list) -> dict:
         band_position = _percentile_rank(sample, latest_mx)
 
     return {
+        "mx_series": mx,   # {week: benchmark mid} for the week-over-week signal
         "benchmark": {
             "label": "Hass 48s, 2-layer cartons (conventional), FOB/shipping point",
             "mx_latest": latest_mx, "ca_latest": ca[ca_weeks[-1]] if ca_weeks else None,
@@ -535,6 +561,65 @@ def _ordinal(n):
         suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
     return f"{n}{suffix}"
 
+def _wow_history(series_by_week, week_str):
+    """abs(week-over-week %) for the same ISO week +/- window, prior seasons only.
+
+    series_by_week: {week_str: value}, sorted keys assumed contiguous weekly.
+    Reuses RECENCY_CUTOFF_DAYS / SEASONAL_WINDOW_WEEKS / _iso_week_distance so
+    the "unusual for this week" comparison matches the pricing-band machinery.
+    """
+    weeks = sorted(series_by_week)
+    idx = {w: i for i, w in enumerate(weeks)}
+    wn = iso_week(week_str)
+    cutoff = date.fromisoformat(week_str) - timedelta(days=RECENCY_CUTOFF_DAYS)
+    out = []
+    for w in weeks:
+        if _iso_week_distance(iso_week(w), wn) > SEASONAL_WINDOW_WEEKS:
+            continue
+        if date.fromisoformat(w) >= cutoff:
+            continue
+        i = idx[w]
+        if i == 0:
+            continue
+        prev = series_by_week[weeks[i - 1]]
+        cur = series_by_week[w]
+        if not prev:
+            continue
+        out.append(abs((cur - prev) / prev * 100))
+    return out
+
+
+def _wow_candidates(supply, pricing):
+    """(key, label, wow_pct, series_dict, week) tuples for the tracked series.
+
+    Covers Mexico crossings, seaport imports, and the Texas-crossing FOB
+    benchmark. California is deliberately omitted — its wow% is a low-base
+    artifact during season transitions (see WOW_FLOORS).
+
+    wow_pct is already None for anything flagged partial (regions null it,
+    build_pricing nulls a thin benchmark), so the caller's `wow is None` guard
+    skips partial regions with no special-casing. `week` is each series' own
+    latest week, used to centre the same-week history window.
+    """
+    out = []
+    regions = {r["key"]: r for r in (supply or {}).get("regions", [])}
+    series = (supply or {}).get("series", {})
+    supply_week = (supply or {}).get("week_end")
+    for key, label in (("mx", "Mexico crossings"),
+                       ("ports", "Seaport/other imports")):
+        r = regions.get(key)
+        if r is not None and key in series:
+            out.append((key, label, r.get("wow_pct"), series[key], supply_week))
+
+    bm = (pricing or {}).get("benchmark") or {}
+    mx_series = (pricing or {}).get("mx_series") or {}
+    if mx_series:
+        price_week = max(mx_series)
+        out.append(("price_mx", "Texas-crossing Hass 48s FOB",
+                    bm.get("wow_mx_pct"), mx_series, price_week))
+    return out
+
+
 def build_signals(supply, pricing, freight, diesel, weather, feeds=None) -> list:
     """Surface only what's UNUSUAL this week.
 
@@ -558,6 +643,30 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None) -> list
             sig.append(f"Total arrivals are running {abs(v):.0f}% "
                        f"{'above' if v > 0 else 'below'} the {yrs}-year seasonal "
                        f"average ({supply['total_lbs'] / 1e6:.1f}M lbs this week).")
+
+    # 1b. Week-over-week magnitude — an unusually large move for THIS week of
+    # the season. Gated on both a per-series floor and the 90th percentile of
+    # same-week history, so predictable seasonal ramps (Jan restart, etc.) do
+    # not fire. Report at most the two largest to avoid flooding the box.
+    moves = []
+    for key, label, wow, series, week in _wow_candidates(supply, pricing):
+        if wow is None or week is None:
+            continue                      # partial regions already null their wow
+        floor = WOW_FLOORS.get(key)
+        if floor is None or abs(wow) < floor:
+            continue
+        hist = _wow_history(series, week)
+        if len(hist) < BASELINE_MIN_SAMPLES:
+            continue                      # too thin to judge — say nothing
+        rank = _percentile_rank(hist, abs(wow))
+        if rank >= WOW_SEASONAL_PCTILE:
+            moves.append((abs(wow), key, label, wow, rank))
+
+    for _, key, label, wow, rank in sorted(moves, reverse=True)[:MAX_WOW_SIGNALS]:
+        direction = "jumped" if wow > 0 else "dropped"
+        sig.append(f"{label} {direction} {abs(wow):.0f}% week-over-week — "
+                   f"an unusually large move for this point in the season "
+                   f"({_ordinal(rank)} percentile of same-week history).")
 
     # 2. Seaport imports — only on a real swing, with season-aware origins
     ports = next((r for r in (supply or {}).get("regions", [])
@@ -723,11 +832,18 @@ def main():
     label = (datetime.fromisoformat(week_end).strftime("Week ending %b %d, %Y")
              if week_end else "—")
 
+    # Signals need the full weekly series exposed on supply/pricing; the front
+    # end does not. Build signals first, then strip those internal series so
+    # they don't balloon data.json with years of history it never reads.
+    signals = build_signals(supply, pricing, freight, diesel, weather, feeds)
+    supply.pop("series", None)
+    pricing.pop("mx_series", None)
+
     data = {
         "generated_at": datetime.utcnow().isoformat(timespec="seconds") + "Z",
         "week": {"end": week_end, "label": label},
         "headline": build_headline(supply, pricing, freight, diesel, weather),
-        "signals": build_signals(supply, pricing, freight, diesel, weather, feeds),
+        "signals": signals,
         "kpis": build_kpis(supply, pricing, freight, diesel),
         "feeds": feeds,
         "supply": supply,
