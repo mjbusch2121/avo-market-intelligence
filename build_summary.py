@@ -459,13 +459,16 @@ def build_weather(weather: dict) -> dict:
 # Narrative + signals
 # ---------------------------------------------------------------
 
-def direction_word(p, up="up", down="down", flat="flat"):
+def direction_word(p, up="up", down="down", flat="flat", decimals=0):
+    """Coarse by default (decimals=0) for the signals block; the headline
+    passes decimals=1 so its percentages match the KPI cards, which render
+    delta_pct with one decimal (dashboard.js deltaHtml -> toFixed(1))."""
     if p is None:
         return flat
     if p > 1:
-        return f"{up} {abs(p):.0f}%"
+        return f"{up} {abs(p):.{decimals}f}%"
     if p < -1:
-        return f"{down} {abs(p):.0f}%"
+        return f"{down} {abs(p):.{decimals}f}%"
     return flat
 
 
@@ -473,12 +476,12 @@ def build_headline(supply, pricing, freight, diesel, weather) -> str:
     parts = []
     if supply:
         parts.append(f"Mexico crossing volume "
-                     f"{direction_word(next((r['wow_pct'] for r in supply['regions'] if r['key'] == 'mx'), None))} week-over-week")
+                     f"{direction_word(next((r['wow_pct'] for r in supply['regions'] if r['key'] == 'mx'), None), decimals=1)} week-over-week")
     bm = (pricing or {}).get("benchmark") or {}
     if bm.get("mx_latest") is not None:
         w = bm.get("wow_mx_pct")
         verb = "steady" if w is None or abs(w) <= 1 else ("firmed" if w > 0 else "softened")
-        move = "" if verb == "steady" else f" {abs(w):.0f}%"
+        move = "" if verb == "steady" else f" {abs(w):.1f}%"
         parts.append(f"Texas-crossing Hass 48s FOB {verb}{move} at ${bm['mx_latest']:.2f}")
     lanes = {l["dest"]: l for l in (freight or {}).get("lanes", [])}
     la, dal = lanes.get("Los Angeles"), lanes.get("Dallas")

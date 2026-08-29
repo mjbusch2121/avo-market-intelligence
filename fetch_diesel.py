@@ -60,15 +60,39 @@ def fetch_series(series_id: str) -> list:
         key=lambda x: x["period"])
 
 
+def write_failure(out_path: Path, reason: str):
+    """Record a failed fetch without faking freshness.
+
+    `fetched_at` means "we got data". On failure we must NOT stamp a fresh one,
+    or the staleness detector never trips. Instead we preserve whatever
+    `fetched_at` the prior file carried (so staleness is measured from the last
+    real success) and add `fetch_attempted` + `fetch_error`. With no prior file
+    there is no `fetched_at` at all, so build_summary treats the feed as stale.
+    Mirrors fetch_freight_pdf.py.
+    """
+    now = _now_iso()
+    if out_path.exists():
+        prev = json.loads(out_path.read_text(encoding="utf-8"))
+        prev["fetch_attempted"] = now
+        prev["fetch_error"] = reason
+        out_path.write_text(json.dumps(prev, indent=1), encoding="utf-8")
+        print(f"Diesel fetch failed ({reason}) — kept previous data, "
+              "preserved its fetched_at for staleness")
+    else:
+        out_path.write_text(json.dumps({
+            "available": False, "reason": reason,
+            "fetch_attempted": now, "fetch_error": reason}, indent=1),
+            encoding="utf-8")
+        print(f"Diesel fetch failed ({reason}) — no prior data to preserve")
+
+
 def main():
     out_path = RAW_DIR / "diesel.json"
     RAW_DIR.mkdir(parents=True, exist_ok=True)
 
     if not API_KEY:
         print("WARNING: EIA_API_KEY not set — diesel panel will show as unavailable")
-        out_path.write_text(json.dumps({"available": False,
-                                        "reason": "EIA_API_KEY not configured",
-                                        "fetched_at": _now_iso()}))
+        write_failure(out_path, "EIA_API_KEY not configured")
         return
 
     out = {"available": True, "series": {}}
@@ -80,10 +104,8 @@ def main():
                   f"{pts[-1]['period']} = ${pts[-1]['value']:.3f}/gal")
     except Exception as e:
         print(f"ERROR fetching EIA data: {e}", file=sys.stderr)
-        if out_path.exists():
-            print("Keeping previous diesel.json")
-            return
-        out = {"available": False, "reason": str(e)}
+        write_failure(out_path, str(e))
+        return
 
     out["fetched_at"] = _now_iso()
     out_path.write_text(json.dumps(out, indent=1), encoding="utf-8")

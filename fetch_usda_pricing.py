@@ -193,9 +193,23 @@ def fetch_pricing_current():
     rows = mars_get("sc-cr/sc/shippingpt/daily",
                     f"group=Fruits;commodity=Avocados;report_date={start}:{mmdd(date.today())}")
     if not rows:
+        # No data is a failure, not a success: don't stamp a fresh fetched_at
+        # (that would mark the USDA feed fresh and hide the gap). Preserve the
+        # prior file's fetched_at and flag the attempt, mirroring the freight
+        # fetcher. With no prior file, omit fetched_at so the feed reads stale.
         print("Pricing current: no daily rows in window")
-        save_json(RAW_DIR / "usda_current.json",
-                  {"report_date": None, "rows": [], "fetched_at": _now_iso()})
+        out_path = RAW_DIR / "usda_current.json"
+        reason = "no daily rows in window"
+        if out_path.exists():
+            prev = load_json(out_path, {})
+            prev["fetch_attempted"] = _now_iso()
+            prev["fetch_error"] = reason
+            save_json(out_path, prev)
+            print("  kept previous usda_current.json, preserved fetched_at")
+        else:
+            save_json(out_path, {"report_date": None, "rows": [],
+                                 "fetch_attempted": _now_iso(),
+                                 "fetch_error": reason})
         return
 
     latest = max(rows, key=lambda r: to_iso(r["report_date"]))["report_date"]

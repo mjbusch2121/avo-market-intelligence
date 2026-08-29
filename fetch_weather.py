@@ -194,8 +194,23 @@ def main():
             entry["nws_narrative"] = nws_narrative(region["lat"], region["lon"])
         regions_out.append(entry)
 
-    if failures == len(REGIONS) and out_path.exists():
-        print("All regions failed — keeping previous weather.json")
+    if failures == len(REGIONS):
+        # Total failure: never stamp a fresh fetched_at (that would mask the
+        # outage from the staleness detector). Preserve the prior file's
+        # timestamp and flag the attempt; with no prior file, omit fetched_at
+        # so the feed reads stale. Mirrors fetch_freight_pdf.py.
+        reason = "all regions failed to fetch"
+        if out_path.exists():
+            prev = json.loads(out_path.read_text(encoding="utf-8"))
+            prev["fetch_attempted"] = _now_iso()
+            prev["fetch_error"] = reason
+            out_path.write_text(json.dumps(prev, indent=1), encoding="utf-8")
+            print("All regions failed — kept previous weather.json, preserved fetched_at")
+        else:
+            out_path.write_text(json.dumps({
+                "fetch_attempted": _now_iso(), "fetch_error": reason,
+                "regions": regions_out}, indent=1), encoding="utf-8")
+            print("All regions failed — no prior weather.json to preserve")
         return
 
     out_path.write_text(json.dumps({"fetched_at": _now_iso(), "regions": regions_out},
