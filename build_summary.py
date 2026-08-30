@@ -13,7 +13,8 @@ import json
 import statistics
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from seasonality import classify, any_unexpected_gaps
+from seasonality import (classify, any_unexpected_gaps,
+                         load_crop_calendar, current_stage, in_window)
 
 ROOT = Path(__file__).parent
 RAW = ROOT / "data" / "raw"
@@ -45,6 +46,13 @@ MAX_WOW_SIGNALS = 2             # report at most the N largest; do not flood the
 
 FREIGHT_STALE_AFTER_DAYS = 10   # report is weekly; 10 days = missed a cycle
 FETCH_STALE_AFTER_DAYS = 8      # weekly Action; 8 days = missed a cycle
+ENSO_STALE_AFTER_DAYS = 45      # ENSO is monthly — do not judge it on a weekly clock
+
+# ENSO signal gating. The band alone is not enough: RONI can read "weak" during
+# a fast ramp that CPC is already issuing an advisory for, so we also fire on an
+# established event or a steep recent move.
+ENSO_MODERATE_ANOM = 1.0        # |RONI| at/above this is moderate+ on its own
+ENSO_STEEP_DELTA = 0.75         # 3-season change past this = fast move / lagging mean
 
 
 def freight_stale_days(report_date):
@@ -444,15 +452,151 @@ def build_diesel(diesel: dict) -> dict:
 
 FLAG_RANK = {"alert": 3, "watch": 2, "normal": 1, "unknown": 0}
 
+# Origin-country labels + why a dark weather group matters. Keyed by the
+# `country` code on each weather region. The framing differs deliberately: a
+# dark group is not a count, it is a specific blind spot — Mexico blinds the
+# near-term supply read, Peru blinds the forward flowering signal.
+COUNTRY_LABELS = {"MX": "Mexico", "US": "California", "CO": "Colombia", "PE": "Peru"}
+WEATHER_DARK_FRAMING = {
+    "MX": "Mexico drives ~80% of near-term supply, so the 2-4 week supply read "
+          "is running blind this cycle.",
+    "US": "the California belt has no live weather this cycle.",
+    "CO": "the Colombian main-crop drought read is unsupported this cycle.",
+    "PE": "the Peru forward signal — flowering that sets the 2027 crop — is "
+          "unsupported this cycle.",
+}
+
 
 def build_weather(weather: dict) -> dict:
     if not weather:
-        return {"overall_flag": "unknown", "regions": []}
+        return {"overall_flag": "unknown", "regions": [],
+                "coverage": {}, "dark_groups": []}
     regions = weather.get("regions", [])
+
+    # Label each region's phenological stage (harvest/flowering/sizing) from the
+    # crop calendar. Per Amendment 2 we do NOT mute out-of-season regions — a
+    # region outside harvest is often exactly where the leading indicator lives
+    # (Peru's Oct-Feb flowering under an El Niño peak). Regions without a
+    # calendar entry (Michoacán, California) get stage=None and render as before.
+    cal = load_crop_calendar()
+    today = date.today()
+    for r in regions:
+        stages = cal.get(r.get("key"), {})
+        r["stage"] = current_stage(stages, today) if stages else None
+
     overall = max(regions, key=lambda r: FLAG_RANK.get(r.get("flag"), 0),
                   default=None)
     return {"overall_flag": overall["flag"] if overall else "unknown",
+            "coverage": weather.get("coverage", {}),
+            "dark_groups": weather.get("dark_groups", []),
             "regions": regions}
+
+
+# ---------------------------------------------------------------
+# ENSO (seasonal-to-annual layer)
+# ---------------------------------------------------------------
+
+def _confidence_rank(conf: str) -> float:
+    """Sortable rank from the prose confidence strings in enso_response.json.
+    Reads the leading qualifier ('high on drought, ...' -> high)."""
+    c = (conf or "").lower().strip()
+    if c.startswith("high"):
+        return 4.0
+    if c.startswith("moderate-high"):
+        return 3.5
+    if c.startswith("moderate"):
+        return 3.0
+    if c.startswith("low-moderate"):
+        return 2.0
+    if c.startswith("low"):
+        return 1.0
+    return 0.0
+
+
+def _enso_rank(origins: list) -> list:
+    """Amendment 5: prefer origins whose current stage intersects their ENSO
+    watch window; dedupe by country (so two Colombia entries don't crowd out
+    Peru), sort by confidence, cap at two. If none intersect — e.g. because the
+    only in-window origin (Michoacán) is unlabelled and has no stage — fall back
+    to the single highest-confidence origin so the signal never goes silent."""
+    candidates = [o for o in origins if o.get("stage") and o.get("in_watch")]
+    best = {}
+    for o in candidates:
+        r = _confidence_rank(o["confidence"])
+        c = o["country"]
+        if c not in best or r > best[c][0]:
+            best[c] = (r, o)
+    ranked = [o for _, o in sorted(best.values(), key=lambda t: -t[0])]
+    if ranked:
+        return ranked[:2]
+    return [max(origins, key=lambda o: _confidence_rank(o["confidence"]))] if origins else []
+
+
+def build_enso(enso_raw: dict, response: dict, weather: dict) -> dict:
+    """Assemble the ENSO block: index state (RONI led, ONI alongside), display
+    helpers that lead with trend and always carry the season, and per-origin
+    teleconnection rows annotated with current stage / watch intersection /
+    whether that origin's live weather is currently dark."""
+    if not enso_raw or not enso_raw.get("roni"):
+        return {"available": False}
+
+    roni, oni = enso_raw["roni"], enso_raw.get("oni") or {}
+    anom = roni["latest"]["anom"]
+    season = f'{roni["latest"]["season"]} {roni["latest"]["year"]}'
+    trend = roni.get("trend", "steady")
+    delta3 = roni.get("delta3")
+    ref3 = roni.get("three_seasons_ago")
+    steep = delta3 is not None and abs(delta3) > ENSO_STEEP_DELTA
+    established = bool(roni.get("established_event"))
+
+    side = "El Niño" if anom > 0 else ("La Niña" if anom < 0 else "ENSO-neutral")
+    # #2 lead with trend + direction, not the band; #1 season always with value.
+    lead = f"{side} {trend}" if side != "ENSO-neutral" else f"ENSO {trend}"
+    up = f", up from {ref3['anom']:+.2f} three seasons ago" if ref3 else ""
+    headline = f"{lead} — RONI {anom:+.2f} ({season}){up}"
+    # #3 lag caveat only when the recent move is steep.
+    lag_caveat = ("the 3-month seasonal mean trails a fast-developing event, so the "
+                  "current state is likely stronger than the season label") if steep else None
+
+    # #4 gate: band alone would stay silent at RONI +0.98 during an advisory.
+    fire = (abs(anom) >= ENSO_MODERATE_ANOM) or established or (trend == "strengthening" and steep)
+
+    dark = set((weather or {}).get("dark_groups") or [])
+    cal = load_crop_calendar()
+    today = date.today()
+    origins = []
+    for o in (response or {}).get("origins", []):
+        country = o["key"].split("_")[0].upper()   # mx_michoacan -> MX
+        stage = current_stage(cal.get(o["key"], {}), today)
+        wm = o.get("watch_months")
+        in_watch = bool(wm and in_window({"window": wm}, today))
+        origins.append({**o, "country": country, "stage": stage,
+                        "in_watch": in_watch, "weather_dark": country in dark})
+
+    ranked = _enso_rank(origins)
+    return {
+        "available": True,
+        "primary": "roni",
+        "latest": roni["latest"],   # convenience: the led index's latest season
+        "roni": roni,
+        "oni": oni,
+        "anom": anom,
+        "season": season,
+        "phase_side": side,
+        "trend": trend,
+        "delta3": delta3,
+        "three_seasons_ago": ref3,
+        "steep": steep,
+        "established_event": established,
+        "consecutive_seasons": roni.get("consecutive_seasons"),
+        "phase_with_season": f'{roni["latest"]["phase"]} ({season})',   # #1
+        "headline": headline,                                           # #2
+        "lag_caveat": lag_caveat,                                       # #3
+        "signal_fire": fire,
+        "signal_keys": [o["key"] for o in ranked],
+        "origins": origins,
+        "fetched_at": enso_raw.get("fetched_at"),
+    }
 
 
 # ---------------------------------------------------------------
@@ -623,7 +767,7 @@ def _wow_candidates(supply, pricing):
     return out
 
 
-def build_signals(supply, pricing, freight, diesel, weather, feeds=None) -> list:
+def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=None) -> list:
     """Surface only what's UNUSUAL this week.
 
     Every signal is gated behind a threshold, so a quiet week produces a
@@ -632,6 +776,13 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None) -> list
     means nothing is out of line.
     """
     sig = []
+    # Coverage/data-integrity caveats that must survive the 5-signal cap: a
+    # whole origin going dark is more important to surface than any single
+    # market move, so these are floated above `sig` at the return.
+    coverage_sig = []
+    # The ENSO forward signal ranks just below coverage caveats and above the
+    # market signals, so a firing advisory is not pushed out of the cap.
+    enso_sig = []
 
     # --- Thresholds (tune these if the box feels too noisy/quiet) ---
     SUPPLY_VS_3YR = 10      # % from seasonal average worth mentioning
@@ -743,23 +894,63 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None) -> list
     # 6. Feed freshness — warn when individual feeds missed a cycle
     if feeds:
         named = {k: v for k, v in feeds.items() if not k.startswith("_")}
-        lagging = [n for n, f in named.items() if f["stale"] and n != "freight"]
+        # freight has its own staleness line above; enso is monthly and surfaced
+        # in its own panel, so neither belongs in this weekly-cadence warning.
+        lagging = [n for n, f in named.items() if f["stale"] and n not in ("freight", "enso")]
         if lagging:
             display = ["USDA" if n in ("supply", "pricing") else n for n in lagging]
             sig.append(f"Data feeds not refreshed this cycle: {', '.join(sorted(set(display)))} "
                        "— figures from these sources may not reflect the current week.")
+
+    # 6b. Weather origin-group outage — a whole origin country went dark. Which
+    # country matters, not the count, so the message is country-specific.
+    # Non-fatal (external outage isn't a code bug), but stated plainly so a
+    # fresh timestamp isn't mistaken for full coverage. This is also what the
+    # ENSO panel keys on to caveat origins it can no longer see.
+    cov = (weather or {}).get("coverage") or {}
+    for c in (weather or {}).get("dark_groups") or []:
+        label = COUNTRY_LABELS.get(c, c)
+        framing = WEATHER_DARK_FRAMING.get(c, "weather for this origin is unavailable this cycle.")
+        coverage_sig.append(f"No live weather for {label} this cycle "
+                            f"({cov.get(c, '0/0')} regions returned data) — {framing}")
 
     # 7. Weather — already event-driven, left as-is
     for r in (weather or {}).get("regions", []):
         if r.get("flag") in ("watch", "alert"):
             sig.append(f"{r['name']}: {r['note']}")
 
-    # Quiet week: say so explicitly rather than showing an empty box
-    if not sig:
-        sig.append("No notable deviations this week — supply, pricing, and "
-                   "freight are all tracking near seasonal norms.")
+    # 8. ENSO — seasonal-to-annual forward signal. Leads with trend/direction
+    # (not the band, which understates a fast ramp), names the ranked affected
+    # origins with their specific effect, and caveats any origin whose live
+    # weather is currently dark. One bullet so it doesn't flood the box.
+    if enso and enso.get("signal_fire"):
+        by_key = {o["key"]: o for o in enso.get("origins", [])}
+        parts = []
+        for k in enso.get("signal_keys", []):
+            o = by_key.get(k)
+            if not o:
+                continue
+            seg = f"{o['name'].split(' (')[0]} — {o.get('signal_effect', '')}"
+            if o.get("weather_dark"):
+                seg += (f" (no live {COUNTRY_LABELS.get(o['country'], o['country'])} "
+                        "weather this cycle to corroborate)")
+            parts.append(seg)
+        lead = enso["headline"]
+        if enso.get("lag_caveat"):
+            lead += f"; {enso['lag_caveat']}"
+        watch = "; ".join(parts)
+        enso_sig.append(f"{lead}. Watch {watch}." if watch else f"{lead}.")
 
-    return sig[:5]
+    # Priority order for the 5-signal cap: coverage caveats first, then the ENSO
+    # forward signal, then the market signals.
+    ordered = coverage_sig + enso_sig + sig
+
+    # Quiet week: say so explicitly rather than showing an empty box
+    if not ordered:
+        ordered.append("No notable deviations this week — supply, pricing, and "
+                       "freight are all tracking near seasonal norms.")
+
+    return ordered[:5]
 
 
 def build_kpis(supply, pricing, freight, diesel) -> list:
@@ -807,6 +998,8 @@ def main():
     freight_raw = load(RAW / "freight.json", {})
     diesel_raw = load(RAW / "diesel.json", {})
     weather_raw = load(RAW / "weather.json", {})
+    enso_raw = load(RAW / "enso.json", {})
+    enso_response = load(ROOT / "enso_response.json", {})
 
     supply = build_supply(movement, notes)
     pricing = build_pricing(price_hist, current, notes)
@@ -816,6 +1009,7 @@ def main():
     freight["stale_after_days"] = FREIGHT_STALE_AFTER_DAYS
     diesel = build_diesel(diesel_raw)
     weather = build_weather(weather_raw)
+    enso = build_enso(enso_raw, enso_response, weather)
 
     # Build feeds freshness block before signals (signals reads it)
     feeds = {}
@@ -831,6 +1025,18 @@ def main():
         }
     feeds["_stale_after_days"] = FETCH_STALE_AFTER_DAYS
 
+    # ENSO is monthly: judge it on its own 45-day clock, and keep it OUT of the
+    # all-stale build-failure check (a fresh ENSO feed must not mask dead weekly
+    # feeds, and a stale monthly feed must not by itself fail the run).
+    enso_age = fetch_age_days(enso_raw.get("fetched_at"))
+    feeds["enso"] = {
+        "fetched_at": enso_raw.get("fetched_at"),
+        "fetch_age_days": enso_age,
+        "stale": enso_age is None or enso_age > ENSO_STALE_AFTER_DAYS,
+        "fetch_error": enso_raw.get("fetch_error"),
+        "stale_after_days": ENSO_STALE_AFTER_DAYS,
+    }
+
     week_end = supply.get("week_end")
     label = (datetime.fromisoformat(week_end).strftime("Week ending %b %d, %Y")
              if week_end else "—")
@@ -838,7 +1044,7 @@ def main():
     # Signals need the full weekly series exposed on supply/pricing; the front
     # end does not. Build signals first, then strip those internal series so
     # they don't balloon data.json with years of history it never reads.
-    signals = build_signals(supply, pricing, freight, diesel, weather, feeds)
+    signals = build_signals(supply, pricing, freight, diesel, weather, feeds, enso)
     supply.pop("series", None)
     pricing.pop("mx_series", None)
 
@@ -854,6 +1060,7 @@ def main():
         "freight": freight,
         "diesel": diesel,
         "weather": weather,
+        "enso": enso,
         "meta": {
             "notes": notes,
             "sources": [
@@ -861,6 +1068,7 @@ def main():
                 {"name": "USDA AMS FVWTRK Truck Rate Report", "url": "https://www.ams.usda.gov/mnreports/fvwtrk.pdf"},
                 {"name": "EIA Weekly Retail Diesel", "url": "https://www.eia.gov/petroleum/gasdiesel/"},
                 {"name": "NOAA/NWS + Open-Meteo", "url": "https://www.weather.gov/"},
+                {"name": "NOAA CPC ENSO indices (RONI/ONI)", "url": "https://www.cpc.ncep.noaa.gov/data/indices/"},
             ],
         },
     }
@@ -887,8 +1095,11 @@ def main():
     if freight_stale:
         print(f"FREIGHT [stale] report is {sd} days old ({freight.get('report_date')})")
 
-    # All-feeds freshness — fail only when every feed has gone dark
-    named_feeds = {k: v for k, v in feeds.items() if not k.startswith("_")}
+    # All-feeds freshness — fail only when every weekly feed has gone dark.
+    # ENSO is excluded: it is monthly (its own 45-day clock), so a fresh ENSO
+    # feed must not mask dead weekly feeds and a stale one must not fail the run.
+    named_feeds = {k: v for k, v in feeds.items()
+                   if not k.startswith("_") and k != "enso"}
     all_stale = all(f["stale"] for f in named_feeds.values())
     if all_stale:
         print("FEEDS [error] every feed is stale — automation appears to have stopped")

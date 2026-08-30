@@ -1,0 +1,78 @@
+{
+  "_comment": "Documented ENSO teleconnections per Westfalia sourcing origin. 'el_nino_effect' is the expected effect of EL NINO; La Nina is broadly opposite but not symmetric, so the dashboard does not auto-invert it. 'confidence' reflects how well established the teleconnection is in the literature, NOT certainty for any given event. 'lag_months' is roughly when it reaches arrivals. 'watch_window' is human prose; 'watch_months' is the machine-readable (MM-DD) version used to rank origins whose current stage intersects the window (see Amendment 5). 'signal_effect' is the short phrase used in the WHAT TO WATCH one-liner. Literature-based, not yet validated against our own rainfall data — see Phase 2 in climatology_project_outline.md.",
+  "origins": [
+    {
+      "key": "mx_michoacan",
+      "name": "Michoacán / Jalisco",
+      "el_nino_effect": "drier",
+      "mechanism": "Suppressed summer monsoon; more pronounced mid-summer canícula during the Jun-Oct wet season.",
+      "impact": "Moisture stress during sizing; potential downward shift in the size curve.",
+      "signal_effect": "moisture stress during sizing, risk of a smaller size curve",
+      "confidence": "moderate",
+      "lag_months": [1, 4],
+      "watch_window": "Jun-Oct",
+      "watch_months": {"start": "06-01", "end": "10-31"}
+    },
+    {
+      "key": "co_sonson",
+      "name": "Sonsón, Antioquia",
+      "el_nino_effect": "drier and warmer",
+      "mechanism": "Reduced Andean rainfall and elevated temperatures. At 2,475m, clear-sky dry spells also raise radiative frost risk and páramo fire risk.",
+      "impact": "Colombia's Sep-Jan main crop overlaps the forecast El Niño peak, so drought stress lands on fruit currently sizing and being harvested — not only on a future crop. The Dec-Mar dry signal then carries into sizing for the Apr-Jul traviesa.",
+      "signal_effect": "drought stress on the main crop now sizing and being harvested",
+      "confidence": "high on drought, moderate on frost",
+      "lag_months": [1, 6],
+      "watch_window": "year-round, strongest Dec-Mar",
+      "watch_months": {"start": "01-01", "end": "12-31"}
+    },
+    {
+      "key": "co_eje_cafetero",
+      "name": "Eje Cafetero / wider Antioquia",
+      "el_nino_effect": "drier and warmer",
+      "mechanism": "Same Andean drought signal at somewhat lower elevation.",
+      "impact": "Colombia's Sep-Jan main crop overlaps the forecast El Niño peak, so drought stress lands on fruit currently sizing and being harvested — not only on a future crop. The Dec-Mar dry signal then carries into sizing for the Apr-Jul traviesa.",
+      "signal_effect": "yield stress across the 220-grower contract base",
+      "confidence": "high",
+      "lag_months": [1, 6],
+      "watch_window": "year-round, strongest Dec-Mar",
+      "watch_months": {"start": "01-01", "end": "12-31"}
+    },
+    {
+      "key": "pe_lambayeque",
+      "name": "Lambayeque (northern coast)",
+      "el_nino_effect": "much wetter — flood risk",
+      "mechanism": "Strong Niño 1+2 warming drives extreme rainfall on the northern Peruvian coast. 1998 and 2017 produced severe flooding in Piura and Lambayeque.",
+      "impact": "Field access, root disease, and road/packhouse logistics disruption. Infrastructure risk more than yield risk.",
+      "signal_effect": "flood risk to fields, roads, and packhouses",
+      "confidence": "high",
+      "lag_months": [4, 8],
+      "watch_window": "Jan-Mar",
+      "watch_months": {"start": "01-01", "end": "03-31"}
+    },
+    {
+      "key": "pe_canete",
+      "name": "Cañete Valley / Áncash (central coast)",
+      "el_nino_effect": "warmer, limited rainfall change",
+      "mechanism": "Warm coastal winter reduces chill accumulation and suppresses flowering induction. Central coast sees far less El Niño rainfall than the north.",
+      "impact": "Reduced flowering carries into the March-September 2027 harvest. A very strong El Niño peaking OND 2026 sits directly on the Aug-Oct flowering window — the 2027 Peruvian crop is being set now, 7-13 months before it reaches arrivals.",
+      "signal_effect": "warmer winter may suppress flowering that sets the 2027 crop",
+      "confidence": "moderate-high",
+      "lag_months": [7, 13],
+      "watch_window": "Aug-Oct flowering",
+      "watch_months": {"start": "08-01", "end": "10-31"},
+      "commercially_significant": true
+    },
+    {
+      "key": "pe_junin",
+      "name": "Monobamba, Junín (cloud forest)",
+      "el_nino_effect": "drier",
+      "mechanism": "Amazon-facing eastern Andean slopes typically run drier during El Niño — opposite sign to the Peruvian coast.",
+      "impact": "Moisture stress in cooperative-sourced high-altitude fruit.",
+      "signal_effect": "moisture stress in high-altitude cooperative fruit",
+      "confidence": "low-moderate — Monobamba sits in a transition zone and the signal is less well established than the coastal one",
+      "lag_months": [3, 9],
+      "watch_window": "Dec-Mar",
+      "watch_months": {"start": "12-01", "end": "03-31"}
+    }
+  ]
+}

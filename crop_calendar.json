@@ -1,0 +1,21 @@
+{
+  "_comment": "In-country crop calendar per growing origin, used by the WEATHER panel to label phenological stage (harvest / flowering / sizing) so a rainfall number reads as a reason to care. These are NOT arrival windows — for when fruit reaches the US market (~3-5 weeks after harvest for ocean freight) see seasons.json. Two files, two concepts: seasons.json = US arrivals; crop_calendar.json = in-country phenology. Dates are MM-DD and may wrap the new year. Stages are approximate and regionally variable; they frame why weather matters, not precise agronomic claims. 'applies_to' shares a template calendar with sibling regions of the same regime. Michoacán and California are intentionally absent — they keep their existing unlabeled treatment.",
+  "origins": [
+    {
+      "key": "pe_canete",
+      "applies_to": ["pe_lambayeque", "pe_ancash"],
+      "harvest": [{"start": "03-01", "end": "09-30"}],
+      "flowering": [{"start": "08-01", "end": "10-31"}],
+      "sizing": [{"start": "11-01", "end": "02-28"}]
+    },
+    {
+      "key": "co_sonson",
+      "applies_to": ["co_eje_cafetero"],
+      "harvest": [{"start": "09-01", "end": "01-31"},
+                  {"start": "04-01", "end": "07-31"}],
+      "flowering": [{"start": "01-01", "end": "03-31"},
+                    {"start": "07-01", "end": "09-30"}],
+      "sizing": [{"start": "04-01", "end": "08-31"}]
+    }
+  ]
+}

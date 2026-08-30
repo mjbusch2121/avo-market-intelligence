@@ -1,0 +1,406 @@
+{
+ "fetched_at": "2026-08-30T03:55:12+00:00",
+ "primary": "roni",
+ "roni": {
+  "latest": {
+   "season": "MJJ",
+   "year": 2026,
+   "anom": 0.98,
+   "phase": "weak El Ni\u00f1o"
+  },
+  "trend": "strengthening",
+  "three_seasons_ago": {
+   "season": "FMA",
+   "year": 2026,
+   "anom": -0.44
+  },
+  "delta3": 1.42,
+  "consecutive_seasons": 1,
+  "established_event": false,
+  "series": [
+   {
+    "season": "JJA",
+    "year": 2023,
+    "anom": 0.54
+   },
+   {
+    "season": "JAS",
+    "year": 2023,
+    "anom": 0.79
+   },
+   {
+    "season": "ASO",
+    "year": 2023,
+    "anom": 1.04
+   },
+   {
+    "season": "SON",
+    "year": 2023,
+    "anom": 1.3
+   },
+   {
+    "season": "OND",
+    "year": 2023,
+    "anom": 1.42
+   },
+   {
+    "season": "NDJ",
+    "year": 2023,
+    "anom": 1.4
+   },
+   {
+    "season": "DJF",
+    "year": 2024,
+    "anom": 1.13
+   },
+   {
+    "season": "JFM",
+    "year": 2024,
+    "anom": 0.78
+   },
+   {
+    "season": "FMA",
+    "year": 2024,
+    "anom": 0.42
+   },
+   {
+    "season": "MAM",
+    "year": 2024,
+    "anom": 0.04
+   },
+   {
+    "season": "AMJ",
+    "year": 2024,
+    "anom": -0.28
+   },
+   {
+    "season": "MJJ",
+    "year": 2024,
+    "anom": -0.45
+   },
+   {
+    "season": "JJA",
+    "year": 2024,
+    "anom": -0.49
+   },
+   {
+    "season": "JAS",
+    "year": 2024,
+    "anom": -0.56
+   },
+   {
+    "season": "ASO",
+    "year": 2024,
+    "anom": -0.67
+   },
+   {
+    "season": "SON",
+    "year": 2024,
+    "anom": -0.76
+   },
+   {
+    "season": "OND",
+    "year": 2024,
+    "anom": -0.88
+   },
+   {
+    "season": "NDJ",
+    "year": 2024,
+    "anom": -1.05
+   },
+   {
+    "season": "DJF",
+    "year": 2025,
+    "anom": -1.1
+   },
+   {
+    "season": "JFM",
+    "year": 2025,
+    "anom": -0.85
+   },
+   {
+    "season": "FMA",
+    "year": 2025,
+    "anom": -0.66
+   },
+   {
+    "season": "MAM",
+    "year": 2025,
+    "anom": -0.5
+   },
+   {
+    "season": "AMJ",
+    "year": 2025,
+    "anom": -0.48
+   },
+   {
+    "season": "MJJ",
+    "year": 2025,
+    "anom": -0.36
+   },
+   {
+    "season": "JJA",
+    "year": 2025,
+    "anom": -0.41
+   },
+   {
+    "season": "JAS",
+    "year": 2025,
+    "anom": -0.59
+   },
+   {
+    "season": "ASO",
+    "year": 2025,
+    "anom": -0.78
+   },
+   {
+    "season": "SON",
+    "year": 2025,
+    "anom": -0.93
+   },
+   {
+    "season": "OND",
+    "year": 2025,
+    "anom": -0.98
+   },
+   {
+    "season": "NDJ",
+    "year": 2025,
+    "anom": -1.04
+   },
+   {
+    "season": "DJF",
+    "year": 2026,
+    "anom": -0.91
+   },
+   {
+    "season": "JFM",
+    "year": 2026,
+    "anom": -0.76
+   },
+   {
+    "season": "FMA",
+    "year": 2026,
+    "anom": -0.44
+   },
+   {
+    "season": "MAM",
+    "year": 2026,
+    "anom": -0.04
+   },
+   {
+    "season": "AMJ",
+    "year": 2026,
+    "anom": 0.49
+   },
+   {
+    "season": "MJJ",
+    "year": 2026,
+    "anom": 0.98
+   }
+  ]
+ },
+ "oni": {
+  "latest": {
+   "season": "MJJ",
+   "year": 2026,
+   "anom": 1.39,
+   "phase": "moderate El Ni\u00f1o"
+  },
+  "trend": "strengthening",
+  "three_seasons_ago": {
+   "season": "FMA",
+   "year": 2026,
+   "anom": 0.11
+  },
+  "delta3": 1.28,
+  "consecutive_seasons": 2,
+  "established_event": false,
+  "series": [
+   {
+    "season": "JJA",
+    "year": 2023,
+    "anom": 1.0
+   },
+   {
+    "season": "JAS",
+    "year": 2023,
+    "anom": 1.25
+   },
+   {
+    "season": "ASO",
+    "year": 2023,
+    "anom": 1.5
+   },
+   {
+    "season": "SON",
+    "year": 2023,
+    "anom": 1.74
+   },
+   {
+    "season": "OND",
+    "year": 2023,
+    "anom": 1.9
+   },
+   {
+    "season": "NDJ",
+    "year": 2023,
+    "anom": 1.99
+   },
+   {
+    "season": "DJF",
+    "year": 2024,
+    "anom": 1.84
+   },
+   {
+    "season": "JFM",
+    "year": 2024,
+    "anom": 1.53
+   },
+   {
+    "season": "FMA",
+    "year": 2024,
+    "anom": 1.18
+   },
+   {
+    "season": "MAM",
+    "year": 2024,
+    "anom": 0.77
+   },
+   {
+    "season": "AMJ",
+    "year": 2024,
+    "anom": 0.43
+   },
+   {
+    "season": "MJJ",
+    "year": 2024,
+    "anom": 0.18
+   },
+   {
+    "season": "JJA",
+    "year": 2024,
+    "anom": 0.06
+   },
+   {
+    "season": "JAS",
+    "year": 2024,
+    "anom": -0.04
+   },
+   {
+    "season": "ASO",
+    "year": 2024,
+    "anom": -0.12
+   },
+   {
+    "season": "SON",
+    "year": 2024,
+    "anom": -0.19
+   },
+   {
+    "season": "OND",
+    "year": 2024,
+    "anom": -0.29
+   },
+   {
+    "season": "NDJ",
+    "year": 2024,
+    "anom": -0.43
+   },
+   {
+    "season": "DJF",
+    "year": 2025,
+    "anom": -0.46
+   },
+   {
+    "season": "JFM",
+    "year": 2025,
+    "anom": -0.22
+   },
+   {
+    "season": "FMA",
+    "year": 2025,
+    "anom": -0.08
+   },
+   {
+    "season": "MAM",
+    "year": 2025,
+    "anom": 0.02
+   },
+   {
+    "season": "AMJ",
+    "year": 2025,
+    "anom": -0.04
+   },
+   {
+    "season": "MJJ",
+    "year": 2025,
+    "anom": -0.02
+   },
+   {
+    "season": "JJA",
+    "year": 2025,
+    "anom": -0.11
+   },
+   {
+    "season": "JAS",
+    "year": 2025,
+    "anom": -0.26
+   },
+   {
+    "season": "ASO",
+    "year": 2025,
+    "anom": -0.43
+   },
+   {
+    "season": "SON",
+    "year": 2025,
+    "anom": -0.57
+   },
+   {
+    "season": "OND",
+    "year": 2025,
+    "anom": -0.61
+   },
+   {
+    "season": "NDJ",
+    "year": 2025,
+    "anom": -0.6
+   },
+   {
+    "season": "DJF",
+    "year": 2026,
+    "anom": -0.39
+   },
+   {
+    "season": "JFM",
+    "year": 2026,
+    "anom": -0.21
+   },
+   {
+    "season": "FMA",
+    "year": 2026,
+    "anom": 0.11
+   },
+   {
+    "season": "MAM",
+    "year": 2026,
+    "anom": 0.46
+   },
+   {
+    "season": "AMJ",
+    "year": 2026,
+    "anom": 0.95
+   },
+   {
+    "season": "MJJ",
+    "year": 2026,
+    "anom": 1.39
+   }
+  ]
+ },
+ "sources": {
+  "roni": "https://www.cpc.ncep.noaa.gov/data/indices/RONI.ascii.txt",
+  "oni": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
+ }
+}

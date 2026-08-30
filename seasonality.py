@@ -27,6 +27,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent
 SEASONS_PATH = ROOT / "seasons.json"
+CROP_CALENDAR_PATH = ROOT / "crop_calendar.json"
 
 # How stale (in days) current data may be before we treat the region
 # as "not reporting". USDA movement is weekly, so 14 days tolerates
@@ -42,6 +43,26 @@ def load_seasons(path: Path = SEASONS_PATH) -> dict:
     """Load seasons.json and index regions by key."""
     cfg = json.loads(path.read_text(encoding="utf-8"))
     return {r["key"]: r for r in cfg["regions"]}
+
+
+def load_crop_calendar(path: Path = CROP_CALENDAR_PATH) -> dict:
+    """Load crop_calendar.json into {region_key: {stage: [windows]}}.
+
+    Resolves 'applies_to' so sibling regions that share a template calendar
+    (e.g. pe_lambayeque reusing pe_canete's) each get their own entry. Returns
+    {} if the file is absent so callers degrade to no stage label rather than
+    crashing.
+    """
+    if not path.exists():
+        return {}
+    cfg = json.loads(path.read_text(encoding="utf-8"))
+    out = {}
+    for origin in cfg.get("origins", []):
+        stages = {s: origin[s] for s in ("harvest", "flowering", "sizing")
+                  if s in origin}
+        for key in [origin["key"], *origin.get("applies_to", [])]:
+            out[key] = stages
+    return out
 
 
 def _md_to_date(md: str, year: int) -> date:
@@ -75,6 +96,29 @@ def in_window_with_grace(region: dict, on: date) -> bool:
     if start <= end:
         return start <= on <= end
     return on >= start or on <= end
+
+
+def _in_any_window(windows: list, on: date) -> bool:
+    """True if `on` is inside any of a list of {start,end} MM-DD windows.
+    Reuses in_window's year-wrap handling per sub-window."""
+    return any(in_window({"window": w}, on) for w in windows)
+
+
+def current_stage(stages: dict, on: date) -> str | None:
+    """Which phenological stage a region is in on `on`, or None.
+
+    stages: {"harvest": [windows], "flowering": [...], "sizing": [...]}.
+    Colombia's two-crop cycle means stages overlap (most months fall inside
+    something — which is why Colombia ships nearly year-round). When they
+    overlap we report the most decision-relevant one: flowering first, because
+    that is where an ENSO peak sets the *following* crop; then sizing; then
+    harvest. This labels the weather card so a rainfall number reads as a reason
+    to care, e.g. "Cañete — flowering" in October.
+    """
+    for stage in ("flowering", "sizing", "harvest"):
+        if _in_any_window(stages.get(stage, []), on):
+            return stage
+    return None
 
 
 def classify(region_key: str, last_reported: str | None,
@@ -189,5 +233,26 @@ if __name__ == "__main__":
         ok = got == want
         failures += (not ok)
         print(f"{'PASS' if ok else 'FAIL'}  {desc}: {got}" + ("" if ok else f" (wanted {want})"))
-    print(f"\n{len(checks) - failures}/{len(checks)} checks passed")
+
+    # crop_calendar / phenological-stage checks (southern + northern hemisphere)
+    cal = load_crop_calendar()
+    stage_checks = [
+        # (desc, region_key, today, expected_stage)
+        ("Cañete flowering in Oct", "pe_canete", date(2026, 10, 15), "flowering"),
+        ("Cañete harvest in June", "pe_canete", date(2026, 6, 15), "harvest"),
+        ("Cañete sizing in Dec", "pe_canete", date(2026, 12, 15), "sizing"),
+        ("Lambayeque inherits Cañete (Oct)", "pe_lambayeque", date(2026, 10, 15), "flowering"),
+        ("Sonsón flowering in Jan (overlap)", "co_sonson", date(2026, 1, 20), "flowering"),
+        ("Sonsón sizing in June (overlap)", "co_sonson", date(2026, 6, 15), "sizing"),
+        ("Eje Cafetero inherits Sonsón (Jan)", "co_eje_cafetero", date(2026, 1, 20), "flowering"),
+        ("Michoacán has no calendar", "michoacan", date(2026, 6, 15), None),
+    ]
+    for desc, key, today, want in stage_checks:
+        got = current_stage(cal.get(key, {}), today)
+        ok = got == want
+        failures += (not ok)
+        print(f"{'PASS' if ok else 'FAIL'}  {desc}: {got}" + ("" if ok else f" (wanted {want})"))
+
+    total = len(checks) + len(stage_checks)
+    print(f"\n{total - failures}/{total} checks passed")
     raise SystemExit(1 if failures else 0)

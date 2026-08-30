@@ -1,12 +1,16 @@
 {
- "generated_at": "2026-08-25T20:23:56Z",
+ "generated_at": "2026-08-30T04:05:07Z",
  "week": {
   "end": "2026-08-22",
   "label": "Week ending Aug 22, 2026"
  },
- "headline": "Mexico crossing volume down 37% week-over-week; Texas-crossing Hass 48s FOB softened 22% at $32.25; LA/Dallas freight soft/soft; diesel up 0.20 at $5.65/gal.",
+ "headline": "Mexico crossing volume down 36.6% week-over-week; Texas-crossing Hass 48s FOB softened 21.8% at $32.25; LA/Dallas freight soft/soft; diesel up 0.20 at $5.65/gal; Eje Cafetero weather bears watching.",
  "signals": [
-  "Total arrivals are running 20% below the 4-year seasonal average (37.2M lbs this week)."
+  "El Ni\u00f1o strengthening \u2014 RONI +0.98 (MJJ 2026), up from -0.44 three seasons ago; the 3-month seasonal mean trails a fast-developing event, so the current state is likely stronger than the season label. Watch Sons\u00f3n, Antioquia \u2014 drought stress on the main crop now sizing and being harvested; Ca\u00f1ete Valley / \u00c1ncash \u2014 warmer winter may suppress flowering that sets the 2027 crop.",
+  "Total arrivals are running 20% below the 4-year seasonal average (37.2M lbs this week).",
+  "Mexico crossings dropped 37% week-over-week \u2014 an unusually large move for this point in the season (100th percentile of same-week history).",
+  "Texas-crossing Hass 48s FOB dropped 22% week-over-week \u2014 an unusually large move for this point in the season (95th percentile of same-week history).",
+  "Freight rates shown are 11 days old \u2014 the USDA truck rate report has not refreshed; treat lane costs as indicative."
  ],
  "kpis": [
   {
@@ -43,35 +47,42 @@
  "feeds": {
   "supply": {
    "fetched_at": "2026-08-25T20:23:50+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 4,
    "stale": false,
    "fetch_error": null
   },
   "pricing": {
    "fetched_at": "2026-08-25T20:23:50+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 4,
    "stale": false,
    "fetch_error": null
   },
   "freight": {
    "fetched_at": "2026-08-25T20:23:51+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 4,
    "stale": false,
    "fetch_error": null
   },
   "diesel": {
    "fetched_at": "2026-08-25T20:23:53+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 4,
    "stale": false,
    "fetch_error": null
   },
   "weather": {
-   "fetched_at": "2026-08-25T20:23:56+00:00",
+   "fetched_at": "2026-08-29T21:41:15+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
-  "_stale_after_days": 8
+  "_stale_after_days": 8,
+  "enso": {
+   "fetched_at": "2026-08-30T03:55:12+00:00",
+   "fetch_age_days": 0,
+   "stale": false,
+   "fetch_error": null,
+   "stale_after_days": 45
+  }
  },
  "supply": {
   "week_end": "2026-08-22",
@@ -971,7 +982,7 @@
     "status": "Adequate"
    }
   ],
-  "stale_days": 7,
+  "stale_days": 11,
   "fetch_error": null,
   "stale_after_days": 10
  },
@@ -1427,7 +1438,14 @@
   }
  },
  "weather": {
-  "overall_flag": "normal",
+  "overall_flag": "watch",
+  "coverage": {
+   "CO": "2/2",
+   "MX": "2/2",
+   "PE": "4/4",
+   "US": "2/2"
+  },
+  "dark_groups": [],
   "regions": [
    {
     "key": "michoacan",
@@ -1436,24 +1454,25 @@
     "role": "Primary Mexican Hass source (~80% of exports)",
     "past7": {
      "days": 7,
-     "rain_mm": 19.3,
-     "tmax_avg_c": 26.0,
-     "tmin_avg_c": 14.7,
-     "tmax_peak_c": 27.4,
+     "rain_mm": 16.8,
+     "tmax_avg_c": 25.3,
+     "tmin_avg_c": 15.2,
+     "tmax_peak_c": 27.7,
      "tmin_low_c": 13.9
     },
     "next14": {
      "days": 14,
-     "rain_mm": 51.6,
-     "tmax_avg_c": 24.1,
+     "rain_mm": 72.1,
+     "tmax_avg_c": 23.6,
      "tmin_avg_c": 13.4,
-     "tmax_peak_c": 25.2,
-     "tmin_low_c": 12.0
+     "tmax_peak_c": 24.8,
+     "tmin_low_c": 11.4
     },
     "source": "open-meteo",
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
-    "available": true
+    "available": true,
+    "stage": null
    },
    {
     "key": "jalisco",
@@ -1462,24 +1481,25 @@
     "role": "Second Mexican export state",
     "past7": {
      "days": 7,
-     "rain_mm": 28.4,
-     "tmax_avg_c": 26.3,
-     "tmin_avg_c": 16.2,
-     "tmax_peak_c": 28.1,
+     "rain_mm": 44.4,
+     "tmax_avg_c": 25.7,
+     "tmin_avg_c": 16.4,
+     "tmax_peak_c": 26.9,
      "tmin_low_c": 15.2
     },
     "next14": {
      "days": 14,
-     "rain_mm": 37.4,
-     "tmax_avg_c": 25.7,
+     "rain_mm": 53.7,
+     "tmax_avg_c": 24.9,
      "tmin_avg_c": 15.9,
-     "tmax_peak_c": 27.8,
-     "tmin_low_c": 13.7
+     "tmax_peak_c": 26.0,
+     "tmin_low_c": 15.1
     },
     "source": "open-meteo",
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
-    "available": true
+    "available": true,
+    "stage": null
    },
    {
     "key": "ventura",
@@ -1488,25 +1508,26 @@
     "role": "California coastal belt",
     "past7": {
      "days": 7,
-     "rain_mm": 0,
-     "tmax_avg_c": 29.9,
-     "tmin_avg_c": 17.0,
-     "tmax_peak_c": 32.4,
-     "tmin_low_c": 15.8
+     "rain_mm": 0.7,
+     "tmax_avg_c": 32.0,
+     "tmin_avg_c": 18.7,
+     "tmax_peak_c": 33.4,
+     "tmin_low_c": 16.9
     },
     "next14": {
      "days": 14,
      "rain_mm": 0,
-     "tmax_avg_c": 28.9,
-     "tmin_avg_c": 18.7,
-     "tmax_peak_c": 35.2,
-     "tmin_low_c": 14.9
+     "tmax_avg_c": 30.8,
+     "tmin_avg_c": 20.0,
+     "tmax_peak_c": 35.5,
+     "tmin_low_c": 14.7
     },
     "source": "open-meteo",
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "available": true,
-    "nws_narrative": "This Afternoon: Sunny, with a high near 88. West southwest wind 5 to 10 mph."
+    "nws_narrative": "This Afternoon: Sunny, with a high near 90. West southwest wind around 10 mph.",
+    "stage": null
    },
    {
     "key": "san_diego",
@@ -1516,26 +1537,754 @@
     "past7": {
      "days": 7,
      "rain_mm": 0,
-     "tmax_avg_c": 34.6,
-     "tmin_avg_c": 18.6,
-     "tmax_peak_c": 38.0,
-     "tmin_low_c": 17.1
+     "tmax_avg_c": 35.6,
+     "tmin_avg_c": 20.2,
+     "tmax_peak_c": 38.1,
+     "tmin_low_c": 18.5
     },
     "next14": {
      "days": 14,
-     "rain_mm": 0,
-     "tmax_avg_c": 29.1,
-     "tmin_avg_c": 16.1,
-     "tmax_peak_c": 35.2,
-     "tmin_low_c": 11.3
+     "rain_mm": 0.1,
+     "tmax_avg_c": 30.8,
+     "tmin_avg_c": 18.0,
+     "tmax_peak_c": 35.4,
+     "tmin_low_c": 14.5
     },
     "source": "open-meteo",
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "available": true,
-    "nws_narrative": "This Afternoon: Sunny, with a high near 95. Southwest wind 10 to 15 mph, with gusts as high as 25 mph."
+    "nws_narrative": "This Afternoon: Sunny, with a high near 93. Southwest wind 10 to 15 mph, with gusts as high as 25 mph.",
+    "stage": null
+   },
+   {
+    "key": "co_sonson",
+    "name": "Sons\u00f3n, Antioquia",
+    "country": "CO",
+    "role": "Own 600ha + La Loma + main packhouse \u2014 highest weight",
+    "past7": {
+     "days": 7,
+     "rain_mm": 14.7,
+     "tmax_avg_c": 22.1,
+     "tmin_avg_c": 13.2,
+     "tmax_peak_c": 23.1,
+     "tmin_low_c": 12.7
+    },
+    "next14": {
+     "days": 14,
+     "rain_mm": 81.0,
+     "tmax_avg_c": 22.2,
+     "tmin_avg_c": 14.0,
+     "tmax_peak_c": 22.9,
+     "tmin_low_c": 13.3
+    },
+    "source": "open-meteo",
+    "flag": "normal",
+    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+    "available": true,
+    "stage": "flowering"
+   },
+   {
+    "key": "co_eje_cafetero",
+    "name": "Eje Cafetero (Manizales area)",
+    "country": "CO",
+    "role": "220 contract growers across Caldas/Quind\u00edo/Risaralda",
+    "past7": {
+     "days": 7,
+     "rain_mm": 75.8,
+     "tmax_avg_c": 22.1,
+     "tmin_avg_c": 13.9,
+     "tmax_peak_c": 23.1,
+     "tmin_low_c": 13.6
+    },
+    "next14": {
+     "days": 14,
+     "rain_mm": 279.8,
+     "tmax_avg_c": 21.2,
+     "tmin_avg_c": 13.6,
+     "tmax_peak_c": 23.3,
+     "tmin_low_c": 13.0
+    },
+    "source": "open-meteo",
+    "flag": "watch",
+    "note": "Heavy rain ahead (280 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+    "available": true,
+    "stage": "flowering"
+   },
+   {
+    "key": "pe_canete",
+    "name": "Ca\u00f1ete Valley, Lima",
+    "country": "PE",
+    "role": "Operational center, 370ac + packhouse",
+    "past7": {
+     "days": 7,
+     "rain_mm": 2.4,
+     "tmax_avg_c": 22.6,
+     "tmin_avg_c": 16.0,
+     "tmax_peak_c": 23.2,
+     "tmin_low_c": 15.3
+    },
+    "next14": {
+     "days": 14,
+     "rain_mm": 2.9,
+     "tmax_avg_c": 22.9,
+     "tmin_avg_c": 16.8,
+     "tmax_peak_c": 23.4,
+     "tmin_low_c": 16.0
+    },
+    "source": "open-meteo",
+    "flag": "normal",
+    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+    "available": true,
+    "stage": "flowering"
+   },
+   {
+    "key": "pe_lambayeque",
+    "name": "Lambayeque (Motupe/Olmos)",
+    "country": "PE",
+    "role": "Northern coast \u2014 the El Ni\u00f1o flood corridor",
+    "past7": {
+     "days": 7,
+     "rain_mm": 0.7,
+     "tmax_avg_c": 29.9,
+     "tmin_avg_c": 17.1,
+     "tmax_peak_c": 31.6,
+     "tmin_low_c": 16.5
+    },
+    "next14": {
+     "days": 14,
+     "rain_mm": 4.0,
+     "tmax_avg_c": 32.1,
+     "tmin_avg_c": 18.6,
+     "tmax_peak_c": 33.0,
+     "tmin_low_c": 17.7
+    },
+    "source": "open-meteo",
+    "flag": "normal",
+    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+    "available": true,
+    "stage": "flowering"
+   },
+   {
+    "key": "pe_ancash",
+    "name": "\u00c1ncash (Casma valley)",
+    "country": "PE",
+    "role": "Mid-to-large partner producers",
+    "past7": {
+     "days": 7,
+     "rain_mm": 0,
+     "tmax_avg_c": 24.8,
+     "tmin_avg_c": 18.1,
+     "tmax_peak_c": 25.6,
+     "tmin_low_c": 17.4
+    },
+    "next14": {
+     "days": 14,
+     "rain_mm": 0.1,
+     "tmax_avg_c": 26.0,
+     "tmin_avg_c": 19.8,
+     "tmax_peak_c": 26.6,
+     "tmin_low_c": 18.8
+    },
+    "source": "open-meteo",
+    "flag": "normal",
+    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+    "available": true,
+    "stage": "flowering"
+   },
+   {
+    "key": "pe_junin",
+    "name": "Monobamba, Jun\u00edn",
+    "country": "PE",
+    "role": "Cloud forest, Amazon-facing \u2014 different regime",
+    "past7": {
+     "days": 7,
+     "rain_mm": 7.9,
+     "tmax_avg_c": 24.4,
+     "tmin_avg_c": 14.7,
+     "tmax_peak_c": 26.2,
+     "tmin_low_c": 13.1
+    },
+    "next14": {
+     "days": 14,
+     "rain_mm": 32.4,
+     "tmax_avg_c": 25.3,
+     "tmin_avg_c": 14.9,
+     "tmax_peak_c": 27.0,
+     "tmin_low_c": 12.8
+    },
+    "source": "open-meteo",
+    "flag": "normal",
+    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+    "available": true,
+    "stage": null
    }
   ]
+ },
+ "enso": {
+  "available": true,
+  "primary": "roni",
+  "latest": {
+   "season": "MJJ",
+   "year": 2026,
+   "anom": 0.98,
+   "phase": "weak El Ni\u00f1o"
+  },
+  "roni": {
+   "latest": {
+    "season": "MJJ",
+    "year": 2026,
+    "anom": 0.98,
+    "phase": "weak El Ni\u00f1o"
+   },
+   "trend": "strengthening",
+   "three_seasons_ago": {
+    "season": "FMA",
+    "year": 2026,
+    "anom": -0.44
+   },
+   "delta3": 1.42,
+   "consecutive_seasons": 1,
+   "established_event": false,
+   "series": [
+    {
+     "season": "JJA",
+     "year": 2023,
+     "anom": 0.54
+    },
+    {
+     "season": "JAS",
+     "year": 2023,
+     "anom": 0.79
+    },
+    {
+     "season": "ASO",
+     "year": 2023,
+     "anom": 1.04
+    },
+    {
+     "season": "SON",
+     "year": 2023,
+     "anom": 1.3
+    },
+    {
+     "season": "OND",
+     "year": 2023,
+     "anom": 1.42
+    },
+    {
+     "season": "NDJ",
+     "year": 2023,
+     "anom": 1.4
+    },
+    {
+     "season": "DJF",
+     "year": 2024,
+     "anom": 1.13
+    },
+    {
+     "season": "JFM",
+     "year": 2024,
+     "anom": 0.78
+    },
+    {
+     "season": "FMA",
+     "year": 2024,
+     "anom": 0.42
+    },
+    {
+     "season": "MAM",
+     "year": 2024,
+     "anom": 0.04
+    },
+    {
+     "season": "AMJ",
+     "year": 2024,
+     "anom": -0.28
+    },
+    {
+     "season": "MJJ",
+     "year": 2024,
+     "anom": -0.45
+    },
+    {
+     "season": "JJA",
+     "year": 2024,
+     "anom": -0.49
+    },
+    {
+     "season": "JAS",
+     "year": 2024,
+     "anom": -0.56
+    },
+    {
+     "season": "ASO",
+     "year": 2024,
+     "anom": -0.67
+    },
+    {
+     "season": "SON",
+     "year": 2024,
+     "anom": -0.76
+    },
+    {
+     "season": "OND",
+     "year": 2024,
+     "anom": -0.88
+    },
+    {
+     "season": "NDJ",
+     "year": 2024,
+     "anom": -1.05
+    },
+    {
+     "season": "DJF",
+     "year": 2025,
+     "anom": -1.1
+    },
+    {
+     "season": "JFM",
+     "year": 2025,
+     "anom": -0.85
+    },
+    {
+     "season": "FMA",
+     "year": 2025,
+     "anom": -0.66
+    },
+    {
+     "season": "MAM",
+     "year": 2025,
+     "anom": -0.5
+    },
+    {
+     "season": "AMJ",
+     "year": 2025,
+     "anom": -0.48
+    },
+    {
+     "season": "MJJ",
+     "year": 2025,
+     "anom": -0.36
+    },
+    {
+     "season": "JJA",
+     "year": 2025,
+     "anom": -0.41
+    },
+    {
+     "season": "JAS",
+     "year": 2025,
+     "anom": -0.59
+    },
+    {
+     "season": "ASO",
+     "year": 2025,
+     "anom": -0.78
+    },
+    {
+     "season": "SON",
+     "year": 2025,
+     "anom": -0.93
+    },
+    {
+     "season": "OND",
+     "year": 2025,
+     "anom": -0.98
+    },
+    {
+     "season": "NDJ",
+     "year": 2025,
+     "anom": -1.04
+    },
+    {
+     "season": "DJF",
+     "year": 2026,
+     "anom": -0.91
+    },
+    {
+     "season": "JFM",
+     "year": 2026,
+     "anom": -0.76
+    },
+    {
+     "season": "FMA",
+     "year": 2026,
+     "anom": -0.44
+    },
+    {
+     "season": "MAM",
+     "year": 2026,
+     "anom": -0.04
+    },
+    {
+     "season": "AMJ",
+     "year": 2026,
+     "anom": 0.49
+    },
+    {
+     "season": "MJJ",
+     "year": 2026,
+     "anom": 0.98
+    }
+   ]
+  },
+  "oni": {
+   "latest": {
+    "season": "MJJ",
+    "year": 2026,
+    "anom": 1.39,
+    "phase": "moderate El Ni\u00f1o"
+   },
+   "trend": "strengthening",
+   "three_seasons_ago": {
+    "season": "FMA",
+    "year": 2026,
+    "anom": 0.11
+   },
+   "delta3": 1.28,
+   "consecutive_seasons": 2,
+   "established_event": false,
+   "series": [
+    {
+     "season": "JJA",
+     "year": 2023,
+     "anom": 1.0
+    },
+    {
+     "season": "JAS",
+     "year": 2023,
+     "anom": 1.25
+    },
+    {
+     "season": "ASO",
+     "year": 2023,
+     "anom": 1.5
+    },
+    {
+     "season": "SON",
+     "year": 2023,
+     "anom": 1.74
+    },
+    {
+     "season": "OND",
+     "year": 2023,
+     "anom": 1.9
+    },
+    {
+     "season": "NDJ",
+     "year": 2023,
+     "anom": 1.99
+    },
+    {
+     "season": "DJF",
+     "year": 2024,
+     "anom": 1.84
+    },
+    {
+     "season": "JFM",
+     "year": 2024,
+     "anom": 1.53
+    },
+    {
+     "season": "FMA",
+     "year": 2024,
+     "anom": 1.18
+    },
+    {
+     "season": "MAM",
+     "year": 2024,
+     "anom": 0.77
+    },
+    {
+     "season": "AMJ",
+     "year": 2024,
+     "anom": 0.43
+    },
+    {
+     "season": "MJJ",
+     "year": 2024,
+     "anom": 0.18
+    },
+    {
+     "season": "JJA",
+     "year": 2024,
+     "anom": 0.06
+    },
+    {
+     "season": "JAS",
+     "year": 2024,
+     "anom": -0.04
+    },
+    {
+     "season": "ASO",
+     "year": 2024,
+     "anom": -0.12
+    },
+    {
+     "season": "SON",
+     "year": 2024,
+     "anom": -0.19
+    },
+    {
+     "season": "OND",
+     "year": 2024,
+     "anom": -0.29
+    },
+    {
+     "season": "NDJ",
+     "year": 2024,
+     "anom": -0.43
+    },
+    {
+     "season": "DJF",
+     "year": 2025,
+     "anom": -0.46
+    },
+    {
+     "season": "JFM",
+     "year": 2025,
+     "anom": -0.22
+    },
+    {
+     "season": "FMA",
+     "year": 2025,
+     "anom": -0.08
+    },
+    {
+     "season": "MAM",
+     "year": 2025,
+     "anom": 0.02
+    },
+    {
+     "season": "AMJ",
+     "year": 2025,
+     "anom": -0.04
+    },
+    {
+     "season": "MJJ",
+     "year": 2025,
+     "anom": -0.02
+    },
+    {
+     "season": "JJA",
+     "year": 2025,
+     "anom": -0.11
+    },
+    {
+     "season": "JAS",
+     "year": 2025,
+     "anom": -0.26
+    },
+    {
+     "season": "ASO",
+     "year": 2025,
+     "anom": -0.43
+    },
+    {
+     "season": "SON",
+     "year": 2025,
+     "anom": -0.57
+    },
+    {
+     "season": "OND",
+     "year": 2025,
+     "anom": -0.61
+    },
+    {
+     "season": "NDJ",
+     "year": 2025,
+     "anom": -0.6
+    },
+    {
+     "season": "DJF",
+     "year": 2026,
+     "anom": -0.39
+    },
+    {
+     "season": "JFM",
+     "year": 2026,
+     "anom": -0.21
+    },
+    {
+     "season": "FMA",
+     "year": 2026,
+     "anom": 0.11
+    },
+    {
+     "season": "MAM",
+     "year": 2026,
+     "anom": 0.46
+    },
+    {
+     "season": "AMJ",
+     "year": 2026,
+     "anom": 0.95
+    },
+    {
+     "season": "MJJ",
+     "year": 2026,
+     "anom": 1.39
+    }
+   ]
+  },
+  "anom": 0.98,
+  "season": "MJJ 2026",
+  "phase_side": "El Ni\u00f1o",
+  "trend": "strengthening",
+  "delta3": 1.42,
+  "three_seasons_ago": {
+   "season": "FMA",
+   "year": 2026,
+   "anom": -0.44
+  },
+  "steep": true,
+  "established_event": false,
+  "consecutive_seasons": 1,
+  "phase_with_season": "weak El Ni\u00f1o (MJJ 2026)",
+  "headline": "El Ni\u00f1o strengthening \u2014 RONI +0.98 (MJJ 2026), up from -0.44 three seasons ago",
+  "lag_caveat": "the 3-month seasonal mean trails a fast-developing event, so the current state is likely stronger than the season label",
+  "signal_fire": true,
+  "signal_keys": [
+   "co_sonson",
+   "pe_canete"
+  ],
+  "origins": [
+   {
+    "key": "mx_michoacan",
+    "name": "Michoac\u00e1n / Jalisco",
+    "el_nino_effect": "drier",
+    "mechanism": "Suppressed summer monsoon; more pronounced mid-summer can\u00edcula during the Jun-Oct wet season.",
+    "impact": "Moisture stress during sizing; potential downward shift in the size curve.",
+    "signal_effect": "moisture stress during sizing, risk of a smaller size curve",
+    "confidence": "moderate",
+    "lag_months": [
+     1,
+     4
+    ],
+    "watch_window": "Jun-Oct",
+    "watch_months": {
+     "start": "06-01",
+     "end": "10-31"
+    },
+    "country": "MX",
+    "stage": null,
+    "in_watch": true,
+    "weather_dark": false
+   },
+   {
+    "key": "co_sonson",
+    "name": "Sons\u00f3n, Antioquia",
+    "el_nino_effect": "drier and warmer",
+    "mechanism": "Reduced Andean rainfall and elevated temperatures. At 2,475m, clear-sky dry spells also raise radiative frost risk and p\u00e1ramo fire risk.",
+    "impact": "Colombia's Sep-Jan main crop overlaps the forecast El Ni\u00f1o peak, so drought stress lands on fruit currently sizing and being harvested \u2014 not only on a future crop. The Dec-Mar dry signal then carries into sizing for the Apr-Jul traviesa.",
+    "signal_effect": "drought stress on the main crop now sizing and being harvested",
+    "confidence": "high on drought, moderate on frost",
+    "lag_months": [
+     1,
+     6
+    ],
+    "watch_window": "year-round, strongest Dec-Mar",
+    "watch_months": {
+     "start": "01-01",
+     "end": "12-31"
+    },
+    "country": "CO",
+    "stage": "flowering",
+    "in_watch": true,
+    "weather_dark": false
+   },
+   {
+    "key": "co_eje_cafetero",
+    "name": "Eje Cafetero / wider Antioquia",
+    "el_nino_effect": "drier and warmer",
+    "mechanism": "Same Andean drought signal at somewhat lower elevation.",
+    "impact": "Colombia's Sep-Jan main crop overlaps the forecast El Ni\u00f1o peak, so drought stress lands on fruit currently sizing and being harvested \u2014 not only on a future crop. The Dec-Mar dry signal then carries into sizing for the Apr-Jul traviesa.",
+    "signal_effect": "yield stress across the 220-grower contract base",
+    "confidence": "high",
+    "lag_months": [
+     1,
+     6
+    ],
+    "watch_window": "year-round, strongest Dec-Mar",
+    "watch_months": {
+     "start": "01-01",
+     "end": "12-31"
+    },
+    "country": "CO",
+    "stage": "flowering",
+    "in_watch": true,
+    "weather_dark": false
+   },
+   {
+    "key": "pe_lambayeque",
+    "name": "Lambayeque (northern coast)",
+    "el_nino_effect": "much wetter \u2014 flood risk",
+    "mechanism": "Strong Ni\u00f1o 1+2 warming drives extreme rainfall on the northern Peruvian coast. 1998 and 2017 produced severe flooding in Piura and Lambayeque.",
+    "impact": "Field access, root disease, and road/packhouse logistics disruption. Infrastructure risk more than yield risk.",
+    "signal_effect": "flood risk to fields, roads, and packhouses",
+    "confidence": "high",
+    "lag_months": [
+     4,
+     8
+    ],
+    "watch_window": "Jan-Mar",
+    "watch_months": {
+     "start": "01-01",
+     "end": "03-31"
+    },
+    "country": "PE",
+    "stage": "flowering",
+    "in_watch": false,
+    "weather_dark": false
+   },
+   {
+    "key": "pe_canete",
+    "name": "Ca\u00f1ete Valley / \u00c1ncash (central coast)",
+    "el_nino_effect": "warmer, limited rainfall change",
+    "mechanism": "Warm coastal winter reduces chill accumulation and suppresses flowering induction. Central coast sees far less El Ni\u00f1o rainfall than the north.",
+    "impact": "Reduced flowering carries into the March-September 2027 harvest. A very strong El Ni\u00f1o peaking OND 2026 sits directly on the Aug-Oct flowering window \u2014 the 2027 Peruvian crop is being set now, 7-13 months before it reaches arrivals.",
+    "signal_effect": "warmer winter may suppress flowering that sets the 2027 crop",
+    "confidence": "moderate-high",
+    "lag_months": [
+     7,
+     13
+    ],
+    "watch_window": "Aug-Oct flowering",
+    "watch_months": {
+     "start": "08-01",
+     "end": "10-31"
+    },
+    "commercially_significant": true,
+    "country": "PE",
+    "stage": "flowering",
+    "in_watch": true,
+    "weather_dark": false
+   },
+   {
+    "key": "pe_junin",
+    "name": "Monobamba, Jun\u00edn (cloud forest)",
+    "el_nino_effect": "drier",
+    "mechanism": "Amazon-facing eastern Andean slopes typically run drier during El Ni\u00f1o \u2014 opposite sign to the Peruvian coast.",
+    "impact": "Moisture stress in cooperative-sourced high-altitude fruit.",
+    "signal_effect": "moisture stress in high-altitude cooperative fruit",
+    "confidence": "low-moderate \u2014 Monobamba sits in a transition zone and the signal is less well established than the coastal one",
+    "lag_months": [
+     3,
+     9
+    ],
+    "watch_window": "Dec-Mar",
+    "watch_months": {
+     "start": "12-01",
+     "end": "03-31"
+    },
+    "country": "PE",
+    "stage": null,
+    "in_watch": false,
+    "weather_dark": false
+   }
+  ],
+  "fetched_at": "2026-08-30T03:55:12+00:00"
  },
  "meta": {
   "notes": [
@@ -1557,6 +2306,10 @@
    {
     "name": "NOAA/NWS + Open-Meteo",
     "url": "https://www.weather.gov/"
+   },
+   {
+    "name": "NOAA CPC ENSO indices (RONI/ONI)",
+    "url": "https://www.cpc.ncep.noaa.gov/data/indices/"
    }
   ]
  }

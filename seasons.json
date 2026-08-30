@@ -1,5 +1,5 @@
 {
-  "_comment": "Single source of truth for regional season windows. Dates are month-day (MM-DD); windows may wrap the new year. 'grace_weeks' = how many weeks past window edges data may still trickle in before a gap counts as unexpected. Edit this file at the March/September checkpoints — nothing else needs to change for a normal season transition.",
+  "_comment": "Single source of truth for regional season windows, meaning when fruit ARRIVES in the US market (used by the supply panel). NOT in-country harvest dates — for grower-side phenology (harvest/flowering/sizing on the weather panel) see crop_calendar.json. The peru/colombia entries here are FUTURE arrival-window placeholders and must not be overwritten with harvest dates. Dates are month-day (MM-DD); windows may wrap the new year. 'grace_weeks' = how many weeks past window edges data may still trickle in before a gap counts as unexpected. Edit this file at the March/September checkpoints — nothing else needs to change for a normal season transition.",
   "regions": [
     {
       "key": "mx",

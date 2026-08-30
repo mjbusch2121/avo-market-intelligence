@@ -482,6 +482,52 @@ function renderDiesel(data) {
   });
 }
 
+// Country order + labels for the weather panel. Near-term supply first
+// (Mexico, then California), then the forward-signal origins (Colombia, Peru).
+const WX_COUNTRY_ORDER = ["MX", "US", "CO", "PE"];
+const WX_COUNTRY_LABELS = { MX: "Mexico", US: "California", CO: "Colombia", PE: "Peru" };
+
+function weatherCard(r) {
+  const card = el("div", "wx-card");
+  const flag = r.flag === "unknown" ? "pending" : r.flag;
+  card.appendChild(
+    el(
+      "div",
+      "wx-head",
+      `<span class="wx-name">${r.name}</span><span class="badge ${r.flag}">${flag}</span>`,
+    ),
+  );
+  // Phenological stage (harvest/flowering/sizing) — the label that turns a
+  // rainfall number into a reason to care. Absent for Michoacán/California.
+  if (r.stage) card.appendChild(el("div", "wx-stage", r.stage));
+  card.appendChild(el("div", "wx-role", r.role));
+  if (r.available) {
+    const days = r.next14.days || 14;
+    const p7 = (k, unit) => (r.past7 ? r.past7[k] + unit : "—");
+    card.appendChild(
+      el(
+        "div",
+        "wx-stats",
+        `
+        <span class="k">past 7d rain</span><span class="k">next ${days}d rain</span>
+        <span>${p7("rain_mm", " mm")}</span><span>${r.next14.rain_mm} mm</span>
+        <span class="k">past 7d high</span><span class="k">next ${days}d peak</span>
+        <span>${p7("tmax_avg_c", "°C")}</span><span>${r.next14.tmax_peak_c}°C</span>`,
+      ),
+    );
+  }
+  card.appendChild(
+    el(
+      "div",
+      "wx-note",
+      r.nws_narrative
+        ? `${r.note} <br><span style="color:var(--muted)">NWS: ${r.nws_narrative}</span>`
+        : r.note,
+    ),
+  );
+  return card;
+}
+
 function renderWeather(data) {
   const w = data.weather;
   const grid = document.getElementById("weather");
@@ -495,42 +541,121 @@ function renderWeather(data) {
     );
     return;
   }
+
+  // Group cards by origin country. Every region stays visible year-round (no
+  // muting on harvest window — the flowering months are where the leading
+  // indicator lives). A whole country going dark shows a header badge.
+  const dark = new Set(w.dark_groups || []);
+  const cov = w.coverage || {};
+  const groups = {};
   w.regions.forEach((r) => {
-    const card = el("div", "wx-card");
-    const flag = r.flag === "unknown" ? "pending" : r.flag;
-    card.appendChild(
+    (groups[r.country] ||= []).push(r);
+  });
+  const ordered = [
+    ...WX_COUNTRY_ORDER.filter((c) => groups[c]),
+    ...Object.keys(groups).filter((c) => !WX_COUNTRY_ORDER.includes(c)),
+  ];
+
+  ordered.forEach((c) => {
+    const covTxt = cov[c] ? `<span class="wx-group-cov">${cov[c]}</span>` : "";
+    const darkBadge = dark.has(c)
+      ? `<span class="badge dark">no data this run</span>`
+      : "";
+    grid.appendChild(
       el(
         "div",
-        "wx-head",
-        `<span class="wx-name">${r.name}</span><span class="badge ${r.flag}">${flag}</span>`,
+        "wx-group-head",
+        `<span class="wx-group-name">${WX_COUNTRY_LABELS[c] || c}</span>${covTxt}${darkBadge}`,
       ),
     );
-    card.appendChild(el("div", "wx-role", r.role));
-    if (r.available) {
-      const days = r.next14.days || 14;
-      const p7 = (k, unit) => (r.past7 ? r.past7[k] + unit : "—");
-      card.appendChild(
-        el(
-          "div",
-          "wx-stats",
-          `
-        <span class="k">past 7d rain</span><span class="k">next ${days}d rain</span>
-        <span>${p7("rain_mm", " mm")}</span><span>${r.next14.rain_mm} mm</span>
-        <span class="k">past 7d high</span><span class="k">next ${days}d peak</span>
-        <span>${p7("tmax_avg_c", "°C")}</span><span>${r.next14.tmax_peak_c}°C</span>`,
-        ),
-      );
-    }
-    card.appendChild(
+    groups[c].forEach((r) => grid.appendChild(weatherCard(r)));
+  });
+}
+
+const ENSO_COUNTRY_LABELS = { MX: "Mexico", CO: "Colombia", PE: "Peru" };
+
+function renderEnso(data) {
+  const e = data.enso;
+  const head = document.getElementById("enso-head");
+  const origBox = document.getElementById("enso-origins");
+  if (!e || !e.available) {
+    if (head)
+      head.innerHTML = `<span class="panel-sub">ENSO data arrives with the next refresh.</span>`;
+    return;
+  }
+  const roni = e.roni, oni = e.oni;
+
+  // Header LEADS with trend + direction; the band label is secondary and always
+  // carries its season. Consecutive-season count distinguishes "warm anomaly"
+  // from an established event.
+  const established = e.established_event
+    ? `established event · ${e.consecutive_seasons} consecutive seasons`
+    : `${e.consecutive_seasons} consecutive season${e.consecutive_seasons === 1 ? "" : "s"} past ±0.5 — not yet an established event`;
+  const lag = e.lag_caveat
+    ? `<p class="enso-lag">⚠ ${e.lag_caveat}.</p>`
+    : "";
+  const oniTxt = oni?.latest
+    ? `ONI ${oni.latest.anom >= 0 ? "+" : ""}${oni.latest.anom.toFixed(2)} (${oni.latest.season} ${oni.latest.year}, ${oni.latest.phase})`
+    : "";
+  head.innerHTML = `
+    <p class="enso-headline">${e.headline}</p>
+    <p class="enso-sub"><span class="enso-band">${e.phase_with_season}</span> · ${established}</p>
+    <p class="enso-oni">RONI led (CPC's official basis); ${oniTxt} shown alongside.</p>
+    ${lag}`;
+
+  // Trend chart — RONI led, ONI alongside, reusing the diesel/supply chart look.
+  const labels = roni.series.map((p) => `${p.season} ${p.year}`);
+  new Chart(document.getElementById("ensoChart"), {
+    type: "line",
+    data: {
+      labels,
+      datasets: [
+        { label: "RONI", data: roni.series.map((p) => p.anom),
+          borderColor: C.flesh, borderWidth: 2.2, pointRadius: 0 },
+        { label: "ONI", data: (oni.series || []).map((p) => p.anom),
+          borderColor: C.muted, borderWidth: 1.3, pointRadius: 0, borderDash: [4, 3] },
+      ],
+    },
+    options: {
+      maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      scales: {
+        x: { grid: { display: false }, ticks: { maxTicksLimit: 6 } },
+        y: {
+          ticks: { callback: (v) => (v > 0 ? "+" : "") + v },
+          grid: {
+            // emphasise the ±0.5 event thresholds and zero line
+            color: (ctx) =>
+              [0, 0.5, -0.5].includes(ctx.tick.value) ? C.line : "transparent",
+          },
+        },
+      },
+      plugins: { legend: { labels: { boxWidth: 10, boxHeight: 10 } } },
+    },
+  });
+
+  // Per-origin teleconnection rows. Do NOT badge the region weather cards —
+  // this is the only place ENSO appears at origin level.
+  (e.origins || []).forEach((o) => {
+    const sig = o.commercially_significant ? " enso-key" : "";
+    const stage = o.stage ? `<span class="enso-stage">${o.stage}</span>` : "";
+    const dark = o.weather_dark
+      ? `<span class="enso-dark">no live ${ENSO_COUNTRY_LABELS[o.country] || o.country} weather this cycle</span>`
+      : "";
+    const lag = Array.isArray(o.lag_months)
+      ? `${o.lag_months[0]}–${o.lag_months[1]} mo lag`
+      : "";
+    origBox.appendChild(
       el(
         "div",
-        "wx-note",
-        r.nws_narrative
-          ? `${r.note} <br><span style="color:var(--muted)">NWS: ${r.nws_narrative}</span>`
-          : r.note,
+        "enso-origin" + sig,
+        `<div class="enso-origin-head">
+           <span class="enso-origin-name">${o.name}</span>${stage}${dark}
+         </div>
+         <div class="enso-origin-effect"><b>${o.el_nino_effect}</b> — ${o.impact}</div>
+         <div class="enso-origin-meta">confidence: ${o.confidence} · ${lag} · watch: ${o.watch_window}</div>`,
       ),
     );
-    grid.appendChild(card);
   });
 }
 
@@ -576,6 +701,7 @@ async function init() {
   renderFreight(data);
   renderDiesel(data);
   renderWeather(data);
+  renderEnso(data);
   renderFooter(data);
 }
 

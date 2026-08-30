@@ -1,5 +1,12 @@
 {
- "fetched_at": "2026-08-25T20:23:56+00:00",
+ "fetched_at": "2026-08-29T21:41:15+00:00",
+ "coverage": {
+  "CO": "2/2",
+  "MX": "2/2",
+  "PE": "4/4",
+  "US": "2/2"
+ },
+ "dark_groups": [],
  "regions": [
   {
    "key": "michoacan",
@@ -8,19 +15,19 @@
    "role": "Primary Mexican Hass source (~80% of exports)",
    "past7": {
     "days": 7,
-    "rain_mm": 19.3,
-    "tmax_avg_c": 26.0,
-    "tmin_avg_c": 14.7,
-    "tmax_peak_c": 27.4,
+    "rain_mm": 16.8,
+    "tmax_avg_c": 25.3,
+    "tmin_avg_c": 15.2,
+    "tmax_peak_c": 27.7,
     "tmin_low_c": 13.9
    },
    "next14": {
     "days": 14,
-    "rain_mm": 51.6,
-    "tmax_avg_c": 24.1,
+    "rain_mm": 72.1,
+    "tmax_avg_c": 23.6,
     "tmin_avg_c": 13.4,
-    "tmax_peak_c": 25.2,
-    "tmin_low_c": 12.0
+    "tmax_peak_c": 24.8,
+    "tmin_low_c": 11.4
    },
    "source": "open-meteo",
    "flag": "normal",
@@ -34,19 +41,19 @@
    "role": "Second Mexican export state",
    "past7": {
     "days": 7,
-    "rain_mm": 28.4,
-    "tmax_avg_c": 26.3,
-    "tmin_avg_c": 16.2,
-    "tmax_peak_c": 28.1,
+    "rain_mm": 44.4,
+    "tmax_avg_c": 25.7,
+    "tmin_avg_c": 16.4,
+    "tmax_peak_c": 26.9,
     "tmin_low_c": 15.2
    },
    "next14": {
     "days": 14,
-    "rain_mm": 37.4,
-    "tmax_avg_c": 25.7,
+    "rain_mm": 53.7,
+    "tmax_avg_c": 24.9,
     "tmin_avg_c": 15.9,
-    "tmax_peak_c": 27.8,
-    "tmin_low_c": 13.7
+    "tmax_peak_c": 26.0,
+    "tmin_low_c": 15.1
    },
    "source": "open-meteo",
    "flag": "normal",
@@ -60,25 +67,25 @@
    "role": "California coastal belt",
    "past7": {
     "days": 7,
-    "rain_mm": 0,
-    "tmax_avg_c": 29.9,
-    "tmin_avg_c": 17.0,
-    "tmax_peak_c": 32.4,
-    "tmin_low_c": 15.8
+    "rain_mm": 0.7,
+    "tmax_avg_c": 32.0,
+    "tmin_avg_c": 18.7,
+    "tmax_peak_c": 33.4,
+    "tmin_low_c": 16.9
    },
    "next14": {
     "days": 14,
     "rain_mm": 0,
-    "tmax_avg_c": 28.9,
-    "tmin_avg_c": 18.7,
-    "tmax_peak_c": 35.2,
-    "tmin_low_c": 14.9
+    "tmax_avg_c": 30.8,
+    "tmin_avg_c": 20.0,
+    "tmax_peak_c": 35.5,
+    "tmin_low_c": 14.7
    },
    "source": "open-meteo",
    "flag": "normal",
    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
    "available": true,
-   "nws_narrative": "This Afternoon: Sunny, with a high near 88. West southwest wind 5 to 10 mph."
+   "nws_narrative": "This Afternoon: Sunny, with a high near 90. West southwest wind around 10 mph."
   },
   {
    "key": "san_diego",
@@ -88,24 +95,180 @@
    "past7": {
     "days": 7,
     "rain_mm": 0,
-    "tmax_avg_c": 34.6,
-    "tmin_avg_c": 18.6,
-    "tmax_peak_c": 38.0,
-    "tmin_low_c": 17.1
+    "tmax_avg_c": 35.6,
+    "tmin_avg_c": 20.2,
+    "tmax_peak_c": 38.1,
+    "tmin_low_c": 18.5
    },
    "next14": {
     "days": 14,
-    "rain_mm": 0,
-    "tmax_avg_c": 29.1,
-    "tmin_avg_c": 16.1,
-    "tmax_peak_c": 35.2,
-    "tmin_low_c": 11.3
+    "rain_mm": 0.1,
+    "tmax_avg_c": 30.8,
+    "tmin_avg_c": 18.0,
+    "tmax_peak_c": 35.4,
+    "tmin_low_c": 14.5
    },
    "source": "open-meteo",
    "flag": "normal",
    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
    "available": true,
-   "nws_narrative": "This Afternoon: Sunny, with a high near 95. Southwest wind 10 to 15 mph, with gusts as high as 25 mph."
+   "nws_narrative": "This Afternoon: Sunny, with a high near 93. Southwest wind 10 to 15 mph, with gusts as high as 25 mph."
+  },
+  {
+   "key": "co_sonson",
+   "name": "Sons\u00f3n, Antioquia",
+   "country": "CO",
+   "role": "Own 600ha + La Loma + main packhouse \u2014 highest weight",
+   "past7": {
+    "days": 7,
+    "rain_mm": 14.7,
+    "tmax_avg_c": 22.1,
+    "tmin_avg_c": 13.2,
+    "tmax_peak_c": 23.1,
+    "tmin_low_c": 12.7
+   },
+   "next14": {
+    "days": 14,
+    "rain_mm": 81.0,
+    "tmax_avg_c": 22.2,
+    "tmin_avg_c": 14.0,
+    "tmax_peak_c": 22.9,
+    "tmin_low_c": 13.3
+   },
+   "source": "open-meteo",
+   "flag": "normal",
+   "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+   "available": true
+  },
+  {
+   "key": "co_eje_cafetero",
+   "name": "Eje Cafetero (Manizales area)",
+   "country": "CO",
+   "role": "220 contract growers across Caldas/Quind\u00edo/Risaralda",
+   "past7": {
+    "days": 7,
+    "rain_mm": 75.8,
+    "tmax_avg_c": 22.1,
+    "tmin_avg_c": 13.9,
+    "tmax_peak_c": 23.1,
+    "tmin_low_c": 13.6
+   },
+   "next14": {
+    "days": 14,
+    "rain_mm": 279.8,
+    "tmax_avg_c": 21.2,
+    "tmin_avg_c": 13.6,
+    "tmax_peak_c": 23.3,
+    "tmin_low_c": 13.0
+   },
+   "source": "open-meteo",
+   "flag": "watch",
+   "note": "Heavy rain ahead (280 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+   "available": true
+  },
+  {
+   "key": "pe_canete",
+   "name": "Ca\u00f1ete Valley, Lima",
+   "country": "PE",
+   "role": "Operational center, 370ac + packhouse",
+   "past7": {
+    "days": 7,
+    "rain_mm": 2.4,
+    "tmax_avg_c": 22.6,
+    "tmin_avg_c": 16.0,
+    "tmax_peak_c": 23.2,
+    "tmin_low_c": 15.3
+   },
+   "next14": {
+    "days": 14,
+    "rain_mm": 2.9,
+    "tmax_avg_c": 22.9,
+    "tmin_avg_c": 16.8,
+    "tmax_peak_c": 23.4,
+    "tmin_low_c": 16.0
+   },
+   "source": "open-meteo",
+   "flag": "normal",
+   "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+   "available": true
+  },
+  {
+   "key": "pe_lambayeque",
+   "name": "Lambayeque (Motupe/Olmos)",
+   "country": "PE",
+   "role": "Northern coast \u2014 the El Ni\u00f1o flood corridor",
+   "past7": {
+    "days": 7,
+    "rain_mm": 0.7,
+    "tmax_avg_c": 29.9,
+    "tmin_avg_c": 17.1,
+    "tmax_peak_c": 31.6,
+    "tmin_low_c": 16.5
+   },
+   "next14": {
+    "days": 14,
+    "rain_mm": 4.0,
+    "tmax_avg_c": 32.1,
+    "tmin_avg_c": 18.6,
+    "tmax_peak_c": 33.0,
+    "tmin_low_c": 17.7
+   },
+   "source": "open-meteo",
+   "flag": "normal",
+   "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+   "available": true
+  },
+  {
+   "key": "pe_ancash",
+   "name": "\u00c1ncash (Casma valley)",
+   "country": "PE",
+   "role": "Mid-to-large partner producers",
+   "past7": {
+    "days": 7,
+    "rain_mm": 0,
+    "tmax_avg_c": 24.8,
+    "tmin_avg_c": 18.1,
+    "tmax_peak_c": 25.6,
+    "tmin_low_c": 17.4
+   },
+   "next14": {
+    "days": 14,
+    "rain_mm": 0.1,
+    "tmax_avg_c": 26.0,
+    "tmin_avg_c": 19.8,
+    "tmax_peak_c": 26.6,
+    "tmin_low_c": 18.8
+   },
+   "source": "open-meteo",
+   "flag": "normal",
+   "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+   "available": true
+  },
+  {
+   "key": "pe_junin",
+   "name": "Monobamba, Jun\u00edn",
+   "country": "PE",
+   "role": "Cloud forest, Amazon-facing \u2014 different regime",
+   "past7": {
+    "days": 7,
+    "rain_mm": 7.9,
+    "tmax_avg_c": 24.4,
+    "tmin_avg_c": 14.7,
+    "tmax_peak_c": 26.2,
+    "tmin_low_c": 13.1
+   },
+   "next14": {
+    "days": 14,
+    "rain_mm": 32.4,
+    "tmax_avg_c": 25.3,
+    "tmin_avg_c": 14.9,
+    "tmax_peak_c": 27.0,
+    "tmin_low_c": 12.8
+   },
+   "source": "open-meteo",
+   "flag": "normal",
+   "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+   "available": true
   }
  ]
 }
