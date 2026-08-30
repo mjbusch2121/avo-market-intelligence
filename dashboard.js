@@ -556,19 +556,27 @@ function renderWeather(data) {
     ...Object.keys(groups).filter((c) => !WX_COUNTRY_ORDER.includes(c)),
   ];
 
+  // Each group is its own block: a heading + its own card grid. Per-group grids
+  // are what let auto-fit collapse empty tracks so two-region groups (Mexico,
+  // California, Colombia) get wide cards instead of blank slots — a single
+  // shared grid can't, because Peru's four cards keep every track occupied.
   ordered.forEach((c) => {
     const covTxt = cov[c] ? `<span class="wx-group-cov">${cov[c]}</span>` : "";
     const darkBadge = dark.has(c)
       ? `<span class="badge dark">no data this run</span>`
       : "";
-    grid.appendChild(
+    const group = el("div", "wx-group");
+    group.appendChild(
       el(
         "div",
         "wx-group-head",
         `<span class="wx-group-name">${WX_COUNTRY_LABELS[c] || c}</span>${covTxt}${darkBadge}`,
       ),
     );
-    groups[c].forEach((r) => grid.appendChild(weatherCard(r)));
+    const cards = el("div", "wx-group-cards");
+    groups[c].forEach((r) => cards.appendChild(weatherCard(r)));
+    group.appendChild(cards);
+    grid.appendChild(group);
   });
 }
 
@@ -597,11 +605,14 @@ function renderEnso(data) {
   const oniTxt = oni?.latest
     ? `ONI ${oni.latest.anom >= 0 ? "+" : ""}${oni.latest.anom.toFixed(2)} (${oni.latest.season} ${oni.latest.year}, ${oni.latest.phase})`
     : "";
+  const fwdNote = e.forward_note
+    ? `<p class="enso-forward-note">◆ ${e.forward_note}</p>`
+    : "";
   head.innerHTML = `
     <p class="enso-headline">${e.headline}</p>
     <p class="enso-sub"><span class="enso-band">${e.phase_with_season}</span> · ${established}</p>
     <p class="enso-oni">RONI led (CPC's official basis); ${oniTxt} shown alongside.</p>
-    ${lag}`;
+    ${lag}${fwdNote}`;
 
   // Trend chart — RONI led, ONI alongside, reusing the diesel/supply chart look.
   const labels = roni.series.map((p) => `${p.season} ${p.year}`);
@@ -642,9 +653,21 @@ function renderEnso(data) {
     const dark = o.weather_dark
       ? `<span class="enso-dark">no live ${ENSO_COUNTRY_LABELS[o.country] || o.country} weather this cycle</span>`
       : "";
-    const lag = Array.isArray(o.lag_months)
-      ? `${o.lag_months[0]}–${o.lag_months[1]} mo lag`
-      : "";
+    // Dual-pathway origins (Michoacán) show each pathway; single-pathway origins
+    // show one effect line. Lag lives on the pathway row when pathways exist.
+    const effectHtml = Array.isArray(o.pathways)
+      ? o.pathways
+          .map(
+            (p) =>
+              `<div class="enso-pathway"><span class="enso-ptype">${p.type === "forward" ? "forward" : "near-term"} · ${p.lag_months[0]}–${p.lag_months[1]} mo</span> ${p.impact}</div>`,
+          )
+          .join("")
+      : `<div class="enso-origin-effect"><b>${o.el_nino_effect}</b> — ${o.impact}</div>`;
+    const tier = o.supply_tier ? `${o.supply_tier} origin · ` : "";
+    const lag =
+      !Array.isArray(o.pathways) && Array.isArray(o.lag_months)
+        ? ` · ${o.lag_months[0]}–${o.lag_months[1]} mo lag`
+        : "";
     origBox.appendChild(
       el(
         "div",
@@ -652,8 +675,8 @@ function renderEnso(data) {
         `<div class="enso-origin-head">
            <span class="enso-origin-name">${o.name}</span>${stage}${dark}
          </div>
-         <div class="enso-origin-effect"><b>${o.el_nino_effect}</b> — ${o.impact}</div>
-         <div class="enso-origin-meta">confidence: ${o.confidence} · ${lag} · watch: ${o.watch_window}</div>`,
+         ${effectHtml}
+         <div class="enso-origin-meta">${tier}confidence: ${o.confidence}${lag} · watch: ${o.watch_window}</div>`,
       ),
     );
   });

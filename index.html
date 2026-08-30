@@ -19,10 +19,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Spline+Sans+Mono:wght@400;600&family=Spline+Sans:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=20260830">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥑</text></svg>">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
-<script src="dashboard.js" defer></script>
+<script src="dashboard.js?v=20260830" defer></script>
 </head>
 <body>
 
@@ -97,29 +97,16 @@
     <div class="availability" id="availability"></div>
   </section>
 
-  <div class="duo">
-    <section class="panel" id="diesel-panel">
-      <div class="panel-head">
-        <div>
-          <p class="eyebrow">EIA · Weekly retail diesel</p>
-          <h2>Diesel context</h2>
-        </div>
+  <section class="panel" id="diesel-panel">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">EIA · Weekly retail diesel</p>
+        <h2>Diesel context</h2>
       </div>
-      <div class="chart-box"><canvas id="dieselChart" role="img" aria-label="Diesel price trend by region"></canvas></div>
-      <div class="diesel-latest" id="diesel-latest"></div>
-    </section>
-
-    <section class="panel" id="weather-panel">
-      <div class="panel-head">
-        <div>
-          <p class="eyebrow">NOAA/NWS + Open-Meteo · Outlook</p>
-          <h2>Growing-region weather</h2>
-        </div>
-        <p class="panel-sub">A leading indicator: what happens in the orchards now shows up in arrivals in 2–4 weeks</p>
-      </div>
-      <div class="weather-grid" id="weather"></div>
-    </section>
-  </div>
+    </div>
+    <div class="chart-box"><canvas id="dieselChart" role="img" aria-label="Diesel price trend by region"></canvas></div>
+    <div class="diesel-latest" id="diesel-latest"></div>
+  </section>
 
   <section class="panel" id="enso-panel">
     <div class="panel-head">
@@ -134,6 +121,17 @@
       <div class="chart-box"><canvas id="ensoChart" role="img" aria-label="RONI and ONI ENSO index trend"></canvas></div>
       <div class="enso-origins" id="enso-origins"></div>
     </div>
+  </section>
+
+  <section class="panel" id="weather-panel">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">NOAA/NWS + Open-Meteo · Outlook</p>
+        <h2>Growing-region weather</h2>
+      </div>
+      <p class="panel-sub">A leading indicator: what happens in the orchards now shows up in arrivals in 2–4 weeks</p>
+    </div>
+    <div class="weather-grid" id="weather"></div>
   </section>
 
 </main>

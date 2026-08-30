@@ -513,23 +513,74 @@ def _confidence_rank(conf: str) -> float:
     return 0.0
 
 
-def _enso_rank(origins: list) -> list:
-    """Amendment 5: prefer origins whose current stage intersects their ENSO
-    watch window; dedupe by country (so two Colombia entries don't crowd out
-    Peru), sort by confidence, cap at two. If none intersect — e.g. because the
-    only in-window origin (Michoacán) is unlabelled and has no stage — fall back
-    to the single highest-confidence origin so the signal never goes silent."""
-    candidates = [o for o in origins if o.get("stage") and o.get("in_watch")]
-    best = {}
-    for o in candidates:
-        r = _confidence_rank(o["confidence"])
-        c = o["country"]
-        if c not in best or r > best[c][0]:
-            best[c] = (r, o)
-    ranked = [o for _, o in sorted(best.values(), key=lambda t: -t[0])]
-    if ranked:
-        return ranked[:2]
-    return [max(origins, key=lambda o: _confidence_rank(o["confidence"]))] if origins else []
+TIER_RANK = {"primary": 3, "secondary": 2, "tertiary": 1}
+
+
+def _pathways_of(o: dict) -> list:
+    """Each (type, pathway) an origin exposes. Origins with a 'pathways' array
+    carry them explicitly; single-pathway origins synthesise one from their
+    top-level lag_months (near_term if lag starts <6 months, else forward)."""
+    if o.get("pathways"):
+        out = []
+        for p in o["pathways"]:
+            lm = p.get("lag_months") or [0, 0]
+            ptype = p.get("type") or ("forward" if lm[0] >= 6 else "near_term")
+            out.append((ptype, p))
+        return out
+    lm = o.get("lag_months") or [0, 0]
+    ptype = "forward" if lm[0] >= 6 else "near_term"
+    return [(ptype, {"type": ptype, "lag_months": lm,
+                     "mechanism": o.get("mechanism"), "impact": o.get("impact"),
+                     "signal_effect": o.get("signal_effect")})]
+
+
+def _enso_slots(origins: list) -> dict:
+    """Amendment 5 (revised): one near-term slot and one forward slot, each the
+    top origin exposing that pathway. Within a slot rank by
+    (stage intersects watch window, supply tier, confidence), dedupe by country.
+    Slots are independent — an empty slot is left empty rather than backfilled,
+    and one origin (Michoacán) may legitimately hold both via its two pathways."""
+    def sort_key(o):
+        return (1 if (o.get("stage") and o.get("in_watch")) else 0,
+                TIER_RANK.get(o.get("supply_tier"), 0),
+                _confidence_rank(o.get("confidence")))
+
+    def lag0(p):
+        lm = p.get("lag_months") or [999]
+        return lm[0]
+
+    def pick(cands):
+        # One pathway per country: rank first by the origin (stage/tier/confidence),
+        # then, when the same origin exposes several pathways in this slot, keep the
+        # nearer-lag one (Colombia's Traviesa 7-12 surfaces before Principal 13-18).
+        best = {}
+        for o, p in cands:
+            k = o["country"]
+            cand_key = (sort_key(o), -lag0(p))
+            if k not in best or cand_key > best[k][1]:
+                best[k] = ((o, p), cand_key)
+        ranked = sorted(best.values(), key=lambda t: t[1], reverse=True)
+        return ranked[0][0] if ranked else None
+
+    near, fwd = [], []
+    for o in origins:
+        for ptype, p in _pathways_of(o):
+            (near if ptype == "near_term" else fwd).append((o, p))
+    return {"near_term": pick(near), "forward": pick(fwd)}
+
+
+def _enso_slot_dict(pick: tuple) -> dict | None:
+    """Flatten a (origin, pathway) pick into the display/signal fields."""
+    if not pick:
+        return None
+    o, p = pick
+    return {
+        "key": o["key"], "name": o["name"], "country": o["country"],
+        "weather_dark": o.get("weather_dark", False),
+        "supply_tier": o.get("supply_tier"),
+        "signal_effect": p.get("signal_effect") or o.get("signal_effect") or "",
+        "lag_months": p.get("lag_months"),
+    }
 
 
 def build_enso(enso_raw: dict, response: dict, weather: dict) -> dict:
@@ -573,7 +624,29 @@ def build_enso(enso_raw: dict, response: dict, weather: dict) -> dict:
         origins.append({**o, "country": country, "stage": stage,
                         "in_watch": in_watch, "weather_dark": country in dark})
 
-    ranked = _enso_rank(origins)
+    slots = _enso_slots(origins)
+    near_term = _enso_slot_dict(slots["near_term"])
+    forward = _enso_slot_dict(slots["forward"])
+
+    # The story this layer now tells: more than one of the largest origins is
+    # setting NEXT season's crop during the event, right now. State it plainly
+    # rather than leaving it implicit in a lag number.
+    fwd_exposed, seen_countries = [], set()
+    for o in origins:
+        if o.get("stage") and o.get("in_watch") and \
+                o["country"] not in seen_countries and \
+                any(t == "forward" for t, _ in _pathways_of(o)):
+            seen_countries.add(o["country"])   # one name per country, not per region
+            # Trim sibling regions (" / "), parentheticals, and the ", Antioquia"
+            # style qualifier so a comma inside one name can't read as a list item.
+            short = o["name"].split(" / ")[0].split(" (")[0].split(",")[0].strip()
+            fwd_exposed.append(short)
+    forward_note = None
+    if side == "El Niño" and len(fwd_exposed) >= 2:
+        n = len(fwd_exposed)
+        lead = "Both" if n == 2 else ("All three" if n == 3 else f"All {n}")
+        forward_note = (f"{lead} of the largest origins are setting next season's "
+                        f"crop into the forecast peak: {', '.join(fwd_exposed)}.")
     return {
         "available": True,
         "primary": "roni",
@@ -593,7 +666,9 @@ def build_enso(enso_raw: dict, response: dict, weather: dict) -> dict:
         "headline": headline,                                           # #2
         "lag_caveat": lag_caveat,                                       # #3
         "signal_fire": fire,
-        "signal_keys": [o["key"] for o in ranked],
+        "near_term": near_term,   # ranked near-term slot (or None)
+        "forward": forward,       # ranked forward slot (or None)
+        "forward_note": forward_note,
         "origins": origins,
         "fetched_at": enso_raw.get("fetched_at"),
     }
@@ -920,26 +995,25 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
             sig.append(f"{r['name']}: {r['note']}")
 
     # 8. ENSO — seasonal-to-annual forward signal. Leads with trend/direction
-    # (not the band, which understates a fast ramp), names the ranked affected
-    # origins with their specific effect, and caveats any origin whose live
-    # weather is currently dark. One bullet so it doesn't flood the box.
+    # (not the band, which understates a fast ramp), then a near-term slot and a
+    # forward slot that answer different questions (fruit on the tree now vs the
+    # crop being set for 2027-28). Caveats any origin whose live weather is dark.
     if enso and enso.get("signal_fire"):
-        by_key = {o["key"]: o for o in enso.get("origins", [])}
-        parts = []
-        for k in enso.get("signal_keys", []):
-            o = by_key.get(k)
-            if not o:
-                continue
-            seg = f"{o['name'].split(' (')[0]} — {o.get('signal_effect', '')}"
-            if o.get("weather_dark"):
-                seg += (f" (no live {COUNTRY_LABELS.get(o['country'], o['country'])} "
-                        "weather this cycle to corroborate)")
-            parts.append(seg)
+        def _seg(label, slot):
+            if not slot:
+                return None
+            s = f"{label}: {slot['name'].split(' (')[0]} — {slot.get('signal_effect', '')}"
+            if slot.get("weather_dark"):
+                s += (f" (no live {COUNTRY_LABELS.get(slot['country'], slot['country'])} "
+                      "weather this cycle to corroborate)")
+            return s
         lead = enso["headline"]
         if enso.get("lag_caveat"):
             lead += f"; {enso['lag_caveat']}"
-        watch = "; ".join(parts)
-        enso_sig.append(f"{lead}. Watch {watch}." if watch else f"{lead}.")
+        segs = [s for s in (_seg("Near-term", enso.get("near_term")),
+                            _seg("Forward", enso.get("forward"))) if s]
+        enso_sig.append(f"{lead}. " + " ".join(f"{s}." for s in segs)
+                        if segs else f"{lead}.")
 
     # Priority order for the 5-signal cap: coverage caveats first, then the ENSO
     # forward signal, then the market signals.

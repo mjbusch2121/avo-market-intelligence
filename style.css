@@ -237,7 +237,7 @@ h1, h2, h3 { font-family: var(--display); margin: 0; }
 .chart-box.tall { height: 320px; }
 
 /* prevent canvas-driven grid blowout: grid items default to min-width:auto */
-.supply-grid > *, .pricing-grid > *, .duo > * { min-width: 0; }
+.supply-grid > *, .pricing-grid > * { min-width: 0; }
 
 /* ---------- supply ---------- */
 
@@ -410,15 +410,7 @@ table.fob td.mostly { color: var(--flesh); font-weight: 600; }
 .avail-chip .status-surplus { color: var(--green); }
 .avail-chip .status-adequate { color: var(--muted); }
 
-/* ---------- diesel + weather ---------- */
-
-.duo {
-  display: grid;
-  grid-template-columns: 5fr 7fr;
-  gap: 26px;
-}
-
-.duo .panel { margin-bottom: 0; }
+/* ---------- diesel ---------- */
 
 .diesel-latest {
   display: flex;
@@ -432,9 +424,20 @@ table.fob td.mostly { color: var(--flesh); font-weight: 600; }
 .diesel-latest .region { color: var(--muted); }
 .diesel-latest .price { font-weight: 600; }
 
+/* The weather panel is a vertical stack of country groups; each group owns its
+   heading and its own card grid (see .wx-group-cards). */
 .weather-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.wx-group-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  /* Per-group grid + auto-fit: empty tracks collapse, so a two-region group
+     (Mexico, California, Colombia) gets wide cards while Peru's four sit at
+     normal width. Mexico thus gets the widest cards without any per-group
+     markup — the "optional Mexico emphasis" falls out for free. */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 14px;
 }
 
@@ -466,14 +469,13 @@ table.fob td.mostly { color: var(--flesh); font-weight: 600; }
 
 .wx-note { font-size: 12.5px; color: var(--paper); border-top: 1px solid var(--line); padding-top: 7px; margin-top: auto; }
 
-/* Country group divider inside the weather grid (spans the full row) */
+/* Country group heading, sits above that group's card grid */
 .wx-group-head {
-  grid-column: 1 / -1;
   display: flex;
   align-items: baseline;
   gap: 10px;
+  margin-bottom: 8px;
 }
-.wx-group-head:not(:first-child) { margin-top: 10px; }
 .wx-group-name {
   font-family: var(--display);
   font-weight: 700;
@@ -508,14 +510,21 @@ table.fob td.mostly { color: var(--flesh); font-weight: 600; }
 .enso-band { color: var(--flesh); font-weight: 600; }
 .enso-oni { font-size: 11.5px; color: var(--muted); margin: 0; }
 .enso-lag { font-size: 12.5px; color: var(--clay); margin: 6px 0 0; }
+/* Full width: chart on top, origin cards flowing below. */
 .enso-body {
-  display: grid;
-  grid-template-columns: minmax(280px, 1.1fr) minmax(280px, 1fr);
-  gap: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   margin-top: 14px;
 }
-@media (max-width: 720px) { .enso-body { grid-template-columns: 1fr; } }
-.enso-origins { display: flex; flex-direction: column; gap: 8px; }
+.enso-origins {
+  display: grid;
+  /* Six cards become ~three across / two rows instead of six stacked rows —
+     roughly a third of the height, with room for the mechanism text. */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--gap, 12px);
+  align-items: start;
+}
 .enso-origin {
   border: 1px solid var(--line);
   border-left: 2px solid var(--muted);
@@ -535,6 +544,16 @@ table.fob td.mostly { color: var(--flesh); font-weight: 600; }
 .enso-origin-effect { font-size: 12.5px; color: var(--paper); margin-top: 4px; }
 .enso-origin-effect b { color: var(--flesh); }
 .enso-origin-meta { font-size: 11px; color: var(--muted); margin-top: 4px; font-family: var(--mono); }
+.enso-pathway { font-size: 12.5px; color: var(--paper); margin-top: 4px; }
+.enso-ptype {
+  font-family: var(--mono); font-size: 9.5px; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--seed); border: 1px solid var(--line);
+  padding: 0 6px; margin-right: 4px;
+}
+.enso-forward-note {
+  font-size: 13px; color: var(--flesh); font-weight: 600;
+  margin: 8px 0 0; padding-top: 7px; border-top: 1px solid var(--line);
+}
 
 /* ---------- footer ---------- */
 
@@ -558,8 +577,7 @@ footer {
 /* ---------- responsive ---------- */
 
 @media (max-width: 900px) {
-  .supply-grid, .pricing-grid, .duo { grid-template-columns: 1fr; }
-  .duo .panel { margin-bottom: 26px; }
+  .supply-grid, .pricing-grid { grid-template-columns: 1fr; }
   .panel-sub { text-align: left; }
   .chart-box.tall { height: 260px; }
 }

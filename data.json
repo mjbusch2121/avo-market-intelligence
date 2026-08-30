@@ -1,16 +1,16 @@
 {
- "generated_at": "2026-08-30T04:05:07Z",
+ "generated_at": "2026-08-30T22:27:53Z",
  "week": {
   "end": "2026-08-22",
   "label": "Week ending Aug 22, 2026"
  },
  "headline": "Mexico crossing volume down 36.6% week-over-week; Texas-crossing Hass 48s FOB softened 21.8% at $32.25; LA/Dallas freight soft/soft; diesel up 0.20 at $5.65/gal; Eje Cafetero weather bears watching.",
  "signals": [
-  "El Ni\u00f1o strengthening \u2014 RONI +0.98 (MJJ 2026), up from -0.44 three seasons ago; the 3-month seasonal mean trails a fast-developing event, so the current state is likely stronger than the season label. Watch Sons\u00f3n, Antioquia \u2014 drought stress on the main crop now sizing and being harvested; Ca\u00f1ete Valley / \u00c1ncash \u2014 warmer winter may suppress flowering that sets the 2027 crop.",
+  "El Ni\u00f1o strengthening \u2014 RONI +0.98 (MJJ 2026), up from -0.44 three seasons ago; the 3-month seasonal mean trails a fast-developing event, so the current state is likely stronger than the season label. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. Forward: Michoac\u00e1n / Jalisco \u2014 the Sep-Feb Normal bloom is setting the 2027-28 main crop into the El Ni\u00f1o peak.",
   "Total arrivals are running 20% below the 4-year seasonal average (37.2M lbs this week).",
   "Mexico crossings dropped 37% week-over-week \u2014 an unusually large move for this point in the season (100th percentile of same-week history).",
   "Texas-crossing Hass 48s FOB dropped 22% week-over-week \u2014 an unusually large move for this point in the season (95th percentile of same-week history).",
-  "Freight rates shown are 11 days old \u2014 the USDA truck rate report has not refreshed; treat lane costs as indicative."
+  "Freight rates shown are 12 days old \u2014 the USDA truck rate report has not refreshed; treat lane costs as indicative."
  ],
  "kpis": [
   {
@@ -47,31 +47,31 @@
  "feeds": {
   "supply": {
    "fetched_at": "2026-08-25T20:23:50+00:00",
-   "fetch_age_days": 4,
+   "fetch_age_days": 5,
    "stale": false,
    "fetch_error": null
   },
   "pricing": {
    "fetched_at": "2026-08-25T20:23:50+00:00",
-   "fetch_age_days": 4,
+   "fetch_age_days": 5,
    "stale": false,
    "fetch_error": null
   },
   "freight": {
    "fetched_at": "2026-08-25T20:23:51+00:00",
-   "fetch_age_days": 4,
+   "fetch_age_days": 5,
    "stale": false,
    "fetch_error": null
   },
   "diesel": {
    "fetched_at": "2026-08-25T20:23:53+00:00",
-   "fetch_age_days": 4,
+   "fetch_age_days": 5,
    "stale": false,
    "fetch_error": null
   },
   "weather": {
    "fetched_at": "2026-08-29T21:41:15+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 1,
    "stale": false,
    "fetch_error": null
   },
@@ -982,7 +982,7 @@
     "status": "Adequate"
    }
   ],
-  "stale_days": 11,
+  "stale_days": 12,
   "fetch_error": null,
   "stale_after_days": 10
  },
@@ -1472,7 +1472,7 @@
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "available": true,
-    "stage": null
+    "stage": "flowering \u2014 Flor Loca"
    },
    {
     "key": "jalisco",
@@ -1499,7 +1499,7 @@
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "available": true,
-    "stage": null
+    "stage": "flowering \u2014 Flor Loca"
    },
    {
     "key": "ventura",
@@ -1527,7 +1527,7 @@
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "available": true,
     "nws_narrative": "This Afternoon: Sunny, with a high near 90. West southwest wind around 10 mph.",
-    "stage": null
+    "stage": "harvest"
    },
    {
     "key": "san_diego",
@@ -1555,7 +1555,7 @@
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "available": true,
     "nws_narrative": "This Afternoon: Sunny, with a high near 93. Southwest wind 10 to 15 mph, with gusts as high as 25 mph.",
-    "stage": null
+    "stage": "harvest"
    },
    {
     "key": "co_sonson",
@@ -1582,7 +1582,7 @@
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "available": true,
-    "stage": "flowering"
+    "stage": "flowering \u2014 Traviesa"
    },
    {
     "key": "co_eje_cafetero",
@@ -1609,7 +1609,7 @@
     "flag": "watch",
     "note": "Heavy rain ahead (280 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
     "available": true,
-    "stage": "flowering"
+    "stage": "flowering \u2014 Traviesa"
    },
    {
     "key": "pe_canete",
@@ -2145,30 +2145,74 @@
   "headline": "El Ni\u00f1o strengthening \u2014 RONI +0.98 (MJJ 2026), up from -0.44 three seasons ago",
   "lag_caveat": "the 3-month seasonal mean trails a fast-developing event, so the current state is likely stronger than the season label",
   "signal_fire": true,
-  "signal_keys": [
-   "co_sonson",
-   "pe_canete"
-  ],
+  "near_term": {
+   "key": "mx_michoacan",
+   "name": "Michoac\u00e1n / Jalisco",
+   "country": "MX",
+   "weather_dark": false,
+   "supply_tier": "primary",
+   "signal_effect": "moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest",
+   "lag_months": [
+    1,
+    4
+   ]
+  },
+  "forward": {
+   "key": "mx_michoacan",
+   "name": "Michoac\u00e1n / Jalisco",
+   "country": "MX",
+   "weather_dark": false,
+   "supply_tier": "primary",
+   "signal_effect": "the Sep-Feb Normal bloom is setting the 2027-28 main crop into the El Ni\u00f1o peak",
+   "lag_months": [
+    12,
+    15
+   ]
+  },
+  "forward_note": "All three of the largest origins are setting next season's crop into the forecast peak: Michoac\u00e1n, Sons\u00f3n, Ca\u00f1ete Valley.",
   "origins": [
    {
     "key": "mx_michoacan",
     "name": "Michoac\u00e1n / Jalisco",
     "el_nino_effect": "drier",
-    "mechanism": "Suppressed summer monsoon; more pronounced mid-summer can\u00edcula during the Jun-Oct wet season.",
-    "impact": "Moisture stress during sizing; potential downward shift in the size curve.",
-    "signal_effect": "moisture stress during sizing, risk of a smaller size curve",
     "confidence": "moderate",
+    "supply_tier": "primary",
+    "watch_window": "year-round \u2014 always at a sensitive stage",
+    "watch_months": {
+     "start": "01-01",
+     "end": "12-31"
+    },
+    "mechanism": "Suppressed summer monsoon and a more pronounced can\u00edcula during the Jun-Oct wet season.",
+    "impact": "Moisture stress during sizing of fruit already on the tree; potential downward shift in the size curve on the current harvest.",
+    "signal_effect": "moisture stress during sizing of the current crop",
     "lag_months": [
      1,
      4
     ],
-    "watch_window": "Jun-Oct",
-    "watch_months": {
-     "start": "06-01",
-     "end": "10-31"
-    },
+    "pathways": [
+     {
+      "type": "near_term",
+      "lag_months": [
+       1,
+       4
+      ],
+      "mechanism": "Suppressed summer monsoon and a more pronounced can\u00edcula during the Jun-Oct wet season.",
+      "impact": "Moisture stress during sizing of fruit already on the tree; potential downward shift in the size curve on the current harvest.",
+      "signal_effect": "moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest"
+     },
+     {
+      "type": "forward",
+      "lag_months": [
+       12,
+       15
+      ],
+      "mechanism": "Drought stress during bloom reduces fruit set. The Sep-Feb Normal bloom \u2014 the main crop \u2014 overlaps the forecast El Ni\u00f1o peak.",
+      "impact": "Reduced set on the Normal bloom carries into the Nov 2027-Apr 2028 harvest. At ~80% of near-term US supply, this is the largest single forward exposure in the origin mix.",
+      "signal_effect": "the Sep-Feb Normal bloom is setting the 2027-28 main crop into the El Ni\u00f1o peak"
+     }
+    ],
     "country": "MX",
-    "stage": null,
+    "stage": "flowering \u2014 Flor Loca",
     "in_watch": true,
     "weather_dark": false
    },
@@ -2176,6 +2220,7 @@
     "key": "co_sonson",
     "name": "Sons\u00f3n, Antioquia",
     "el_nino_effect": "drier and warmer",
+    "supply_tier": "secondary",
     "mechanism": "Reduced Andean rainfall and elevated temperatures. At 2,475m, clear-sky dry spells also raise radiative frost risk and p\u00e1ramo fire risk.",
     "impact": "Colombia's Sep-Jan main crop overlaps the forecast El Ni\u00f1o peak, so drought stress lands on fruit currently sizing and being harvested \u2014 not only on a future crop. The Dec-Mar dry signal then carries into sizing for the Apr-Jul traviesa.",
     "signal_effect": "drought stress on the main crop now sizing and being harvested",
@@ -2184,13 +2229,45 @@
      1,
      6
     ],
+    "pathways": [
+     {
+      "type": "near_term",
+      "lag_months": [
+       1,
+       6
+      ],
+      "mechanism": "Reduced Andean rainfall and elevated temperatures during the Sep-Jan main crop harvest.",
+      "impact": "Water stress on fruit currently sizing and being picked; the forecast El Ni\u00f1o peak lands inside the main harvest window.",
+      "signal_effect": "drought stress on the main crop now sizing and being harvested"
+     },
+     {
+      "type": "forward",
+      "lag_months": [
+       7,
+       12
+      ],
+      "mechanism": "The Traviesa bloom occurs mid-year, roughly 7-9 months before its Mar-Aug harvest.",
+      "impact": "Drought stress on the current Traviesa bloom carries into the Apr-Jul 2027 crop.",
+      "signal_effect": "the Jun-Aug Traviesa bloom is setting the Apr-Jul 2027 crop"
+     },
+     {
+      "type": "forward",
+      "lag_months": [
+       13,
+       18
+      ],
+      "mechanism": "The Principal bloom occurs Jan-Mar \u2014 precisely when Colombia's El Ni\u00f1o drought signal is strongest \u2014 roughly 8-10 months before its Sep-Feb harvest.",
+      "impact": "The Jan-Mar 2027 main bloom falls in the peak drought window of a very strong event. This sets the Sep 2027-Feb 2028 main crop and is Colombia's largest single exposure.",
+      "signal_effect": "the Jan-Mar 2027 Principal bloom sets the 2027-28 main crop in peak drought"
+     }
+    ],
     "watch_window": "year-round, strongest Dec-Mar",
     "watch_months": {
      "start": "01-01",
      "end": "12-31"
     },
     "country": "CO",
-    "stage": "flowering",
+    "stage": "flowering \u2014 Traviesa",
     "in_watch": true,
     "weather_dark": false
    },
@@ -2198,6 +2275,7 @@
     "key": "co_eje_cafetero",
     "name": "Eje Cafetero / wider Antioquia",
     "el_nino_effect": "drier and warmer",
+    "supply_tier": "tertiary",
     "mechanism": "Same Andean drought signal at somewhat lower elevation.",
     "impact": "Colombia's Sep-Jan main crop overlaps the forecast El Ni\u00f1o peak, so drought stress lands on fruit currently sizing and being harvested \u2014 not only on a future crop. The Dec-Mar dry signal then carries into sizing for the Apr-Jul traviesa.",
     "signal_effect": "yield stress across the 220-grower contract base",
@@ -2206,13 +2284,45 @@
      1,
      6
     ],
+    "pathways": [
+     {
+      "type": "near_term",
+      "lag_months": [
+       1,
+       6
+      ],
+      "mechanism": "Same Andean drought signal at somewhat lower elevation, during the Sep-Jan main crop harvest.",
+      "impact": "Water stress on fruit currently sizing and being picked across the 220-grower contract base.",
+      "signal_effect": "yield stress across the 220-grower contract base now sizing and being harvested"
+     },
+     {
+      "type": "forward",
+      "lag_months": [
+       7,
+       12
+      ],
+      "mechanism": "The Traviesa bloom occurs mid-year, roughly 7-9 months before its Mar-Aug harvest.",
+      "impact": "Drought stress on the current Traviesa bloom carries into the Apr-Jul 2027 crop.",
+      "signal_effect": "the Jun-Aug Traviesa bloom is setting the Apr-Jul 2027 crop"
+     },
+     {
+      "type": "forward",
+      "lag_months": [
+       13,
+       18
+      ],
+      "mechanism": "The Principal bloom occurs Jan-Mar \u2014 when the El Ni\u00f1o drought signal is strongest \u2014 roughly 8-10 months before its Sep-Feb harvest.",
+      "impact": "The Jan-Mar 2027 main bloom falls in the peak drought window, setting the Sep 2027-Feb 2028 main crop.",
+      "signal_effect": "the Jan-Mar 2027 Principal bloom sets the 2027-28 main crop in peak drought"
+     }
+    ],
     "watch_window": "year-round, strongest Dec-Mar",
     "watch_months": {
      "start": "01-01",
      "end": "12-31"
     },
     "country": "CO",
-    "stage": "flowering",
+    "stage": "flowering \u2014 Traviesa",
     "in_watch": true,
     "weather_dark": false
    },
@@ -2220,6 +2330,7 @@
     "key": "pe_lambayeque",
     "name": "Lambayeque (northern coast)",
     "el_nino_effect": "much wetter \u2014 flood risk",
+    "supply_tier": "tertiary",
     "mechanism": "Strong Ni\u00f1o 1+2 warming drives extreme rainfall on the northern Peruvian coast. 1998 and 2017 produced severe flooding in Piura and Lambayeque.",
     "impact": "Field access, root disease, and road/packhouse logistics disruption. Infrastructure risk more than yield risk.",
     "signal_effect": "flood risk to fields, roads, and packhouses",
@@ -2242,6 +2353,7 @@
     "key": "pe_canete",
     "name": "Ca\u00f1ete Valley / \u00c1ncash (central coast)",
     "el_nino_effect": "warmer, limited rainfall change",
+    "supply_tier": "secondary",
     "mechanism": "Warm coastal winter reduces chill accumulation and suppresses flowering induction. Central coast sees far less El Ni\u00f1o rainfall than the north.",
     "impact": "Reduced flowering carries into the March-September 2027 harvest. A very strong El Ni\u00f1o peaking OND 2026 sits directly on the Aug-Oct flowering window \u2014 the 2027 Peruvian crop is being set now, 7-13 months before it reaches arrivals.",
     "signal_effect": "warmer winter may suppress flowering that sets the 2027 crop",
@@ -2265,6 +2377,7 @@
     "key": "pe_junin",
     "name": "Monobamba, Jun\u00edn (cloud forest)",
     "el_nino_effect": "drier",
+    "supply_tier": "tertiary",
     "mechanism": "Amazon-facing eastern Andean slopes typically run drier during El Ni\u00f1o \u2014 opposite sign to the Peruvian coast.",
     "impact": "Moisture stress in cooperative-sourced high-altitude fruit.",
     "signal_effect": "moisture stress in high-altitude cooperative fruit",

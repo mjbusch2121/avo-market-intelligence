@@ -98,26 +98,34 @@ def in_window_with_grace(region: dict, on: date) -> bool:
     return on >= start or on <= end
 
 
-def _in_any_window(windows: list, on: date) -> bool:
-    """True if `on` is inside any of a list of {start,end} MM-DD windows.
-    Reuses in_window's year-wrap handling per sub-window."""
-    return any(in_window({"window": w}, on) for w in windows)
+def _matching_windows(windows: list, on: date) -> list:
+    """Sub-windows of a stage that contain `on` (reusing in_window's wrap
+    handling). Returns the window dicts so their labels can be read."""
+    return [w for w in windows if in_window({"window": w}, on)]
 
 
 def current_stage(stages: dict, on: date) -> str | None:
     """Which phenological stage a region is in on `on`, or None.
 
-    stages: {"harvest": [windows], "flowering": [...], "sizing": [...]}.
-    Colombia's two-crop cycle means stages overlap (most months fall inside
-    something — which is why Colombia ships nearly year-round). When they
-    overlap we report the most decision-relevant one: flowering first, because
-    that is where an ENSO peak sets the *following* crop; then sizing; then
-    harvest. This labels the weather card so a rainfall number reads as a reason
-    to care, e.g. "Cañete — flowering" in October.
+    stages: {"harvest": [windows], "flowering": [...], "sizing": [...]}, where
+    a window may carry a "label" (e.g. a named bloom). Overlapping stages are
+    resolved by priority: flowering first, because that is where an ENSO peak
+    sets the *following* crop; then sizing; then harvest.
+
+    When several labelled windows of the chosen stage match, all their labels
+    are appended, e.g. "flowering — Aventajada, Normal". For single-cycle
+    origins (no labels) the return is just the stage name, unchanged.
     """
     for stage in ("flowering", "sizing", "harvest"):
-        if _in_any_window(stages.get(stage, []), on):
-            return stage
+        matching = _matching_windows(stages.get(stage, []), on)
+        if not matching:
+            continue
+        labels = []
+        for w in matching:
+            lab = w.get("label")
+            if lab and lab not in labels:
+                labels.append(lab)
+        return f"{stage} — {', '.join(labels)}" if labels else stage
     return None
 
 
@@ -237,7 +245,7 @@ if __name__ == "__main__":
     # crop_calendar / phenological-stage checks (southern + northern hemisphere)
     cal = load_crop_calendar()
     stage_checks = [
-        # (desc, region_key, today, expected_stage)
+        # (desc, region_key, today, expected_stage) — single-cycle: no labels
         ("Cañete flowering in Oct", "pe_canete", date(2026, 10, 15), "flowering"),
         ("Cañete harvest in June", "pe_canete", date(2026, 6, 15), "harvest"),
         ("Cañete sizing in Dec", "pe_canete", date(2026, 12, 15), "sizing"),
@@ -245,7 +253,15 @@ if __name__ == "__main__":
         ("Sonsón flowering in Jan (overlap)", "co_sonson", date(2026, 1, 20), "flowering"),
         ("Sonsón sizing in June (overlap)", "co_sonson", date(2026, 6, 15), "sizing"),
         ("Eje Cafetero inherits Sonsón (Jan)", "co_eje_cafetero", date(2026, 1, 20), "flowering"),
-        ("Michoacán has no calendar", "michoacan", date(2026, 6, 15), None),
+        # Michoacán: four labelled blooms, flowering priority surfaces the bloom
+        ("Michoacán bloom Aug 29", "michoacan", date(2026, 8, 29), "flowering — Flor Loca"),
+        ("Michoacán bloom Dec 15", "michoacan", date(2026, 12, 15), "flowering — Normal"),
+        ("Michoacán bloom May 1 2027", "michoacan", date(2027, 5, 1), "flowering — Marceña"),
+        ("Michoacán two blooms Oct 15", "michoacan", date(2026, 10, 15),
+         "flowering — Aventajada, Normal"),
+        ("Jalisco inherits Michoacán", "jalisco", date(2026, 8, 29), "flowering — Flor Loca"),
+        ("Michoacán via ENSO key alias", "mx_michoacan", date(2026, 8, 29), "flowering — Flor Loca"),
+        ("Ventura harvest Aug (no label)", "ventura", date(2026, 8, 29), "harvest"),
     ]
     for desc, key, today, want in stage_checks:
         got = current_stage(cal.get(key, {}), today)
