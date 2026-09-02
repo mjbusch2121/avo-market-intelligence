@@ -17,16 +17,23 @@
         {
           "type": "near_term",
           "lag_months": [1, 4],
-          "mechanism": "Suppressed summer monsoon and a more pronounced canícula during the Jun-Oct wet season.",
+          "mechanism": "Suppressed summer monsoon rainfall and a more pronounced canícula during the Jun-Oct wet season.",
           "impact": "Moisture stress during sizing of fruit already on the tree; potential downward shift in the size curve on the current harvest.",
           "signal_effect": "moisture stress on fruit sizing now — risk of a smaller size curve on the current harvest"
         },
         {
           "type": "forward",
-          "lag_months": [12, 15],
-          "mechanism": "Drought stress during bloom reduces fruit set. The Sep-Feb Normal bloom — the main crop — overlaps the forecast El Niño peak.",
-          "impact": "Reduced set on the Normal bloom carries into the Nov 2027-Apr 2028 harvest. At ~80% of near-term US supply, this is the largest single forward exposure in the origin mix.",
-          "signal_effect": "the Sep-Feb Normal bloom is setting the 2027-28 main crop into the El Niño peak"
+          "lag_months": [9, 13],
+          "mechanism": "The Loca bloom occurs Aug-Sep, inside the monsoon window El Niño suppresses. Drought stress during bloom reduces fruit set.",
+          "impact": "Reduced set on the Loca bloom carries into the May-Sep 2027 harvest — the earliest crop affected.",
+          "signal_effect": "the Aug-Sep Loca bloom is setting the May-Sep 2027 crop"
+        },
+        {
+          "type": "forward",
+          "lag_months": [10, 17],
+          "mechanism": "Soil moisture carried out of a weak monsoon is drawn on by the Oct-Dec Aventajada and Dec-Feb Normal blooms, both of which fall in Michoacán's dry season.",
+          "impact": "Depleted stored moisture affects set on the Normal bloom, the largest crop, harvested Sep 2027-Feb 2028.",
+          "signal_effect": "stored soil moisture from a weak monsoon feeds the Oct-Feb blooms that set the 2027-28 main crop"
         }
       ]
     },
@@ -36,7 +43,7 @@
       "el_nino_effect": "drier and warmer",
       "supply_tier": "secondary",
       "mechanism": "Reduced Andean rainfall and elevated temperatures. At 2,475m, clear-sky dry spells also raise radiative frost risk and páramo fire risk.",
-      "impact": "Colombia's Sep-Jan main crop overlaps the forecast El Niño peak, so drought stress lands on fruit currently sizing and being harvested — not only on a future crop. The Dec-Mar dry signal then carries into sizing for the Apr-Jul traviesa.",
+      "impact": "Colombia's Sep-Jan main crop overlaps the period when the El Niño drought signal is strongest, so drought stress lands on fruit currently sizing and being harvested — not only on a future crop. The Dec-Mar dry signal then carries into sizing for the Apr-Jul traviesa.",
       "signal_effect": "drought stress on the main crop now sizing and being harvested",
       "confidence": "high on drought, moderate on frost",
       "lag_months": [1, 6],
@@ -45,7 +52,7 @@
           "type": "near_term",
           "lag_months": [1, 6],
           "mechanism": "Reduced Andean rainfall and elevated temperatures during the Sep-Jan main crop harvest.",
-          "impact": "Water stress on fruit currently sizing and being picked; the forecast El Niño peak lands inside the main harvest window.",
+          "impact": "Water stress on fruit currently sizing and being picked; the El Niño drought signal lands inside the main harvest window.",
           "signal_effect": "drought stress on the main crop now sizing and being harvested"
         },
         {
@@ -59,8 +66,8 @@
           "type": "forward",
           "lag_months": [13, 18],
           "mechanism": "The Principal bloom occurs Jan-Mar — precisely when Colombia's El Niño drought signal is strongest — roughly 8-10 months before its Sep-Feb harvest.",
-          "impact": "The Jan-Mar 2027 main bloom falls in the peak drought window of a very strong event. This sets the Sep 2027-Feb 2028 main crop and is Colombia's largest single exposure.",
-          "signal_effect": "the Jan-Mar 2027 Principal bloom sets the 2027-28 main crop in peak drought"
+          "impact": "The Jan-Mar 2027 main bloom sets the Sep 2027-Feb 2028 main crop and is Colombia's largest single exposure.",
+          "signal_effect": "the Jan-Mar 2027 Principal bloom sets the 2027-28 main crop"
         }
       ],
       "watch_window": "year-round, strongest Dec-Mar",
@@ -72,7 +79,7 @@
       "el_nino_effect": "drier and warmer",
       "supply_tier": "tertiary",
       "mechanism": "Same Andean drought signal at somewhat lower elevation.",
-      "impact": "Colombia's Sep-Jan main crop overlaps the forecast El Niño peak, so drought stress lands on fruit currently sizing and being harvested — not only on a future crop. The Dec-Mar dry signal then carries into sizing for the Apr-Jul traviesa.",
+      "impact": "Colombia's Sep-Jan main crop overlaps the period when the El Niño drought signal is strongest, so drought stress lands on fruit currently sizing and being harvested — not only on a future crop. The Dec-Mar dry signal then carries into sizing for the Apr-Jul traviesa.",
       "signal_effect": "yield stress across the 220-grower contract base",
       "confidence": "high",
       "lag_months": [1, 6],
@@ -95,8 +102,8 @@
           "type": "forward",
           "lag_months": [13, 18],
           "mechanism": "The Principal bloom occurs Jan-Mar — when the El Niño drought signal is strongest — roughly 8-10 months before its Sep-Feb harvest.",
-          "impact": "The Jan-Mar 2027 main bloom falls in the peak drought window, setting the Sep 2027-Feb 2028 main crop.",
-          "signal_effect": "the Jan-Mar 2027 Principal bloom sets the 2027-28 main crop in peak drought"
+          "impact": "The Jan-Mar 2027 main bloom sets the Sep 2027-Feb 2028 main crop.",
+          "signal_effect": "the Jan-Mar 2027 Principal bloom sets the 2027-28 main crop"
         }
       ],
       "watch_window": "year-round, strongest Dec-Mar",
@@ -121,7 +128,7 @@
       "el_nino_effect": "warmer, limited rainfall change",
       "supply_tier": "secondary",
       "mechanism": "Warm coastal winter reduces chill accumulation and suppresses flowering induction. Central coast sees far less El Niño rainfall than the north.",
-      "impact": "Reduced flowering carries into the March-September 2027 harvest. A very strong El Niño peaking OND 2026 sits directly on the Aug-Oct flowering window — the 2027 Peruvian crop is being set now, 7-13 months before it reaches arrivals.",
+      "impact": "Reduced flowering carries into the March-September 2027 harvest. The Aug-Oct flowering window sets the 2027 Peruvian crop now, 7-13 months before it reaches arrivals.",
       "signal_effect": "warmer winter may suppress flowering that sets the 2027 crop",
       "confidence": "moderate-high",
       "lag_months": [7, 13],

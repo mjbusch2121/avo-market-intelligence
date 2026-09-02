@@ -34,6 +34,7 @@ jobs:
           python fetch_freight_pdf.py
           python fetch_diesel.py
           python fetch_weather.py
+          python fetch_enso.py
           python build_summary.py
 
       - name: Commit refreshed data

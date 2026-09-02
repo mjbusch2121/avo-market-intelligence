@@ -77,6 +77,12 @@ function renderHeadline(data) {
       el("span", "clause-sep", i < clauses.length - 1 ? "; " : "."),
     );
   });
+
+  // Disclose the as-of date behind each headline clause: the one-liner blends
+  // panels with genuinely different as-of dates, so we surface them rather than
+  // implying a single reporting date.
+  const asof = document.getElementById("headline-asof");
+  if (asof) asof.textContent = data.headline_asof || "";
 }
 
 function renderKpis(data) {
@@ -184,7 +190,12 @@ function renderSupply(data) {
         },
         {
           type: "line",
-          label: `${s.baseline_years || 3}-yr seasonal avg (total)`,
+          label:
+            s.total_excludes && s.total_excludes.length
+              ? `${s.baseline_years || 3}-yr seasonal avg (excl. ${s.total_excludes
+                  .map((e) => e.toUpperCase())
+                  .join(", ")} — pending)`
+              : `${s.baseline_years || 3}-yr seasonal avg`,
           data: s.trend.map((t) => t.avg3yr),
           borderColor: C.muted,
           borderDash: [5, 4],

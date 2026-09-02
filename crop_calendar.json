@@ -22,16 +22,16 @@
       "applies_to": ["mx_jalisco", "michoacan", "jalisco"],
       "_note": "Four overlapping blooms, each harvested ~12-15 months after bloom. Both bloom and harvest windows union to all twelve months, so Michoacán never has an off-window and 'stage' alone is uninformative — the bloom label carries the signal. Jalisco follows the same cycle and is important as Flor Loca supplement when Michoacán dips. Bloom stored under 'flowering' for one consistent stage name.",
       "flowering": [
-        {"start": "06-01", "end": "09-30", "label": "Flor Loca"},
-        {"start": "09-01", "end": "11-30", "label": "Aventajada"},
-        {"start": "09-01", "end": "02-28", "label": "Normal"},
-        {"start": "03-01", "end": "06-30", "label": "Marceña"}
+        {"start": "08-01", "end": "09-30", "label": "Loca"},
+        {"start": "10-01", "end": "12-31", "label": "Aventajada"},
+        {"start": "12-01", "end": "02-28", "label": "Normal"},
+        {"start": "02-01", "end": "03-31", "label": "Marceña"}
       ],
       "harvest": [
-        {"start": "07-01", "end": "09-30", "label": "Flor Loca"},
-        {"start": "09-01", "end": "10-31", "label": "Aventajada"},
-        {"start": "11-01", "end": "04-30", "label": "Normal"},
-        {"start": "03-01", "end": "07-31", "label": "Marceña"}
+        {"start": "05-01", "end": "09-30", "label": "Loca"},
+        {"start": "07-01", "end": "10-31", "label": "Aventajada"},
+        {"start": "09-01", "end": "02-28", "label": "Normal"},
+        {"start": "03-01", "end": "08-31", "label": "Marceña"}
       ]
     },
     {

@@ -182,17 +182,6 @@ def build_supply(movement: dict, notes: list) -> dict:
         vals = seasonal_sample(week_str, series_fn)
         return statistics.mean(vals) if vals else None
 
-    trend = []
-    for w in weeks[-TREND_WEEKS:]:
-        _avg = seasonal_avg(w, total)
-        trend.append({
-            "week": w,
-            "mx": weekly[w]["mx"],
-            "ca": weekly[w]["ca"],
-            "ports": weekly[w]["ports"],
-            "avg3yr": round(_avg) if _avg else None,
-        })
-
     # USDA posts some districts late (CA domestic movement especially), so
     # the newest week can be a fraction of the true total. Flag a region as
     # partial when it prints far below its own trailing median, and keep it
@@ -254,6 +243,21 @@ def build_supply(movement: dict, notes: list) -> dict:
     def total_reliable(w):
         return sum(weekly[w][k] for k in ("mx", "ca", "ports")
                    if k not in partial_keys)
+
+    # Trend chart's seasonal-average line uses total_reliable — the SAME basis as
+    # the KPI's total_vs_3yr_pct — so dividing the displayed total by the chart
+    # line reproduces the displayed percentage. partial_keys is derived from the
+    # current week; every displayed baseline excludes the same regions.
+    trend = []
+    for w in weeks[-TREND_WEEKS:]:
+        _avg = seasonal_avg(w, total_reliable)
+        trend.append({
+            "week": w,
+            "mx": weekly[w]["mx"],
+            "ca": weekly[w]["ca"],
+            "ports": weekly[w]["ports"],
+            "avg3yr": round(_avg) if _avg else None,
+        })
 
     rel_sample = seasonal_sample(cur_w, total_reliable)
     avg_rel = statistics.mean(rel_sample) if rel_sample else None
@@ -645,8 +649,15 @@ def build_enso(enso_raw: dict, response: dict, weather: dict) -> dict:
     if side == "El Niño" and len(fwd_exposed) >= 2:
         n = len(fwd_exposed)
         lead = "Both" if n == 2 else ("All three" if n == 3 else f"All {n}")
+        # Qualify with the LIVE index state, not a frozen forecast: read the
+        # current phase and trend off the fetched RONI so the intensity language
+        # always matches what the panel is actually showing.
+        phase = roni["latest"]["phase"]                      # e.g. "weak El Niño"
+        trend_verb = {"strengthening": "strengthens",
+                      "weakening": "weakens"}.get(trend, "holds")
         forward_note = (f"{lead} of the largest origins are setting next season's "
-                        f"crop into the forecast peak: {', '.join(fwd_exposed)}.")
+                        f"crop as the current {phase} {trend_verb}: "
+                        f"{', '.join(fwd_exposed)}.")
     return {
         "available": True,
         "primary": "roni",
@@ -721,6 +732,27 @@ def build_headline(supply, pricing, freight, diesel, weather) -> str:
     return "; ".join(parts) + "." if parts else "Data pending first full refresh."
 
 
+def build_headline_asof(supply, pricing, freight, diesel) -> str:
+    """One line disclosing the as-of date behind each headline clause.
+
+    THE WEEK ON ONE LINE blends panels with genuinely different as-of dates
+    (supply/pricing weekly, freight report, diesel period). We don't reconcile
+    them — they honestly differ — we disclose them. Dates are sourced from
+    data.json fields, never hardcoded, so this stays correct as feeds refresh.
+    """
+    parts = []
+    week_end = (supply or {}).get("week_end")
+    if week_end:
+        parts.append(f"Supply & pricing wk ending {week_end}")
+    fr = (freight or {}).get("report_date")
+    if fr:
+        parts.append(f"Freight {fr}")
+    nat = ((diesel or {}).get("latest") or {}).get("national")
+    if nat and nat.get("period"):
+        parts.append(f"Diesel {nat['period']}")
+    return " · ".join(parts)
+
+
 def active_import_origins() -> str:
     """Which import origins are plausibly shipping right now, per
     seasons.json. Replaces the hardcoded 'Peru/Colombia/DR season'
@@ -774,15 +806,6 @@ def _quartile_band(vals):
     return q[0], q[2]
 
 
-def _ordinal(n):
-    """Turn 23 into '23rd', 11 into '11th', 1 into '1st'."""
-    n = int(n)
-    if 10 <= n % 100 <= 20:
-        suffix = "th"
-    else:
-        suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
-    return f"{n}{suffix}"
-
 def _wow_history(series_by_week, week_str):
     """abs(week-over-week %) for the same ISO week +/- window, prior seasons only.
 
@@ -809,6 +832,30 @@ def _wow_history(series_by_week, week_str):
             continue
         out.append(abs((cur - prev) / prev * 100))
     return out
+
+
+def _wow_history_years(series_by_week, week_str):
+    """Distinct prior seasons contributing to _wow_history's same-week window.
+
+    Mirrors _wow_history's week selection exactly, but counts the calendar years
+    the samples fall in rather than the moves themselves — so the signal can say
+    "in N seasons of history" instead of an overstated percentile at this n.
+    """
+    weeks = sorted(series_by_week)
+    wn = iso_week(week_str)
+    cutoff = date.fromisoformat(week_str) - timedelta(days=RECENCY_CUTOFF_DAYS)
+    years = set()
+    for i, w in enumerate(weeks):
+        if i == 0:
+            continue
+        if _iso_week_distance(iso_week(w), wn) > SEASONAL_WINDOW_WEEKS:
+            continue
+        if date.fromisoformat(w) >= cutoff:
+            continue
+        if not series_by_week[weeks[i - 1]]:
+            continue
+        years.add(date.fromisoformat(w).year)
+    return len(years)
 
 
 def _wow_candidates(supply, pricing):
@@ -889,13 +936,17 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
             continue                      # too thin to judge — say nothing
         rank = _percentile_rank(hist, abs(wow))
         if rank >= WOW_SEASONAL_PCTILE:
-            moves.append((abs(wow), key, label, wow, rank))
+            yrs = _wow_history_years(series, week)
+            moves.append((abs(wow), key, label, wow, rank, yrs))
 
-    for _, key, label, wow, rank in sorted(moves, reverse=True)[:MAX_WOW_SIGNALS]:
+    for _, key, label, wow, rank, yrs in sorted(moves, reverse=True)[:MAX_WOW_SIGNALS]:
         direction = "jumped" if wow > 0 else "dropped"
+        # State the sample plainly instead of a percentile: with ~20 autocorrelated
+        # points the effective n is ~4-5, so "100th percentile" overstates rarity.
+        note = (f"largest same-week move in {yrs} seasons of history" if rank >= 95
+                else f"among the largest same-week moves in {yrs} seasons")
         sig.append(f"{label} {direction} {abs(wow):.0f}% week-over-week — "
-                   f"an unusually large move for this point in the season "
-                   f"({_ordinal(rank)} percentile of same-week history).")
+                   f"an unusually large move for this point in the season ({note}).")
 
     # 2. Seaport imports — only on a real swing, with season-aware origins
     ports = next((r for r in (supply or {}).get("regions", [])
@@ -915,19 +966,17 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
         p = bm["band_position_pct"]
         yrs_p = bm.get("baseline_years", 3)
         if p <= 5:
-            sig.append(f"Benchmark Hass 48s FOB is at the very bottom of its {yrs_p}-year "
-                       f"seasonal range ({_ordinal(p)} percentile) — historically "
-                       f"cheap for this week.")
+            sig.append(f"Benchmark Hass 48s FOB is below the 5th percentile of its "
+                       f"{yrs_p}-year seasonal history — historically cheap for this week.")
         elif p >= 95:
-            sig.append(f"Benchmark Hass 48s FOB is at the very top of its {yrs_p}-year "
-                       f"seasonal range ({_ordinal(p)} percentile) — historically "
-                       f"expensive for this week.")
+            sig.append(f"Benchmark Hass 48s FOB is above the 95th percentile of its "
+                       f"{yrs_p}-year seasonal history — historically expensive for this week.")
         elif p >= 75:
-            sig.append(f"Benchmark Hass 48s FOB is near the top of its {yrs_p}-year "
-                       f"seasonal range ({_ordinal(p)} percentile) — firm for this week.")
+            sig.append(f"Benchmark Hass 48s FOB is at the upper edge of its {yrs_p}-year "
+                       f"seasonal 25th–75th band — firm for this week.")
         elif p <= 25:
-            sig.append(f"Benchmark Hass 48s FOB is near the bottom of its {yrs_p}-year "
-                       f"seasonal range ({_ordinal(p)} percentile) — soft for this week.")
+            sig.append(f"Benchmark Hass 48s FOB is at the lower edge of its {yrs_p}-year "
+                       f"seasonal 25th–75th band — soft for this week.")
         # 26-74 = unremarkable, say nothing
 
     # 4. Truck shortages — scoped to origin; check whether lane rates agree
@@ -1126,6 +1175,7 @@ def main():
         "generated_at": datetime.utcnow().isoformat(timespec="seconds") + "Z",
         "week": {"end": week_end, "label": label},
         "headline": build_headline(supply, pricing, freight, diesel, weather),
+        "headline_asof": build_headline_asof(supply, pricing, freight, diesel),
         "signals": signals,
         "kpis": build_kpis(supply, pricing, freight, diesel),
         "feeds": feeds,

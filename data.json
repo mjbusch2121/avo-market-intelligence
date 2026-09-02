@@ -1,15 +1,16 @@
 {
- "generated_at": "2026-09-01T22:21:14Z",
+ "generated_at": "2026-09-02T22:52:17Z",
  "week": {
   "end": "2026-08-29",
   "label": "Week ending Aug 29, 2026"
  },
  "headline": "Mexico crossing volume up 82.0% week-over-week; Texas-crossing Hass 48s FOB softened 9.3% at $29.25; LA/Dallas freight soft/flat; diesel down 0.05 at $5.60/gal; Eje Cafetero weather bears watching.",
+ "headline_asof": "Supply & pricing wk ending 2026-08-29 \u00b7 Freight 2026-08-25 \u00b7 Diesel 2026-08-31",
  "signals": [
-  "El Ni\u00f1o strengthening \u2014 RONI +0.98 (MJJ 2026), up from -0.44 three seasons ago; the 3-month seasonal mean trails a fast-developing event, so the current state is likely stronger than the season label. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. Forward: Michoac\u00e1n / Jalisco \u2014 the Sep-Feb Normal bloom is setting the 2027-28 main crop into the El Ni\u00f1o peak.",
+  "El Ni\u00f1o strengthening \u2014 RONI +0.98 (MJJ 2026), up from -0.44 three seasons ago; the 3-month seasonal mean trails a fast-developing event, so the current state is likely stronger than the season label. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. Forward: Michoac\u00e1n / Jalisco \u2014 the Aug-Sep Loca bloom is setting the May-Sep 2027 crop.",
   "Total arrivals are running 25% above the 4-year seasonal average (60.1M lbs this week).",
-  "Mexico crossings jumped 82% week-over-week \u2014 an unusually large move for this point in the season (100th percentile of same-week history).",
-  "Benchmark Hass 48s FOB is near the bottom of its 4-year seasonal range (25th percentile) \u2014 soft for this week.",
+  "Mexico crossings jumped 82% week-over-week \u2014 an unusually large move for this point in the season (largest same-week move in 4 seasons of history).",
+  "Benchmark Hass 48s FOB is at the lower edge of its 4-year seasonal 25th\u201375th band \u2014 soft for this week.",
   "Eje Cafetero (Manizales area): Heavy rain ahead (321 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks."
  ],
  "kpis": [
@@ -47,38 +48,38 @@
  "feeds": {
   "supply": {
    "fetched_at": "2026-09-01T22:21:02+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 1,
    "stale": false,
    "fetch_error": null
   },
   "pricing": {
    "fetched_at": "2026-09-01T22:21:02+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 1,
    "stale": false,
    "fetch_error": null
   },
   "freight": {
    "fetched_at": "2026-09-01T22:21:03+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 1,
    "stale": false,
    "fetch_error": null
   },
   "diesel": {
    "fetched_at": "2026-09-01T22:21:07+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 1,
    "stale": false,
    "fetch_error": null
   },
   "weather": {
    "fetched_at": "2026-09-01T22:21:14+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 1,
    "stale": false,
    "fetch_error": null
   },
   "_stale_after_days": 8,
   "enso": {
    "fetched_at": "2026-08-30T03:55:12+00:00",
-   "fetch_age_days": 2,
+   "fetch_age_days": 3,
    "stale": false,
    "fetch_error": null,
    "stale_after_days": 45
@@ -171,364 +172,364 @@
     "mx": 39552417,
     "ca": 7320420,
     "ports": 7564408,
-    "avg3yr": 51595634
+    "avg3yr": 46575614
    },
    {
     "week": "2025-09-13",
     "mx": 50606265,
     "ca": 7649434,
     "ports": 9970305,
-    "avg3yr": 50317309
+    "avg3yr": 46256971
    },
    {
     "week": "2025-09-20",
     "mx": 47759054,
     "ca": 5692380,
     "ports": 10020766,
-    "avg3yr": 50178455
+    "avg3yr": 47208678
    },
    {
     "week": "2025-09-27",
     "mx": 47338358,
     "ca": 5626192,
     "ports": 6714153,
-    "avg3yr": 52081502
+    "avg3yr": 49694051
    },
    {
     "week": "2025-10-04",
     "mx": 43436310,
     "ca": 4733328,
     "ports": 5674396,
-    "avg3yr": 51296672
+    "avg3yr": 49455553
    },
    {
     "week": "2025-10-11",
     "mx": 57174028,
     "ca": 4959412,
     "ports": 3621878,
-    "avg3yr": 52230013
+    "avg3yr": 50878767
    },
    {
     "week": "2025-10-18",
     "mx": 46357443,
     "ca": 2326822,
     "ports": 3187901,
-    "avg3yr": 53887463
+    "avg3yr": 52970894
    },
    {
     "week": "2025-10-25",
     "mx": 60773128,
     "ca": 3201173,
     "ports": 2722901,
-    "avg3yr": 54288025
+    "avg3yr": 53648125
    },
    {
     "week": "2025-11-01",
     "mx": 58713284,
     "ca": 2009336,
     "ports": 3225140,
-    "avg3yr": 54229410
+    "avg3yr": 53825019
    },
    {
     "week": "2025-11-08",
     "mx": 55719359,
     "ca": 1846626,
     "ports": 3641378,
-    "avg3yr": 55741880
+    "avg3yr": 55386112
    },
    {
     "week": "2025-11-15",
     "mx": 49323643,
     "ca": 92189,
     "ports": 2588386,
-    "avg3yr": 54179198
+    "avg3yr": 53866064
    },
    {
     "week": "2025-11-22",
     "mx": 59280935,
     "ca": 605639,
     "ports": 4351260,
-    "avg3yr": 52476804
+    "avg3yr": 52202198
    },
    {
     "week": "2025-11-29",
     "mx": 53689896,
     "ca": 92189,
     "ports": 2565510,
-    "avg3yr": 53021611
+    "avg3yr": 52769272
    },
    {
     "week": "2025-12-06",
     "mx": 56937673,
     "ca": 506944,
     "ports": 3308429,
-    "avg3yr": 53845722
+    "avg3yr": 53638898
    },
    {
     "week": "2025-12-13",
     "mx": 65967588,
     "ca": 421535,
     "ports": 3656792,
-    "avg3yr": 50880915
+    "avg3yr": 50702380
    },
    {
     "week": "2025-12-20",
     "mx": 54593879,
     "ca": 180523,
     "ports": 3220945,
-    "avg3yr": 51909825
+    "avg3yr": 51769248
    },
    {
     "week": "2025-12-27",
     "mx": 39317851,
     "ca": 282781,
     "ports": 2399582,
-    "avg3yr": 49385855
+    "avg3yr": 49277481
    },
    {
     "week": "2026-01-03",
     "mx": 36405001,
     "ca": 688424,
     "ports": 2472897,
-    "avg3yr": 49033008
+    "avg3yr": 48622957
    },
    {
     "week": "2026-01-10",
     "mx": 73702514,
     "ca": 930200,
     "ports": 3532241,
-    "avg3yr": 56173164
+    "avg3yr": 55165935
    },
    {
     "week": "2026-01-17",
     "mx": 53738431,
     "ca": 1078846,
     "ports": 3904738,
-    "avg3yr": 60203000
+    "avg3yr": 59041162
    },
    {
     "week": "2026-01-24",
     "mx": 60957142,
     "ca": 777168,
     "ports": 2184943,
-    "avg3yr": 66104666
+    "avg3yr": 64773896
    },
    {
     "week": "2026-01-31",
     "mx": 92028032,
     "ca": 1215203,
     "ports": 4639511,
-    "avg3yr": 65400816
+    "avg3yr": 63888460
    },
    {
     "week": "2026-02-07",
     "mx": 76617542,
     "ca": 189809,
     "ports": 3424580,
-    "avg3yr": 63988177
+    "avg3yr": 62421702
    },
    {
     "week": "2026-02-14",
     "mx": 58203007,
     "ca": 301978,
     "ports": 3219980,
-    "avg3yr": 62910790
+    "avg3yr": 61359162
    },
    {
     "week": "2026-02-21",
     "mx": 47130259,
     "ca": 83805,
     "ports": 1179557,
-    "avg3yr": 59815758
+    "avg3yr": 58171762
    },
    {
     "week": "2026-02-28",
     "mx": 70155258,
     "ca": 1517160,
     "ports": 3872267,
-    "avg3yr": 57893541
+    "avg3yr": 55932540
    },
    {
     "week": "2026-03-07",
     "mx": 59358032,
     "ca": 2592011,
     "ports": 2947356,
-    "avg3yr": 58201902
+    "avg3yr": 55447013
    },
    {
     "week": "2026-03-14",
     "mx": 61221705,
     "ca": 3000219,
     "ports": 3150642,
-    "avg3yr": 63738008
+    "avg3yr": 59875450
    },
    {
     "week": "2026-03-21",
     "mx": 74129317,
     "ca": 4812987,
     "ports": 4025014,
-    "avg3yr": 64075141
+    "avg3yr": 59293121
    },
    {
     "week": "2026-03-28",
     "mx": 68551242,
     "ca": 7776367,
     "ports": 2446381,
-    "avg3yr": 65679978
+    "avg3yr": 59375977
    },
    {
     "week": "2026-04-04",
     "mx": 69639791,
     "ca": 10048544,
     "ports": 4533319,
-    "avg3yr": 65170351
+    "avg3yr": 56937489
    },
    {
     "week": "2026-04-11",
     "mx": 75140656,
     "ca": 13613812,
     "ports": 3784432,
-    "avg3yr": 66163271
+    "avg3yr": 56455950
    },
    {
     "week": "2026-04-18",
     "mx": 46006137,
     "ca": 13145525,
     "ports": 3293168,
-    "avg3yr": 66543018
+    "avg3yr": 55751153
    },
    {
     "week": "2026-04-25",
     "mx": 62221887,
     "ca": 13444140,
     "ports": 2027680,
-    "avg3yr": 66612475
+    "avg3yr": 54690569
    },
    {
     "week": "2026-05-02",
     "mx": 65010289,
     "ca": 14468853,
     "ports": 2686997,
-    "avg3yr": 65397479
+    "avg3yr": 52509133
    },
    {
     "week": "2026-05-09",
     "mx": 59341703,
     "ca": 14146762,
     "ports": 3124021,
-    "avg3yr": 67045635
+    "avg3yr": 53304800
    },
    {
     "week": "2026-05-16",
     "mx": 48484477,
     "ca": 0,
     "ports": 3223613,
-    "avg3yr": 63574190
+    "avg3yr": 49978515
    },
    {
     "week": "2026-05-23",
     "mx": 50522963,
     "ca": 15722938,
     "ports": 3620250,
-    "avg3yr": 62695038
+    "avg3yr": 48953825
    },
    {
     "week": "2026-05-30",
     "mx": 39842943,
     "ca": 16385662,
     "ports": 3258534,
-    "avg3yr": 60425753
+    "avg3yr": 47148427
    },
    {
     "week": "2026-06-06",
     "mx": 41137433,
     "ca": 33962738,
     "ports": 6062175,
-    "avg3yr": 59307988
+    "avg3yr": 45156811
    },
    {
     "week": "2026-06-13",
     "mx": 48275777,
     "ca": 19917207,
     "ports": 9292178,
-    "avg3yr": 59371076
+    "avg3yr": 44790989
    },
    {
     "week": "2026-06-20",
     "mx": 27871415,
     "ca": 19073819,
     "ports": 7700715,
-    "avg3yr": 58538401
+    "avg3yr": 43526980
    },
    {
     "week": "2026-06-27",
     "mx": 33820148,
     "ca": 18829780,
     "ports": 13965761,
-    "avg3yr": 58680010
+    "avg3yr": 43318115
    },
    {
     "week": "2026-07-04",
     "mx": 39180447,
     "ca": 14742134,
     "ports": 15092167,
-    "avg3yr": 59760396
+    "avg3yr": 43762610
    },
    {
     "week": "2026-07-11",
     "mx": 35495650,
     "ca": 13394071,
     "ports": 16465596,
-    "avg3yr": 59453168
+    "avg3yr": 44660558
    },
    {
     "week": "2026-07-18",
     "mx": 41897985,
     "ca": 26380609,
     "ports": 13771779,
-    "avg3yr": 57959295
+    "avg3yr": 44322954
    },
    {
     "week": "2026-07-25",
     "mx": 36226491,
     "ca": 12523675,
     "ports": 17279718,
-    "avg3yr": 59320287
+    "avg3yr": 46389231
    },
    {
     "week": "2026-08-01",
     "mx": 39895434,
     "ca": 19880289,
     "ports": 10956058,
-    "avg3yr": 57723025
+    "avg3yr": 45775927
    },
    {
     "week": "2026-08-08",
     "mx": 43804011,
     "ca": 10975726,
     "ports": 9481478,
-    "avg3yr": 56812764
+    "avg3yr": 46222477
    },
    {
     "week": "2026-08-15",
     "mx": 45803579,
     "ca": 12257277,
     "ports": 8883210,
-    "avg3yr": 56712612
+    "avg3yr": 47127695
    },
    {
     "week": "2026-08-22",
     "mx": 29045097,
     "ca": 10971271,
     "ports": 8108964,
-    "avg3yr": 54503061
+    "avg3yr": 46230618
    },
    {
     "week": "2026-08-29",
     "mx": 52867341,
     "ca": 1455054,
     "ports": 7244433,
-    "avg3yr": 54994440
+    "avg3yr": 48013212
    }
   ]
  },
@@ -1105,7 +1106,7 @@
     "status": "Adequate"
    }
   ],
-  "stale_days": 7,
+  "stale_days": 8,
   "fetch_error": null,
   "stale_after_days": 10
  },
@@ -1595,7 +1596,7 @@
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "available": true,
-    "stage": "flowering \u2014 Flor Loca, Aventajada, Normal"
+    "stage": "flowering \u2014 Loca"
    },
    {
     "key": "jalisco",
@@ -1622,7 +1623,7 @@
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "available": true,
-    "stage": "flowering \u2014 Flor Loca, Aventajada, Normal"
+    "stage": "flowering \u2014 Loca"
    },
    {
     "key": "ventura",
@@ -2286,13 +2287,13 @@
    "country": "MX",
    "weather_dark": false,
    "supply_tier": "primary",
-   "signal_effect": "the Sep-Feb Normal bloom is setting the 2027-28 main crop into the El Ni\u00f1o peak",
+   "signal_effect": "the Aug-Sep Loca bloom is setting the May-Sep 2027 crop",
    "lag_months": [
-    12,
-    15
+    9,
+    13
    ]
   },
-  "forward_note": "All three of the largest origins are setting next season's crop into the forecast peak: Michoac\u00e1n, Sons\u00f3n, Ca\u00f1ete Valley.",
+  "forward_note": "All three of the largest origins are setting next season's crop as the current weak El Ni\u00f1o strengthens: Michoac\u00e1n, Sons\u00f3n, Ca\u00f1ete Valley.",
   "origins": [
    {
     "key": "mx_michoacan",
@@ -2319,23 +2320,33 @@
        1,
        4
       ],
-      "mechanism": "Suppressed summer monsoon and a more pronounced can\u00edcula during the Jun-Oct wet season.",
+      "mechanism": "Suppressed summer monsoon rainfall and a more pronounced can\u00edcula during the Jun-Oct wet season.",
       "impact": "Moisture stress during sizing of fruit already on the tree; potential downward shift in the size curve on the current harvest.",
       "signal_effect": "moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest"
      },
      {
       "type": "forward",
       "lag_months": [
-       12,
-       15
+       9,
+       13
       ],
-      "mechanism": "Drought stress during bloom reduces fruit set. The Sep-Feb Normal bloom \u2014 the main crop \u2014 overlaps the forecast El Ni\u00f1o peak.",
-      "impact": "Reduced set on the Normal bloom carries into the Nov 2027-Apr 2028 harvest. At ~80% of near-term US supply, this is the largest single forward exposure in the origin mix.",
-      "signal_effect": "the Sep-Feb Normal bloom is setting the 2027-28 main crop into the El Ni\u00f1o peak"
+      "mechanism": "The Loca bloom occurs Aug-Sep, inside the monsoon window El Ni\u00f1o suppresses. Drought stress during bloom reduces fruit set.",
+      "impact": "Reduced set on the Loca bloom carries into the May-Sep 2027 harvest \u2014 the earliest crop affected.",
+      "signal_effect": "the Aug-Sep Loca bloom is setting the May-Sep 2027 crop"
+     },
+     {
+      "type": "forward",
+      "lag_months": [
+       10,
+       17
+      ],
+      "mechanism": "Soil moisture carried out of a weak monsoon is drawn on by the Oct-Dec Aventajada and Dec-Feb Normal blooms, both of which fall in Michoac\u00e1n's dry season.",
+      "impact": "Depleted stored moisture affects set on the Normal bloom, the largest crop, harvested Sep 2027-Feb 2028.",
+      "signal_effect": "stored soil moisture from a weak monsoon feeds the Oct-Feb blooms that set the 2027-28 main crop"
      }
     ],
     "country": "MX",
-    "stage": "flowering \u2014 Flor Loca, Aventajada, Normal",
+    "stage": "flowering \u2014 Loca",
     "in_watch": true,
     "weather_dark": false
    },
@@ -2345,7 +2356,7 @@
     "el_nino_effect": "drier and warmer",
     "supply_tier": "secondary",
     "mechanism": "Reduced Andean rainfall and elevated temperatures. At 2,475m, clear-sky dry spells also raise radiative frost risk and p\u00e1ramo fire risk.",
-    "impact": "Colombia's Sep-Jan main crop overlaps the forecast El Ni\u00f1o peak, so drought stress lands on fruit currently sizing and being harvested \u2014 not only on a future crop. The Dec-Mar dry signal then carries into sizing for the Apr-Jul traviesa.",
+    "impact": "Colombia's Sep-Jan main crop overlaps the period when the El Ni\u00f1o drought signal is strongest, so drought stress lands on fruit currently sizing and being harvested \u2014 not only on a future crop. The Dec-Mar dry signal then carries into sizing for the Apr-Jul traviesa.",
     "signal_effect": "drought stress on the main crop now sizing and being harvested",
     "confidence": "high on drought, moderate on frost",
     "lag_months": [
@@ -2360,7 +2371,7 @@
        6
       ],
       "mechanism": "Reduced Andean rainfall and elevated temperatures during the Sep-Jan main crop harvest.",
-      "impact": "Water stress on fruit currently sizing and being picked; the forecast El Ni\u00f1o peak lands inside the main harvest window.",
+      "impact": "Water stress on fruit currently sizing and being picked; the El Ni\u00f1o drought signal lands inside the main harvest window.",
       "signal_effect": "drought stress on the main crop now sizing and being harvested"
      },
      {
@@ -2380,8 +2391,8 @@
        18
       ],
       "mechanism": "The Principal bloom occurs Jan-Mar \u2014 precisely when Colombia's El Ni\u00f1o drought signal is strongest \u2014 roughly 8-10 months before its Sep-Feb harvest.",
-      "impact": "The Jan-Mar 2027 main bloom falls in the peak drought window of a very strong event. This sets the Sep 2027-Feb 2028 main crop and is Colombia's largest single exposure.",
-      "signal_effect": "the Jan-Mar 2027 Principal bloom sets the 2027-28 main crop in peak drought"
+      "impact": "The Jan-Mar 2027 main bloom sets the Sep 2027-Feb 2028 main crop and is Colombia's largest single exposure.",
+      "signal_effect": "the Jan-Mar 2027 Principal bloom sets the 2027-28 main crop"
      }
     ],
     "watch_window": "year-round, strongest Dec-Mar",
@@ -2400,7 +2411,7 @@
     "el_nino_effect": "drier and warmer",
     "supply_tier": "tertiary",
     "mechanism": "Same Andean drought signal at somewhat lower elevation.",
-    "impact": "Colombia's Sep-Jan main crop overlaps the forecast El Ni\u00f1o peak, so drought stress lands on fruit currently sizing and being harvested \u2014 not only on a future crop. The Dec-Mar dry signal then carries into sizing for the Apr-Jul traviesa.",
+    "impact": "Colombia's Sep-Jan main crop overlaps the period when the El Ni\u00f1o drought signal is strongest, so drought stress lands on fruit currently sizing and being harvested \u2014 not only on a future crop. The Dec-Mar dry signal then carries into sizing for the Apr-Jul traviesa.",
     "signal_effect": "yield stress across the 220-grower contract base",
     "confidence": "high",
     "lag_months": [
@@ -2435,8 +2446,8 @@
        18
       ],
       "mechanism": "The Principal bloom occurs Jan-Mar \u2014 when the El Ni\u00f1o drought signal is strongest \u2014 roughly 8-10 months before its Sep-Feb harvest.",
-      "impact": "The Jan-Mar 2027 main bloom falls in the peak drought window, setting the Sep 2027-Feb 2028 main crop.",
-      "signal_effect": "the Jan-Mar 2027 Principal bloom sets the 2027-28 main crop in peak drought"
+      "impact": "The Jan-Mar 2027 main bloom sets the Sep 2027-Feb 2028 main crop.",
+      "signal_effect": "the Jan-Mar 2027 Principal bloom sets the 2027-28 main crop"
      }
     ],
     "watch_window": "year-round, strongest Dec-Mar",
@@ -2478,7 +2489,7 @@
     "el_nino_effect": "warmer, limited rainfall change",
     "supply_tier": "secondary",
     "mechanism": "Warm coastal winter reduces chill accumulation and suppresses flowering induction. Central coast sees far less El Ni\u00f1o rainfall than the north.",
-    "impact": "Reduced flowering carries into the March-September 2027 harvest. A very strong El Ni\u00f1o peaking OND 2026 sits directly on the Aug-Oct flowering window \u2014 the 2027 Peruvian crop is being set now, 7-13 months before it reaches arrivals.",
+    "impact": "Reduced flowering carries into the March-September 2027 harvest. The Aug-Oct flowering window sets the 2027 Peruvian crop now, 7-13 months before it reaches arrivals.",
     "signal_effect": "warmer winter may suppress flowering that sets the 2027 crop",
     "confidence": "moderate-high",
     "lag_months": [
