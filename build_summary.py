@@ -124,12 +124,22 @@ def pct(new, old):
     return round((new - old) / old * 100, 1)
 
 
-def mid(row) -> float | None:
-    for lo_k, hi_k in (("mostly_low", "mostly_high"), ("low", "high")):
-        lo, hi = row.get(lo_k), row.get(hi_k)
-        if lo is not None and hi is not None:
-            return (float(lo) + float(hi)) / 2
-    return None
+def mid(row):
+    """Volume-concentrated midpoint. USDA 'mostly' is where the bulk of
+    sales cleared; range low/high includes thin quotes at both ends and
+    overstates whenever the high is thin (most weeks). Fall back to the full
+    range only when USDA omits 'mostly' (no dominant range that day).
+
+    Returns (value, basis) where basis is 'mostly' | 'range' | None so a
+    mixed-basis series is visible rather than silently blended.
+    """
+    ml, mh = row.get("mostly_low"), row.get("mostly_high")
+    if ml is not None and mh is not None:
+        return (float(ml) + float(mh)) / 2, "mostly"
+    lo, hi = row.get("low"), row.get("high")
+    if lo is not None and hi is not None:
+        return (float(lo) + float(hi)) / 2, "range"
+    return None, None
 
 
 def is_conventional(v) -> bool:
@@ -299,13 +309,25 @@ def build_supply(movement: dict, notes: list) -> dict:
 def build_pricing(price_hist: dict, current: dict, notes: list) -> dict:
     # weekly benchmark mids per district
     series = {}  # district -> {week: mid}
+    basis_counts = {"mostly": 0, "range": 0}
     for row in price_hist.values():
         if not is_hass_benchmark(row):
             continue
-        m = mid(row)
+        m, basis = mid(row)
         if m is None:
             continue
+        basis_counts[basis] += 1
         series.setdefault(row["district"], {})[row["week_end"]] = m
+
+    # Surface a mixed-basis series: the midpoint prefers USDA 'mostly', but a
+    # row with no dominant range falls back to full range low/high. A heavily
+    # mixed series would need different treatment, so make the split auditable.
+    n_basis = basis_counts["mostly"] + basis_counts["range"]
+    if basis_counts["range"] and n_basis:
+        notes.append(
+            f"Price benchmark: {basis_counts['range']} of {n_basis} rows "
+            f"({basis_counts['range'] / n_basis * 100:.0f}%) used range-basis "
+            "midpoint (USDA 'mostly' absent that day).")
 
     mx = series.get("MEXICO CROSSINGS THROUGH TEXAS", {})
     ca = series.get("SOUTH DISTRICT CALIFORNIA", {})
@@ -381,6 +403,10 @@ def build_pricing(price_hist: dict, current: dict, notes: list) -> dict:
             "band_position_pct": band_position,
             "baseline_n": baseline_n,
             "baseline_years": baseline_years,
+            # Week-ending date of the weekly benchmark series. Distinct from
+            # report_date (the daily size/grade table below): the two answer
+            # different questions and legitimately differ by a few days.
+            "week": mx_weeks[-1] if mx_weeks else None,
         },
         "report_date": current.get("report_date"),
         "table": table,
@@ -673,7 +699,10 @@ def build_enso(enso_raw: dict, response: dict, weather: dict) -> dict:
         "steep": steep,
         "established_event": established,
         "consecutive_seasons": roni.get("consecutive_seasons"),
-        "phase_with_season": f'{roni["latest"]["phase"]} ({season})',   # #1
+        # Carry the RONI value beside the band label so a reading one-hundredth
+        # from the next band (+0.98, "weak", vs 1.0 "moderate") shows its proximity
+        # instead of hiding behind the coarse label.
+        "phase_with_season": f'{roni["latest"]["phase"]} {anom:+.2f} ({season})',   # #1
         "headline": headline,                                           # #2
         "lag_caveat": lag_caveat,                                       # #3
         "signal_fire": fire,
@@ -713,12 +742,28 @@ def build_headline(supply, pricing, freight, diesel, weather) -> str:
         verb = "steady" if w is None or abs(w) <= 1 else ("firmed" if w > 0 else "softened")
         move = "" if verb == "steady" else f" {abs(w):.1f}%"
         parts.append(f"Texas-crossing Hass 48s FOB {verb}{move} at ${bm['mx_latest']:.2f}")
-    lanes = {l["dest"]: l for l in (freight or {}).get("lanes", [])}
+    lanes_list = (freight or {}).get("lanes", [])
+    lanes = {l["dest"]: l for l in lanes_list}
     la, dal = lanes.get("Los Angeles"), lanes.get("Dallas")
     if la and dal:
         def word(l):
-            return "firm" if l["wow_pct"] > 1 else ("soft" if l["wow_pct"] < -1 else "flat")
-        parts.append(f"LA/Dallas freight {word(la)}/{word(dal)}")
+            w = l.get("wow_pct")
+            if w is None:
+                return "n/a"
+            return "firm" if w > 1 else ("soft" if w < -1 else "flat")
+        clause = f"LA/Dallas freight {word(la)}/{word(dal)}"
+        # Don't let the two fixed lanes hide a bigger mover: if another lane moved
+        # materially more (>= 2 pts beyond the larger of LA/Dallas), name it in the
+        # same clause so the headline's freight read isn't blind to it.
+        movers = [l for l in lanes_list if l.get("wow_pct") is not None]
+        la_dal_max = max(abs(la.get("wow_pct") or 0), abs(dal.get("wow_pct") or 0))
+        if movers:
+            biggest = max(movers, key=lambda l: abs(l["wow_pct"]))
+            if (biggest["dest"] not in ("Los Angeles", "Dallas")
+                    and abs(biggest["wow_pct"]) >= la_dal_max + 2):
+                bw = "up" if biggest["wow_pct"] > 0 else "down"
+                clause += f", {biggest['dest']} {bw} {abs(biggest['wow_pct']):.0f}%"
+        parts.append(clause)
     nat = ((diesel or {}).get("latest") or {}).get("national")
     if nat:
         d = nat["wow"]
@@ -939,14 +984,40 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
             yrs = _wow_history_years(series, week)
             moves.append((abs(wow), key, label, wow, rank, yrs))
 
+    regions_by_key = {r["key"]: r for r in (supply or {}).get("regions", [])}
+    supply_years = (supply or {}).get("baseline_years", 3)
+    bm = (pricing or {}).get("benchmark") or {}
     for _, key, label, wow, rank, yrs in sorted(moves, reverse=True)[:MAX_WOW_SIGNALS]:
         direction = "jumped" if wow > 0 else "dropped"
         # State the sample plainly instead of a percentile: with ~20 autocorrelated
         # points the effective n is ~4-5, so "100th percentile" overstates rarity.
-        note = (f"largest same-week move in {yrs} seasons of history" if rank >= 95
-                else f"among the largest same-week moves in {yrs} seasons")
-        sig.append(f"{label} {direction} {abs(wow):.0f}% week-over-week — "
-                   f"an unusually large move for this point in the season ({note}).")
+        rank_phrase = (f"the largest same-week move in {yrs} seasons of history"
+                       if rank >= 95
+                       else f"among the largest same-week moves in {yrs} seasons")
+
+        # Current level: volume for supply regions, price for the FOB benchmark.
+        r = regions_by_key.get(key)
+        if r is not None:
+            level = f" to {r['lbs'] / 1e6:.1f}M lbs"
+        elif key == "price_mx" and bm.get("mx_latest") is not None:
+            level = f" to ${bm['mx_latest']:.2f}"
+        else:
+            level = ""
+
+        # Pair the WoW % with the seasonal comparison so the two can't be read in
+        # isolation: a big move that lands above norm is a surge; one that lands
+        # at norm is a rebound. Only supply regions carry vs_3yr_pct (the FOB
+        # benchmark and partial regions don't) — omit the clause when it's null.
+        vs = r.get("vs_3yr_pct") if r is not None else None
+        if vs is not None:
+            seasonal = (f"{abs(vs):.0f}% {'above' if vs > 0 else 'below'} the "
+                        f"{supply_years}-year seasonal norm")
+            sig.append(f"{label} {direction} {abs(wow):.0f}% week-over-week{level} "
+                       f"— {seasonal}, and {rank_phrase}.")
+        else:
+            sig.append(f"{label} {direction} {abs(wow):.0f}% week-over-week{level} "
+                       f"— an unusually large move for this point in the season "
+                       f"({rank_phrase}).")
 
     # 2. Seaport imports — only on a real swing, with season-aware origins
     ports = next((r for r in (supply or {}).get("regions", [])
@@ -1093,15 +1164,23 @@ def build_kpis(supply, pricing, freight, diesel) -> list:
         })
     bm = (pricing or {}).get("benchmark") or {}
     if bm.get("mx_latest") is not None:
+        # Weekly benchmark — stamp the week-ending date so it's not conflated with
+        # the daily size/grade table (a few days later, different figure).
+        wk = bm.get("week")
+        wk_note = (datetime.fromisoformat(wk).strftime("wk ending %b %d") + " · "
+                   if wk else "")
         kpis.append({"label": "Hass 48s FOB (TX)", "value": f"${bm['mx_latest']:.2f}",
-                     "delta_pct": bm.get("wow_mx_pct"), "sub": "vs prior week"})
+                     "delta_pct": bm.get("wow_mx_pct"), "sub": f"{wk_note}vs prior week"})
     la = next((l for l in (freight or {}).get("lanes", []) if l["dest"] == "Los Angeles"), None)
     if la:
         origin_label = la["origin_short"].split(" (")[0]
+        # The delta is the LANE RATE change, not a crossings-volume move. Bind it
+        # to "vs prior wk" and prefix the origin with "from" so the origin text
+        # can't be misread as "3% crossings".
         kpis.append({"label": f"Freight: {origin_label} → LA",
                      "value": f"${la['low']:,}–{la['high']:,}",
                      "delta_pct": la["wow_pct"] or None,
-                     "sub": la["origin_short"]})
+                     "sub": f"vs prior wk · from {la['origin_short']}"})
     nat = ((diesel or {}).get("latest") or {}).get("national")
     if nat:
         kpis.append({"label": "US diesel", "value": f"${nat['value']:.2f}/gal",

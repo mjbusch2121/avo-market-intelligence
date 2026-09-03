@@ -18,9 +18,13 @@ const fmtMoney = (v) => "$" + Number(v).toFixed(2);
 
 function deltaHtml(pct, suffix = "%") {
   if (pct === null || pct === undefined) return "";
-  const cls = pct > 1 ? "up" : pct < -1 ? "down" : "flat";
-  const arrow = pct > 1 ? "▲" : pct < -1 ? "▼" : "◆";
-  return `<span class="delta ${cls}">${arrow} ${Math.abs(pct).toFixed(1)}${suffix}</span>`;
+  // Classify on the value AS DISPLAYED (1 decimal) so the glyph can never
+  // contradict the number: a printed "0.9%" must show a direction, not the flat
+  // diamond. The old ±1% dead zone flagged a real -0.9% diesel move as flat.
+  const shown = Number(Math.abs(pct).toFixed(1));
+  const cls = shown === 0 ? "flat" : pct > 0 ? "up" : "down";
+  const arrow = cls === "up" ? "▲" : cls === "down" ? "▼" : "◆";
+  return `<span class="delta ${cls}">${arrow} ${shown.toFixed(1)}${suffix}</span>`;
 }
 
 function el(tag, cls, html) {
@@ -35,6 +39,16 @@ function monthTick(iso) {
   return d
     .toLocaleDateString("en-US", { month: "short", year: "2-digit" })
     .replace(" ", " '");
+}
+
+// "2026-08-29" -> "Aug 29, 2026" for panel as-of labels.
+function dayLabel(iso) {
+  if (!iso) return "";
+  return new Date(iso + "T00:00:00").toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 }
 
 Chart?.register &&
@@ -150,8 +164,16 @@ function renderSupply(data) {
 
   const crossBox = document.getElementById("crossings");
   s.crossings.forEach((c) => {
-    // suppress noisy % swings on tiny bases
-    const wow = c.lbs > 1e6 ? deltaHtml(c.wow_pct) : "";
+    // Small-base crossings (Otay Mesa, Nogales) can post huge % swings off a
+    // near-zero base. Rather than hide them — a doubling is the largest move on
+    // the panel and shouldn't be invisible — show them with a "low base"
+    // qualifier so the reader weights them correctly against Pharr's ~26M.
+    const wow =
+      c.wow_pct === null || c.wow_pct === undefined
+        ? ""
+        : c.lbs > 1e6
+          ? deltaHtml(c.wow_pct)
+          : `${deltaHtml(c.wow_pct)} <span class="lowbase">low base</span>`;
     crossBox.appendChild(
       el(
         "div",
@@ -244,8 +266,10 @@ function renderPricing(data) {
   const bYrs = p.benchmark.baseline_years || 3;
   const bandLowLabel = `${bYrs}-yr seasonal 25th percentile`;
   const bandHighLabel = `${bYrs}-yr seasonal 25th–75th percentile`;
+  const benchWeek = p.benchmark.week ? ` · week ending ${dayLabel(p.benchmark.week)}` : "";
   document.getElementById("pricing-sub").textContent =
-    p.benchmark.label + ` — vs its ${bYrs}-yr seasonal 25th–75th percentile band`;
+    p.benchmark.label +
+    ` — vs its ${bYrs}-yr seasonal 25th–75th percentile band${benchWeek}`;
 
   new Chart(document.getElementById("priceChart"), {
     type: "line",
@@ -364,7 +388,9 @@ function renderPricing(data) {
       el(
         "p",
         "panel-sub",
-        `Daily shipping-point report, ${p.report_date} · Hass, 2-layer cartons, conventional`,
+        `Current market, ${dayLabel(p.report_date)} (daily shipping-point report) · ` +
+          `Hass, 2-layer cartons, conventional — a few days after the weekly benchmark above, ` +
+          `so figures differ.`,
       ),
     );
   }
@@ -607,9 +633,12 @@ function renderEnso(data) {
   // Header LEADS with trend + direction; the band label is secondary and always
   // carries its season. Consecutive-season count distinguishes "warm anomaly"
   // from an established event.
+  // Count is labelled RONI (the led index) so it isn't read against ONI's own
+  // count, which crosses ±0.5 on a different schedule. ONI's count stays in
+  // data.json but isn't shown, to avoid implying a second authoritative figure.
   const established = e.established_event
-    ? `established event · ${e.consecutive_seasons} consecutive seasons`
-    : `${e.consecutive_seasons} consecutive season${e.consecutive_seasons === 1 ? "" : "s"} past ±0.5 — not yet an established event`;
+    ? `established event · RONI ${e.consecutive_seasons} consecutive seasons`
+    : `RONI ${e.consecutive_seasons} consecutive season${e.consecutive_seasons === 1 ? "" : "s"} past ±0.5 — not yet an established event`;
   const lag = e.lag_caveat
     ? `<p class="enso-lag">⚠ ${e.lag_caveat}.</p>`
     : "";
@@ -622,7 +651,7 @@ function renderEnso(data) {
   head.innerHTML = `
     <p class="enso-headline">${e.headline}</p>
     <p class="enso-sub"><span class="enso-band">${e.phase_with_season}</span> · ${established}</p>
-    <p class="enso-oni">RONI led (CPC's official basis); ${oniTxt} shown alongside.</p>
+    <p class="enso-oni">RONI led (CPC's basis for current probabilities); ${oniTxt} shown alongside.</p>
     ${lag}${fwdNote}`;
 
   // Trend chart — RONI led, ONI alongside, reusing the diesel/supply chart look.

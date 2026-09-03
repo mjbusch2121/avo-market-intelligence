@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-09-02T22:52:17Z",
+ "generated_at": "2026-09-02T23:29:19Z",
  "week": {
   "end": "2026-08-29",
   "label": "Week ending Aug 29, 2026"
  },
- "headline": "Mexico crossing volume up 82.0% week-over-week; Texas-crossing Hass 48s FOB softened 9.3% at $29.25; LA/Dallas freight soft/flat; diesel down 0.05 at $5.60/gal; Eje Cafetero weather bears watching.",
+ "headline": "Mexico crossing volume up 82.0% week-over-week; Texas-crossing Hass 48s FOB softened 9.3% at $29.25; LA/Dallas freight soft/flat, Philadelphia down 5%; diesel down 0.05 at $5.60/gal; Eje Cafetero weather bears watching.",
  "headline_asof": "Supply & pricing wk ending 2026-08-29 \u00b7 Freight 2026-08-25 \u00b7 Diesel 2026-08-31",
  "signals": [
   "El Ni\u00f1o strengthening \u2014 RONI +0.98 (MJJ 2026), up from -0.44 three seasons ago; the 3-month seasonal mean trails a fast-developing event, so the current state is likely stronger than the season label. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. Forward: Michoac\u00e1n / Jalisco \u2014 the Aug-Sep Loca bloom is setting the May-Sep 2027 crop.",
   "Total arrivals are running 25% above the 4-year seasonal average (60.1M lbs this week).",
-  "Mexico crossings jumped 82% week-over-week \u2014 an unusually large move for this point in the season (largest same-week move in 4 seasons of history).",
+  "Mexico crossings jumped 82% week-over-week to 52.9M lbs \u2014 42% above the 4-year seasonal norm, and the largest same-week move in 4 seasons of history.",
   "Benchmark Hass 48s FOB is at the lower edge of its 4-year seasonal 25th\u201375th band \u2014 soft for this week.",
   "Eje Cafetero (Manizales area): Heavy rain ahead (321 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks."
  ],
@@ -30,13 +30,13 @@
    "label": "Hass 48s FOB (TX)",
    "value": "$29.25",
    "delta_pct": -9.3,
-   "sub": "vs prior week"
+   "sub": "wk ending Aug 29 \u00b7 vs prior week"
   },
   {
    "label": "Freight: S. Texas crossings \u2192 LA",
    "value": "$2,600\u20133,400",
    "delta_pct": -3,
-   "sub": "S. Texas crossings (McAllen/Pharr)"
+   "sub": "vs prior wk \u00b7 from S. Texas crossings (McAllen/Pharr)"
   },
   {
    "label": "US diesel",
@@ -542,7 +542,8 @@
    "wow_ca_pct": -4.8,
    "band_position_pct": 25,
    "baseline_n": 20,
-   "baseline_years": 4
+   "baseline_years": 4,
+   "week": "2026-08-29"
   },
   "report_date": "2026-09-01",
   "table": [
@@ -2265,7 +2266,7 @@
   "steep": true,
   "established_event": false,
   "consecutive_seasons": 1,
-  "phase_with_season": "weak El Ni\u00f1o (MJJ 2026)",
+  "phase_with_season": "weak El Ni\u00f1o +0.98 (MJJ 2026)",
   "headline": "El Ni\u00f1o strengthening \u2014 RONI +0.98 (MJJ 2026), up from -0.44 three seasons ago",
   "lag_caveat": "the 3-month seasonal mean trails a fast-developing event, so the current state is likely stronger than the season label",
   "signal_fire": true,
@@ -2535,7 +2536,8 @@
  },
  "meta": {
   "notes": [
-   "California movement for the latest week appears partially reported by USDA; week-over-week and seasonal comparisons suppressed until revised."
+   "California movement for the latest week appears partially reported by USDA; week-over-week and seasonal comparisons suppressed until revised.",
+   "Price benchmark: 1 of 324 rows (0%) used range-basis midpoint (USDA 'mostly' absent that day)."
   ],
   "sources": [
    {

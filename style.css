@@ -181,6 +181,12 @@ h1, h2, h3 { font-family: var(--display); margin: 0; }
 .delta.up { color: var(--green); }
 .delta.down { color: var(--clay); }
 .delta.flat { color: var(--muted); }
+.lowbase {
+  font-size: 10px;
+  color: var(--muted);
+  font-style: italic;
+  white-space: nowrap;
+}
 
 /* ---------- signals ---------- */
 
