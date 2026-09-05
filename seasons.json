@@ -1,9 +1,9 @@
 {
-  "_comment": "Single source of truth for regional season windows, meaning when fruit ARRIVES in the US market (used by the supply panel). NOT in-country harvest dates — for grower-side phenology (harvest/flowering/sizing on the weather panel) see crop_calendar.json. The peru/colombia entries here are FUTURE arrival-window placeholders and must not be overwritten with harvest dates. Dates are month-day (MM-DD); windows may wrap the new year. 'grace_weeks' = how many weeks past window edges data may still trickle in before a gap counts as unexpected. Edit this file at the March/September checkpoints — nothing else needs to change for a normal season transition.",
+  "_comment": "Single source of truth for regional season windows, meaning when fruit ARRIVES in the US market (used by the supply panel). NOT in-country harvest dates — for grower-side phenology (harvest/flowering/sizing on the weather panel) see crop_calendar.json. Supply is now grouped by ORIGIN, so peru/colombia/chile/other are LIVE separately-tracked regions (no longer future placeholders); their windows are US arrival windows and must not be overwritten with in-country harvest dates. Dates are month-day (MM-DD); windows may wrap the new year. 'grace_weeks' = how many weeks past window edges data may still trickle in before a gap counts as unexpected. Edit this file at the March/September checkpoints — nothing else needs to change for a normal season transition.",
   "regions": [
     {
       "key": "mx",
-      "name": "Mexico crossings",
+      "name": "Mexico",
       "window": { "start": "01-01", "end": "12-31" },
       "grace_weeks": 0,
       "resume_hint": null,
@@ -18,20 +18,12 @@
       "notes": "CA harvest typically spring through late summer. USDA reporting often trails the field by a couple weeks on both ends — hence the grace window."
     },
     {
-      "key": "ports",
-      "name": "Seaport/other imports",
-      "window": { "start": "01-01", "end": "12-31" },
-      "grace_weeks": 2,
-      "resume_hint": null,
-      "notes": "Aggregate of all seaborne arrivals (Peru, Colombia, Chile, DR...). Some origin is almost always shipping, so treated as year-round but with grace since the mix shifts."
-    },
-    {
       "key": "peru",
       "name": "Peru imports",
       "window": { "start": "05-15", "end": "09-15" },
       "grace_weeks": 2,
       "resume_hint": "resumes ~late May",
-      "notes": "FUTURE — not yet a separately tracked region. Window included now so the config is ready when a fetcher is added. See SEASONAL_INTEGRATION.md, Future Elements."
+      "notes": "Live separately-tracked region. Peru ships to the US roughly late spring through early fall."
     },
     {
       "key": "colombia",
@@ -39,7 +31,23 @@
       "window": { "start": "01-01", "end": "12-31" },
       "grace_weeks": 4,
       "resume_hint": null,
-      "notes": "FUTURE — Colombia ships in multiple flushes with variable timing; treated year-round with a wide grace window rather than hard edges."
+      "notes": "Live separately-tracked region. Colombia ships in multiple flushes with variable timing; treated year-round with a wide grace window rather than hard edges."
+    },
+    {
+      "key": "chile",
+      "name": "Chile imports",
+      "window": { "start": "10-01", "end": "02-28" },
+      "grace_weeks": 3,
+      "resume_hint": "resumes ~mid-fall",
+      "notes": "PROVISIONAL window. Chilean Hass arrives counter-season (roughly Oct through Feb, concentrated around Dec-Jan); dates inferred from history, not a published schedule. Widen if arrivals appear outside it."
+    },
+    {
+      "key": "other",
+      "name": "Other imports (mainly Dominican Republic)",
+      "window": { "start": "01-01", "end": "12-31" },
+      "grace_weeks": 2,
+      "resume_hint": null,
+      "notes": "Aggregate of everything not separately tracked — Dominican Republic (the bulk), Florida, Jamaica, Grenada, New Zealand. Some origin is almost always shipping, so year-round with grace since the mix shifts."
     }
   ]
 }

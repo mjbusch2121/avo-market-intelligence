@@ -28,19 +28,17 @@ RECENCY_CUTOFF_DAYS = 180      # unchanged; was hardcoded as timedelta(days=180)
 
 # Week-over-week magnitude signals. A move fires only when it is BOTH
 # seasonally unusual (>= this percentile of same-week history) AND materially
-# large (>= the per-series floor below). Floors were calibrated against the
-# committed histories, not guessed: each sits near the series' own 90-95th
-# percentile of abs(week-over-week %). The mx floor is deliberately just below
-# the 90th percentile so genuinely large late-season moves still clear it.
+# large (>= the per-series floor below).
+#
+# PRICE ONLY. Volume series (mx, imports) were removed: USDA weekly movement
+# attributes the same shipments to different weeks than AVIS does — a big weekly
+# volume "move" measures when reporting landed, not what shipped, and cannot
+# survive the underlying data quality. Rolling-4 volume (the honest unit) lives
+# on the headline and region rows instead. Price comes from daily shipping-point
+# quotes, which have no such attribution problem, so its WoW stays meaningful.
 WOW_SEASONAL_PCTILE = 90        # move must rank this high among same-week history
 WOW_FLOORS = {                  # ...AND exceed this absolute magnitude (%)
     "price_mx": 12.0,   # ~90th pct of abs(wow); pinned <=21.8 by 2026-08-22
-    "mx": 35.0,         # pinned <=36.6 so the current week's drop clears it
-    "ports": 90.0,      # high on purpose: the seaport swing signal already
-                        #   covers moves >=20%, so only flag extreme moves
-    # California is intentionally excluded: its week-over-week % explodes off a
-    # near-zero base during season transitions (+400% to +1700%), which is a
-    # low-base artifact, not tradable intelligence. See _wow_candidates.
 }
 MAX_WOW_SIGNALS = 2             # report at most the N largest; do not flood the box
 
@@ -110,12 +108,36 @@ def iso_week(d: str) -> int:
     return date.fromisoformat(d).isocalendar().week
 
 
-def region_of(district: str) -> str:
-    if district.startswith("MEXICO CROSSINGS"):
-        return "mx"
-    if "CALIFORNIA" in district:
-        return "ca"
-    return "ports"
+# Supply is grouped by ORIGIN (the third field of each movement key), not by a
+# substring of the district name. The old district-substring routing misrouted
+# "IMPORTS THROUGH LOS ANGELES-LONG BEACH CALIFORNIA | Peru" into California and
+# "SOUTH FLORIDA | Florida" into seaport imports. Origin is unambiguous.
+ORIGIN_REGION = {
+    "Mexico": "mx",
+    "California-South": "ca",
+    "Peru": "peru",
+    "Colombia": "colombia",
+    "Chile": "chile",
+}
+REGION_ORDER = ["mx", "ca", "peru", "colombia", "chile", "other"]
+# Import origins (everything shipped in that isn't Mexican or Californian). Used
+# for the aggregate "seaport imports" swing signal, which watches the total, not
+# a single origin line.
+IMPORT_KEYS = ["peru", "colombia", "chile", "other"]
+REGION_NAMES = {
+    "mx": "Mexico",
+    "ca": "California",
+    "peru": "Peru",
+    "colombia": "Colombia",
+    "chile": "Chile",
+    "other": "Other imports (mainly Dominican Republic)",
+}
+
+
+def region_of(origin: str) -> str:
+    """Bucket a movement row by its ORIGIN string. Anything not separately
+    tracked (Dominican Republic, Florida, Jamaica, Grenada, NZ...) → 'other'."""
+    return ORIGIN_REGION.get(origin, "other")
 
 
 def pct(new, old):
@@ -158,12 +180,12 @@ def is_hass_benchmark(row) -> bool:
 # ---------------------------------------------------------------
 
 def build_supply(movement: dict, notes: list) -> dict:
-    weekly = {}      # week_end -> {mx, ca, ports}
+    weekly = {}      # week_end -> {mx, ca, peru, colombia, chile, other}
     by_district = {} # week_end -> {district: lbs}
     for key, lbs in movement.items():
-        week, district, _origin = key.split("|", 2)
-        weekly.setdefault(week, {"mx": 0, "ca": 0, "ports": 0})
-        weekly[week][region_of(district)] += lbs
+        week, district, origin = key.split("|", 2)
+        weekly.setdefault(week, {k: 0 for k in REGION_ORDER})
+        weekly[week][region_of(origin)] += lbs
         by_district.setdefault(week, {})
         by_district[week][district] = by_district[week].get(district, 0) + lbs
 
@@ -209,14 +231,24 @@ def build_supply(movement: dict, notes: list) -> dict:
     
     partial_keys = set()
     regions = []
-    for key, name in (("mx", "Mexico crossings"),
-                      ("ca", "California"),
-                      ("ports", "Seaport/other imports")):
+    for key in REGION_ORDER:
+        name = REGION_NAMES[key]
         cur = weekly[cur_w][key]
         pri = weekly[prior_w][key] if prior_w else 0
         avg = seasonal_avg(cur_w, lambda w, k=key: weekly[w][k])
         med = trailing_median(key)
         season = classify(key, last_reported_week(key))
+
+        # Rolling 4-week volume — the honest unit for this data. USDA and AVIS
+        # agree on Mexico's 4-week total but disagree by up to 20M on which week
+        # fruit landed in, so weekly changes measure reporting timing, not
+        # shipments. Rolling-4 converges across sources; weekly bars stay as
+        # detail but must not drive a headline or signal. Needs 8 weeks.
+        roll4_lbs = (sum(weekly[w][key] for w in weeks[-4:])
+                     if len(weeks) >= 4 else None)
+        roll4_prior_lbs = (sum(weekly[w][key] for w in weeks[-8:-4])
+                           if len(weeks) >= 8 else None)
+        roll4_pct = (pct(roll4_lbs, roll4_prior_lbs) if roll4_prior_lbs else None)
 
         # An out-of-season region reporting near zero is a KNOWN zero, not a
         # missing report. Only an in-season region can be "partially reported".
@@ -228,10 +260,16 @@ def build_supply(movement: dict, notes: list) -> dict:
             notes.append(f"{name} movement for the latest week appears "
                          "partially reported by USDA; week-over-week and "
                          "seasonal comparisons suppressed until revised.")
+            # A partial current week understates roll4_lbs, so suppress the %
+            # just like wow_pct / vs_3yr_pct.
+            roll4_pct = None
         regions.append({
             "key": key, "name": name, "lbs": cur,
             "partial": partial,
             "wow_pct": None if partial else pct(cur, pri),
+            "roll4_lbs": roll4_lbs,
+            "roll4_prior_lbs": roll4_prior_lbs,
+            "roll4_pct": roll4_pct,
             "vs_3yr_pct": None if partial or not avg else pct(cur, avg),
             "season": season,
         })
@@ -251,7 +289,7 @@ def build_supply(movement: dict, notes: list) -> dict:
 
     # totals & comparisons over reliably-reported regions only
     def total_reliable(w):
-        return sum(weekly[w][k] for k in ("mx", "ca", "ports")
+        return sum(weekly[w][k] for k in REGION_ORDER
                    if k not in partial_keys)
 
     # Trend chart's seasonal-average line uses total_reliable — the SAME basis as
@@ -261,13 +299,10 @@ def build_supply(movement: dict, notes: list) -> dict:
     trend = []
     for w in weeks[-TREND_WEEKS:]:
         _avg = seasonal_avg(w, total_reliable)
-        trend.append({
-            "week": w,
-            "mx": weekly[w]["mx"],
-            "ca": weekly[w]["ca"],
-            "ports": weekly[w]["ports"],
-            "avg3yr": round(_avg) if _avg else None,
-        })
+        row = {"week": w, "avg3yr": round(_avg) if _avg else None}
+        for k in REGION_ORDER:
+            row[k] = weekly[w][k]
+        trend.append(row)
 
     rel_sample = seasonal_sample(cur_w, total_reliable)
     avg_rel = statistics.mean(rel_sample) if rel_sample else None
@@ -278,21 +313,41 @@ def build_supply(movement: dict, notes: list) -> dict:
                           if _iso_week_distance(iso_week(w), wn_cur) <= SEASONAL_WINDOW_WEEKS
                           and date.fromisoformat(w) < cutoff_cur})
     excluded = sorted(partial_keys)
-    # Per-region weekly series {week: lbs}, exposed for the week-over-week
-    # magnitude signal so it reuses these totals instead of re-parsing history.
-    region_wow_series = {
-        k: {w: weekly[w][k] for w in weeks}
-        for k in ("mx", "ports")
+
+    # "Seaport imports" is now an AGGREGATE of the four import origins, not a
+    # single region line. The swing signal watches the total (Peru + Colombia +
+    # Chile + other), so build a per-week series for it and a current-week
+    # summary. Suppress its wow if any import origin is partial this week.
+    def imports_total(w):
+        return sum(weekly[w][k] for k in IMPORT_KEYS)
+    imports_partial = bool(partial_keys & set(IMPORT_KEYS))
+    imports_agg = {
+        "lbs": imports_total(cur_w),
+        "wow_pct": (None if imports_partial or not prior_w
+                    else pct(imports_total(cur_w), imports_total(prior_w))),
     }
+
+    # Rolling 4-week total over the SAME reliable regions as total_reliable, for
+    # the headline and total KPI — the stable read that both data sources agree on.
+    def roll_sum_reliable(wk_slice):
+        return sum(weekly[w][k] for w in wk_slice
+                   for k in REGION_ORDER if k not in partial_keys)
+    total_roll4_lbs = roll_sum_reliable(weeks[-4:]) if len(weeks) >= 4 else None
+    total_roll4_prior = roll_sum_reliable(weeks[-8:-4]) if len(weeks) >= 8 else None
+    total_roll4_pct = (pct(total_roll4_lbs, total_roll4_prior)
+                       if total_roll4_prior else None)
+
     return {
         "week_end": cur_w,
-        "series": region_wow_series,
+        "imports_agg": imports_agg,
         "total_lbs": total_reliable(cur_w),
         "total_lbs_all_regions": total(cur_w),
         "total_excludes": excluded,
         "total_wow_pct": pct(total_reliable(cur_w), total_reliable(prior_w))
                          if prior_w else None,
         "total_vs_3yr_pct": pct(total_reliable(cur_w), avg_rel) if avg_rel else None,
+        "total_roll4_lbs": total_roll4_lbs,
+        "total_roll4_pct": total_roll4_pct,
         "baseline_n": baseline_n,
         "baseline_years": baseline_years,
         "partial_regions": sorted(partial_keys),
@@ -734,8 +789,14 @@ def direction_word(p, up="up", down="down", flat="flat", decimals=0):
 def build_headline(supply, pricing, freight, diesel, weather) -> str:
     parts = []
     if supply:
-        parts.append(f"Mexico crossing volume "
-                     f"{direction_word(next((r['wow_pct'] for r in supply['regions'] if r['key'] == 'mx'), None), decimals=1)} week-over-week")
+        # Lead with the rolling 4-week total, the unit both data sources agree on.
+        # A single week (or one week vs a 4-week average) still carries the
+        # attribution noise; the 4-week TOTAL vs the prior four weeks does not.
+        mx = next((r for r in supply["regions"] if r["key"] == "mx"), None)
+        if mx and mx.get("roll4_lbs") is not None:
+            move = direction_word(mx.get("roll4_pct"), decimals=0)
+            parts.append(f"Mexico 4-week volume {mx['roll4_lbs'] / 1e6:.1f}M lbs, "
+                         f"{move} vs the prior four weeks")
     bm = (pricing or {}).get("benchmark") or {}
     if bm.get("mx_latest") is not None:
         w = bm.get("wow_mx_pct")
@@ -810,8 +871,10 @@ def active_import_origins() -> str:
 
     today = date.today()
     seasons = load_seasons()
+    # Keys now match the live origin regions. Dominican Republic ships inside the
+    # year-round 'other' aggregate, so it surfaces via that key.
     names = {"peru": "Peru", "colombia": "Colombia", "chile": "Chile",
-             "dr": "DR", "dominican": "DR"}
+             "other": "DR/other"}
     active = [label for key, label in names.items()
               if key in seasons and in_window(seasons[key], today)]
     return "/".join(dict.fromkeys(active))
@@ -906,25 +969,18 @@ def _wow_history_years(series_by_week, week_str):
 def _wow_candidates(supply, pricing):
     """(key, label, wow_pct, series_dict, week) tuples for the tracked series.
 
-    Covers Mexico crossings, seaport imports, and the Texas-crossing FOB
-    benchmark. California is deliberately omitted — its wow% is a low-base
-    artifact during season transitions (see WOW_FLOORS).
+    PRICE ONLY (the Texas-crossing FOB benchmark). Volume series were dropped:
+    weekly USDA movement attributes the same shipments to different weeks than
+    AVIS does, so a weekly volume "move" measures reporting timing, not what
+    shipped. Price is a daily shipping-point quote with no such attribution
+    problem, so its WoW remains meaningful. `supply` is kept in the signature
+    for the caller and in case a volume series ever regains weekly integrity.
 
-    wow_pct is already None for anything flagged partial (regions null it,
-    build_pricing nulls a thin benchmark), so the caller's `wow is None` guard
-    skips partial regions with no special-casing. `week` is each series' own
-    latest week, used to centre the same-week history window.
+    wow_pct is already None when build_pricing nulls a thin benchmark, so the
+    caller's `wow is None` guard skips it. `week` is the series' own latest week,
+    used to centre the same-week history window.
     """
     out = []
-    regions = {r["key"]: r for r in (supply or {}).get("regions", [])}
-    series = (supply or {}).get("series", {})
-    supply_week = (supply or {}).get("week_end")
-    for key, label in (("mx", "Mexico crossings"),
-                       ("ports", "Seaport/other imports")):
-        r = regions.get(key)
-        if r is not None and key in series:
-            out.append((key, label, r.get("wow_pct"), series[key], supply_week))
-
     bm = (pricing or {}).get("benchmark") or {}
     mx_series = (pricing or {}).get("mx_series") or {}
     if mx_series:
@@ -995,10 +1051,14 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
                        if rank >= 95
                        else f"among the largest same-week moves in {yrs} seasons")
 
-        # Current level: volume for supply regions, price for the FOB benchmark.
+        # Current level: volume for supply regions and the imports aggregate,
+        # price for the FOB benchmark.
         r = regions_by_key.get(key)
+        imp = (supply or {}).get("imports_agg") if key == "imports" else None
         if r is not None:
             level = f" to {r['lbs'] / 1e6:.1f}M lbs"
+        elif imp is not None:
+            level = f" to {imp['lbs'] / 1e6:.1f}M lbs"
         elif key == "price_mx" and bm.get("mx_latest") is not None:
             level = f" to ${bm['mx_latest']:.2f}"
         else:
@@ -1019,16 +1079,16 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
                        f"— an unusually large move for this point in the season "
                        f"({rank_phrase}).")
 
-    # 2. Seaport imports — only on a real swing, with season-aware origins
-    ports = next((r for r in (supply or {}).get("regions", [])
-                  if r["key"] == "ports"), None)
-    if ports and ports["lbs"] > 0 and ports.get("wow_pct") is not None:
-        w = ports["wow_pct"]
+    # 2. Seaport imports — only on a real swing, with season-aware origins. Keyed
+    # on the imports AGGREGATE (Peru + Colombia + Chile + other), not a single line.
+    imp = (supply or {}).get("imports_agg")
+    if imp and imp["lbs"] > 0 and imp.get("wow_pct") is not None:
+        w = imp["wow_pct"]
         if abs(w) >= PORTS_WOW:
             origins = active_import_origins()
             who = f" ({origins})" if origins else ""
             sig.append(f"Seaport imports{who} moved "
-                       f"{direction_word(w)} to {ports['lbs'] / 1e6:.1f}M lbs — "
+                       f"{direction_word(w)} to {imp['lbs'] / 1e6:.1f}M lbs — "
                        "watch East Coast spot pressure.")
 
     # 3. Benchmark FOB — only when genuinely cheap or expensive for the week
@@ -1151,7 +1211,7 @@ def build_kpis(supply, pricing, freight, diesel) -> list:
     kpis = []
     mx = next((r for r in (supply or {}).get("regions", []) if r["key"] == "mx"), None)
     if mx:
-        kpis.append({"label": "MX crossing volume", "value": f"{mx['lbs'] / 1e6:.1f}M lbs",
+        kpis.append({"label": "Mexico volume", "value": f"{mx['lbs'] / 1e6:.1f}M lbs",
                      "delta_pct": mx["wow_pct"], "sub": "vs prior week"})
     if supply and supply.get("total_vs_3yr_pct") is not None:
         excl = supply.get("total_excludes") or []
@@ -1243,11 +1303,10 @@ def main():
     label = (datetime.fromisoformat(week_end).strftime("Week ending %b %d, %Y")
              if week_end else "—")
 
-    # Signals need the full weekly series exposed on supply/pricing; the front
-    # end does not. Build signals first, then strip those internal series so
-    # they don't balloon data.json with years of history it never reads.
+    # The price WoW signal needs the full weekly benchmark series exposed on
+    # pricing; the front end does not. Build signals first, then strip it so it
+    # doesn't balloon data.json with years of history it never reads.
     signals = build_signals(supply, pricing, freight, diesel, weather, feeds, enso)
-    supply.pop("series", None)
     pricing.pop("mx_series", None)
 
     data = {

@@ -13,6 +13,21 @@ const C = {
 
 const CLAUSE_COLORS = [C.green, C.flesh, C.seed, C.muted, C.sky];
 
+// Supply regions in stack order, with a colour from the existing palette. Both
+// the per-region rows and the stacked trend chart drive off this list, so the
+// two never drift out of sync.
+const SUPPLY_REGIONS = [
+  { key: "mx", label: "Mexico", color: C.green },
+  { key: "ca", label: "California", color: C.flesh },
+  { key: "peru", label: "Peru", color: C.seed },
+  { key: "colombia", label: "Colombia", color: C.clay },
+  { key: "chile", label: "Chile", color: C.sky },
+  { key: "other", label: "Other imports", color: C.muted },
+];
+const REGION_COLOR = Object.fromEntries(
+  SUPPLY_REGIONS.map((r) => [r.key, r.color]),
+);
+
 const fmtM = (lbs) => (lbs / 1e6).toFixed(1) + "M";
 const fmtMoney = (v) => "$" + Number(v).toFixed(2);
 
@@ -128,7 +143,7 @@ function renderSupply(data) {
 
   const regionsBox = document.getElementById("supply-regions");
   s.regions.forEach((r) => {
-    const dotColor = { mx: C.green, ca: C.flesh, ports: C.seed }[r.key];
+    const dotColor = REGION_COLOR[r.key] || C.muted;
     const st = r.season?.status || "active";
 
     // Out-of-season / gap: show the message instead of numbers
@@ -148,9 +163,14 @@ function renderSupply(data) {
       return;
     }
 
+    // A region rounding to ~0 shouldn't show a percentage: a ±100% swing off a
+    // sub-100K base is a low-base artifact, not intelligence (same treatment as
+    // small-base crossings). Below the floor, show the volume and a muted note.
     const comps = r.partial
       ? '<span class="badge partial">partial data</span>'
-      : `${deltaHtml(r.wow_pct)} wow${r.vs_3yr_pct !== null ? " · " + deltaHtml(r.vs_3yr_pct) + " 3yr" : ""}`;
+      : r.lbs < 100000
+        ? '<span class="lowbase">low volume this week</span>'
+        : `${deltaHtml(r.wow_pct)} wow${r.vs_3yr_pct !== null ? " · " + deltaHtml(r.vs_3yr_pct) + " 3yr" : ""}`;
     regionsBox.appendChild(
       el(
         "div",
@@ -189,27 +209,13 @@ function renderSupply(data) {
     data: {
       labels: s.trend.map((t) => t.week),
       datasets: [
-        {
+        ...SUPPLY_REGIONS.map((reg) => ({
           type: "bar",
-          label: "Mexico crossings",
-          data: s.trend.map((t) => t.mx),
-          backgroundColor: C.green,
+          label: reg.label,
+          data: s.trend.map((t) => t[reg.key]),
+          backgroundColor: reg.color,
           stack: "vol",
-        },
-        {
-          type: "bar",
-          label: "California",
-          data: s.trend.map((t) => t.ca),
-          backgroundColor: C.flesh,
-          stack: "vol",
-        },
-        {
-          type: "bar",
-          label: "Seaport/other",
-          data: s.trend.map((t) => t.ports),
-          backgroundColor: C.seed,
-          stack: "vol",
-        },
+        })),
         {
           type: "line",
           label:

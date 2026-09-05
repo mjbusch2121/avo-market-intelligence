@@ -1,30 +1,30 @@
 {
- "generated_at": "2026-09-02T23:29:19Z",
+ "generated_at": "2026-09-05T20:17:14Z",
  "week": {
   "end": "2026-08-29",
   "label": "Week ending Aug 29, 2026"
  },
- "headline": "Mexico crossing volume up 82.0% week-over-week; Texas-crossing Hass 48s FOB softened 9.3% at $29.25; LA/Dallas freight soft/flat, Philadelphia down 5%; diesel down 0.05 at $5.60/gal; Eje Cafetero weather bears watching.",
+ "headline": "Mexico 4-week volume 171.7M lbs, up 12% vs the prior four weeks; Texas-crossing Hass 48s FOB softened 9.3% at $29.25; LA/Dallas freight soft/flat, Philadelphia down 5%; diesel down 0.05 at $5.60/gal; Eje Cafetero weather bears watching.",
  "headline_asof": "Supply & pricing wk ending 2026-08-29 \u00b7 Freight 2026-08-25 \u00b7 Diesel 2026-08-31",
  "signals": [
   "El Ni\u00f1o strengthening \u2014 RONI +0.98 (MJJ 2026), up from -0.44 three seasons ago; the 3-month seasonal mean trails a fast-developing event, so the current state is likely stronger than the season label. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. Forward: Michoac\u00e1n / Jalisco \u2014 the Aug-Sep Loca bloom is setting the May-Sep 2027 crop.",
-  "Total arrivals are running 25% above the 4-year seasonal average (60.1M lbs this week).",
-  "Mexico crossings jumped 82% week-over-week to 52.9M lbs \u2014 42% above the 4-year seasonal norm, and the largest same-week move in 4 seasons of history.",
+  "Total arrivals are running 22% above the 4-year seasonal average (61.6M lbs this week).",
   "Benchmark Hass 48s FOB is at the lower edge of its 4-year seasonal 25th\u201375th band \u2014 soft for this week.",
+  "Freight rates shown are 11 days old \u2014 the USDA truck rate report has not refreshed; treat lane costs as indicative.",
   "Eje Cafetero (Manizales area): Heavy rain ahead (321 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks."
  ],
  "kpis": [
   {
-   "label": "MX crossing volume",
+   "label": "Mexico volume",
    "value": "52.9M lbs",
-   "delta_pct": 82.0,
+   "delta_pct": 81.9,
    "sub": "vs prior week"
   },
   {
    "label": "Total arrivals vs 4-yr avg",
-   "value": "+25%",
+   "value": "+22%",
    "delta_pct": null,
-   "sub": "60.1M lbs this week (excl. CA \u2014 pending)"
+   "sub": "61.6M lbs this week (excl. CA \u2014 pending)"
   },
   {
    "label": "Hass 48s FOB (TX)",
@@ -47,39 +47,39 @@
  ],
  "feeds": {
   "supply": {
-   "fetched_at": "2026-09-01T22:21:02+00:00",
-   "fetch_age_days": 1,
+   "fetched_at": "2026-09-03T00:08:19+00:00",
+   "fetch_age_days": 2,
    "stale": false,
    "fetch_error": null
   },
   "pricing": {
-   "fetched_at": "2026-09-01T22:21:02+00:00",
-   "fetch_age_days": 1,
+   "fetched_at": "2026-09-03T00:08:19+00:00",
+   "fetch_age_days": 2,
    "stale": false,
    "fetch_error": null
   },
   "freight": {
    "fetched_at": "2026-09-01T22:21:03+00:00",
-   "fetch_age_days": 1,
+   "fetch_age_days": 3,
    "stale": false,
    "fetch_error": null
   },
   "diesel": {
    "fetched_at": "2026-09-01T22:21:07+00:00",
-   "fetch_age_days": 1,
+   "fetch_age_days": 3,
    "stale": false,
    "fetch_error": null
   },
   "weather": {
    "fetched_at": "2026-09-01T22:21:14+00:00",
-   "fetch_age_days": 1,
+   "fetch_age_days": 3,
    "stale": false,
    "fetch_error": null
   },
   "_stale_after_days": 8,
   "enso": {
    "fetched_at": "2026-08-30T03:55:12+00:00",
-   "fetch_age_days": 3,
+   "fetch_age_days": 6,
    "stale": false,
    "fetch_error": null,
    "stale_after_days": 45
@@ -87,13 +87,19 @@
  },
  "supply": {
   "week_end": "2026-08-29",
-  "total_lbs": 60111774,
+  "imports_agg": {
+   "lbs": 8653023,
+   "wow_pct": -13.1
+  },
+  "total_lbs": 61566828,
   "total_lbs_all_regions": 61566828,
   "total_excludes": [
    "ca"
   ],
-  "total_wow_pct": 61.8,
-  "total_vs_3yr_pct": 25.2,
+  "total_wow_pct": 57.7,
+  "total_vs_3yr_pct": 22.4,
+  "total_roll4_lbs": 211993503,
+  "total_roll4_pct": -3.1,
   "baseline_n": 20,
   "baseline_years": 4,
   "partial_regions": [
@@ -102,11 +108,14 @@
   "regions": [
    {
     "key": "mx",
-    "name": "Mexico crossings",
-    "lbs": 52867341,
+    "name": "Mexico",
+    "lbs": 52913805,
     "partial": false,
-    "wow_pct": 82.0,
-    "vs_3yr_pct": 42.1,
+    "wow_pct": 81.9,
+    "roll4_lbs": 171705884,
+    "roll4_prior_lbs": 153608488,
+    "roll4_pct": 11.8,
+    "vs_3yr_pct": 42.2,
     "season": {
      "status": "active",
      "message": null,
@@ -116,10 +125,29 @@
    {
     "key": "ca",
     "name": "California",
-    "lbs": 1455054,
+    "lbs": 0,
     "partial": true,
     "wow_pct": null,
+    "roll4_lbs": 28903938,
+    "roll4_prior_lbs": 65282212,
+    "roll4_pct": null,
     "vs_3yr_pct": null,
+    "season": {
+     "status": "active",
+     "message": null,
+     "last_reported": "2026-08-22"
+    }
+   },
+   {
+    "key": "peru",
+    "name": "Peru",
+    "lbs": 5931285,
+    "partial": false,
+    "wow_pct": -20.1,
+    "roll4_lbs": 29450710,
+    "roll4_prior_lbs": 50302996,
+    "roll4_pct": -41.5,
+    "vs_3yr_pct": -38.8,
     "season": {
      "status": "active",
      "message": null,
@@ -127,12 +155,47 @@
     }
    },
    {
-    "key": "ports",
-    "name": "Seaport/other imports",
-    "lbs": 7244433,
+    "key": "colombia",
+    "name": "Colombia",
+    "lbs": 95632,
     "partial": false,
-    "wow_pct": -10.7,
-    "vs_3yr_pct": -32.9,
+    "wow_pct": null,
+    "roll4_lbs": 429269,
+    "roll4_prior_lbs": 3497863,
+    "roll4_pct": -87.7,
+    "vs_3yr_pct": -90.3,
+    "season": {
+     "status": "active",
+     "message": null,
+     "last_reported": "2026-08-29"
+    }
+   },
+   {
+    "key": "chile",
+    "name": "Chile",
+    "lbs": 0,
+    "partial": false,
+    "wow_pct": -100.0,
+    "roll4_lbs": 1306,
+    "roll4_prior_lbs": 0,
+    "roll4_pct": null,
+    "vs_3yr_pct": -100.0,
+    "season": {
+     "status": "active",
+     "message": null,
+     "last_reported": "2026-08-22"
+    }
+   },
+   {
+    "key": "other",
+    "name": "Other imports (mainly Dominican Republic)",
+    "lbs": 2626106,
+    "partial": false,
+    "wow_pct": 3.9,
+    "roll4_lbs": 10406334,
+    "roll4_prior_lbs": 11475796,
+    "roll4_pct": -9.3,
+    "vs_3yr_pct": 11.8,
     "season": {
      "status": "active",
      "message": null,
@@ -169,367 +232,523 @@
   "trend": [
    {
     "week": "2025-09-06",
+    "avg3yr": 48432220,
     "mx": 39552417,
-    "ca": 7320420,
-    "ports": 7564408,
-    "avg3yr": 46575614
+    "ca": 5015758,
+    "peru": 6943528,
+    "colombia": 807974,
+    "chile": 0,
+    "other": 2117568
    },
    {
     "week": "2025-09-13",
+    "avg3yr": 47868738,
     "mx": 50606265,
-    "ca": 7649434,
-    "ports": 9970305,
-    "avg3yr": 46256971
+    "ca": 5923881,
+    "peru": 8264236,
+    "colombia": 743202,
+    "chile": 0,
+    "other": 2688420
    },
    {
     "week": "2025-09-20",
-    "mx": 47759054,
-    "ca": 5692380,
-    "ports": 10020766,
-    "avg3yr": 47208678
+    "avg3yr": 48579207,
+    "mx": 47758979,
+    "ca": 4341683,
+    "peru": 7741619,
+    "colombia": 956537,
+    "chile": 0,
+    "other": 2673382
    },
    {
     "week": "2025-09-27",
+    "avg3yr": 50978950,
     "mx": 47338358,
-    "ca": 5626192,
-    "ports": 6714153,
-    "avg3yr": 49694051
+    "ca": 4400108,
+    "peru": 4700218,
+    "colombia": 385081,
+    "chile": 0,
+    "other": 2854938
    },
    {
     "week": "2025-10-04",
+    "avg3yr": 50595670,
     "mx": 43436310,
-    "ca": 4733328,
-    "ports": 5674396,
-    "avg3yr": 49455553
+    "ca": 3987270,
+    "peru": 3439498,
+    "colombia": 382440,
+    "chile": 0,
+    "other": 2598516
    },
    {
     "week": "2025-10-11",
+    "avg3yr": 51806858,
     "mx": 57174028,
-    "ca": 4959412,
-    "ports": 3621878,
-    "avg3yr": 50878767
+    "ca": 3925632,
+    "peru": 1949253,
+    "colombia": 286979,
+    "chile": 0,
+    "other": 2419426
    },
    {
     "week": "2025-10-18",
+    "avg3yr": 53668857,
     "mx": 46357443,
-    "ca": 2326822,
-    "ports": 3187901,
-    "avg3yr": 52970894
+    "ca": 2014970,
+    "peru": 1068016,
+    "colombia": 191348,
+    "chile": 184378,
+    "other": 2056011
    },
    {
     "week": "2025-10-25",
+    "avg3yr": 54179274,
     "mx": 60773128,
-    "ca": 3201173,
-    "ports": 2722901,
-    "avg3yr": 53648125
+    "ca": 2684431,
+    "peru": 0,
+    "colombia": 143448,
+    "chile": 762796,
+    "other": 2333399
    },
    {
     "week": "2025-11-01",
+    "avg3yr": 54207586,
     "mx": 58713284,
-    "ca": 2009336,
-    "ports": 3225140,
-    "avg3yr": 53825019
+    "ca": 1727638,
+    "peru": 0,
+    "colombia": 382273,
+    "chile": 595647,
+    "other": 2528918
    },
    {
     "week": "2025-11-08",
-    "mx": 55719359,
-    "ca": 1846626,
-    "ports": 3641378,
-    "avg3yr": 55386112
+    "avg3yr": 55739582,
+    "mx": 55758959,
+    "ca": 1388881,
+    "peru": 0,
+    "colombia": 95782,
+    "chile": 827451,
+    "other": 3136290
    },
    {
     "week": "2025-11-15",
+    "avg3yr": 54179198,
     "mx": 49323643,
-    "ca": 92189,
-    "ports": 2588386,
-    "avg3yr": 53866064
+    "ca": 0,
+    "peru": 0,
+    "colombia": 191348,
+    "chile": 496584,
+    "other": 1992643
    },
    {
     "week": "2025-11-22",
+    "avg3yr": 52476804,
     "mx": 59280935,
-    "ca": 605639,
-    "ports": 4351260,
-    "avg3yr": 52202198
+    "ca": 0,
+    "peru": 0,
+    "colombia": 239079,
+    "chile": 1103649,
+    "other": 3614171
    },
    {
     "week": "2025-11-29",
+    "avg3yr": 53021611,
     "mx": 53689896,
-    "ca": 92189,
-    "ports": 2565510,
-    "avg3yr": 52769272
+    "ca": 0,
+    "peru": 0,
+    "colombia": 47901,
+    "chile": 542836,
+    "other": 2066962
    },
    {
     "week": "2025-12-06",
+    "avg3yr": 53845722,
     "mx": 56937673,
-    "ca": 506944,
-    "ports": 3308429,
-    "avg3yr": 53638898
+    "ca": 0,
+    "peru": 0,
+    "colombia": 189325,
+    "chile": 958859,
+    "other": 2667189
    },
    {
     "week": "2025-12-13",
+    "avg3yr": 50880915,
     "mx": 65967588,
-    "ca": 421535,
-    "ports": 3656792,
-    "avg3yr": 50702380
+    "ca": 0,
+    "peru": 0,
+    "colombia": 184336,
+    "chile": 738969,
+    "other": 3155022
    },
    {
     "week": "2025-12-20",
-    "mx": 54593879,
-    "ca": 180523,
-    "ports": 3220945,
-    "avg3yr": 51769248
+    "avg3yr": 51909825,
+    "mx": 54636119,
+    "ca": 0,
+    "peru": 0,
+    "colombia": 377043,
+    "chile": 457142,
+    "other": 2525043
    },
    {
     "week": "2025-12-27",
+    "avg3yr": 49385855,
     "mx": 39317851,
-    "ca": 282781,
-    "ports": 2399582,
-    "avg3yr": 49277481
+    "ca": 0,
+    "peru": 0,
+    "colombia": 197100,
+    "chile": 458948,
+    "other": 2026315
    },
    {
     "week": "2026-01-03",
-    "mx": 36405001,
-    "ca": 688424,
-    "ports": 2472897,
-    "avg3yr": 48622957
+    "avg3yr": 48691762,
+    "mx": 36447241,
+    "ca": 272391,
+    "peru": 0,
+    "colombia": 334372,
+    "chile": 558012,
+    "other": 1954306
    },
    {
     "week": "2026-01-10",
-    "mx": 73702514,
-    "ca": 930200,
-    "ports": 3532241,
-    "avg3yr": 55165935
+    "avg3yr": 55287248,
+    "mx": 73783038,
+    "ca": 573208,
+    "peru": 0,
+    "colombia": 429750,
+    "chile": 460850,
+    "other": 2918109
    },
    {
     "week": "2026-01-17",
-    "mx": 53738431,
-    "ca": 1078846,
-    "ports": 3904738,
-    "avg3yr": 59041162
+    "avg3yr": 59157193,
+    "mx": 53738433,
+    "ca": 710186,
+    "peru": 11,
+    "colombia": 660373,
+    "chile": 553038,
+    "other": 3059974
    },
    {
     "week": "2026-01-24",
+    "avg3yr": 64902429,
     "mx": 60957142,
-    "ca": 777168,
-    "ports": 2184943,
-    "avg3yr": 64773896
+    "ca": 732816,
+    "peru": 0,
+    "colombia": 143448,
+    "chile": 44352,
+    "other": 2041495
    },
    {
     "week": "2026-01-31",
+    "avg3yr": 64048575,
     "mx": 92028032,
-    "ca": 1215203,
-    "ports": 4639511,
-    "avg3yr": 63888460
+    "ca": 1037795,
+    "peru": 0,
+    "colombia": 384807,
+    "chile": 177408,
+    "other": 4254704
    },
    {
     "week": "2026-02-07",
+    "avg3yr": 62607565,
     "mx": 76617542,
     "ca": 189809,
-    "ports": 3424580,
-    "avg3yr": 62421702
+    "peru": 0,
+    "colombia": 434480,
+    "chile": 0,
+    "other": 2990100
    },
    {
     "week": "2026-02-14",
+    "avg3yr": 61550560,
     "mx": 58203007,
     "ca": 301978,
-    "ports": 3219980,
-    "avg3yr": 61359162
+    "peru": 0,
+    "colombia": 340761,
+    "chile": 0,
+    "other": 2879219
    },
    {
     "week": "2026-02-21",
+    "avg3yr": 58396859,
     "mx": 47130259,
     "ca": 83805,
-    "ports": 1179557,
-    "avg3yr": 58171762
+    "peru": 0,
+    "colombia": 93562,
+    "chile": 0,
+    "other": 1085995
    },
    {
     "week": "2026-02-28",
-    "mx": 70155258,
-    "ca": 1517160,
-    "ports": 3872267,
-    "avg3yr": 55932540
+    "avg3yr": 56177941,
+    "mx": 70155183,
+    "ca": 1469429,
+    "peru": 0,
+    "colombia": 427637,
+    "chile": 0,
+    "other": 3492436
    },
    {
     "week": "2026-03-07",
+    "avg3yr": 55716159,
     "mx": 59358032,
     "ca": 2592011,
-    "ports": 2947356,
-    "avg3yr": 55447013
+    "peru": 0,
+    "colombia": 292259,
+    "chile": 0,
+    "other": 2655097
    },
    {
     "week": "2026-03-14",
+    "avg3yr": 60161169,
     "mx": 61221705,
     "ca": 3000219,
-    "ports": 3150642,
-    "avg3yr": 59875450
+    "peru": 0,
+    "colombia": 196394,
+    "chile": 0,
+    "other": 2954248
    },
    {
     "week": "2026-03-21",
+    "avg3yr": 59570870,
     "mx": 74129317,
     "ca": 4812987,
-    "ports": 4025014,
-    "avg3yr": 59293121
+    "peru": 40695,
+    "colombia": 146109,
+    "chile": 0,
+    "other": 3838210
    },
    {
     "week": "2026-03-28",
-    "mx": 68551242,
+    "avg3yr": 59658439,
+    "mx": 68644170,
     "ca": 7776367,
-    "ports": 2446381,
-    "avg3yr": 59375977
+    "peru": 41119,
+    "colombia": 286826,
+    "chile": 0,
+    "other": 2025508
    },
    {
     "week": "2026-04-04",
-    "mx": 69639791,
+    "avg3yr": 57234983,
+    "mx": 69732719,
     "ca": 10048544,
-    "ports": 4533319,
-    "avg3yr": 56937489
+    "peru": 81815,
+    "colombia": 278023,
+    "chile": 0,
+    "other": 4080553
    },
    {
     "week": "2026-04-11",
-    "mx": 75140656,
+    "avg3yr": 56733043,
+    "mx": 75233584,
     "ca": 13613812,
-    "ports": 3784432,
-    "avg3yr": 56455950
+    "peru": 80543,
+    "colombia": 184166,
+    "chile": 0,
+    "other": 3426795
    },
    {
     "week": "2026-04-18",
-    "mx": 46006137,
+    "avg3yr": 56007530,
+    "mx": 46052601,
     "ca": 13145525,
-    "ports": 3293168,
-    "avg3yr": 55751153
+    "peru": 80967,
+    "colombia": 139984,
+    "chile": 0,
+    "other": 3025753
    },
    {
     "week": "2026-04-25",
+    "avg3yr": 54945405,
     "mx": 62221887,
     "ca": 13444140,
-    "ports": 2027680,
-    "avg3yr": 54690569
+    "peru": 83086,
+    "colombia": 92083,
+    "chile": 0,
+    "other": 1852511
    },
    {
     "week": "2026-05-02",
-    "mx": 65010289,
+    "avg3yr": 52749124,
+    "mx": 65103217,
     "ca": 14468853,
-    "ports": 2686997,
-    "avg3yr": 52509133
+    "peru": 206070,
+    "colombia": 88754,
+    "chile": 0,
+    "other": 2299245
    },
    {
     "week": "2026-05-09",
-    "mx": 59341703,
+    "avg3yr": 53544817,
+    "mx": 59434631,
     "ca": 14146762,
-    "ports": 3124021,
-    "avg3yr": 53304800
+    "peru": 85629,
+    "colombia": 184166,
+    "chile": 0,
+    "other": 2761298
    },
    {
     "week": "2026-05-16",
-    "mx": 48484477,
+    "avg3yr": 50290000,
+    "mx": 48577405,
     "ca": 0,
-    "ports": 3223613,
-    "avg3yr": 49978515
+    "peru": 78848,
+    "colombia": 277181,
+    "chile": 0,
+    "other": 2774656
    },
    {
     "week": "2026-05-23",
-    "mx": 50522963,
+    "avg3yr": 49344935,
+    "mx": 50615891,
     "ca": 15722938,
-    "ports": 3620250,
-    "avg3yr": 48953825
+    "peru": 347562,
+    "colombia": 426948,
+    "chile": 0,
+    "other": 2752812
    },
    {
     "week": "2026-05-30",
-    "mx": 39842943,
+    "avg3yr": 47643479,
+    "mx": 39935871,
     "ca": 16385662,
-    "ports": 3258534,
-    "avg3yr": 47148427
+    "peru": 673869,
+    "colombia": 143447,
+    "chile": 0,
+    "other": 2348290
    },
    {
     "week": "2026-06-06",
-    "mx": 41137433,
+    "avg3yr": 45736470,
+    "mx": 41230361,
     "ca": 33962738,
-    "ports": 6062175,
-    "avg3yr": 45156811
+    "peru": 2124483,
+    "colombia": 847040,
+    "chile": 0,
+    "other": 2997724
    },
    {
     "week": "2026-06-13",
-    "mx": 48275777,
-    "ca": 19917207,
-    "ports": 9292178,
-    "avg3yr": 44790989
+    "avg3yr": 45928846,
+    "mx": 48368705,
+    "ca": 19824369,
+    "peru": 6066105,
+    "colombia": 852636,
+    "chile": 0,
+    "other": 2373347
    },
    {
     "week": "2026-06-20",
-    "mx": 27871415,
-    "ca": 19073819,
-    "ports": 7700715,
-    "avg3yr": 43526980
+    "avg3yr": 45017453,
+    "mx": 27917879,
+    "ca": 18085935,
+    "peru": 6492698,
+    "colombia": 516634,
+    "chile": 0,
+    "other": 1632803
    },
    {
     "week": "2026-06-27",
-    "mx": 33820148,
-    "ca": 18829780,
-    "ports": 13965761,
-    "avg3yr": 43318115
+    "avg3yr": 45139758,
+    "mx": 33959540,
+    "ca": 17687065,
+    "peru": 10575668,
+    "colombia": 1370920,
+    "chile": 0,
+    "other": 3022496
    },
    {
     "week": "2026-07-04",
-    "mx": 39180447,
-    "ca": 14742134,
-    "ports": 15092167,
-    "avg3yr": 43762610
+    "avg3yr": 46185008,
+    "mx": 39226911,
+    "ca": 12830643,
+    "peru": 13152854,
+    "colombia": 809605,
+    "chile": 0,
+    "other": 2994735
    },
    {
     "week": "2026-07-11",
-    "mx": 35495650,
-    "ca": 13394071,
-    "ports": 16465596,
-    "avg3yr": 44660558
+    "avg3yr": 47429834,
+    "mx": 35542114,
+    "ca": 11610592,
+    "peru": 13701236,
+    "colombia": 1465310,
+    "chile": 0,
+    "other": 3036065
    },
    {
     "week": "2026-07-18",
+    "avg3yr": 47376792,
     "mx": 41897985,
-    "ca": 26380609,
-    "ports": 13771779,
-    "avg3yr": 44322954
+    "ca": 24346854,
+    "peru": 11482826,
+    "colombia": 1237038,
+    "chile": 0,
+    "other": 3085670
    },
    {
     "week": "2026-07-25",
-    "mx": 36226491,
-    "ca": 12523675,
-    "ports": 17279718,
-    "avg3yr": 46389231
+    "avg3yr": 49678278,
+    "mx": 36272955,
+    "ca": 10854296,
+    "peru": 15860146,
+    "colombia": 379952,
+    "chile": 0,
+    "other": 2662535
    },
    {
     "week": "2026-08-01",
+    "avg3yr": 49316095,
     "mx": 39895434,
-    "ca": 19880289,
-    "ports": 10956058,
-    "avg3yr": 45775927
+    "ca": 18470470,
+    "peru": 9258788,
+    "colombia": 415563,
+    "chile": 0,
+    "other": 2691526
    },
    {
     "week": "2026-08-08",
-    "mx": 43804011,
-    "ca": 10975726,
-    "ports": 9481478,
-    "avg3yr": 46222477
+    "avg3yr": 49542763,
+    "mx": 43850475,
+    "ca": 9741095,
+    "peru": 7945698,
+    "colombia": 153208,
+    "chile": 0,
+    "other": 2570739
    },
    {
     "week": "2026-08-15",
-    "mx": 45803579,
-    "ca": 12257277,
-    "ports": 8883210,
-    "avg3yr": 47127695
+    "avg3yr": 50275956,
+    "mx": 45850043,
+    "ca": 10084995,
+    "peru": 8147413,
+    "colombia": 180429,
+    "chile": 0,
+    "other": 2681186
    },
    {
     "week": "2026-08-22",
-    "mx": 29045097,
-    "ca": 10971271,
-    "ports": 8108964,
-    "avg3yr": 46230618
+    "avg3yr": 48926782,
+    "mx": 29091561,
+    "ca": 9077848,
+    "peru": 7426314,
+    "colombia": 0,
+    "chile": 1306,
+    "other": 2528303
    },
    {
     "week": "2026-08-29",
-    "mx": 52867341,
-    "ca": 1455054,
-    "ports": 7244433,
-    "avg3yr": 48013212
+    "avg3yr": 50280564,
+    "mx": 52913805,
+    "ca": 0,
+    "peru": 5931285,
+    "colombia": 95632,
+    "chile": 0,
+    "other": 2626106
    }
   ]
  },
@@ -545,7 +764,7 @@
    "baseline_years": 4,
    "week": "2026-08-29"
   },
-  "report_date": "2026-09-01",
+  "report_date": "2026-09-02",
   "table": [
    {
     "district": "MEXICO CROSSINGS THROUGH TEXAS",
@@ -664,7 +883,7 @@
      }
     ],
     "tone": {
-     "market": "Conventional 40s and Organic 48s Lower, others about steady",
+     "market": "About Steady",
      "supply": null,
      "demand": "FAIRLY LIGHT"
     }
@@ -1107,7 +1326,7 @@
     "status": "Adequate"
    }
   ],
-  "stale_days": 8,
+  "stale_days": 11,
   "fetch_error": null,
   "stale_after_days": 10
  },
