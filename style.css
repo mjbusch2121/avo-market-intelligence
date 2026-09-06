@@ -531,7 +531,10 @@ table.fob td.mostly { color: var(--flesh); font-weight: 600; }
 }
 .enso-sub { font-size: 13px; color: var(--paper); margin: 0 0 2px; }
 .enso-band { color: var(--flesh); font-weight: 600; }
-.enso-oni { font-size: 11.5px; color: var(--muted); margin: 0; }
+.enso-oni { font-size: 11.5px; color: var(--muted); margin: 8px 0 0; }
+.enso-nino12 { font-size: 13px; color: var(--sky); margin: 8px 0 0; }
+.enso-nino12 b { color: var(--paper); }
+.enso-week { color: var(--muted); font-weight: 400; font-size: 11px; }
 .enso-lag { font-size: 12.5px; color: var(--clay); margin: 6px 0 0; }
 /* Full width: chart on top, origin cards flowing below. */
 .enso-body {

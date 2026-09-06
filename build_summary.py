@@ -45,12 +45,29 @@ MAX_WOW_SIGNALS = 2             # report at most the N largest; do not flood the
 FREIGHT_STALE_AFTER_DAYS = 10   # report is weekly; 10 days = missed a cycle
 FETCH_STALE_AFTER_DAYS = 8      # weekly Action; 8 days = missed a cycle
 ENSO_STALE_AFTER_DAYS = 45      # ENSO is monthly — do not judge it on a weekly clock
+ENSO_WEEKLY_STALE_AFTER_DAYS = 14  # Niño 1+2 is WEEKLY — 45 would mask a month of misses
 
 # ENSO signal gating. The band alone is not enough: RONI can read "weak" during
 # a fast ramp that CPC is already issuing an advisory for, so we also fire on an
 # established event or a steep recent move.
 ENSO_MODERATE_ANOM = 1.0        # |RONI| at/above this is moderate+ on its own
 ENSO_STEEP_DELTA = 0.75         # 3-season change past this = fast move / lagging mean
+
+# Lambayeque coastal flood signal, driven by Niño 1+2 (the eastern box off Peru),
+# NOT Niño 3.4/RONI. Threshold +1.8 °C is the midpoint of the empirical gap between
+# ordinary years (peak <=+1.6) and the four documented flood years (1982-83,
+# 1997-98, 2017, 2023; peak >=+2.0), calibrated on 1981-2026 weekly SST. Gated to
+# Oct-Mar: Niño 1+2 warming through the fall/winter is the lead indicator for the
+# Jan-Mar coastal rain window; a warm anomaly in June has no seasonal consequence.
+NINO12_FLOOD_THRESHOLD = 1.8
+NINO12_GATE_MONTHS = {10, 11, 12, 1, 2, 3}
+# Coastal-pattern condition, INDEPENDENT of the absolute threshold: the coast
+# running this far above the central Pacific fires on its own (this is how 2017
+# and 2023 flooded with the central Pacific near neutral). Raised 1.0 -> 1.5 so
+# it isolates the three genuine coastal years (1997-98 +1.8, 2016-17 +2.1,
+# 2022-23 +2.0) and excludes ordinary strong events (2023-24 +1.1, 2006-07 +1.4).
+NINO12_DIVERGENCE_MIN = 1.5
+NINO12_NEAR_RECORD = 3.7        # >=99th pctile of 1981-2026 → "near the warmest"
 
 
 def freight_stale_days(report_date):
@@ -687,12 +704,13 @@ def build_enso(enso_raw: dict, response: dict, weather: dict) -> dict:
 
     side = "El Niño" if anom > 0 else ("La Niña" if anom < 0 else "ENSO-neutral")
     # #2 lead with trend + direction, not the band; #1 season always with value.
+    # Plain language for a produce reader — no index acronym in body copy.
     lead = f"{side} {trend}" if side != "ENSO-neutral" else f"ENSO {trend}"
     up = f", up from {ref3['anom']:+.2f} three seasons ago" if ref3 else ""
-    headline = f"{lead} — RONI {anom:+.2f} ({season}){up}"
+    headline = f"{lead} — {anom:+.2f} for {season}{up}"
     # #3 lag caveat only when the recent move is steep.
-    lag_caveat = ("the 3-month seasonal mean trails a fast-developing event, so the "
-                  "current state is likely stronger than the season label") if steep else None
+    lag_caveat = ("the three-month average trails a fast-developing event, so "
+                  "conditions are likely stronger than that label suggests") if steep else None
 
     # #4 gate: band alone would stay silent at RONI +0.98 during an advisory.
     fire = (abs(anom) >= ENSO_MODERATE_ANOM) or established or (trend == "strengthening" and steep)
@@ -739,6 +757,35 @@ def build_enso(enso_raw: dict, response: dict, weather: dict) -> dict:
         forward_note = (f"{lead} of the largest origins are setting next season's "
                         f"crop as the current {phase} {trend_verb}: "
                         f"{', '.join(fwd_exposed)}.")
+
+    # Niño 1+2 coastal flood layer (Lambayeque only). Weekly SST, its own cadence.
+    # Scoped here — NOT attached to any origin row — so it can never leak into the
+    # central-coast (Cañete, Áncash) or Amazon-facing (Monobamba) Peru origins,
+    # which respond to different forcing. Gated to Oct-Mar.
+    nino12_raw = enso_raw.get("nino12")
+    nino12 = None
+    if nino12_raw and nino12_raw.get("latest"):
+        lt = nino12_raw["latest"]
+        a12 = lt.get("nino12_anom")
+        div = lt.get("divergence")
+        in_season = today.month in NINO12_GATE_MONTHS
+        # Two INDEPENDENT firing conditions (either suffices): the coast reaching
+        # the absolute flood level, or the coast running well above the central
+        # Pacific (the coastal pattern). The signal names which one triggered.
+        fire_abs = a12 is not None and a12 >= NINO12_FLOOD_THRESHOLD
+        fire_div = div is not None and div >= NINO12_DIVERGENCE_MIN
+        nino12 = {
+            "available": True,
+            "latest": lt,
+            "series": nino12_raw.get("series", []),
+            "threshold": NINO12_FLOOD_THRESHOLD,
+            "in_season": in_season,
+            "fire": bool(in_season and (fire_abs or fire_div)),
+            "fire_absolute": bool(fire_abs),
+            "fire_divergence": bool(fire_div),
+            "near_record": bool(a12 is not None and a12 >= NINO12_NEAR_RECORD),
+            "stale": bool(nino12_raw.get("nino12_stale")),
+        }
     return {
         "available": True,
         "primary": "roni",
@@ -764,6 +811,7 @@ def build_enso(enso_raw: dict, response: dict, weather: dict) -> dict:
         "near_term": near_term,   # ranked near-term slot (or None)
         "forward": forward,       # ranked forward slot (or None)
         "forward_note": forward_note,
+        "nino12": nino12,         # Niño 1+2 coastal flood layer (Lambayeque)
         "origins": origins,
         "fetched_at": enso_raw.get("fetched_at"),
     }
@@ -1149,9 +1197,11 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
     # 6. Feed freshness — warn when individual feeds missed a cycle
     if feeds:
         named = {k: v for k, v in feeds.items() if not k.startswith("_")}
-        # freight has its own staleness line above; enso is monthly and surfaced
-        # in its own panel, so neither belongs in this weekly-cadence warning.
-        lagging = [n for n, f in named.items() if f["stale"] and n not in ("freight", "enso")]
+        # freight has its own staleness line above; enso/enso_weekly are surfaced
+        # in the ENSO panel with their own clocks, so none belong in this
+        # weekly-cadence warning.
+        lagging = [n for n, f in named.items()
+                   if f["stale"] and n not in ("freight", "enso", "enso_weekly")]
         if lagging:
             display = ["USDA" if n in ("supply", "pricing") else n for n in lagging]
             sig.append(f"Data feeds not refreshed this cycle: {', '.join(sorted(set(display)))} "
@@ -1195,8 +1245,35 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
         enso_sig.append(f"{lead}. " + " ".join(f"{s}." for s in segs)
                         if segs else f"{lead}.")
 
+    # 8b. Peru coastal flood signal — Lambayeque ONLY, gated to Oct-Mar. Plain
+    # language for a produce reader (no ocean-index jargon). Two independent
+    # triggers: the coast reaching the absolute flood level, or warming
+    # concentrated on the coast (the 2017/2023 pattern that flooded with the
+    # central Pacific near neutral). The text names which trigger fired, states
+    # conditions-present not a forecast, and never implies a repeat of 1998.
+    n12 = (enso or {}).get("nino12")
+    if n12 and n12.get("fire"):
+        coast = n12["latest"]["nino12_anom"]
+        if n12.get("fire_absolute"):
+            near = " — near the warmest in 45 years of records" if n12.get("near_record") else ""
+            txt = (f"Ocean temperatures off northern Peru are {coast:.1f}°C above "
+                   f"normal{near}. Warm coastal water at this level preceded the "
+                   f"severe flooding in Lambayeque and Piura in 1998, 2017 and 2023.")
+            if n12.get("fire_divergence"):
+                txt += (" The warming is concentrated on the Peru coast rather than "
+                        "the central Pacific, the pattern behind those events.")
+        else:  # divergence-only trigger
+            txt = ("Ocean warming is concentrated off the Peru coast rather than the "
+                   "central Pacific — the pattern that produced coastal flooding in "
+                   "2017 and 2023 without a strong El Niño elsewhere.")
+        txt += (" Watch the January–March rain window for field access and "
+                "packhouse logistics.")
+        if n12.get("stale"):
+            txt += " (Coastal reading carried over from a prior update.)"
+        enso_sig.append(txt)
+
     # Priority order for the 5-signal cap: coverage caveats first, then the ENSO
-    # forward signal, then the market signals.
+    # forward + coastal signals, then the market signals.
     ordered = coverage_sig + enso_sig + sig
 
     # Quiet week: say so explicitly rather than showing an empty box
@@ -1299,6 +1376,18 @@ def main():
         "stale_after_days": ENSO_STALE_AFTER_DAYS,
     }
 
+    # Niño 1+2 is WEEKLY (same fetch as RONI/ONI, but its data cadence is weekly),
+    # so it gets a tighter 14-day clock than seasonal ENSO. Like enso, it stays OUT
+    # of the all-stale failure check and the weekly-feed-freshness signal (it has
+    # its own panel line). fetch_error keys on the weekly-SST-specific error.
+    feeds["enso_weekly"] = {
+        "fetched_at": enso_raw.get("fetched_at"),
+        "fetch_age_days": enso_age,
+        "stale": enso_age is None or enso_age > ENSO_WEEKLY_STALE_AFTER_DAYS,
+        "fetch_error": enso_raw.get("nino12_error"),
+        "stale_after_days": ENSO_WEEKLY_STALE_AFTER_DAYS,
+    }
+
     week_end = supply.get("week_end")
     label = (datetime.fromisoformat(week_end).strftime("Week ending %b %d, %Y")
              if week_end else "—")
@@ -1358,10 +1447,11 @@ def main():
         print(f"FREIGHT [stale] report is {sd} days old ({freight.get('report_date')})")
 
     # All-feeds freshness — fail only when every weekly feed has gone dark.
-    # ENSO is excluded: it is monthly (its own 45-day clock), so a fresh ENSO
-    # feed must not mask dead weekly feeds and a stale one must not fail the run.
+    # ENSO (monthly) and its weekly Niño 1+2 companion are excluded: both have
+    # their own clocks and their own panel, so neither must mask dead weekly
+    # feeds nor fail the run on its own.
     named_feeds = {k: v for k, v in feeds.items()
-                   if not k.startswith("_") and k != "enso"}
+                   if not k.startswith("_") and k not in ("enso", "enso_weekly")}
     all_stale = all(f["stale"] for f in named_feeds.values())
     if all_stale:
         print("FEEDS [error] every feed is stale — automation appears to have stopped")

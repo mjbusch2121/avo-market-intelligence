@@ -636,29 +636,51 @@ function renderEnso(data) {
   }
   const roni = e.roni, oni = e.oni;
 
-  // Header LEADS with trend + direction; the band label is secondary and always
-  // carries its season. Consecutive-season count distinguishes "warm anomaly"
-  // from an established event.
-  // Count is labelled RONI (the led index) so it isn't read against ONI's own
-  // count, which crosses ±0.5 on a different schedule. ONI's count stays in
-  // data.json but isn't shown, to avoid implying a second authoritative figure.
+  // Plain language for a produce reader — no ocean-index jargon in body copy.
+  // Panel LEADS with the current WEEKLY reading (the seasonal figure averages
+  // three months and trails a developing event), seasonal classification beneath.
+  const sgn1 = (v) => (v >= 0 ? "+" : "") + v.toFixed(1);
+  const sgn2 = (v) => (v >= 0 ? "+" : "") + v.toFixed(2);
+  const n12 = e.nino12;
+  const wk = n12 && n12.latest ? dayLabel(n12.latest.week) : null;
+
+  // Lead: central-Pacific current state (weekly), seasonal classification beneath.
+  let lead;
+  if (n12 && n12.latest && n12.latest.nino34_anom != null) {
+    const trails = e.steep ? " It trails a fast-developing event." : "";
+    lead =
+      `<p class="enso-headline">Central Pacific: <b>${sgn1(n12.latest.nino34_anom)}°C above normal</b> ` +
+      `<span class="enso-week">(week of ${wk})</span></p>` +
+      `<p class="enso-sub">The official classification averages three months and currently reads ` +
+      `${e.roni.latest.phase} at ${sgn2(e.anom)}.${trails}</p>`;
+  } else {
+    lead = `<p class="enso-headline">${e.roni.latest.phase} at ${sgn2(e.anom)} (${e.season})</p>`;
+  }
+
+  // Peru coastal reading — shown YEAR-ROUND (the Oct–Mar gate is for the flood
+  // signal, not the panel). A near-record ocean temperature is worth showing.
+  let coast = "";
+  if (n12 && n12.latest && n12.latest.nino12_anom != null) {
+    const rec = n12.near_record ? " — near the warmest reading in 45 years of records" : "";
+    const carried = n12.stale ? " (carried over from a prior update)" : "";
+    coast =
+      `<p class="enso-nino12"><b>Off northern Peru: ${sgn1(n12.latest.nino12_anom)}°C above normal</b> ` +
+      `<span class="enso-week">(week of ${wk})</span>${rec}.${carried}</p>`;
+  }
+
+  // Not-yet-established nuance, plain: five consecutive seasons make it formal.
   const established = e.established_event
-    ? `established event · RONI ${e.consecutive_seasons} consecutive seasons`
-    : `RONI ${e.consecutive_seasons} consecutive season${e.consecutive_seasons === 1 ? "" : "s"} past ±0.5 — not yet an established event`;
-  const lag = e.lag_caveat
-    ? `<p class="enso-lag">⚠ ${e.lag_caveat}.</p>`
-    : "";
-  const oniTxt = oni?.latest
-    ? `ONI ${oni.latest.anom >= 0 ? "+" : ""}${oni.latest.anom.toFixed(2)} (${oni.latest.season} ${oni.latest.year}, ${oni.latest.phase})`
-    : "";
+    ? `<p class="enso-sub">A formally established event — the warm pattern has held ${e.consecutive_seasons} seasons.</p>`
+    : `<p class="enso-sub">The warm pattern has held ${e.consecutive_seasons} season${e.consecutive_seasons === 1 ? "" : "s"} so far; a formally established event needs five, so it is not yet one.</p>`;
+
   const fwdNote = e.forward_note
     ? `<p class="enso-forward-note">◆ ${e.forward_note}</p>`
     : "";
-  head.innerHTML = `
-    <p class="enso-headline">${e.headline}</p>
-    <p class="enso-sub"><span class="enso-band">${e.phase_with_season}</span> · ${established}</p>
-    <p class="enso-oni">RONI led (CPC's basis for current probabilities); ${oniTxt} shown alongside.</p>
-    ${lag}${fwdNote}`;
+  // Single source credit — the one place the index names may appear.
+  const credit =
+    `<p class="enso-oni">Source: NOAA CPC. RONI used for current probabilities; ONI shown for continuity.</p>`;
+
+  head.innerHTML = lead + coast + established + fwdNote + credit;
 
   // Trend chart — RONI led, ONI alongside, reusing the diesel/supply chart look.
   const labels = roni.series.map((p) => `${p.season} ${p.year}`);
@@ -667,9 +689,9 @@ function renderEnso(data) {
     data: {
       labels,
       datasets: [
-        { label: "RONI", data: roni.series.map((p) => p.anom),
+        { label: "Central Pacific (adjusted)", data: roni.series.map((p) => p.anom),
           borderColor: C.flesh, borderWidth: 2.2, pointRadius: 0 },
-        { label: "ONI", data: (oni.series || []).map((p) => p.anom),
+        { label: "Central Pacific (traditional)", data: (oni.series || []).map((p) => p.anom),
           borderColor: C.muted, borderWidth: 1.3, pointRadius: 0, borderDash: [4, 3] },
       ],
     },
