@@ -1117,6 +1117,21 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
     # descriptive context; it just does not gate a "what to watch" line. Price is
     # different (it mean-reverts) — see the seasonal-band note in build_pricing —
     # so the FOB percentile-band signal below IS a valid anomaly detector.
+    #
+    # A momentum variant WAS prototyped: rolling-4 week-over-week, gated by the
+    # same-week-seasonal percentile (reusing _wow_history, like the price signal).
+    # It killed the level bias (firing ~3.6/yr, two-sided) but is NOT shippable
+    # yet, for two empirical reasons found in backtest:
+    #   1. n~=2. The same-week gate has only ~2 prior seasons of rolling history,
+    #      so every "percentile" is a choice between two numbers, not discriminating.
+    #   2. Firings cluster on wk4-5, wk30-31, wk43-44, wk50 -- the Mexico January
+    #      restart, July ramp, October and December transitions. Those are exactly
+    #      the predictable seasonal inflections the gate exists to SUPPRESS, and at
+    #      n~=2 it cannot. (A residual 72% up-skew is real supply dynamics -- sharp
+    #      ramps, gradual declines -- not a defect, but it reads as a ticker.)
+    # REVISIT when there are >=4 prior seasons of rolling-4 history (~2027): only
+    # then does the same-week gate have enough samples to tell a genuine anomaly
+    # from the annual restart ramp. Backtest was scratchpad-only, not committed.
 
     # 1b. Week-over-week magnitude — an unusually large move for THIS week of
     # the season. Gated on both a per-series floor and the 90th percentile of
