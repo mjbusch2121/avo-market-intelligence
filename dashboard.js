@@ -205,11 +205,16 @@ function renderSupply(data) {
     );
   });
 
+  // The stacked bars must describe the SAME set of regions as the dashed
+  // seasonal-average line (which excludes any region pending revision this week,
+  // via total_reliable). Otherwise the bar tops and the baseline are two different
+  // quantities and a reader eyeballing a surplus is comparing the wrong things.
+  const barExcluded = new Set(s.total_excludes || []);
   new Chart(document.getElementById("supplyChart"), {
     data: {
       labels: s.trend.map((t) => t.week),
       datasets: [
-        ...SUPPLY_REGIONS.map((reg) => ({
+        ...SUPPLY_REGIONS.filter((reg) => !barExcluded.has(reg.key)).map((reg) => ({
           type: "bar",
           label: reg.label,
           data: s.trend.map((t) => t[reg.key]),
@@ -736,6 +741,11 @@ function renderEnso(data) {
       !Array.isArray(o.pathways) && Array.isArray(o.lag_months)
         ? ` · ${o.lag_months[0]}–${o.lag_months[1]} mo lag`
         : "";
+    // Some origins carry a note explaining why the watch window differs from the
+    // impact window (e.g. Lambayeque's ocean signal leads the rain by months).
+    const watchNote = o.watch_note
+      ? `<div class="enso-origin-note">${o.watch_note}</div>`
+      : "";
     origBox.appendChild(
       el(
         "div",
@@ -744,7 +754,8 @@ function renderEnso(data) {
            <span class="enso-origin-name">${o.name}</span>${stage}${dark}
          </div>
          ${effectHtml}
-         <div class="enso-origin-meta">${tier}confidence: ${o.confidence}${lag} · watch: ${o.watch_window}</div>`,
+         <div class="enso-origin-meta">${tier}confidence: ${o.confidence}${lag} · watch: ${o.watch_window}</div>
+         ${watchNote}`,
       ),
     );
   });

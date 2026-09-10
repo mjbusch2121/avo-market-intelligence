@@ -570,6 +570,7 @@ table.fob td.mostly { color: var(--flesh); font-weight: 600; }
 .enso-origin-effect { font-size: 12.5px; color: var(--paper); margin-top: 4px; }
 .enso-origin-effect b { color: var(--flesh); }
 .enso-origin-meta { font-size: 11px; color: var(--muted); margin-top: 4px; font-family: var(--mono); }
+.enso-origin-note { font-size: 11.5px; color: var(--muted); margin-top: 4px; font-style: italic; }
 .enso-pathway { font-size: 12.5px; color: var(--paper); margin-top: 4px; }
 .enso-ptype {
   font-family: var(--mono); font-size: 9.5px; text-transform: uppercase;

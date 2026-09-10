@@ -120,7 +120,8 @@
       "confidence": "high",
       "lag_months": [4, 8],
       "watch_window": "Jan-Mar",
-      "watch_months": {"start": "01-01", "end": "03-31"}
+      "watch_months": {"start": "01-01", "end": "03-31"},
+      "watch_note": "Ocean temperatures off this coast are watched from October — they lead the Jan-Mar coastal rain window by months."
     },
     {
       "key": "pe_canete",

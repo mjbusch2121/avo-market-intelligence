@@ -231,6 +231,15 @@ def build_supply(movement: dict, notes: list) -> dict:
         vals = seasonal_sample(week_str, series_fn)
         return statistics.mean(vals) if vals else None
 
+    # NOTE on seasonal comparisons for VOLUME. These vs-prior-season figures
+    # (vs_3yr_pct, the rolling-4 baseline) are honest as DESCRIPTIVE LEVELS but are
+    # NOT anomaly detectors, because volume TRENDS: arrivals grow ~15%/yr, so a
+    # recent week sits structurally above a multi-year mean and any threshold on
+    # the deviation fires one-sided (backtested 67% positive, 100% in 2026). This
+    # is the opposite of price, which mean-reverts and so supports a symmetric
+    # seasonal-percentile signal — see the band note in build_pricing. So: use
+    # these for context/KPI levels, never to gate a "what to watch" line.
+
     # USDA posts some districts late (CA domestic movement especially), so
     # the newest week can be a fraction of the true total. Flag a region as
     # partial when it prints far below its own trailing median, and keep it
@@ -354,6 +363,20 @@ def build_supply(movement: dict, notes: list) -> dict:
     total_roll4_pct = (pct(total_roll4_lbs, total_roll4_prior)
                        if total_roll4_prior else None)
 
+    # Rolling 4-week seasonal baseline: the sum of the same-week seasonal averages
+    # over the last 4 weeks (the SAME per-week baseline the trend line draws). The
+    # rolling total is compared against THIS, so the KPI tile and signal report a
+    # like-for-like rolling change instead of a single noisy week vs a single-week
+    # baseline. Dividing total_roll4_lbs by total_roll4_baseline_lbs reproduces
+    # total_roll4_vs_baseline_pct exactly.
+    _roll4_weeks = weeks[-4:] if len(weeks) >= 4 else []
+    _base_vals = [seasonal_avg(w, total_reliable) for w in _roll4_weeks]
+    total_roll4_baseline_lbs = (round(sum(_base_vals))
+                                if _base_vals and all(v is not None for v in _base_vals)
+                                else None)
+    total_roll4_vs_baseline_pct = (pct(total_roll4_lbs, total_roll4_baseline_lbs)
+                                    if total_roll4_baseline_lbs else None)
+
     return {
         "week_end": cur_w,
         "imports_agg": imports_agg,
@@ -365,6 +388,8 @@ def build_supply(movement: dict, notes: list) -> dict:
         "total_vs_3yr_pct": pct(total_reliable(cur_w), avg_rel) if avg_rel else None,
         "total_roll4_lbs": total_roll4_lbs,
         "total_roll4_pct": total_roll4_pct,
+        "total_roll4_baseline_lbs": total_roll4_baseline_lbs,
+        "total_roll4_vs_baseline_pct": total_roll4_vs_baseline_pct,
         "baseline_n": baseline_n,
         "baseline_years": baseline_years,
         "partial_regions": sorted(partial_keys),
@@ -458,6 +483,15 @@ def build_pricing(price_hist: dict, current: dict, notes: list) -> dict:
 
     latest_mx = mx[mx_weeks[-1]] if mx_weeks else None
 
+    # Seasonal percentile band — a VALID anomaly detector for price, because price
+    # MEAN-REVERTS. Unlike volume (which trends ~15%/yr and so sits structurally
+    # above a multi-year mean — see build_supply / build_signals section 1), the
+    # FOB benchmark has no secular drift, so its percentile rank within the same-
+    # week prior-season sample is roughly uniform: backtested 2023-2026 it sat
+    # below the 25th 38% of weeks and above the 75th 38% of weeks — symmetric.
+    # That symmetry is what makes "outside the 25-75 band" a real signal here and
+    # NOT for volume. Keep this distinction in mind before reusing the seasonal-
+    # percentile approach on any new series: ask first whether it trends.
     raw_sample = seasonal_sample(mx_weeks[-1]) if mx_weeks else []
     sample = [v for _, v in raw_sample]
     baseline_n = len(sample)
@@ -786,6 +820,16 @@ def build_enso(enso_raw: dict, response: dict, weather: dict) -> dict:
             "near_record": bool(a12 is not None and a12 >= NINO12_NEAR_RECORD),
             "stale": bool(nino12_raw.get("nino12_stale")),
         }
+
+    # Current WEEKLY central-Pacific reading (Niño 3.4), pulled from the same weekly
+    # SST file. The panel and signal 1 lead with this — the seasonal RONI value
+    # averages three months and lags a fast-developing event. None if weekly SST
+    # is unavailable, in which case the signal falls back to the seasonal headline.
+    cp_weekly = None
+    if nino12_raw and nino12_raw.get("latest"):
+        _cp = nino12_raw["latest"]
+        if _cp.get("nino34_anom") is not None:
+            cp_weekly = {"anom": _cp["nino34_anom"], "week": _cp.get("week")}
     return {
         "available": True,
         "primary": "roni",
@@ -812,6 +856,7 @@ def build_enso(enso_raw: dict, response: dict, weather: dict) -> dict:
         "forward": forward,       # ranked forward slot (or None)
         "forward_note": forward_note,
         "nino12": nino12,         # Niño 1+2 coastal flood layer (Lambayeque)
+        "central_pacific_weekly": cp_weekly,  # weekly Niño 3.4 — panel/signal lead
         "origins": origins,
         "fetched_at": enso_raw.get("fetched_at"),
     }
@@ -1056,18 +1101,22 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
     enso_sig = []
 
     # --- Thresholds (tune these if the box feels too noisy/quiet) ---
-    SUPPLY_VS_3YR = 10      # % from seasonal average worth mentioning
     PORTS_WOW = 20          # % week-over-week swing in seaport arrivals
     # FOB: flagged only outside the 25-75 percentile band (see below)
 
-    # 1. Supply vs seasonal norm — only when meaningfully off-pace
-    if supply and supply.get("total_vs_3yr_pct") is not None:
-        v = supply["total_vs_3yr_pct"]
-        if abs(v) >= SUPPLY_VS_3YR:
-            yrs = supply.get("baseline_years", 3)
-            sig.append(f"Total arrivals are running {abs(v):.0f}% "
-                       f"{'above' if v > 0 else 'below'} the {yrs}-year seasonal "
-                       f"average ({supply['total_lbs'] / 1e6:.1f}M lbs this week).")
+    # 1. NO total-supply "vs seasonal norm" signal.
+    # A threshold on the deviation from a multi-year seasonal average cannot work
+    # as an anomaly detector for VOLUME, because volume trends: arrivals have
+    # grown ~15%/yr, so recent weeks sit structurally above a baseline dragged
+    # down by earlier years. Backtested across 2023-2026 the rolling-4 deviation
+    # fired one-sided — 67% positive overall, 100% positive in 2026 — at every
+    # threshold tried (5/7/10), and neither a prior-year-only nor a trend-fitted
+    # baseline removed the lean (both still ~65% positive; a genuine surge year
+    # beats any cross-year reference). It degrades to an always-on "above average"
+    # light, not a signal. The rolling-4 level still appears on the KPI tile as
+    # descriptive context; it just does not gate a "what to watch" line. Price is
+    # different (it mean-reverts) — see the seasonal-band note in build_pricing —
+    # so the FOB percentile-band signal below IS a valid anomaly detector.
 
     # 1b. Week-over-week magnitude — an unusually large move for THIS week of
     # the season. Gated on both a per-series floor and the 90th percentile of
@@ -1153,7 +1202,13 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
         elif p >= 75:
             sig.append(f"Benchmark Hass 48s FOB is at the upper edge of its {yrs_p}-year "
                        f"seasonal 25th–75th band — firm for this week.")
+        elif p < 25:
+            # Strictly below the 25th percentile: the price is UNDER the band, not
+            # sitting on its lower edge — the chart line dips beneath the shaded band.
+            sig.append(f"Benchmark Hass 48s FOB is below its {yrs_p}-year seasonal "
+                       f"25th–75th band — softer than three-quarters of same-week readings.")
         elif p <= 25:
+            # Exactly at the 25th: sitting on the lower edge, inside the band.
             sig.append(f"Benchmark Hass 48s FOB is at the lower edge of its {yrs_p}-year "
                        f"seasonal 25th–75th band — soft for this week.")
         # 26-74 = unremarkable, say nothing
@@ -1237,7 +1292,25 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
                 s += (f" (no live {COUNTRY_LABELS.get(slot['country'], slot['country'])} "
                       "weather this cycle to corroborate)")
             return s
-        lead = enso["headline"]
+        # Lead with the current WEEKLY central-Pacific reading, then the seasonal
+        # classification as context — the same ordering the panel uses. The
+        # seasonal value averages three months and understates a fast ramp, so it
+        # must not open the signal. Falls back to the seasonal headline if the
+        # weekly SST reading is unavailable.
+        cp = enso.get("central_pacific_weekly")
+        if cp and cp.get("anom") is not None:
+            wk = cp.get("week")
+            wtxt = (f" (week of {datetime.fromisoformat(wk).strftime('%b %d')})"
+                    if wk else "")
+            phase = enso["latest"]["phase"]
+            ref3 = enso.get("three_seasons_ago")
+            up = f", up from {ref3['anom']:+.2f} three seasons ago" if ref3 else ""
+            lead = (f"Central Pacific ocean temperatures are {cp['anom']:+.1f}°C "
+                    f"above normal{wtxt}. The three-month average reads {phase} at "
+                    f"{enso['anom']:+.2f} for {enso['season']} and is "
+                    f"{enso.get('trend', 'steady')}{up}")
+        else:
+            lead = enso["headline"]
         if enso.get("lag_caveat"):
             lead += f"; {enso['lag_caveat']}"
         segs = [s for s in (_seg("Near-term", enso.get("near_term")),
@@ -1290,14 +1363,30 @@ def build_kpis(supply, pricing, freight, diesel) -> list:
     if mx:
         kpis.append({"label": "Mexico volume", "value": f"{mx['lbs'] / 1e6:.1f}M lbs",
                      "delta_pct": mx["wow_pct"], "sub": "vs prior week"})
-    if supply and supply.get("total_vs_3yr_pct") is not None:
+    if supply and supply.get("total_roll4_lbs") is not None:
+        # The VALUE is the rolling-4 LEVEL (a volume), not a percentage — so the
+        # tile can't be misread as a weekly event. The "+X% vs N-yr avg" lives in
+        # the sub as plain descriptive context: volume trends (arrivals grow ~15%/
+        # yr), so a positive reading here reflects category growth against a lagging
+        # multi-year mean, NOT an anomaly. That is why this is a level, not a
+        # signal (see build_signals section 1). % is derived from the shown 0.1M
+        # figures so it reconciles with a division of the displayed numbers.
         excl = supply.get("total_excludes") or []
         excl_note = f" (excl. {', '.join(e.upper() for e in excl)} — pending)" if excl else ""
+        rt = supply["total_roll4_lbs"] / 1e6
+        vs = supply.get("total_roll4_vs_baseline_pct")
+        rb = supply.get("total_roll4_baseline_lbs")
+        if vs is not None and rb:
+            disp = round((round(rt, 1) / round(rb / 1e6, 1) - 1) * 100)
+            yrs = supply.get("baseline_years", 3)
+            sub = f"{disp:+.0f}% vs {yrs}-yr seasonal avg{excl_note}"
+        else:
+            sub = excl_note.strip() or "vs prior seasons"
         kpis.append({
-            "label": f"Total arrivals vs {supply.get('baseline_years', 3)}-yr avg",
-            "value": f"{supply['total_vs_3yr_pct']:+.0f}%",
+            "label": "Arrivals · trailing 4 wk",
+            "value": f"{rt:.1f}M lbs",
             "delta_pct": None,
-            "sub": f"{supply['total_lbs']/1e6:.1f}M lbs this week{excl_note}",
+            "sub": sub,
         })
     bm = (pricing or {}).get("benchmark") or {}
     if bm.get("mx_latest") is not None:

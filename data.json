@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-08T22:21:35Z",
+ "generated_at": "2026-09-10T05:41:20Z",
  "week": {
   "end": "2026-09-05",
   "label": "Week ending Sep 05, 2026"
@@ -7,11 +7,11 @@
  "headline": "Mexico 4-week volume 176.1M lbs, up 9% vs the prior four weeks; Texas-crossing Hass 48s FOB softened 10.3% at $26.25; LA/Dallas freight firm/firm; diesel down 0.05 at $5.60/gal; Ventura Co. weather bears watching.",
  "headline_asof": "Supply & pricing wk ending 2026-09-05 \u00b7 Freight 2026-09-01 \u00b7 Diesel 2026-08-31",
  "signals": [
-  "El Ni\u00f1o strengthening \u2014 +1.36 for JJA 2026, up from -0.04 three seasons ago; the three-month average trails a fast-developing event, so conditions are likely stronger than that label suggests. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. Forward: Michoac\u00e1n / Jalisco \u2014 the Aug-Sep Loca bloom is setting the May-Sep 2027 crop.",
-  "Total arrivals are running 11% above the 4-year seasonal average (55.9M lbs this week).",
-  "Benchmark Hass 48s FOB is at the lower edge of its 4-year seasonal 25th\u201375th band \u2014 soft for this week.",
+  "Central Pacific ocean temperatures are +2.7\u00b0C above normal (week of Sep 02). The three-month average reads moderate El Ni\u00f1o at +1.36 for JJA 2026 and is strengthening, up from -0.04 three seasons ago; the three-month average trails a fast-developing event, so conditions are likely stronger than that label suggests. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. Forward: Michoac\u00e1n / Jalisco \u2014 the Aug-Sep Loca bloom is setting the May-Sep 2027 crop.",
+  "Benchmark Hass 48s FOB is below its 4-year seasonal 25th\u201375th band \u2014 softer than three-quarters of same-week readings.",
   "Truck availability tight out of South & Central CA, Oxnard district CA \u2014 expect upward rate pressure on lanes from this origin.",
-  "Ventura Co. (Oxnard): Heat spike forecast (40\u00b0C peak) \u2014 watch for fruit stress and accelerated maturity."
+  "Ventura Co. (Oxnard): Heat spike forecast (40\u00b0C peak) \u2014 watch for fruit stress and accelerated maturity.",
+  "San Diego Co. (Fallbrook): Heat spike forecast (40\u00b0C peak) \u2014 watch for fruit stress and accelerated maturity."
  ],
  "kpis": [
   {
@@ -21,10 +21,10 @@
    "sub": "vs prior week"
   },
   {
-   "label": "Total arrivals vs 4-yr avg",
-   "value": "+11%",
+   "label": "Arrivals \u00b7 trailing 4 wk",
+   "value": "213.3M lbs",
    "delta_pct": null,
-   "sub": "55.9M lbs this week (excl. CA \u2014 pending)"
+   "sub": "+7% vs 4-yr seasonal avg (excl. CA \u2014 pending)"
   },
   {
    "label": "Hass 48s FOB (TX)",
@@ -48,45 +48,45 @@
  "feeds": {
   "supply": {
    "fetched_at": "2026-09-08T22:20:11+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 1,
    "stale": false,
    "fetch_error": null
   },
   "pricing": {
    "fetched_at": "2026-09-08T22:20:11+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 1,
    "stale": false,
    "fetch_error": null
   },
   "freight": {
    "fetched_at": "2026-09-08T22:20:13+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 1,
    "stale": false,
    "fetch_error": null
   },
   "diesel": {
    "fetched_at": "2026-09-08T22:20:16+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 1,
    "stale": false,
    "fetch_error": null
   },
   "weather": {
    "fetched_at": "2026-09-08T22:21:33+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 1,
    "stale": false,
    "fetch_error": null
   },
   "_stale_after_days": 8,
   "enso": {
    "fetched_at": "2026-09-08T22:21:34+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 1,
    "stale": false,
    "fetch_error": null,
    "stale_after_days": 45
   },
   "enso_weekly": {
    "fetched_at": "2026-09-08T22:21:34+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 1,
    "stale": false,
    "fetch_error": null,
    "stale_after_days": 14
@@ -107,6 +107,8 @@
   "total_vs_3yr_pct": 10.6,
   "total_roll4_lbs": 213339242,
   "total_roll4_pct": -2.9,
+  "total_roll4_baseline_lbs": 200012145,
+  "total_roll4_vs_baseline_pct": 6.7,
   "baseline_n": 20,
   "baseline_years": 4,
   "partial_regions": [
@@ -1333,7 +1335,7 @@
     "status": "Slight Shortage"
    }
   ],
-  "stale_days": 7,
+  "stale_days": 8,
   "fetch_error": null,
   "stale_after_days": 10
  },
@@ -3052,6 +3054,10 @@
    "near_record": true,
    "stale": false
   },
+  "central_pacific_weekly": {
+   "anom": 2.7,
+   "week": "2026-09-02"
+  },
   "origins": [
    {
     "key": "mx_michoacan",
@@ -3236,6 +3242,7 @@
      "start": "01-01",
      "end": "03-31"
     },
+    "watch_note": "Ocean temperatures off this coast are watched from October \u2014 they lead the Jan-Mar coastal rain window by months.",
     "country": "PE",
     "stage": "flowering",
     "in_watch": false,
