@@ -328,6 +328,9 @@ h1, h2, h3 { font-family: var(--display); margin: 0; }
   max-width: 60%;
 }
 .stat-row.season-warn .season-note { color: var(--clay); }
+/* Minor-origin gap: a quiet, low-weight one-liner — no clay border, dimmed. */
+.stat-row.season-gap-min .stat-name { opacity: 0.6; }
+.stat-row.season-gap-min .season-note { font-style: italic; }
 
 /* ---------- pricing ---------- */
 

@@ -146,6 +146,26 @@ function renderSupply(data) {
     const dotColor = REGION_COLOR[r.key] || C.muted;
     const st = r.season?.status || "active";
 
+    // Minor-origin gap: a thin/off-season origin (a few % of volume) that has
+    // gone quiet gets ONE compact line, not a full card — it shouldn't take the
+    // same vertical weight as the origins doing the volume. The full card (below)
+    // is reserved for a MAJOR origin gap (California), where a top-volume source
+    // going quiet is commercially significant.
+    if (st === "unexpected_gap" && r.minor) {
+      const md = (r.season?.last_reported || "").slice(5) || "—";
+      const why = r.gap_reason ? ` (${r.gap_reason})` : "";
+      regionsBox.appendChild(
+        el(
+          "div",
+          "stat-row season-gap-min",
+          `
+        <span class="stat-name"><span class="dot" style="background:${dotColor}"></span>${r.name}</span>
+        <span class="season-note">no report since ${md}${why}</span>`,
+        ),
+      );
+      return;
+    }
+
     // Out-of-season / gap: show the message instead of numbers
     if (st !== "active") {
       const cls =

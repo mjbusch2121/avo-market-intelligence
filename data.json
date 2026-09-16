@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-16T02:05:04Z",
+ "generated_at": "2026-09-16T04:47:30Z",
  "week": {
   "end": "2026-09-05",
   "label": "Week ending Sep 05, 2026"
@@ -7,11 +7,11 @@
  "headline": "Mexico 4-week volume 176.1M lbs, up 9% vs the prior four weeks; Texas-crossing Hass 48s FOB softened 10.3% at $26.25; LA/Dallas freight firm/firm; diesel down 0.05 at $5.60/gal; Ventura Co. weather bears watching.",
  "headline_asof": "Supply & pricing wk ending 2026-09-05 \u00b7 Freight 2026-09-01 \u00b7 Diesel 2026-08-31",
  "signals": [
-  "California arrivals have not been reported since 2026-08-29 \u2014 USDA movement for this origin may be delayed or its report slug changed. The rest of the dashboard is unaffected; investigate the fetcher.",
-  "Colombia arrivals have not been reported since 2026-08-29 \u2014 USDA movement for this origin may be delayed or its report slug changed. The rest of the dashboard is unaffected; investigate the fetcher.",
-  "Chile arrivals have not been reported since 2026-08-22 \u2014 USDA movement for this origin may be delayed or its report slug changed. The rest of the dashboard is unaffected; investigate the fetcher.",
+  "California arrivals have not been reported since 2026-08-29 \u2014 a top-volume origin has gone quiet, so treat the weekly total as unconfirmed until USDA updates.",
   "Central Pacific ocean temperatures are +2.7\u00b0C above normal (week of Sep 02). The three-month average reads moderate El Ni\u00f1o at +1.36 for JJA 2026 and is strengthening, up from -0.04 three seasons ago; the three-month average trails a fast-developing event, so conditions are likely stronger than that label suggests. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. Forward: Michoac\u00e1n / Jalisco \u2014 the Aug-Sep Loca bloom is setting the May-Sep 2027 crop.",
-  "Benchmark Hass 48s FOB is below its 4-year seasonal 25th\u201375th band \u2014 softer than three-quarters of same-week readings."
+  "Benchmark Hass 48s FOB is below its 4-year seasonal 25th\u201375th band \u2014 softer than three-quarters of same-week readings.",
+  "Truck availability tight out of South & Central CA, Oxnard district CA \u2014 expect upward rate pressure on lanes from this origin.",
+  "Freight rates shown are 14 days old \u2014 the USDA truck rate report has not refreshed; treat lane costs as indicative."
  ],
  "kpis": [
   {
@@ -129,7 +129,10 @@
      "status": "active",
      "message": null,
      "last_reported": "2026-09-05"
-    }
+    },
+    "vol_share": 0.735,
+    "minor": false,
+    "gap_reason": null
    },
    {
     "key": "ca",
@@ -145,7 +148,10 @@
      "status": "unexpected_gap",
      "message": "California (South District) should be reporting but isn't (last data: 2026-08-29). Check the USDA report slug and the fetcher.",
      "last_reported": "2026-08-29"
-    }
+    },
+    "vol_share": 0.1097,
+    "minor": false,
+    "gap_reason": null
    },
    {
     "key": "peru",
@@ -161,7 +167,10 @@
      "status": "active",
      "message": null,
      "last_reported": "2026-09-05"
-    }
+    },
+    "vol_share": 0.112,
+    "minor": false,
+    "gap_reason": null
    },
    {
     "key": "colombia",
@@ -177,7 +186,10 @@
      "status": "unexpected_gap",
      "message": "Colombia imports should be reporting but isn't (last data: 2026-08-29). Check the USDA report slug and the fetcher.",
      "last_reported": "2026-08-29"
-    }
+    },
+    "vol_share": 0.0012,
+    "minor": true,
+    "gap_reason": "low volume"
    },
    {
     "key": "chile",
@@ -193,7 +205,10 @@
      "status": "unexpected_gap",
      "message": "Chile imports should be reporting but isn't (last data: 2026-08-22). Check the USDA report slug and the fetcher.",
      "last_reported": "2026-08-22"
-    }
+    },
+    "vol_share": 0.0,
+    "minor": true,
+    "gap_reason": "off-season"
    },
    {
     "key": "other",
@@ -209,7 +224,10 @@
      "status": "active",
      "message": null,
      "last_reported": "2026-09-05"
-    }
+    },
+    "vol_share": 0.0422,
+    "minor": true,
+    "gap_reason": null
    }
   ],
   "crossings": [

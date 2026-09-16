@@ -13,7 +13,8 @@ import json
 import statistics
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from seasonality import (classify, load_crop_calendar, current_stage, in_window)
+from seasonality import (classify, load_seasons, load_crop_calendar,
+                         current_stage, in_window)
 
 ROOT = Path(__file__).parent
 RAW = ROOT / "data" / "raw"
@@ -24,6 +25,12 @@ TREND_WEEKS = 52
 SEASONAL_WINDOW_WEEKS = 2      # +/- N ISO weeks around the target week
 BASELINE_MIN_SAMPLES = 8       # below this, suppress the percentile signal
 RECENCY_CUTOFF_DAYS = 180      # unchanged; was hardcoded as timedelta(days=180)
+
+# A gapped origin below this share of trailing 4-week volume is "minor": its
+# reporting gap gets the compact one-line card and a single low-ranked, combined
+# "what to watch" note, not a full card + prominent per-origin bullet. Above it
+# (California) a gap is commercially significant and keeps the full treatment.
+MINOR_ORIGIN_SHARE = 0.05
 
 # Week-over-week magnitude signals. A move fires only when it is BOTH
 # seasonally unusual (>= this percentile of same-week history) AND materially
@@ -254,6 +261,8 @@ def build_supply(movement: dict, notes: list) -> dict:
                 return w
         return None
     
+    seasons_cfg = load_seasons()
+    today = date.today()
     partial_keys = set()
     regions = []
     for key in REGION_ORDER:
@@ -262,7 +271,8 @@ def build_supply(movement: dict, notes: list) -> dict:
         pri = weekly[prior_w][key] if prior_w else 0
         avg = seasonal_avg(cur_w, lambda w, k=key: weekly[w][k])
         med = trailing_median(key)
-        season = classify(key, last_reported_week(key))
+        season = classify(key, last_reported_week(key), today=today,
+                          seasons=seasons_cfg)
 
         # Rolling 4-week volume — the honest unit for this data. USDA and AVIS
         # agree on Mexico's 4-week total but disagree by up to 20M on which week
@@ -298,6 +308,24 @@ def build_supply(movement: dict, notes: list) -> dict:
             "vs_3yr_pct": None if partial or not avg else pct(cur, avg),
             "season": season,
         })
+
+    # Trailing-volume share, and the minor/major split used for gap presentation.
+    # A gapped MINOR origin (thin share) gets a compact one-line card and folds
+    # into a single combined "what to watch" note; a gapped MAJOR origin (CA) keeps
+    # the full card + a prominent caveat. gap_reason distinguishes a genuinely thin
+    # origin ("low volume") from one that is simply out of its arrival window now
+    # ("off-season"), using the plain (no-grace) season window.
+    total_roll4_all = sum(r.get("roll4_lbs") or 0 for r in regions)
+    for r in regions:
+        share = ((r["roll4_lbs"] / total_roll4_all)
+                 if total_roll4_all and r.get("roll4_lbs") else 0.0)
+        r["vol_share"] = round(share, 4)
+        r["minor"] = share < MINOR_ORIGIN_SHARE
+        r["gap_reason"] = None
+        if r["season"]["status"] == "unexpected_gap" and r["minor"]:
+            cfg = seasons_cfg.get(r["key"])
+            r["gap_reason"] = ("off-season" if cfg and not in_window(cfg, today)
+                               else "low volume")
 
     crossings = []
     for district, lbs in sorted(by_district.get(cur_w, {}).items(),
@@ -980,6 +1008,15 @@ def _iso_week_distance(a, b):
     return min(d, 53 - d)
 
 
+def _loose_date(iso: str) -> str:
+    """'2026-08-22' -> 'late August'. A soft phrasing for the combined minor-gap
+    note, so two origins with slightly different last-report dates read as one
+    condition ('since late August') rather than a pair of exact timestamps."""
+    d = date.fromisoformat(iso)
+    part = "early" if d.day <= 10 else "mid" if d.day <= 20 else "late"
+    return f"{part} {d.strftime('%B')}"
+
+
 def _percentile_rank(vals, x):
     """True percentile rank of x within vals, 0-100.
 
@@ -1090,14 +1127,22 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
     conditions. A short 'What to watch' box is itself information: it
     means nothing is out of line.
     """
+    # Priority tiers, composed at the return (highest first):
+    #   coverage_sig  data-integrity caveats that must survive the cap — a whole
+    #                 weather group dark, or a MAJOR origin (CA) reporting gap.
+    #   enso_sig      the ENSO forward + coastal signals.
+    #   sig           market-moving signals: price WoW, seaport swing, price band.
+    #   minor_gap_sig a MINOR-origin reporting gap — ranked below the market
+    #                 signals above (a <5%-of-volume origin going quiet must not
+    #                 outrank ENSO / the price band / a WoW price move), but above
+    #                 the operational tier.
+    #   sig_ops       lower-tier operational signals: freight, feed freshness,
+    #                 weather watches.
     sig = []
-    # Coverage/data-integrity caveats that must survive the 5-signal cap: a
-    # whole origin going dark is more important to surface than any single
-    # market move, so these are floated above `sig` at the return.
     coverage_sig = []
-    # The ENSO forward signal ranks just below coverage caveats and above the
-    # market signals, so a firing advisory is not pushed out of the cap.
     enso_sig = []
+    minor_gap_sig = []
+    sig_ops = []
 
     # --- Thresholds (tune these if the box feels too noisy/quiet) ---
     PORTS_WOW = 20          # % week-over-week swing in seaport arrivals
@@ -1236,11 +1281,11 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
                  if l.get("wow_pct") is not None]
         softening = [l for l in lanes if l["wow_pct"] < -1]
         if softening and len(softening) >= len(lanes) / 2:
-            sig.append(f"Truck availability is tight out of {districts}, but quoted lane "
+            sig_ops.append(f"Truck availability is tight out of {districts}, but quoted lane "
                        "rates softened this week — capacity pressure has not yet reached "
                        "spot rates. Watch for a lag.")
         else:
-            sig.append(f"Truck availability tight out of {districts} — "
+            sig_ops.append(f"Truck availability tight out of {districts} — "
                        "expect upward rate pressure on lanes from this origin.")
 
     # 4b. Fallback lane — when S. Texas has no quote, the card flips origin silently
@@ -1248,7 +1293,7 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
                       if not l.get("origin_is_preferred")]
     if fallback_lanes:
         names = ", ".join(f"{l['dest']} (from {l['origin_short']})" for l in fallback_lanes)
-        sig.append(f"No S. Texas lane quoted into {names} this week — "
+        sig_ops.append(f"No S. Texas lane quoted into {names} this week — "
                    "rates shown are from an alternate origin and are not "
                    "comparable to prior weeks.")
 
@@ -1256,11 +1301,11 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
     sd = (freight or {}).get("stale_days")
     fe = (freight or {}).get("fetch_error")
     if fe:
-        sig.append("Freight rates could not be refreshed from USDA this week — "
+        sig_ops.append("Freight rates could not be refreshed from USDA this week — "
                    "lane costs shown are carried over from the last successful "
                    "fetch; treat as indicative.")
     elif sd is not None and sd > FREIGHT_STALE_AFTER_DAYS:
-        sig.append(f"Freight rates shown are {sd} days old — the USDA truck "
+        sig_ops.append(f"Freight rates shown are {sd} days old — the USDA truck "
                    "rate report has not refreshed; treat lane costs as indicative.")
 
     # 6. Feed freshness — warn when individual feeds missed a cycle
@@ -1273,7 +1318,7 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
                    if f["stale"] and n not in ("freight", "enso", "enso_weekly")]
         if lagging:
             display = ["USDA" if n in ("supply", "pricing") else n for n in lagging]
-            sig.append(f"Data feeds not refreshed this cycle: {', '.join(sorted(set(display)))} "
+            sig_ops.append(f"Data feeds not refreshed this cycle: {', '.join(sorted(set(display)))} "
                        "— figures from these sources may not reflect the current week.")
 
     # 6b. Weather origin-group outage — a whole origin country went dark. Which
@@ -1288,24 +1333,45 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
         coverage_sig.append(f"No live weather for {label} this cycle "
                             f"({cov.get(c, '0/0')} regions returned data) — {framing}")
 
-    # 6c. Supply reporting gap — a tracked origin that seasons.json says should be
-    # reporting has gone quiet past the staleness clock. WARNING only (the build no
-    # longer fails on this — see the build-failure policy in main): one origin's
-    # gap must never block the rest of the dashboard. Same class as the weather
-    # dark-group caveat above, so it rides in coverage_sig and survives the cap.
-    for r in (supply or {}).get("regions", []):
-        season = r.get("season") or {}
-        if season.get("status") == "unexpected_gap":
-            last = season.get("last_reported") or "never"
-            coverage_sig.append(
-                f"{r['name']} arrivals have not been reported since {last} — USDA "
-                "movement for this origin may be delayed or its report slug changed. "
-                "The rest of the dashboard is unaffected; investigate the fetcher.")
+    # 6c. Supply reporting gaps (WARNING only — the build no longer fails on these;
+    # see the build-failure policy in main). Split by commercial weight:
+    #   MAJOR (California, a top-volume origin): a prominent coverage caveat, since
+    #     a big source going quiet genuinely puts the week's total in doubt.
+    #   MINOR (Colombia, Chile: each a few % of volume, thin/lumpy or off-season):
+    #     collapsed into ONE low-ranked observation, not one bullet per origin. A
+    #     USDA reporting lull on two thin origins is a single condition, not two
+    #     problems, and must not outrank live market signals. Worded as an
+    #     observation for a business reader, not an engineering to-do.
+    gapped = [r for r in (supply or {}).get("regions", [])
+              if (r.get("season") or {}).get("status") == "unexpected_gap"]
+    for r in [g for g in gapped if not g.get("minor")]:
+        last = (r.get("season") or {}).get("last_reported") or "an unknown date"
+        coverage_sig.append(
+            f"{r['name']} arrivals have not been reported since {last} — a top-volume "
+            "origin has gone quiet, so treat the weekly total as unconfirmed until "
+            "USDA updates.")
+    minor_gapped = [g for g in gapped if g.get("minor")]
+    if minor_gapped:
+        names = [r["name"] for r in minor_gapped]
+        if len(names) == 1:
+            name_str, subj = names[0], "this origin is"
+        elif len(names) == 2:
+            name_str, subj = f"{names[0]} and {names[1]}", "both origins are"
+        else:
+            name_str = ", ".join(names[:-1]) + f", and {names[-1]}"
+            subj = "these origins are"
+        lasts = [(r.get("season") or {}).get("last_reported") for r in minor_gapped]
+        lasts = [x for x in lasts if x]
+        since = _loose_date(min(lasts)) if lasts else "recently"
+        minor_gap_sig.append(
+            f"{name_str} arrivals have not been reported since {since} — {subj} "
+            "thin or off-season right now, so this may be a normal reporting lull "
+            "rather than a supply gap.")
 
     # 7. Weather — already event-driven, left as-is
     for r in (weather or {}).get("regions", []):
         if r.get("flag") in ("watch", "alert"):
-            sig.append(f"{r['name']}: {r['note']}")
+            sig_ops.append(f"{r['name']}: {r['note']}")
 
     # 8. ENSO — seasonal-to-annual forward signal. Leads with trend/direction
     # (not the band, which understates a fast ramp), then a near-term slot and a
@@ -1373,9 +1439,13 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
             txt += " (Coastal reading carried over from a prior update.)"
         enso_sig.append(txt)
 
-    # Priority order for the 5-signal cap: coverage caveats first, then the ENSO
-    # forward + coastal signals, then the market signals.
-    ordered = coverage_sig + enso_sig + sig
+    # Priority order for the 5-signal cap: data-integrity caveats (incl. a MAJOR
+    # origin gap) first, then ENSO, then market signals, then operational signals,
+    # and LAST the MINOR-origin gap. It's ranked dead last so it's the first thing
+    # the cap drops on a busy week — a benign reporting lull on two thin origins
+    # should yield the summary box to anything more actionable. Nothing is lost:
+    # the compact sidebar line surfaces it regardless.
+    ordered = coverage_sig + enso_sig + sig + sig_ops + minor_gap_sig
 
     # Quiet week: say so explicitly rather than showing an empty box
     if not ordered:
