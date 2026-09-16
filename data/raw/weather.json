@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-09-16T04:29:25+00:00",
+ "fetched_at": "2026-09-16T05:01:07+00:00",
  "coverage": {
   "CO": "2/2",
   "MX": "2/2",
@@ -77,7 +77,7 @@
     "days": 14,
     "rain_mm": 1.5,
     "tmax_avg_c": 26.9,
-    "tmin_avg_c": 18.1,
+    "tmin_avg_c": 18.0,
     "tmax_peak_c": 35.7,
     "tmin_low_c": 16.9
    },
@@ -103,8 +103,8 @@
    "next14": {
     "days": 14,
     "rain_mm": 5.7,
-    "tmax_avg_c": 25.7,
-    "tmin_avg_c": 15.1,
+    "tmax_avg_c": 25.8,
+    "tmin_avg_c": 15.3,
     "tmax_peak_c": 33.1,
     "tmin_low_c": 12.8
    },
@@ -121,17 +121,17 @@
    "role": "Own 600ha + La Loma + main packhouse \u2014 highest weight",
    "past7": {
     "days": 7,
-    "rain_mm": 26.0,
-    "tmax_avg_c": 22.0,
+    "rain_mm": 29.9,
+    "tmax_avg_c": 22.1,
     "tmin_avg_c": 13.4,
     "tmax_peak_c": 22.7,
     "tmin_low_c": 12.9
    },
    "next14": {
     "days": 14,
-    "rain_mm": 65.2,
-    "tmax_avg_c": 21.5,
-    "tmin_avg_c": 13.8,
+    "rain_mm": 63.4,
+    "tmax_avg_c": 21.2,
+    "tmin_avg_c": 13.7,
     "tmax_peak_c": 23.1,
     "tmin_low_c": 12.8
    },
@@ -147,23 +147,23 @@
    "role": "220 contract growers across Caldas/Quind\u00edo/Risaralda",
    "past7": {
     "days": 7,
-    "rain_mm": 75.3,
-    "tmax_avg_c": 22.4,
-    "tmin_avg_c": 13.8,
-    "tmax_peak_c": 24.7,
-    "tmin_low_c": 12.4
+    "rain_mm": 82.4,
+    "tmax_avg_c": 22.3,
+    "tmin_avg_c": 13.9,
+    "tmax_peak_c": 23.9,
+    "tmin_low_c": 13.4
    },
    "next14": {
     "days": 14,
-    "rain_mm": 278.2,
-    "tmax_avg_c": 19.9,
-    "tmin_avg_c": 13.8,
+    "rain_mm": 288.2,
+    "tmax_avg_c": 19.5,
+    "tmin_avg_c": 13.9,
     "tmax_peak_c": 23.9,
     "tmin_low_c": 12.9
    },
    "source": "open-meteo",
    "flag": "watch",
-   "note": "Heavy rain ahead (278 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+   "note": "Heavy rain ahead (288 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
    "available": true
   },
   {
@@ -174,16 +174,16 @@
    "past7": {
     "days": 7,
     "rain_mm": 0.7,
-    "tmax_avg_c": 23.7,
-    "tmin_avg_c": 18.1,
-    "tmax_peak_c": 24.9,
+    "tmax_avg_c": 23.5,
+    "tmin_avg_c": 18.0,
+    "tmax_peak_c": 24.4,
     "tmin_low_c": 16.5
    },
    "next14": {
     "days": 14,
     "rain_mm": 5.1,
     "tmax_avg_c": 23.4,
-    "tmin_avg_c": 17.6,
+    "tmin_avg_c": 17.7,
     "tmax_peak_c": 24.0,
     "tmin_low_c": 15.9
    },
@@ -199,17 +199,17 @@
    "role": "Northern coast \u2014 the El Ni\u00f1o flood corridor",
    "past7": {
     "days": 7,
-    "rain_mm": 1.7,
-    "tmax_avg_c": 30.0,
-    "tmin_avg_c": 18.4,
-    "tmax_peak_c": 32.0,
+    "rain_mm": 4.8,
+    "tmax_avg_c": 29.9,
+    "tmin_avg_c": 18.2,
+    "tmax_peak_c": 31.2,
     "tmin_low_c": 17.5
    },
    "next14": {
     "days": 14,
-    "rain_mm": 18.8,
+    "rain_mm": 16.3,
     "tmax_avg_c": 32.0,
-    "tmin_avg_c": 19.4,
+    "tmin_avg_c": 19.5,
     "tmax_peak_c": 33.5,
     "tmin_low_c": 17.9
    },
@@ -226,16 +226,16 @@
    "past7": {
     "days": 7,
     "rain_mm": 0.1,
-    "tmax_avg_c": 26.1,
-    "tmin_avg_c": 20.1,
+    "tmax_avg_c": 26.0,
+    "tmin_avg_c": 20.0,
     "tmax_peak_c": 27.4,
     "tmin_low_c": 19.1
    },
    "next14": {
     "days": 14,
     "rain_mm": 0,
-    "tmax_avg_c": 27.0,
-    "tmin_avg_c": 20.6,
+    "tmax_avg_c": 27.1,
+    "tmin_avg_c": 20.7,
     "tmax_peak_c": 27.7,
     "tmin_low_c": 18.7
    },
@@ -251,17 +251,17 @@
    "role": "Cloud forest, Amazon-facing \u2014 different regime",
    "past7": {
     "days": 7,
-    "rain_mm": 18.1,
-    "tmax_avg_c": 24.8,
-    "tmin_avg_c": 15.1,
+    "rain_mm": 18.7,
+    "tmax_avg_c": 24.9,
+    "tmin_avg_c": 15.3,
     "tmax_peak_c": 26.5,
     "tmin_low_c": 13.5
    },
    "next14": {
     "days": 14,
-    "rain_mm": 70.2,
-    "tmax_avg_c": 26.0,
-    "tmin_avg_c": 16.2,
+    "rain_mm": 80.2,
+    "tmax_avg_c": 26.2,
+    "tmin_avg_c": 16.3,
     "tmax_peak_c": 28.2,
     "tmin_low_c": 14.6
    },
