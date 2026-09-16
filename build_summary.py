@@ -13,8 +13,7 @@ import json
 import statistics
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from seasonality import (classify, any_unexpected_gaps,
-                         load_crop_calendar, current_stage, in_window)
+from seasonality import (classify, load_crop_calendar, current_stage, in_window)
 
 ROOT = Path(__file__).parent
 RAW = ROOT / "data" / "raw"
@@ -1289,6 +1288,20 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
         coverage_sig.append(f"No live weather for {label} this cycle "
                             f"({cov.get(c, '0/0')} regions returned data) — {framing}")
 
+    # 6c. Supply reporting gap — a tracked origin that seasons.json says should be
+    # reporting has gone quiet past the staleness clock. WARNING only (the build no
+    # longer fails on this — see the build-failure policy in main): one origin's
+    # gap must never block the rest of the dashboard. Same class as the weather
+    # dark-group caveat above, so it rides in coverage_sig and survives the cap.
+    for r in (supply or {}).get("regions", []):
+        season = r.get("season") or {}
+        if season.get("status") == "unexpected_gap":
+            last = season.get("last_reported") or "never"
+            coverage_sig.append(
+                f"{r['name']} arrivals have not been reported since {last} — USDA "
+                "movement for this origin may be delayed or its report slug changed. "
+                "The rest of the dashboard is unaffected; investigate the fetcher.")
+
     # 7. Weather — already event-driven, left as-is
     for r in (weather or {}).get("regions", []):
         if r.get("flag") in ("watch", "alert"):
@@ -1534,21 +1547,37 @@ def main():
     for n in notes:
         print("NOTE:", n)
 
-    # Season check — fail the Action if a region that should be
-    # reporting has gone dark (USDA slug change, broken parser, etc.)
+    # --- Build-failure policy -------------------------------------------------
+    # Exit 1 is reserved for PIPELINE-BROKEN conditions only — states where the
+    # whole automation has failed and a red Action is the right alarm:
+    #   * every weekly feed stale (automation stopped), or
+    #   * the freight fetcher hard-errored with no data to fall back on.
+    # Everything softer — a single origin's reporting gap, or one feed lagging a
+    # cycle — is a WARNING, not a failure. It's surfaced on the page (the region
+    # card and the signals list) and logged here, but it must NOT block Mexico,
+    # pricing, freight, diesel, weather, and ENSO from publishing. One lagging
+    # non-critical feed taking the entire dashboard offline is the bug this fixes
+    # (the 2026-09-09 run: data.json was fully correct and still didn't ship).
+    # This mirrors the weather dark-group precedent, which already warns-not-fails.
+
+    # Season gaps — LOG + surfaced as signals (see build_signals coverage_sig);
+    # no longer fail the build. A gap on CA/Colombia/Chile or any future origin
+    # is investigated from the warning, not by a dead pipeline.
     season_blocks = {r["key"]: r["season"] for r in supply.get("regions", [])}
-    gaps = any_unexpected_gaps(season_blocks)
     for key, block in season_blocks.items():
         if block["status"] != "active":
             print(f"SEASON [{block['status']}] {key}: {block['message']}")
-    # Freight freshness
+
+    # Freight freshness — a present-but-stale report is a WARNING (already shown
+    # in the freight panel and signal 5). Only a hard fetch error (no data at
+    # all) is pipeline-broken.
     fe = freight.get("fetch_error")
     sd = freight.get("stale_days")
     freight_stale = sd is not None and sd > FREIGHT_STALE_AFTER_DAYS
     if fe:
         print(f"FREIGHT [error] {fe}")
     if freight_stale:
-        print(f"FREIGHT [stale] report is {sd} days old ({freight.get('report_date')})")
+        print(f"FREIGHT [stale] report is {sd} days old ({freight.get('report_date')}) — warning only")
 
     # All-feeds freshness — fail only when every weekly feed has gone dark.
     # ENSO (monthly) and its weekly Niño 1+2 companion are excluded: both have
@@ -1560,7 +1589,7 @@ def main():
     if all_stale:
         print("FEEDS [error] every feed is stale — automation appears to have stopped")
 
-    if gaps or fe or freight_stale or all_stale:
+    if fe or all_stale:
         raise SystemExit(1)
 
 if __name__ == "__main__":

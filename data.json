@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-10T05:41:20Z",
+ "generated_at": "2026-09-16T02:05:04Z",
  "week": {
   "end": "2026-09-05",
   "label": "Week ending Sep 05, 2026"
@@ -7,11 +7,11 @@
  "headline": "Mexico 4-week volume 176.1M lbs, up 9% vs the prior four weeks; Texas-crossing Hass 48s FOB softened 10.3% at $26.25; LA/Dallas freight firm/firm; diesel down 0.05 at $5.60/gal; Ventura Co. weather bears watching.",
  "headline_asof": "Supply & pricing wk ending 2026-09-05 \u00b7 Freight 2026-09-01 \u00b7 Diesel 2026-08-31",
  "signals": [
+  "California arrivals have not been reported since 2026-08-29 \u2014 USDA movement for this origin may be delayed or its report slug changed. The rest of the dashboard is unaffected; investigate the fetcher.",
+  "Colombia arrivals have not been reported since 2026-08-29 \u2014 USDA movement for this origin may be delayed or its report slug changed. The rest of the dashboard is unaffected; investigate the fetcher.",
+  "Chile arrivals have not been reported since 2026-08-22 \u2014 USDA movement for this origin may be delayed or its report slug changed. The rest of the dashboard is unaffected; investigate the fetcher.",
   "Central Pacific ocean temperatures are +2.7\u00b0C above normal (week of Sep 02). The three-month average reads moderate El Ni\u00f1o at +1.36 for JJA 2026 and is strengthening, up from -0.04 three seasons ago; the three-month average trails a fast-developing event, so conditions are likely stronger than that label suggests. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. Forward: Michoac\u00e1n / Jalisco \u2014 the Aug-Sep Loca bloom is setting the May-Sep 2027 crop.",
-  "Benchmark Hass 48s FOB is below its 4-year seasonal 25th\u201375th band \u2014 softer than three-quarters of same-week readings.",
-  "Truck availability tight out of South & Central CA, Oxnard district CA \u2014 expect upward rate pressure on lanes from this origin.",
-  "Ventura Co. (Oxnard): Heat spike forecast (40\u00b0C peak) \u2014 watch for fruit stress and accelerated maturity.",
-  "San Diego Co. (Fallbrook): Heat spike forecast (40\u00b0C peak) \u2014 watch for fruit stress and accelerated maturity."
+  "Benchmark Hass 48s FOB is below its 4-year seasonal 25th\u201375th band \u2014 softer than three-quarters of same-week readings."
  ],
  "kpis": [
   {
@@ -48,45 +48,45 @@
  "feeds": {
   "supply": {
    "fetched_at": "2026-09-08T22:20:11+00:00",
-   "fetch_age_days": 1,
+   "fetch_age_days": 7,
    "stale": false,
    "fetch_error": null
   },
   "pricing": {
    "fetched_at": "2026-09-08T22:20:11+00:00",
-   "fetch_age_days": 1,
+   "fetch_age_days": 7,
    "stale": false,
    "fetch_error": null
   },
   "freight": {
    "fetched_at": "2026-09-08T22:20:13+00:00",
-   "fetch_age_days": 1,
+   "fetch_age_days": 7,
    "stale": false,
    "fetch_error": null
   },
   "diesel": {
    "fetched_at": "2026-09-08T22:20:16+00:00",
-   "fetch_age_days": 1,
+   "fetch_age_days": 7,
    "stale": false,
    "fetch_error": null
   },
   "weather": {
    "fetched_at": "2026-09-08T22:21:33+00:00",
-   "fetch_age_days": 1,
+   "fetch_age_days": 7,
    "stale": false,
    "fetch_error": null
   },
   "_stale_after_days": 8,
   "enso": {
    "fetched_at": "2026-09-08T22:21:34+00:00",
-   "fetch_age_days": 1,
+   "fetch_age_days": 7,
    "stale": false,
    "fetch_error": null,
    "stale_after_days": 45
   },
   "enso_weekly": {
    "fetched_at": "2026-09-08T22:21:34+00:00",
-   "fetch_age_days": 1,
+   "fetch_age_days": 7,
    "stale": false,
    "fetch_error": null,
    "stale_after_days": 14
@@ -142,8 +142,8 @@
     "roll4_pct": null,
     "vs_3yr_pct": null,
     "season": {
-     "status": "active",
-     "message": null,
+     "status": "unexpected_gap",
+     "message": "California (South District) should be reporting but isn't (last data: 2026-08-29). Check the USDA report slug and the fetcher.",
      "last_reported": "2026-08-29"
     }
    },
@@ -174,8 +174,8 @@
     "roll4_pct": -87.4,
     "vs_3yr_pct": -100.0,
     "season": {
-     "status": "active",
-     "message": null,
+     "status": "unexpected_gap",
+     "message": "Colombia imports should be reporting but isn't (last data: 2026-08-29). Check the USDA report slug and the fetcher.",
      "last_reported": "2026-08-29"
     }
    },
@@ -190,8 +190,8 @@
     "roll4_pct": null,
     "vs_3yr_pct": -100.0,
     "season": {
-     "status": "out_of_season",
-     "message": "Chile imports season concluded \u2014 resumes ~mid-fall",
+     "status": "unexpected_gap",
+     "message": "Chile imports should be reporting but isn't (last data: 2026-08-22). Check the USDA report slug and the fetcher.",
      "last_reported": "2026-08-22"
     }
    },
@@ -1335,7 +1335,7 @@
     "status": "Slight Shortage"
    }
   ],
-  "stale_days": 8,
+  "stale_days": 14,
   "fetch_error": null,
   "stale_after_days": 10
  },

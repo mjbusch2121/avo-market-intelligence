@@ -180,10 +180,14 @@ def classify(region_key: str, last_reported: str | None,
 
 
 def any_unexpected_gaps(season_blocks: dict) -> list[str]:
-    """Given {region_key: classify(...) result}, return keys with
-    unexpected gaps. build_summary.py uses this to fail the pipeline
-    loudly (exit code 1) so the GitHub Action goes red instead of
-    committing a silently-hollow data.json.
+    """Given {region_key: classify(...) result}, return keys with unexpected gaps.
+
+    NOTE: as of Chunk 7 a single origin's gap no longer fails the build — one
+    lagging origin must not block the rest of the dashboard from publishing.
+    build_summary now SURFACES gaps as warnings (a region card + a signal) and
+    reserves exit 1 for pipeline-broken states (all feeds stale, or a fetcher
+    hard error). This helper remains as a convenience for anything that needs the
+    list of gapped origins; it is no longer wired to build failure.
     """
     return [k for k, v in season_blocks.items()
             if v["status"] == "unexpected_gap"]
