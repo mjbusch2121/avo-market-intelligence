@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-09-22T22:42:39+00:00",
+ "fetched_at": "2026-09-29T23:24:36+00:00",
  "coverage": {
   "CO": "2/2",
   "MX": "2/2",
@@ -15,23 +15,23 @@
    "role": "Primary Mexican Hass source (~80% of exports)",
    "past7": {
     "days": 7,
-    "rain_mm": 20.5,
-    "tmax_avg_c": 26.0,
-    "tmin_avg_c": 14.2,
-    "tmax_peak_c": 27.9,
-    "tmin_low_c": 13.3
+    "rain_mm": 24.7,
+    "tmax_avg_c": 25.2,
+    "tmin_avg_c": 14.3,
+    "tmax_peak_c": 25.7,
+    "tmin_low_c": 13.0
    },
    "next14": {
     "days": 14,
-    "rain_mm": 116.5,
-    "tmax_avg_c": 23.6,
-    "tmin_avg_c": 14.2,
-    "tmax_peak_c": 26.0,
-    "tmin_low_c": 12.7
+    "rain_mm": 224.1,
+    "tmax_avg_c": 21.9,
+    "tmin_avg_c": 14.3,
+    "tmax_peak_c": 23.9,
+    "tmin_low_c": 11.5
    },
    "source": "open-meteo",
-   "flag": "normal",
-   "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+   "flag": "watch",
+   "note": "Heavy rain ahead (224 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
    "available": true
   },
   {
@@ -41,23 +41,23 @@
    "role": "Second Mexican export state",
    "past7": {
     "days": 7,
-    "rain_mm": 18.3,
-    "tmax_avg_c": 27.6,
-    "tmin_avg_c": 16.4,
-    "tmax_peak_c": 28.9,
-    "tmin_low_c": 15.7
+    "rain_mm": 15.3,
+    "tmax_avg_c": 25.4,
+    "tmin_avg_c": 17.1,
+    "tmax_peak_c": 27.3,
+    "tmin_low_c": 16.7
    },
    "next14": {
     "days": 14,
-    "rain_mm": 59.5,
-    "tmax_avg_c": 25.0,
-    "tmin_avg_c": 16.6,
-    "tmax_peak_c": 29.1,
-    "tmin_low_c": 15.2
+    "rain_mm": 168.5,
+    "tmax_avg_c": 22.3,
+    "tmin_avg_c": 16.0,
+    "tmax_peak_c": 24.2,
+    "tmin_low_c": 13.7
    },
    "source": "open-meteo",
-   "flag": "normal",
-   "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+   "flag": "watch",
+   "note": "Heavy rain ahead (168 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
    "available": true
   },
   {
@@ -68,24 +68,24 @@
    "past7": {
     "days": 7,
     "rain_mm": 0,
-    "tmax_avg_c": 25.6,
-    "tmin_avg_c": 16.7,
-    "tmax_peak_c": 27.6,
-    "tmin_low_c": 14.6
+    "tmax_avg_c": 27.1,
+    "tmin_avg_c": 15.9,
+    "tmax_peak_c": 29.0,
+    "tmin_low_c": 14.4
    },
    "next14": {
     "days": 14,
     "rain_mm": 0,
-    "tmax_avg_c": 30.3,
-    "tmin_avg_c": 20.0,
-    "tmax_peak_c": 37.8,
-    "tmin_low_c": 14.4
+    "tmax_avg_c": 35.3,
+    "tmin_avg_c": 24.2,
+    "tmax_peak_c": 41.0,
+    "tmin_low_c": 15.2
    },
    "source": "open-meteo",
    "flag": "watch",
-   "note": "Heat spike forecast (38\u00b0C peak) \u2014 watch for fruit stress and accelerated maturity.",
+   "note": "Heat spike forecast (41\u00b0C peak) \u2014 watch for fruit stress and accelerated maturity.",
    "available": true,
-   "nws_narrative": "This Afternoon: Sunny, with a high near 75. West southwest wind around 10 mph."
+   "nws_narrative": "This Afternoon: Sunny, with a high near 83. West wind 10 to 15 mph."
   },
   {
    "key": "san_diego",
@@ -95,24 +95,24 @@
    "past7": {
     "days": 7,
     "rain_mm": 0,
-    "tmax_avg_c": 26.5,
+    "tmax_avg_c": 30.0,
     "tmin_avg_c": 17.3,
-    "tmax_peak_c": 27.9,
-    "tmin_low_c": 14.8
+    "tmax_peak_c": 35.6,
+    "tmin_low_c": 15.8
    },
    "next14": {
     "days": 14,
-    "rain_mm": 4.5,
-    "tmax_avg_c": 29.8,
-    "tmin_avg_c": 17.9,
+    "rain_mm": 0,
+    "tmax_avg_c": 35.0,
+    "tmin_avg_c": 21.4,
     "tmax_peak_c": 40.8,
-    "tmin_low_c": 14.5
+    "tmin_low_c": 14.3
    },
    "source": "open-meteo",
    "flag": "watch",
    "note": "Heat spike forecast (41\u00b0C peak) \u2014 watch for fruit stress and accelerated maturity.",
    "available": true,
-   "nws_narrative": "This Afternoon: Sunny, with a high near 81. Southwest wind around 15 mph, with gusts as high as 25 mph."
+   "nws_narrative": "This Afternoon: Sunny, with a high near 84. West wind around 15 mph, with gusts as high as 25 mph."
   },
   {
    "key": "co_sonson",
@@ -121,23 +121,23 @@
    "role": "Own 600ha + La Loma + main packhouse \u2014 highest weight",
    "past7": {
     "days": 7,
-    "rain_mm": 16.6,
-    "tmax_avg_c": 21.7,
-    "tmin_avg_c": 13.1,
-    "tmax_peak_c": 22.9,
-    "tmin_low_c": 12.4
+    "rain_mm": 32.1,
+    "tmax_avg_c": 21.5,
+    "tmin_avg_c": 13.3,
+    "tmax_peak_c": 22.7,
+    "tmin_low_c": 12.5
    },
    "next14": {
     "days": 14,
-    "rain_mm": 152.3,
+    "rain_mm": 201.0,
     "tmax_avg_c": 20.5,
-    "tmin_avg_c": 13.6,
-    "tmax_peak_c": 22.7,
-    "tmin_low_c": 12.7
+    "tmin_avg_c": 13.4,
+    "tmax_peak_c": 22.6,
+    "tmin_low_c": 12.0
    },
    "source": "open-meteo",
-   "flag": "normal",
-   "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+   "flag": "watch",
+   "note": "Heavy rain ahead (201 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
    "available": true
   },
   {
@@ -147,23 +147,23 @@
    "role": "220 contract growers across Caldas/Quind\u00edo/Risaralda",
    "past7": {
     "days": 7,
-    "rain_mm": 55.0,
-    "tmax_avg_c": 22.6,
-    "tmin_avg_c": 14.1,
-    "tmax_peak_c": 24.8,
-    "tmin_low_c": 13.4
+    "rain_mm": 130.0,
+    "tmax_avg_c": 20.8,
+    "tmin_avg_c": 13.7,
+    "tmax_peak_c": 22.9,
+    "tmin_low_c": 12.7
    },
    "next14": {
     "days": 14,
-    "rain_mm": 281.0,
-    "tmax_avg_c": 19.8,
-    "tmin_avg_c": 13.7,
-    "tmax_peak_c": 22.8,
-    "tmin_low_c": 12.7
+    "rain_mm": 225.7,
+    "tmax_avg_c": 19.9,
+    "tmin_avg_c": 14.0,
+    "tmax_peak_c": 23.3,
+    "tmin_low_c": 12.3
    },
    "source": "open-meteo",
    "flag": "watch",
-   "note": "Heavy rain ahead (281 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+   "note": "Heavy rain ahead (226 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
    "available": true
   },
   {
@@ -173,19 +173,19 @@
    "role": "Operational center, 370ac + packhouse",
    "past7": {
     "days": 7,
-    "rain_mm": 6.4,
-    "tmax_avg_c": 23.1,
-    "tmin_avg_c": 17.6,
-    "tmax_peak_c": 23.6,
-    "tmin_low_c": 16.5
+    "rain_mm": 0.4,
+    "tmax_avg_c": 23.3,
+    "tmin_avg_c": 17.1,
+    "tmax_peak_c": 23.8,
+    "tmin_low_c": 16.2
    },
    "next14": {
     "days": 14,
-    "rain_mm": 2.5,
-    "tmax_avg_c": 23.6,
-    "tmin_avg_c": 17.8,
-    "tmax_peak_c": 24.5,
-    "tmin_low_c": 16.2
+    "rain_mm": 3.2,
+    "tmax_avg_c": 24.4,
+    "tmin_avg_c": 18.9,
+    "tmax_peak_c": 25.2,
+    "tmin_low_c": 17.4
    },
    "source": "open-meteo",
    "flag": "normal",
@@ -199,23 +199,23 @@
    "role": "Northern coast \u2014 the El Ni\u00f1o flood corridor",
    "past7": {
     "days": 7,
-    "rain_mm": 4.0,
-    "tmax_avg_c": 30.3,
-    "tmin_avg_c": 18.4,
-    "tmax_peak_c": 31.8,
-    "tmin_low_c": 16.9
+    "rain_mm": 4.5,
+    "tmax_avg_c": 30.0,
+    "tmin_avg_c": 20.3,
+    "tmax_peak_c": 33.7,
+    "tmin_low_c": 19.6
    },
    "next14": {
     "days": 14,
-    "rain_mm": 8.0,
-    "tmax_avg_c": 31.8,
-    "tmin_avg_c": 20.0,
-    "tmax_peak_c": 35.0,
-    "tmin_low_c": 18.5
+    "rain_mm": 5.8,
+    "tmax_avg_c": 31.6,
+    "tmin_avg_c": 20.2,
+    "tmax_peak_c": 32.6,
+    "tmin_low_c": 18.7
    },
    "source": "open-meteo",
-   "flag": "watch",
-   "note": "Heat spike forecast (35\u00b0C peak) \u2014 watch for fruit stress and accelerated maturity.",
+   "flag": "normal",
+   "note": "No weather-driven supply disruption signals in the 2-4 week window.",
    "available": true
   },
   {
@@ -225,19 +225,19 @@
    "role": "Mid-to-large partner producers",
    "past7": {
     "days": 7,
-    "rain_mm": 0.3,
-    "tmax_avg_c": 26.2,
-    "tmin_avg_c": 20.0,
-    "tmax_peak_c": 27.0,
-    "tmin_low_c": 19.4
+    "rain_mm": 0,
+    "tmax_avg_c": 27.4,
+    "tmin_avg_c": 21.0,
+    "tmax_peak_c": 28.0,
+    "tmin_low_c": 20.3
    },
    "next14": {
     "days": 14,
     "rain_mm": 0,
-    "tmax_avg_c": 27.4,
-    "tmin_avg_c": 21.2,
-    "tmax_peak_c": 27.8,
-    "tmin_low_c": 20.3
+    "tmax_avg_c": 27.6,
+    "tmin_avg_c": 21.8,
+    "tmax_peak_c": 27.9,
+    "tmin_low_c": 19.3
    },
    "source": "open-meteo",
    "flag": "normal",
@@ -251,19 +251,19 @@
    "role": "Cloud forest, Amazon-facing \u2014 different regime",
    "past7": {
     "days": 7,
-    "rain_mm": 15.8,
-    "tmax_avg_c": 25.3,
-    "tmin_avg_c": 15.5,
-    "tmax_peak_c": 27.0,
-    "tmin_low_c": 14.7
+    "rain_mm": 31.4,
+    "tmax_avg_c": 26.3,
+    "tmin_avg_c": 15.6,
+    "tmax_peak_c": 27.8,
+    "tmin_low_c": 13.0
    },
    "next14": {
     "days": 14,
-    "rain_mm": 68.5,
-    "tmax_avg_c": 26.7,
-    "tmin_avg_c": 16.7,
-    "tmax_peak_c": 28.7,
-    "tmin_low_c": 14.0
+    "rain_mm": 81.9,
+    "tmax_avg_c": 25.6,
+    "tmin_avg_c": 16.4,
+    "tmax_peak_c": 27.8,
+    "tmin_low_c": 13.4
    },
    "source": "open-meteo",
    "flag": "normal",
