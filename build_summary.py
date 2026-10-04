@@ -11,8 +11,19 @@
 
 import json
 import statistics
+import sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+
+# Diagnostics print non-ASCII (°C, em dashes, the S. Texas→LA arrow in the
+# headline). Windows consoles default to cp1252, which can't encode those and
+# would crash the script on an otherwise-successful build. Rebind stdout/stderr
+# to UTF-8 (file I/O already writes UTF-8 explicitly and is unaffected).
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8")
+    except (AttributeError, ValueError):
+        pass
 from seasonality import (classify, load_seasons, load_crop_calendar,
                          current_stage, in_window)
 
@@ -49,6 +60,11 @@ WOW_FLOORS = {                  # ...AND exceed this absolute magnitude (%)
 MAX_WOW_SIGNALS = 2             # report at most the N largest; do not flood the box
 
 FREIGHT_STALE_AFTER_DAYS = 10   # report is weekly; 10 days = missed a cycle
+# Season statuses (from seasonality.classify) that mean CA fruit is still
+# arriving, so CA-district trucking is still an avocado signal. classify only
+# ever returns "active" for in-season; grace just reclassifies a gap, it is not
+# its own status. See Fix 5c.
+CA_ACTIVE_STATUSES = {"active"}
 FETCH_STALE_AFTER_DAYS = 8      # weekly Action; 8 days = missed a cycle
 ENSO_STALE_AFTER_DAYS = 45      # ENSO is monthly — do not judge it on a weekly clock
 ENSO_WEEKLY_STALE_AFTER_DAYS = 14  # Niño 1+2 is WEEKLY — 45 would mask a month of misses
@@ -575,6 +591,7 @@ def build_freight(freight: dict, notes: list) -> dict:
                 found = {"dest": r["dest"], "origin": origin,
                          "origin_short": origin_short,
                          "origin_is_preferred": origin == FREIGHT_ORIGINS[0][0],
+                         "avocado_group": "AVOCADO" in (r.get("commodities") or "").upper(),
                          **{k: r[k] for k in
                          ("availability", "low", "high", "mostly_low",
                           "mostly_high", "wow_pct", "wow_reported")}}
@@ -587,10 +604,23 @@ def build_freight(freight: dict, notes: list) -> dict:
     availability = []
     for origin, origin_short in FREIGHT_ORIGINS:
         rows = sections.get(origin, {}).get("rows", [])
-        if rows:
-            statuses = [r["availability"] for r in rows]
-            availability.append({"district": origin_short,
-                                 "status": max(set(statuses), key=statuses.count)})
+        if not rows:
+            continue
+        # USDA lists several commodity groups per district. Decide the district's
+        # avocado-trucking status from the avocado group's rows alone when present,
+        # so a longer citrus list can't out-vote the avocado loads (audit fix 5a).
+        avo = [r for r in rows if "AVOCADO" in (r.get("commodities") or "").upper()]
+        basis_rows = avo or rows
+        statuses = [r["availability"] for r in basis_rows]
+        wows = [r["wow_pct"] for r in basis_rows
+                if r.get("wow_reported") and r.get("wow_pct") is not None]
+        availability.append({
+            "district": origin_short,
+            "status": max(set(statuses), key=statuses.count),
+            "basis": "avocado loads" if avo else "all loads",
+            "wow_min": min(wows) if wows else None,
+            "wow_max": max(wows) if wows else None,
+        })
 
     return {"report_date": freight.get("report_date"),
             "lanes": lanes, "availability": availability}
@@ -740,6 +770,8 @@ def _enso_slot_dict(pick: tuple) -> dict | None:
     return {
         "key": o["key"], "name": o["name"], "country": o["country"],
         "weather_dark": o.get("weather_dark", False),
+        "weather_wet": o.get("weather_wet", False),
+        "el_nino_effect": o.get("el_nino_effect") or "",
         "supply_tier": o.get("supply_tier"),
         "signal_effect": p.get("signal_effect") or o.get("signal_effect") or "",
         "lag_months": p.get("lag_months"),
@@ -777,6 +809,10 @@ def build_enso(enso_raw: dict, response: dict, weather: dict) -> dict:
     fire = (abs(anom) >= ENSO_MODERATE_ANOM) or established or (trend == "strengthening" and steep)
 
     dark = set((weather or {}).get("dark_groups") or [])
+    # Countries whose live 14-day forecast is wet, so an ENSO "drier" tilt should
+    # be flagged as a seasonal risk rather than an immediate one (Fix 6).
+    wet_countries = {r.get("country") for r in (weather or {}).get("regions", [])
+                     if r.get("flag_kind") == "rain"}
     cal = load_crop_calendar()
     today = date.today()
     origins = []
@@ -786,7 +822,8 @@ def build_enso(enso_raw: dict, response: dict, weather: dict) -> dict:
         wm = o.get("watch_months")
         in_watch = bool(wm and in_window({"window": wm}, today))
         origins.append({**o, "country": country, "stage": stage,
-                        "in_watch": in_watch, "weather_dark": country in dark})
+                        "in_watch": in_watch, "weather_dark": country in dark,
+                        "weather_wet": country in wet_countries})
 
     slots = _enso_slots(origins)
     near_term = _enso_slot_dict(slots["near_term"])
@@ -931,8 +968,8 @@ def build_headline(supply, pricing, freight, diesel, weather) -> str:
             w = l.get("wow_pct")
             if w is None:
                 return "n/a"
-            return "firm" if w > 1 else ("soft" if w < -1 else "flat")
-        clause = f"LA/Dallas freight {word(la)}/{word(dal)}"
+            return "flat" if abs(w) <= 1 else f"{w:+.0f}%"
+        clause = f"S. Texas→LA/Dallas truck rates {word(la)}/{word(dal)} wk/wk"
         # Don't let the two fixed lanes hide a bigger mover: if another lane moved
         # materially more (>= 2 pts beyond the larger of LA/Dallas), name it in the
         # same clause so the headline's freight read isn't blind to it.
@@ -1272,21 +1309,32 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
                        f"seasonal 25th–75th band — soft for this week.")
         # 26-74 = unremarkable, say nothing
 
-    # 4. Truck shortages — scoped to origin; check whether lane rates agree
+    # 4. Truck shortages — report the observed move for the district's avocado loads
+    #    (or all loads if USDA lists no avocado group). Gate California districts on
+    #    the CA season: once CA is out of its arrival window, CA trucking is not an
+    #    avocado signal.
+    ca = next((r for r in (supply or {}).get("regions", []) if r["key"] == "ca"), None)
+    ca_in_season = bool(ca and (ca.get("season") or {}).get("status") in CA_ACTIVE_STATUSES)
+    shown_origins = {l["origin_short"] for l in (freight or {}).get("lanes", [])}
     shortages = [a for a in (freight or {}).get("availability", [])
-                 if "Shortage" in a["status"]]
+                 if (a["status"] == "Shortage"
+                     or ("Shortage" in a["status"]
+                         and a.get("wow_max") is not None and a["wow_max"] >= 5))
+                 and a["district"] not in shown_origins
+                 and (ca_in_season or not a["district"].endswith("CA"))]
     if shortages:
-        districts = ", ".join(a["district"] for a in shortages)
-        lanes = [l for l in (freight or {}).get("lanes", [])
-                 if l.get("wow_pct") is not None]
-        softening = [l for l in lanes if l["wow_pct"] < -1]
-        if softening and len(softening) >= len(lanes) / 2:
-            sig_ops.append(f"Truck availability is tight out of {districts}, but quoted lane "
-                       "rates softened this week — capacity pressure has not yet reached "
-                       "spot rates. Watch for a lag.")
-        else:
-            sig_ops.append(f"Truck availability tight out of {districts} — "
-                       "expect upward rate pressure on lanes from this origin.")
+        def _move(a):
+            lo, hi = a.get("wow_min"), a.get("wow_max")
+            if lo is None:
+                return ""
+            if lo == hi:
+                return ", rates flat wk/wk" if lo == 0 else f", rates {lo:+.0f}% wk/wk"
+            return f", rates {lo:+.0f}% to {hi:+.0f}% wk/wk"
+        parts = [f"{a['district']} ({a['status'].lower()} on {a['basis']}{_move(a)})"
+                 for a in shortages]
+        where = "this origin" if len(shortages) == 1 else "these districts"
+        sig_ops.append("Truck availability tight out of " + "; ".join(parts) +
+                       f". No lane from {where} is shown on the freight card.")
 
     # 4b. Fallback lane — when S. Texas has no quote, the card flips origin silently
     fallback_lanes = [l for l in (freight or {}).get("lanes", [])
@@ -1385,6 +1433,10 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
             if slot.get("weather_dark"):
                 s += (f" (no live {COUNTRY_LABELS.get(slot['country'], slot['country'])} "
                       "weather this cycle to corroborate)")
+            if (label == "Near-term" and slot.get("weather_wet")
+                    and "drier" in (slot.get("el_nino_effect") or "")):
+                s += (". The next two weeks are forecast wet there, so this is a "
+                      "seasonal risk, not an immediate one")
             return s
         # Lead with the current WEEKLY central-Pacific reading, then the seasonal
         # classification as context — the same ordering the panel uses. The
@@ -1459,7 +1511,7 @@ def build_kpis(supply, pricing, freight, diesel) -> list:
     kpis = []
     mx = next((r for r in (supply or {}).get("regions", []) if r["key"] == "mx"), None)
     if mx:
-        kpis.append({"label": "Mexico volume", "value": f"{mx['lbs'] / 1e6:.1f}M lbs",
+        kpis.append({"label": "Mexico volume · this week", "value": f"{mx['lbs'] / 1e6:.1f}M lbs",
                      "delta_pct": mx["wow_pct"], "sub": "vs prior week"})
     if supply and supply.get("total_roll4_lbs") is not None:
         # The VALUE is the rolling-4 LEVEL (a volume), not a percentage — so the
@@ -1481,7 +1533,7 @@ def build_kpis(supply, pricing, freight, diesel) -> list:
         else:
             sub = excl_note.strip() or "vs prior seasons"
         kpis.append({
-            "label": "Arrivals · trailing 4 wk",
+            "label": "All origins · trailing 4 wk",
             "value": f"{rt:.1f}M lbs",
             "delta_pct": None,
             "sub": sub,
@@ -1501,10 +1553,13 @@ def build_kpis(supply, pricing, freight, diesel) -> list:
         # The delta is the LANE RATE change, not a crossings-volume move. Bind it
         # to "vs prior wk" and prefix the origin with "from" so the origin text
         # can't be misread as "3% crossings".
+        # USDA may not name avocados in this origin's commodity list; when it
+        # doesn't, disclose that the quote is a mixed-produce reefer rate (Fix 5d).
+        mixed = "" if la.get("avocado_group") else " · mixed-produce rate"
         kpis.append({"label": f"Freight: {origin_label} → LA",
                      "value": f"${la['low']:,}–{la['high']:,}",
                      "delta_pct": la["wow_pct"] or None,
-                     "sub": f"vs prior wk · from {la['origin_short']}"})
+                     "sub": f"vs prior wk · from {la['origin_short']}{mixed}"})
     nat = ((diesel or {}).get("latest") or {}).get("national")
     if nat:
         kpis.append({"label": "US diesel", "value": f"${nat['value']:.2f}/gal",

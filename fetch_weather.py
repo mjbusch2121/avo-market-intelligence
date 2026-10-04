@@ -181,6 +181,8 @@ def met_no(lat: float, lon: float) -> dict | None:
         "tmax_avg_c": round(sum(v["tmax"] for v in vals) / len(vals), 1),
         "tmin_avg_c": round(sum(v["tmin"] for v in vals) / len(vals), 1),
         "tmax_peak_c": round(max(v["tmax"] for v in vals), 1),
+        "tmax_peak_date": None,          # fallback can't cheaply track which day peaked
+        "tmax_peak_lead_days": None,
         "tmin_low_c": round(min(v["tmin"] for v in vals), 1),
     }
 
@@ -204,6 +206,10 @@ def nws_narrative(lat: float, lon: float) -> str | None:
 def summarize(daily: dict) -> dict:
     """Split the 21-day daily arrays into past-7 and next-14 aggregates."""
     def agg(times, tmax, tmin, rain):
+        # Index of the hottest day, so callers can say *when* the peak lands.
+        # For next14 the list starts today (index 0), so the index == lead days.
+        valid = [(i, v) for i, v in enumerate(tmax) if v is not None]
+        peak_i, peak_v = max(valid, key=lambda p: p[1]) if valid else (None, 0)
         return {
             "days": len(times),
             "rain_mm": round(sum(v or 0 for v in rain), 1),
@@ -211,7 +217,9 @@ def summarize(daily: dict) -> dict:
                                 max(1, sum(1 for v in tmax if v is not None)), 1),
             "tmin_avg_c": round(sum(v for v in tmin if v is not None) /
                                 max(1, sum(1 for v in tmin if v is not None)), 1),
-            "tmax_peak_c": round(max((v for v in tmax if v is not None), default=0), 1),
+            "tmax_peak_c": round(peak_v, 1),
+            "tmax_peak_date": times[peak_i] if peak_i is not None else None,
+            "tmax_peak_lead_days": peak_i,   # meaningful for next14 only
             "tmin_low_c": round(min((v for v in tmin if v is not None), default=0), 1),
         }
 
@@ -221,8 +229,8 @@ def summarize(daily: dict) -> dict:
             "next14": agg(t[7:], hi[7:], lo[7:], pr[7:])}
 
 
-def flag_region(s: dict, region: dict) -> tuple[str, str]:
-    """Turn aggregates into a (flag, note) leading-indicator read, using the
+def flag_region(s: dict, region: dict) -> tuple[str, str, str | None]:
+    """Turn aggregates into a (flag, note, kind) leading-indicator read, using the
     region's own PROVISIONAL thresholds (see REGIONS) rather than global
     constants. A threshold of None disables that rule for the region.
 
@@ -242,24 +250,33 @@ def flag_region(s: dict, region: dict) -> tuple[str, str]:
 
     frost = th.get("frost_alert_c")
     if frost is not None and n14["tmin_low_c"] <= frost:
-        return "alert", "Frost risk in the forecast — potential fruit/tree damage."
+        return "alert", "Frost risk in the forecast — potential fruit/tree damage.", "frost"
 
     rain14 = th.get("rain_14d_watch_mm")
     if rain14 is not None and n14["rain_mm"] >= rain14 * horizon / 14:
         return "watch", (f"Heavy rain ahead ({n14['rain_mm']:.0f} mm/{horizon}d) — expect "
-                         "harvest and packing slowdowns hitting arrivals in 2-4 weeks.")
+                         "harvest and packing slowdowns hitting arrivals in 2-4 weeks."), "rain"
 
     rain7 = th.get("rain_7d_past_watch_mm")
     if p7 and rain7 is not None and p7["rain_mm"] >= rain7:
         return "watch", (f"Wet week just ended ({p7['rain_mm']:.0f} mm) — near-term crossing "
-                         "volumes may dip while orchards dry out.")
+                         "volumes may dip while orchards dry out."), "rain"
 
     tmax = th.get("tmax_peak_watch_c")
     if tmax is not None and n14["tmax_peak_c"] >= tmax:
-        return "watch", (f"Heat spike forecast ({n14['tmax_peak_c']:.0f}°C peak) — watch for "
-                         "fruit stress and accelerated maturity.")
+        when = ""
+        if n14.get("tmax_peak_date"):
+            dt = datetime.fromisoformat(n14["tmax_peak_date"])
+            lead = n14.get("tmax_peak_lead_days")
+            when = f" around {dt:%b} {dt.day}" + (f", {lead} days out" if lead else "")
+        note = (f"Heat spike forecast ({n14['tmax_peak_c']:.0f}°C peak{when}) — watch for "
+                "fruit stress and accelerated maturity.")
+        if (n14.get("tmax_peak_lead_days") or 0) >= 6:
+            note += " Longer-range forecast; confirm as it nears."
+        return "watch", note, "heat"
 
-    return "normal", "No weather-driven supply disruption signals in the 2-4 week window."
+    return ("normal",
+            "No weather-driven supply disruption signals in the 2-4 week window.", None)
 
 
 def country_coverage(regions_out: list) -> tuple[dict, list]:
@@ -297,7 +314,7 @@ def main():
         if daily:
             entry.update(summarize(daily))
             entry["source"] = "open-meteo"
-            entry["flag"], entry["note"] = flag_region(entry, region)
+            entry["flag"], entry["note"], entry["flag_kind"] = flag_region(entry, region)
             entry["available"] = True
         else:
             fallback = met_no(region["lat"], region["lon"])
@@ -305,11 +322,12 @@ def main():
                 entry["past7"] = None
                 entry["next14"] = fallback
                 entry["source"] = "met.no"
-                entry["flag"], entry["note"] = flag_region(entry, region)
+                entry["flag"], entry["note"], entry["flag_kind"] = flag_region(entry, region)
                 entry["available"] = True
             else:
                 entry["available"] = False
                 entry["flag"], entry["note"] = "unknown", "Weather data unavailable this run."
+                entry["flag_kind"] = None
                 failures += 1
         if region["country"] == "US":
             entry["nws_narrative"] = nws_narrative(region["lat"], region["lon"])

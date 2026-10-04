@@ -1,27 +1,27 @@
 {
- "generated_at": "2026-09-29T23:24:36Z",
+ "generated_at": "2026-10-04T23:10:03Z",
  "week": {
   "end": "2026-09-26",
   "label": "Week ending Sep 26, 2026"
  },
- "headline": "Mexico 4-week volume 197.5M lbs, up 15% vs the prior four weeks; Texas-crossing Hass 48s FOB steady at $25.25; LA/Dallas freight firm/firm; diesel down 0.15 at $6.38/gal; Michoac\u00e1n weather bears watching.",
- "headline_asof": "Supply & pricing wk ending 2026-09-26 \u00b7 Freight 2026-09-22 \u00b7 Diesel 2026-09-28",
+ "headline": "Mexico 4-week volume 197.5M lbs, up 15% vs the prior four weeks; Texas-crossing Hass 48s FOB steady at $25.25; S. Texas\u2192LA/Dallas truck rates -2%/-7% wk/wk; diesel down 0.15 at $6.38/gal; Michoac\u00e1n weather bears watching.",
+ "headline_asof": "Supply & pricing wk ending 2026-09-26 \u00b7 Freight 2026-09-29 \u00b7 Diesel 2026-09-28",
  "signals": [
-  "Central Pacific ocean temperatures are +3.1\u00b0C above normal (week of Sep 23). The three-month average reads moderate El Ni\u00f1o at +1.36 for JJA 2026 and is strengthening, up from -0.04 three seasons ago; the three-month average trails a fast-developing event, so conditions are likely stronger than that label suggests. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. Forward: Michoac\u00e1n / Jalisco \u2014 the Aug-Sep Loca bloom is setting the May-Sep 2027 crop.",
+  "Central Pacific ocean temperatures are +3.1\u00b0C above normal (week of Sep 23). The three-month average reads moderate El Ni\u00f1o at +1.36 for JJA 2026 and is strengthening, up from -0.04 three seasons ago; the three-month average trails a fast-developing event, so conditions are likely stronger than that label suggests. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. The next two weeks are forecast wet there, so this is a seasonal risk, not an immediate one. Forward: Michoac\u00e1n / Jalisco \u2014 the Aug-Sep Loca bloom is setting the May-Sep 2027 crop.",
+  "Ocean temperatures off northern Peru are 4.7\u00b0C above normal \u2014 near the warmest in 45 years of records. Warm coastal water at this level preceded the severe flooding in Lambayeque and Piura in 1998, 2017 and 2023. The warming is concentrated on the Peru coast rather than the central Pacific, the pattern behind those events. Watch the January\u2013March rain window for field access and packhouse logistics.",
   "Benchmark Hass 48s FOB is below its 4-year seasonal 25th\u201375th band \u2014 softer than three-quarters of same-week readings.",
-  "Truck availability tight out of South & Central CA, Oxnard district CA \u2014 expect upward rate pressure on lanes from this origin.",
-  "Michoac\u00e1n (Uruapan): Heavy rain ahead (224 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
-  "Jalisco (Cd. Guzm\u00e1n): Heavy rain ahead (168 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks."
+  "Truck availability tight out of South & Central CA (slight shortage on avocado loads, rates -1% to +19% wk/wk); Oxnard district CA (slight shortage on all loads, rates +6% to +8% wk/wk). No lane from these districts is shown on the freight card.",
+  "Michoac\u00e1n (Uruapan): Heavy rain ahead (352 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks."
  ],
  "kpis": [
   {
-   "label": "Mexico volume",
+   "label": "Mexico volume \u00b7 this week",
    "value": "58.2M lbs",
    "delta_pct": 11.2,
    "sub": "vs prior week"
   },
   {
-   "label": "Arrivals \u00b7 trailing 4 wk",
+   "label": "All origins \u00b7 trailing 4 wk",
    "value": "239.7M lbs",
    "delta_pct": null,
    "sub": "+12% vs 4-yr seasonal avg"
@@ -35,8 +35,8 @@
   {
    "label": "Freight: S. Texas crossings \u2192 LA",
    "value": "$3,600\u20134,400",
-   "delta_pct": 14,
-   "sub": "vs prior wk \u00b7 from S. Texas crossings (McAllen/Pharr)"
+   "delta_pct": -2,
+   "sub": "vs prior wk \u00b7 from S. Texas crossings (McAllen/Pharr) \u00b7 mixed-produce rate"
   },
   {
    "label": "US diesel",
@@ -48,45 +48,45 @@
  "feeds": {
   "supply": {
    "fetched_at": "2026-09-29T23:24:29+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 4,
    "stale": false,
    "fetch_error": null
   },
   "pricing": {
    "fetched_at": "2026-09-29T23:24:29+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 4,
    "stale": false,
    "fetch_error": null
   },
   "freight": {
-   "fetched_at": "2026-09-29T23:24:30+00:00",
+   "fetched_at": "2026-10-04T23:10:03+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "diesel": {
    "fetched_at": "2026-09-29T23:24:34+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 4,
    "stale": false,
    "fetch_error": null
   },
   "weather": {
-   "fetched_at": "2026-09-29T23:24:36+00:00",
-   "fetch_age_days": 0,
+   "fetched_at": "2026-10-02T01:07:27+00:00",
+   "fetch_age_days": 2,
    "stale": false,
    "fetch_error": null
   },
   "_stale_after_days": 8,
   "enso": {
    "fetched_at": "2026-09-29T23:24:36+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 4,
    "stale": false,
    "fetch_error": null,
    "stale_after_days": 45
   },
   "enso_weekly": {
    "fetched_at": "2026-09-29T23:24:36+00:00",
-   "fetch_age_days": 0,
+   "fetch_age_days": 4,
    "stale": false,
    "fetch_error": null,
    "stale_after_days": 14
@@ -204,7 +204,7 @@
     },
     "vol_share": 0.0,
     "minor": true,
-    "gap_reason": "off-season"
+    "gap_reason": "low volume"
    },
    {
     "key": "other",
@@ -1219,19 +1219,20 @@
   ]
  },
  "freight": {
-  "report_date": "2026-09-22",
+  "report_date": "2026-09-29",
   "lanes": [
    {
     "dest": "Los Angeles",
     "origin": "MEXICO CROSSINGS THROUGH SOUTH TEXAS",
     "origin_short": "S. Texas crossings (McAllen/Pharr)",
     "origin_is_preferred": true,
-    "availability": "Slight Surplus",
+    "avocado_group": false,
+    "availability": "Slight Shortage",
     "low": 3600,
     "high": 4400,
     "mostly_low": 4000,
-    "mostly_high": 4400,
-    "wow_pct": 14,
+    "mostly_high": 4200,
+    "wow_pct": -2,
     "wow_reported": true
    },
    {
@@ -1239,12 +1240,13 @@
     "origin": "MEXICO CROSSINGS THROUGH SOUTH TEXAS",
     "origin_short": "S. Texas crossings (McAllen/Pharr)",
     "origin_is_preferred": true,
+    "avocado_group": false,
     "availability": "Slight Surplus",
     "low": 2000,
-    "high": 2400,
-    "mostly_low": 2200,
-    "mostly_high": 2400,
-    "wow_pct": 10,
+    "high": 2300,
+    "mostly_low": 2100,
+    "mostly_high": 2200,
+    "wow_pct": -7,
     "wow_reported": true
    },
    {
@@ -1252,12 +1254,13 @@
     "origin": "MEXICO CROSSINGS THROUGH SOUTH TEXAS",
     "origin_short": "S. Texas crossings (McAllen/Pharr)",
     "origin_is_preferred": true,
-    "availability": "Slight Surplus",
-    "low": 5400,
-    "high": 6000,
-    "mostly_low": 5600,
-    "mostly_high": 6000,
-    "wow_pct": 8,
+    "avocado_group": false,
+    "availability": "Slight Shortage",
+    "low": 5800,
+    "high": 6300,
+    "mostly_low": 5900,
+    "mostly_high": 6100,
+    "wow_pct": 3,
     "wow_reported": true
    },
    {
@@ -1265,30 +1268,40 @@
     "origin": "MEXICO CROSSINGS THROUGH SOUTH TEXAS",
     "origin_short": "S. Texas crossings (McAllen/Pharr)",
     "origin_is_preferred": true,
-    "availability": "Slight Surplus",
+    "avocado_group": false,
+    "availability": "Slight Shortage",
     "low": 5800,
-    "high": 6600,
+    "high": 6400,
     "mostly_low": 6000,
     "mostly_high": 6400,
-    "wow_pct": 7,
+    "wow_pct": 0,
     "wow_reported": true
    }
   ],
   "availability": [
    {
     "district": "S. Texas crossings (McAllen/Pharr)",
-    "status": "Slight Surplus"
+    "status": "Slight Surplus",
+    "basis": "all loads",
+    "wow_min": -16,
+    "wow_max": 11
    },
    {
     "district": "South & Central CA",
-    "status": "Shortage"
+    "status": "Slight Shortage",
+    "basis": "avocado loads",
+    "wow_min": -1,
+    "wow_max": 19
    },
    {
     "district": "Oxnard district CA",
-    "status": "Slight Shortage"
+    "status": "Slight Shortage",
+    "basis": "all loads",
+    "wow_min": 6,
+    "wow_max": 8
    }
   ],
-  "stale_days": 7,
+  "stale_days": 5,
   "fetch_error": null,
   "stale_after_days": 10
  },
@@ -1760,25 +1773,30 @@
     "role": "Primary Mexican Hass source (~80% of exports)",
     "past7": {
      "days": 7,
-     "rain_mm": 24.7,
-     "tmax_avg_c": 25.2,
-     "tmin_avg_c": 14.3,
-     "tmax_peak_c": 25.7,
+     "rain_mm": 109.6,
+     "tmax_avg_c": 24.0,
+     "tmin_avg_c": 14.9,
+     "tmax_peak_c": 25.6,
+     "tmax_peak_date": "2026-09-27",
+     "tmax_peak_lead_days": 3,
      "tmin_low_c": 13.0
     },
     "next14": {
      "days": 14,
-     "rain_mm": 224.1,
-     "tmax_avg_c": 21.9,
-     "tmin_avg_c": 14.3,
-     "tmax_peak_c": 23.9,
-     "tmin_low_c": 11.5
+     "rain_mm": 351.5,
+     "tmax_avg_c": 21.8,
+     "tmin_avg_c": 14.7,
+     "tmax_peak_c": 24.0,
+     "tmax_peak_date": "2026-10-08",
+     "tmax_peak_lead_days": 7,
+     "tmin_low_c": 13.4
     },
     "source": "open-meteo",
     "flag": "watch",
-    "note": "Heavy rain ahead (224 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+    "note": "Heavy rain ahead (352 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+    "flag_kind": "rain",
     "available": true,
-    "stage": "flowering \u2014 Loca"
+    "stage": "flowering \u2014 Aventajada"
    },
    {
     "key": "jalisco",
@@ -1787,25 +1805,30 @@
     "role": "Second Mexican export state",
     "past7": {
      "days": 7,
-     "rain_mm": 15.3,
-     "tmax_avg_c": 25.4,
-     "tmin_avg_c": 17.1,
-     "tmax_peak_c": 27.3,
-     "tmin_low_c": 16.7
+     "rain_mm": 60.9,
+     "tmax_avg_c": 23.9,
+     "tmin_avg_c": 17.3,
+     "tmax_peak_c": 26.5,
+     "tmax_peak_date": "2026-09-27",
+     "tmax_peak_lead_days": 3,
+     "tmin_low_c": 16.8
     },
     "next14": {
      "days": 14,
-     "rain_mm": 168.5,
-     "tmax_avg_c": 22.3,
-     "tmin_avg_c": 16.0,
-     "tmax_peak_c": 24.2,
-     "tmin_low_c": 13.7
+     "rain_mm": 180.2,
+     "tmax_avg_c": 22.6,
+     "tmin_avg_c": 15.9,
+     "tmax_peak_c": 24.1,
+     "tmax_peak_date": "2026-10-06",
+     "tmax_peak_lead_days": 5,
+     "tmin_low_c": 14.6
     },
     "source": "open-meteo",
     "flag": "watch",
-    "note": "Heavy rain ahead (168 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+    "note": "Heavy rain ahead (180 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+    "flag_kind": "rain",
     "available": true,
-    "stage": "flowering \u2014 Loca"
+    "stage": "flowering \u2014 Aventajada"
    },
    {
     "key": "ventura",
@@ -1815,24 +1838,29 @@
     "past7": {
      "days": 7,
      "rain_mm": 0,
-     "tmax_avg_c": 27.1,
+     "tmax_avg_c": 27.5,
      "tmin_avg_c": 15.9,
-     "tmax_peak_c": 29.0,
+     "tmax_peak_c": 29.6,
+     "tmax_peak_date": "2026-09-29",
+     "tmax_peak_lead_days": 5,
      "tmin_low_c": 14.4
     },
     "next14": {
      "days": 14,
      "rain_mm": 0,
-     "tmax_avg_c": 35.3,
-     "tmin_avg_c": 24.2,
-     "tmax_peak_c": 41.0,
-     "tmin_low_c": 15.2
+     "tmax_avg_c": 33.4,
+     "tmin_avg_c": 22.5,
+     "tmax_peak_c": 38.8,
+     "tmax_peak_date": "2026-10-04",
+     "tmax_peak_lead_days": 3,
+     "tmin_low_c": 14.9
     },
     "source": "open-meteo",
     "flag": "watch",
-    "note": "Heat spike forecast (41\u00b0C peak) \u2014 watch for fruit stress and accelerated maturity.",
+    "note": "Heat spike forecast (39\u00b0C peak around Oct 4, 3 days out) \u2014 watch for fruit stress and accelerated maturity.",
+    "flag_kind": "heat",
     "available": true,
-    "nws_narrative": "This Afternoon: Sunny, with a high near 83. West wind 10 to 15 mph.",
+    "nws_narrative": "Tonight: Partly cloudy, with a low around 69. North northwest wind 5 to 10 mph.",
     "stage": "harvest"
    },
    {
@@ -1844,23 +1872,28 @@
      "days": 7,
      "rain_mm": 0,
      "tmax_avg_c": 30.0,
-     "tmin_avg_c": 17.3,
+     "tmin_avg_c": 16.9,
      "tmax_peak_c": 35.6,
-     "tmin_low_c": 15.8
+     "tmax_peak_date": "2026-09-26",
+     "tmax_peak_lead_days": 2,
+     "tmin_low_c": 14.3
     },
     "next14": {
      "days": 14,
      "rain_mm": 0,
-     "tmax_avg_c": 35.0,
-     "tmin_avg_c": 21.4,
-     "tmax_peak_c": 40.8,
-     "tmin_low_c": 14.3
+     "tmax_avg_c": 33.9,
+     "tmin_avg_c": 19.2,
+     "tmax_peak_c": 39.4,
+     "tmax_peak_date": "2026-10-04",
+     "tmax_peak_lead_days": 3,
+     "tmin_low_c": 13.6
     },
     "source": "open-meteo",
     "flag": "watch",
-    "note": "Heat spike forecast (41\u00b0C peak) \u2014 watch for fruit stress and accelerated maturity.",
+    "note": "Heat spike forecast (39\u00b0C peak around Oct 4, 3 days out) \u2014 watch for fruit stress and accelerated maturity.",
+    "flag_kind": "heat",
     "available": true,
-    "nws_narrative": "This Afternoon: Sunny, with a high near 84. West wind around 15 mph, with gusts as high as 25 mph.",
+    "nws_narrative": "Tonight: Mostly clear, with a low around 65. East wind 0 to 5 mph.",
     "stage": "harvest"
    },
    {
@@ -1870,23 +1903,28 @@
     "role": "Own 600ha + La Loma + main packhouse \u2014 highest weight",
     "past7": {
      "days": 7,
-     "rain_mm": 32.1,
-     "tmax_avg_c": 21.5,
-     "tmin_avg_c": 13.3,
+     "rain_mm": 29.8,
+     "tmax_avg_c": 21.6,
+     "tmin_avg_c": 13.4,
      "tmax_peak_c": 22.7,
+     "tmax_peak_date": "2026-09-24",
+     "tmax_peak_lead_days": 0,
      "tmin_low_c": 12.5
     },
     "next14": {
      "days": 14,
-     "rain_mm": 201.0,
-     "tmax_avg_c": 20.5,
-     "tmin_avg_c": 13.4,
-     "tmax_peak_c": 22.6,
-     "tmin_low_c": 12.0
+     "rain_mm": 166.7,
+     "tmax_avg_c": 19.6,
+     "tmin_avg_c": 13.3,
+     "tmax_peak_c": 22.5,
+     "tmax_peak_date": "2026-10-01",
+     "tmax_peak_lead_days": 0,
+     "tmin_low_c": 11.5
     },
     "source": "open-meteo",
     "flag": "watch",
-    "note": "Heavy rain ahead (201 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+    "note": "Heavy rain ahead (167 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+    "flag_kind": "rain",
     "available": true,
     "stage": "harvest"
    },
@@ -1897,23 +1935,28 @@
     "role": "220 contract growers across Caldas/Quind\u00edo/Risaralda",
     "past7": {
      "days": 7,
-     "rain_mm": 130.0,
+     "rain_mm": 128.9,
      "tmax_avg_c": 20.8,
-     "tmin_avg_c": 13.7,
-     "tmax_peak_c": 22.9,
-     "tmin_low_c": 12.7
+     "tmin_avg_c": 14.2,
+     "tmax_peak_c": 23.3,
+     "tmax_peak_date": "2026-09-29",
+     "tmax_peak_lead_days": 5,
+     "tmin_low_c": 13.8
     },
     "next14": {
      "days": 14,
-     "rain_mm": 225.7,
+     "rain_mm": 222.7,
      "tmax_avg_c": 19.9,
-     "tmin_avg_c": 14.0,
-     "tmax_peak_c": 23.3,
-     "tmin_low_c": 12.3
+     "tmin_avg_c": 13.9,
+     "tmax_peak_c": 21.9,
+     "tmax_peak_date": "2026-10-09",
+     "tmax_peak_lead_days": 8,
+     "tmin_low_c": 12.4
     },
     "source": "open-meteo",
     "flag": "watch",
-    "note": "Heavy rain ahead (226 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+    "note": "Heavy rain ahead (223 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+    "flag_kind": "rain",
     "available": true,
     "stage": "harvest"
    },
@@ -1924,23 +1967,28 @@
     "role": "Operational center, 370ac + packhouse",
     "past7": {
      "days": 7,
-     "rain_mm": 0.4,
-     "tmax_avg_c": 23.3,
-     "tmin_avg_c": 17.1,
-     "tmax_peak_c": 23.8,
-     "tmin_low_c": 16.2
+     "rain_mm": 1.1,
+     "tmax_avg_c": 23.5,
+     "tmin_avg_c": 17.6,
+     "tmax_peak_c": 24.1,
+     "tmax_peak_date": "2026-09-30",
+     "tmax_peak_lead_days": 6,
+     "tmin_low_c": 17.1
     },
     "next14": {
      "days": 14,
-     "rain_mm": 3.2,
-     "tmax_avg_c": 24.4,
+     "rain_mm": 4.5,
+     "tmax_avg_c": 24.6,
      "tmin_avg_c": 18.9,
-     "tmax_peak_c": 25.2,
-     "tmin_low_c": 17.4
+     "tmax_peak_c": 25.3,
+     "tmax_peak_date": "2026-10-07",
+     "tmax_peak_lead_days": 6,
+     "tmin_low_c": 16.7
     },
     "source": "open-meteo",
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+    "flag_kind": null,
     "available": true,
     "stage": "flowering"
    },
@@ -1952,22 +2000,27 @@
     "past7": {
      "days": 7,
      "rain_mm": 4.5,
-     "tmax_avg_c": 30.0,
-     "tmin_avg_c": 20.3,
+     "tmax_avg_c": 29.5,
+     "tmin_avg_c": 20.2,
      "tmax_peak_c": 33.7,
+     "tmax_peak_date": "2026-09-24",
+     "tmax_peak_lead_days": 0,
      "tmin_low_c": 19.6
     },
     "next14": {
      "days": 14,
-     "rain_mm": 5.8,
+     "rain_mm": 5.5,
      "tmax_avg_c": 31.6,
-     "tmin_avg_c": 20.2,
-     "tmax_peak_c": 32.6,
-     "tmin_low_c": 18.7
+     "tmin_avg_c": 20.3,
+     "tmax_peak_c": 33.6,
+     "tmax_peak_date": "2026-10-11",
+     "tmax_peak_lead_days": 10,
+     "tmin_low_c": 19.3
     },
     "source": "open-meteo",
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+    "flag_kind": null,
     "available": true,
     "stage": "flowering"
    },
@@ -1979,22 +2032,27 @@
     "past7": {
      "days": 7,
      "rain_mm": 0,
-     "tmax_avg_c": 27.4,
-     "tmin_avg_c": 21.0,
+     "tmax_avg_c": 27.3,
+     "tmin_avg_c": 20.9,
      "tmax_peak_c": 28.0,
-     "tmin_low_c": 20.3
+     "tmax_peak_date": "2026-09-24",
+     "tmax_peak_lead_days": 0,
+     "tmin_low_c": 20.5
     },
     "next14": {
      "days": 14,
-     "rain_mm": 0,
-     "tmax_avg_c": 27.6,
-     "tmin_avg_c": 21.8,
-     "tmax_peak_c": 27.9,
-     "tmin_low_c": 19.3
+     "rain_mm": 0.7,
+     "tmax_avg_c": 27.7,
+     "tmin_avg_c": 22.1,
+     "tmax_peak_c": 28.3,
+     "tmax_peak_date": "2026-10-14",
+     "tmax_peak_lead_days": 13,
+     "tmin_low_c": 20.0
     },
     "source": "open-meteo",
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+    "flag_kind": null,
     "available": true,
     "stage": "flowering"
    },
@@ -2005,23 +2063,28 @@
     "role": "Cloud forest, Amazon-facing \u2014 different regime",
     "past7": {
      "days": 7,
-     "rain_mm": 31.4,
-     "tmax_avg_c": 26.3,
-     "tmin_avg_c": 15.6,
+     "rain_mm": 28.8,
+     "tmax_avg_c": 26.2,
+     "tmin_avg_c": 15.8,
      "tmax_peak_c": 27.8,
-     "tmin_low_c": 13.0
+     "tmax_peak_date": "2026-09-25",
+     "tmax_peak_lead_days": 1,
+     "tmin_low_c": 14.1
     },
     "next14": {
      "days": 14,
-     "rain_mm": 81.9,
-     "tmax_avg_c": 25.6,
-     "tmin_avg_c": 16.4,
-     "tmax_peak_c": 27.8,
-     "tmin_low_c": 13.4
+     "rain_mm": 92.7,
+     "tmax_avg_c": 25.5,
+     "tmin_avg_c": 16.7,
+     "tmax_peak_c": 27.0,
+     "tmax_peak_date": "2026-10-04",
+     "tmax_peak_lead_days": 3,
+     "tmin_low_c": 11.0
     },
     "source": "open-meteo",
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+    "flag_kind": null,
     "available": true,
     "stage": null
    }
@@ -2456,6 +2519,8 @@
    "name": "Michoac\u00e1n / Jalisco",
    "country": "MX",
    "weather_dark": false,
+   "weather_wet": true,
+   "el_nino_effect": "drier",
    "supply_tier": "primary",
    "signal_effect": "moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest",
    "lag_months": [
@@ -2468,6 +2533,8 @@
    "name": "Michoac\u00e1n / Jalisco",
    "country": "MX",
    "weather_dark": false,
+   "weather_wet": true,
+   "el_nino_effect": "drier",
    "supply_tier": "primary",
    "signal_effect": "the Aug-Sep Loca bloom is setting the May-Sep 2027 crop",
    "lag_months": [
@@ -3007,8 +3074,8 @@
     }
    ],
    "threshold": 1.8,
-   "in_season": false,
-   "fire": false,
+   "in_season": true,
+   "fire": true,
    "fire_absolute": true,
    "fire_divergence": true,
    "near_record": true,
@@ -3070,9 +3137,10 @@
      }
     ],
     "country": "MX",
-    "stage": "flowering \u2014 Loca",
+    "stage": "flowering \u2014 Aventajada",
     "in_watch": true,
-    "weather_dark": false
+    "weather_dark": false,
+    "weather_wet": true
    },
    {
     "key": "co_sonson",
@@ -3127,7 +3195,8 @@
     "country": "CO",
     "stage": "harvest",
     "in_watch": true,
-    "weather_dark": false
+    "weather_dark": false,
+    "weather_wet": true
    },
    {
     "key": "co_eje_cafetero",
@@ -3182,7 +3251,8 @@
     "country": "CO",
     "stage": "harvest",
     "in_watch": true,
-    "weather_dark": false
+    "weather_dark": false,
+    "weather_wet": true
    },
    {
     "key": "pe_lambayeque",
@@ -3206,7 +3276,8 @@
     "country": "PE",
     "stage": "flowering",
     "in_watch": false,
-    "weather_dark": false
+    "weather_dark": false,
+    "weather_wet": false
    },
    {
     "key": "pe_canete",
@@ -3230,7 +3301,8 @@
     "country": "PE",
     "stage": "flowering",
     "in_watch": true,
-    "weather_dark": false
+    "weather_dark": false,
+    "weather_wet": false
    },
    {
     "key": "pe_junin",
@@ -3253,7 +3325,8 @@
     "country": "PE",
     "stage": null,
     "in_watch": false,
-    "weather_dark": false
+    "weather_dark": false,
+    "weather_wet": false
    }
   ],
   "fetched_at": "2026-09-29T23:24:36+00:00"

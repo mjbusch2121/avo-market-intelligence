@@ -190,7 +190,9 @@ function renderSupply(data) {
       ? '<span class="badge partial">partial data</span>'
       : r.lbs < 100000
         ? '<span class="lowbase">low volume this week</span>'
-        : `${deltaHtml(r.wow_pct)} wow${r.vs_3yr_pct !== null ? " · " + deltaHtml(r.vs_3yr_pct) + " 3yr" : ""}`;
+        : `${r.wow_pct === null || r.wow_pct === undefined
+              ? '<span class="lowbase">n/a</span>'
+              : deltaHtml(r.wow_pct)} wow${r.vs_3yr_pct !== null ? " · " + deltaHtml(r.vs_3yr_pct) + " 3yr" : ""}`;
     regionsBox.appendChild(
       el(
         "div",
@@ -461,7 +463,7 @@ function renderFreight(data) {
       <div class="lane-dest">${l.dest}</div>
       <div class="lane-rate">$${l.low.toLocaleString()}–${l.high.toLocaleString()}</div>
       <div class="lane-meta">${wow} vs prior week</div>
-      <div class="lane-meta">from ${l.origin_short}</div>
+      <div class="lane-meta">from ${l.origin_short}${l.avocado_group ? "" : " · mixed-produce rate"}</div>
       <div class="lane-meta">trucks: ${l.availability}</div>`,
       ),
     );
@@ -566,8 +568,9 @@ function weatherCard(r) {
     ),
   );
   // Phenological stage (harvest/flowering/sizing) — the label that turns a
-  // rainfall number into a reason to care. Absent for Michoacán/California.
-  if (r.stage) card.appendChild(el("div", "wx-stage", r.stage));
+  // rainfall number into a reason to care.
+  // Absent only where crop_calendar.json has no entry (currently Monobamba).
+  card.appendChild(el("div", "wx-stage", r.stage || "stage n/a"));
   card.appendChild(el("div", "wx-role", r.role));
   if (r.available) {
     const days = r.next14.days || 14;
@@ -589,7 +592,7 @@ function weatherCard(r) {
       "div",
       "wx-note",
       r.nws_narrative
-        ? `${r.note} <br><span style="color:var(--muted)">NWS: ${r.nws_narrative}</span>`
+        ? `${r.note} <br><span style="color:var(--muted)">NWS today: ${r.nws_narrative}</span>`
         : r.note,
     ),
   );
@@ -703,7 +706,7 @@ function renderEnso(data) {
     : "";
   // Single source credit — the one place the index names may appear.
   const credit =
-    `<p class="enso-oni">Source: NOAA CPC. RONI used for current probabilities; ONI shown for continuity.</p>`;
+    `<p class="enso-oni">Source: NOAA CPC.</p>`;
 
   head.innerHTML = lead + coast + established + fwdNote + credit;
 
@@ -742,7 +745,7 @@ function renderEnso(data) {
   // this is the only place ENSO appears at origin level.
   (e.origins || []).forEach((o) => {
     const sig = o.commercially_significant ? " enso-key" : "";
-    const stage = o.stage ? `<span class="enso-stage">${o.stage}</span>` : "";
+    const stage = `<span class="enso-stage">${o.stage || "stage n/a"}</span>`;
     const dark = o.weather_dark
       ? `<span class="enso-dark">no live ${ENSO_COUNTRY_LABELS[o.country] || o.country} weather this cycle</span>`
       : "";
