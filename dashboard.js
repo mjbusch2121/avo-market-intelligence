@@ -187,7 +187,7 @@ function renderSupply(data) {
     // sub-100K base is a low-base artifact, not intelligence (same treatment as
     // small-base crossings). Below the floor, show the volume and a muted note.
     const comps = r.partial
-      ? '<span class="badge partial">partial data</span>'
+      ? `<span class="badge partial">${r.partial_reason === "season_end" ? "season ending" : "partial data"}</span>`
       : r.lbs < 100000
         ? '<span class="lowbase">low volume this week</span>'
         : `${r.wow_pct === null || r.wow_pct === undefined

@@ -86,16 +86,23 @@ def in_window(region: dict, on: date) -> bool:
     return on >= start or on <= end
 
 
-def in_window_with_grace(region: dict, on: date) -> bool:
-    """Same as in_window, but pads both edges by grace_weeks. Used to
-    decide whether a data gap is 'expected' - USDA reporting often
-    trails the field at season edges."""
-    grace = timedelta(weeks=region.get("grace_weeks", 0))
-    start = _md_to_date(region["window"]["start"], on.year) - grace
-    end = _md_to_date(region["window"]["end"], on.year) + grace
-    if start <= end:
-        return start <= on <= end
-    return on >= start or on <= end
+def _within_days_after(md: str, days: int, on: date, include_day0: bool) -> bool:
+    """True if `on` falls in the `days` days after month-day `md`.
+
+    Checks this year's and last year's occurrence so a zone that crosses
+    Jan 1 (a window ending in December) still matches.
+    """
+    if days <= 0:
+        return False
+    for y in (on.year, on.year - 1):
+        d = _md_to_date(md, y)
+        stop = d + timedelta(days=days)
+        if include_day0:
+            if d <= on < stop:          # leading zone: [start, start + grace)
+                return True
+        elif d < on <= stop:            # trailing zone: (end, end + grace]
+            return True
+    return False
 
 
 def _matching_windows(windows: list, on: date) -> list:
@@ -163,18 +170,29 @@ def classify(region_key: str, last_reported: str | None,
         return {"status": "active", "message": None,
                 "last_reported": last_reported}
 
-    # No fresh data. Expected, or a problem?
-    if in_window_with_grace(region, today):
+    # No fresh data. Expected, or a problem? A gap AT the edges of a season is
+    # expected (reports trickle in/out across the window boundary); only a gap
+    # squarely inside the window — past the leading grace zone — is an alarm.
+    win = region["window"]
+    grace_days = 7 * region.get("grace_weeks", 0)
+    year_round = win["start"] == "01-01" and win["end"] == "12-31"
+    starting = (not year_round) and _within_days_after(win["start"], grace_days, today, True)
+    winding = (not year_round) and _within_days_after(win["end"], grace_days, today, False)
+
+    if in_window(region, today) and not starting:
         return {"status": "unexpected_gap",
                 "message": (f"{region['name']} should be reporting but isn't "
                             f"(last data: {last_reported or 'never'}). "
                             "Check the USDA report slug and the fetcher."),
                 "last_reported": last_reported}
 
-    hint = region.get("resume_hint")
-    msg = f"{region['name']} season concluded"
-    if hint:
-        msg += f" — {hint}"
+    if starting:
+        msg = f"{region['name']} season starting — first USDA reports expected soon"
+    elif winding:
+        msg = f"{region['name']} season winding down — final USDA reports may still arrive"
+    else:
+        hint = region.get("resume_hint")
+        msg = f"{region['name']} season concluded" + (f" — {hint}" if hint else "")
     return {"status": "out_of_season", "message": msg,
             "last_reported": last_reported}
 
@@ -234,10 +252,16 @@ if __name__ == "__main__":
         ("CA reporting in June", "ca", "2026-06-28", date(2026, 7, 1), "active"),
         ("CA dark in December", "ca", "2026-09-28", date(2026, 12, 15), "out_of_season"),
         ("CA dark in June (bad)", "ca", "2026-04-01", date(2026, 6, 15), "unexpected_gap"),
-        ("CA dark in early Oct (grace)", "ca", "2026-09-25", date(2026, 10, 15), "unexpected_gap"),
+        ("CA dark in early Oct (grace)", "ca", "2026-09-25", date(2026, 10, 15), "out_of_season"),
         ("CA dark in Nov (past grace)", "ca", "2026-09-25", date(2026, 11, 15), "out_of_season"),
+        ("CA dark late Mar (start grace)", "ca", "2025-09-25", date(2026, 3, 25), "out_of_season"),
+        ("CA dark late Apr (past start grace)", "ca", "2025-09-25", date(2026, 4, 20), "unexpected_gap"),
+        ("Chile dark early Oct (start grace)", "chile", "2026-02-20", date(2026, 10, 6), "out_of_season"),
+        ("Chile dark mid Nov (in window)", "chile", "2026-02-20", date(2026, 11, 15), "unexpected_gap"),
+        ("Colombia dark Jan (year-round)", "colombia", "2025-11-01", date(2026, 1, 10), "unexpected_gap"),
+        ("MX dark Jan 2 (year-round, grace 0)", "mx", "2025-12-01", date(2026, 1, 2), "unexpected_gap"),
         ("Never-reported region in window", "ca", None, date(2026, 6, 15), "unexpected_gap"),
-        ("Unknown region key", "chile", "2026-07-01", date(2026, 7, 14), "unexpected_gap"),
+        ("Unknown region key", "nonexistent_region", "2026-07-01", date(2026, 7, 14), "unexpected_gap"),
     ]
     failures = 0
     for desc, key, last, today, want in checks:
@@ -245,6 +269,18 @@ if __name__ == "__main__":
         ok = got == want
         failures += (not ok)
         print(f"{'PASS' if ok else 'FAIL'}  {desc}: {got}" + ("" if ok else f" (wanted {want})"))
+
+    # Edge-zone messages carry the actual guidance, so assert the wording too.
+    msg_checks = [
+        ("CA winding-down message", "ca", "2026-09-25", date(2026, 10, 15), "winding down"),
+        ("Chile season-starting message", "chile", "2026-02-20", date(2026, 10, 6), "season starting"),
+    ]
+    for desc, key, last, today, needle in msg_checks:
+        got = classify(key, last, today=today, seasons=seasons)["message"] or ""
+        ok = needle in got
+        failures += (not ok)
+        print(f"{'PASS' if ok else 'FAIL'}  {desc}: {got!r}"
+              + ("" if ok else f" (wanted substring {needle!r})"))
 
     # crop_calendar / phenological-stage checks (southern + northern hemisphere)
     cal = load_crop_calendar()
@@ -273,6 +309,6 @@ if __name__ == "__main__":
         failures += (not ok)
         print(f"{'PASS' if ok else 'FAIL'}  {desc}: {got}" + ("" if ok else f" (wanted {want})"))
 
-    total = len(checks) + len(stage_checks)
+    total = len(checks) + len(msg_checks) + len(stage_checks)
     print(f"\n{total - failures}/{total} checks passed")
     raise SystemExit(1 if failures else 0)

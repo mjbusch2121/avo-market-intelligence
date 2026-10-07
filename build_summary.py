@@ -163,6 +163,8 @@ REGION_ORDER = ["mx", "ca", "peru", "colombia", "chile", "other"]
 # for the aggregate "seaport imports" swing signal, which watches the total, not
 # a single origin line.
 IMPORT_KEYS = ["peru", "colombia", "chile", "other"]
+IMPORT_LABELS = {"peru": "Peru", "colombia": "Colombia", "chile": "Chile",
+                 "other": "DR/other"}
 REGION_NAMES = {
     "mx": "Mexico",
     "ca": "California",
@@ -171,6 +173,10 @@ REGION_NAMES = {
     "chile": "Chile",
     "other": "Other imports (mainly Dominican Republic)",
 }
+
+# Only footnote the range-basis midpoint share once it's material — at 0% the
+# note is accurate but adds nothing. Counting is unconditional; only the note is gated.
+BASIS_NOTE_MIN_SHARE = 0.05
 
 
 def region_of(origin: str) -> str:
@@ -305,18 +311,34 @@ def build_supply(movement: dict, notes: list) -> dict:
         # missing report. Only an in-season region can be "partially reported".
         looks_low = med > 1e6 and cur < 0.3 * med
         partial = looks_low and season["status"] != "out_of_season"
+        partial_reason = None
 
         if partial:
             partial_keys.add(key)
-            notes.append(f"{name} movement for the latest week appears "
-                         "partially reported by USDA; week-over-week and "
-                         "seasonal comparisons suppressed until revised.")
+            # A zero week just after the window closes is a season ending, not a
+            # half-filed report — USDA will not "revise" a week with no fruit.
+            # Distinguish the two so the wording (and badge) can differ; the math
+            # (excluded from totals, comparisons suppressed) stays identical.
+            reg_cfg = seasons_cfg.get(key)
+            past_window = bool(reg_cfg) and not in_window(reg_cfg, today)
+            if cur == 0 and past_window:
+                partial_reason = "season_end"
+                end = datetime.strptime(reg_cfg["window"]["end"], "%m-%d")
+                notes.append(f"{name} reported no movement for the latest week — "
+                             f"consistent with the season ending (US arrival window "
+                             f"closed {end:%b} {end.day}). Comparisons suppressed.")
+            else:
+                partial_reason = "low_report"
+                notes.append(f"{name} movement for the latest week appears "
+                             "partially reported by USDA; week-over-week and "
+                             "seasonal comparisons suppressed until revised.")
             # A partial current week understates roll4_lbs, so suppress the %
             # just like wow_pct / vs_3yr_pct.
             roll4_pct = None
         regions.append({
             "key": key, "name": name, "lbs": cur,
             "partial": partial,
+            "partial_reason": partial_reason,
             "wow_pct": None if partial else pct(cur, pri),
             "roll4_lbs": roll4_lbs,
             "roll4_prior_lbs": roll4_prior_lbs,
@@ -426,6 +448,7 @@ def build_supply(movement: dict, notes: list) -> dict:
         "total_lbs": total_reliable(cur_w),
         "total_lbs_all_regions": total(cur_w),
         "total_excludes": excluded,
+        "exclude_reasons": {r["key"]: r["partial_reason"] for r in regions if r["partial"]},
         "total_wow_pct": pct(total_reliable(cur_w), total_reliable(prior_w))
                          if prior_w else None,
         "total_vs_3yr_pct": pct(total_reliable(cur_w), avg_rel) if avg_rel else None,
@@ -463,7 +486,7 @@ def build_pricing(price_hist: dict, current: dict, notes: list) -> dict:
     # row with no dominant range falls back to full range low/high. A heavily
     # mixed series would need different treatment, so make the split auditable.
     n_basis = basis_counts["mostly"] + basis_counts["range"]
-    if basis_counts["range"] and n_basis:
+    if basis_counts["range"] and n_basis and basis_counts["range"] / n_basis >= BASIS_NOTE_MIN_SHARE:
         notes.append(
             f"Price benchmark: {basis_counts['range']} of {n_basis} rows "
             f"({basis_counts['range'] / n_basis * 100:.0f}%) used range-basis "
@@ -1016,26 +1039,6 @@ def build_headline_asof(supply, pricing, freight, diesel) -> str:
     return " · ".join(parts)
 
 
-def active_import_origins() -> str:
-    """Which import origins are plausibly shipping right now, per
-    seasons.json. Replaces the hardcoded 'Peru/Colombia/DR season'
-    string, which would have been wrong half the year.
-
-    Returns e.g. 'Peru/Colombia' or '' if none are in window.
-    """
-    from seasonality import load_seasons, in_window
-    from datetime import date
-
-    today = date.today()
-    seasons = load_seasons()
-    # Keys now match the live origin regions. Dominican Republic ships inside the
-    # year-round 'other' aggregate, so it surfaces via that key.
-    names = {"peru": "Peru", "colombia": "Colombia", "chile": "Chile",
-             "other": "DR/other"}
-    active = [label for key, label in names.items()
-              if key in seasons and in_window(seasons[key], today)]
-    return "/".join(dict.fromkeys(active))
-
 def _iso_week_distance(a, b):
     """Circular distance between two ISO week numbers.
 
@@ -1278,8 +1281,13 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
     if imp and imp["lbs"] > 0 and imp.get("wow_pct") is not None:
         w = imp["wow_pct"]
         if abs(w) >= PORTS_WOW:
-            origins = active_import_origins()
-            who = f" ({origins})" if origins else ""
+            # Name who actually shipped this week, largest first — a calendar
+            # window says who COULD ship, not who drove the swing.
+            shippers = sorted((r for r in (supply or {}).get("regions", [])
+                               if r["key"] in IMPORT_LABELS and r["lbs"] > 0),
+                              key=lambda r: -r["lbs"])
+            who = (" (" + "/".join(IMPORT_LABELS[r["key"]] for r in shippers) + ")"
+                   if shippers else "")
             sig.append(f"Seaport imports{who} moved "
                        f"{direction_word(w)} to {imp['lbs'] / 1e6:.1f}M lbs — "
                        "watch East Coast spot pressure.")
@@ -1522,7 +1530,11 @@ def build_kpis(supply, pricing, freight, diesel) -> list:
         # signal (see build_signals section 1). % is derived from the shown 0.1M
         # figures so it reconciles with a division of the displayed numbers.
         excl = supply.get("total_excludes") or []
-        excl_note = f" (excl. {', '.join(e.upper() for e in excl)} — pending)" if excl else ""
+        reasons = supply.get("exclude_reasons") or {}
+        label = {"season_end": "season ending", "low_report": "pending"}
+        excl_note = (" (excl. " + ", ".join(
+            f"{e.upper()} — {label.get(reasons.get(e), 'pending')}" for e in excl) + ")"
+            if excl else "")
         rt = supply["total_roll4_lbs"] / 1e6
         vs = supply.get("total_roll4_vs_baseline_pct")
         rb = supply.get("total_roll4_baseline_lbs")

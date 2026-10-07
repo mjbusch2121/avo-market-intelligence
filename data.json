@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-06T23:32:13Z",
+ "generated_at": "2026-10-07T03:33:50Z",
  "week": {
   "end": "2026-10-03",
   "label": "Week ending Oct 03, 2026"
@@ -9,7 +9,7 @@
  "signals": [
   "Central Pacific ocean temperatures are +3.2\u00b0C above normal (week of Sep 30). The three-month average reads strong El Ni\u00f1o at +1.69 for JAS 2026 and is strengthening, up from +0.49 three seasons ago; the three-month average trails a fast-developing event, so conditions are likely stronger than that label suggests. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. The next two weeks are forecast wet there, so this is a seasonal risk, not an immediate one. Forward: Michoac\u00e1n / Jalisco \u2014 the Aug-Sep Loca bloom is setting the May-Sep 2027 crop.",
   "Ocean temperatures off northern Peru are 5.3\u00b0C above normal \u2014 near the warmest in 45 years of records. Warm coastal water at this level preceded the severe flooding in Lambayeque and Piura in 1998, 2017 and 2023. The warming is concentrated on the Peru coast rather than the central Pacific, the pattern behind those events. Watch the January\u2013March rain window for field access and packhouse logistics.",
-  "Seaport imports (Colombia/Chile/DR/other) moved down 22% to 4.5M lbs \u2014 watch East Coast spot pressure.",
+  "Seaport imports (Peru/DR/other/Colombia) moved down 22% to 4.5M lbs \u2014 watch East Coast spot pressure.",
   "Benchmark Hass 48s FOB is below its 4-year seasonal 25th\u201375th band \u2014 softer than three-quarters of same-week readings.",
   "Truck availability tight out of South & Central CA (slight shortage on avocado loads, rates -1% to +19% wk/wk); Oxnard district CA (slight shortage on all loads, rates +6% to +8% wk/wk). No lane from these districts is shown on the freight card."
  ],
@@ -24,7 +24,7 @@
    "label": "All origins \u00b7 trailing 4 wk",
    "value": "227.5M lbs",
    "delta_pct": null,
-   "sub": "+11% vs 4-yr seasonal avg (excl. CA \u2014 pending)"
+   "sub": "+11% vs 4-yr seasonal avg (excl. CA \u2014 season ending)"
   },
   {
    "label": "Hass 48s FOB (TX)",
@@ -103,6 +103,9 @@
   "total_excludes": [
    "ca"
   ],
+  "exclude_reasons": {
+   "ca": "season_end"
+  },
   "total_wow_pct": -7.7,
   "total_vs_3yr_pct": 14.0,
   "total_roll4_lbs": 227465051,
@@ -120,6 +123,7 @@
     "name": "Mexico",
     "lbs": 54515733,
     "partial": false,
+    "partial_reason": null,
     "wow_pct": -6.4,
     "roll4_lbs": 203694791,
     "roll4_prior_lbs": 176131291,
@@ -139,6 +143,7 @@
     "name": "California",
     "lbs": 0,
     "partial": true,
+    "partial_reason": "season_end",
     "wow_pct": null,
     "roll4_lbs": 8769019,
     "roll4_prior_lbs": 35218169,
@@ -158,6 +163,7 @@
     "name": "Peru",
     "lbs": 2613515,
     "partial": false,
+    "partial_reason": null,
     "wow_pct": -31.4,
     "roll4_lbs": 15530691,
     "roll4_prior_lbs": 26830607,
@@ -177,6 +183,7 @@
     "name": "Colombia",
     "lbs": 47731,
     "partial": false,
+    "partial_reason": null,
     "wow_pct": null,
     "roll4_lbs": 47731,
     "roll4_prior_lbs": 276061,
@@ -196,25 +203,27 @@
     "name": "Chile",
     "lbs": 0,
     "partial": false,
+    "partial_reason": null,
     "wow_pct": null,
     "roll4_lbs": 0,
     "roll4_prior_lbs": 1306,
     "roll4_pct": -100.0,
     "vs_3yr_pct": -100.0,
     "season": {
-     "status": "unexpected_gap",
-     "message": "Chile imports should be reporting but isn't (last data: 2026-08-22). Check the USDA report slug and the fetcher.",
+     "status": "out_of_season",
+     "message": "Chile imports season starting \u2014 first USDA reports expected soon",
      "last_reported": "2026-08-22"
     },
     "vol_share": 0.0,
     "minor": true,
-    "gap_reason": "low volume"
+    "gap_reason": null
    },
    {
     "key": "other",
     "name": "Other imports (mainly Dominican Republic)",
     "lbs": 1804177,
     "partial": false,
+    "partial_reason": null,
     "wow_pct": -4.8,
     "roll4_lbs": 8191838,
     "roll4_prior_lbs": 10337082,
@@ -3337,8 +3346,7 @@
  },
  "meta": {
   "notes": [
-   "California movement for the latest week appears partially reported by USDA; week-over-week and seasonal comparisons suppressed until revised.",
-   "Price benchmark: 1 of 333 rows (0%) used range-basis midpoint (USDA 'mostly' absent that day)."
+   "California reported no movement for the latest week \u2014 consistent with the season ending (US arrival window closed Sep 30). Comparisons suppressed."
   ],
   "sources": [
    {
