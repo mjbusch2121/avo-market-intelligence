@@ -1,41 +1,41 @@
 {
- "generated_at": "2026-10-07T03:33:50Z",
+ "generated_at": "2026-10-13T23:36:11Z",
  "week": {
-  "end": "2026-10-03",
-  "label": "Week ending Oct 03, 2026"
+  "end": "2026-10-10",
+  "label": "Week ending Oct 10, 2026"
  },
- "headline": "Mexico 4-week volume 203.7M lbs, up 16% vs the prior four weeks; Texas-crossing Hass 48s FOB steady at $25.25; S. Texas\u2192LA/Dallas truck rates -2%/-7% wk/wk; diesel down 0.18 at $6.20/gal; Michoac\u00e1n weather bears watching.",
- "headline_asof": "Supply & pricing wk ending 2026-10-03 \u00b7 Freight 2026-09-29 \u00b7 Diesel 2026-10-05",
+ "headline": "Mexico 4-week volume 218.8M lbs, up 30% vs the prior four weeks; Texas-crossing Hass 48s FOB softened 7.9% at $23.25; S. Texas\u2192LA/Dallas truck rates flat/flat wk/wk; diesel down 0.18 at $6.20/gal; Michoac\u00e1n weather bears watching.",
+ "headline_asof": "Supply & pricing wk ending 2026-10-10 \u00b7 Freight 2026-10-06 \u00b7 Diesel 2026-10-05",
  "signals": [
-  "Central Pacific ocean temperatures are +3.2\u00b0C above normal (week of Sep 30). The three-month average reads strong El Ni\u00f1o at +1.69 for JAS 2026 and is strengthening, up from +0.49 three seasons ago; the three-month average trails a fast-developing event, so conditions are likely stronger than that label suggests. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. The next two weeks are forecast wet there, so this is a seasonal risk, not an immediate one. Forward: Michoac\u00e1n / Jalisco \u2014 the Aug-Sep Loca bloom is setting the May-Sep 2027 crop.",
-  "Ocean temperatures off northern Peru are 5.3\u00b0C above normal \u2014 near the warmest in 45 years of records. Warm coastal water at this level preceded the severe flooding in Lambayeque and Piura in 1998, 2017 and 2023. The warming is concentrated on the Peru coast rather than the central Pacific, the pattern behind those events. Watch the January\u2013March rain window for field access and packhouse logistics.",
-  "Seaport imports (Peru/DR/other/Colombia) moved down 22% to 4.5M lbs \u2014 watch East Coast spot pressure.",
-  "Benchmark Hass 48s FOB is below its 4-year seasonal 25th\u201375th band \u2014 softer than three-quarters of same-week readings.",
-  "Truck availability tight out of South & Central CA (slight shortage on avocado loads, rates -1% to +19% wk/wk); Oxnard district CA (slight shortage on all loads, rates +6% to +8% wk/wk). No lane from these districts is shown on the freight card."
+  "Central Pacific ocean temperatures are +3.3\u00b0C above normal (week of Oct 07). The three-month average reads strong El Ni\u00f1o at +1.69 for JAS 2026 and is strengthening, up from +0.49 three seasons ago; the three-month average trails a fast-developing event, so conditions are likely stronger than that label suggests. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. The next two weeks are forecast wet there, so this is a seasonal risk, not an immediate one. Forward: Michoac\u00e1n / Jalisco \u2014 the Aug-Sep Loca bloom is setting the May-Sep 2027 crop.",
+  "Ocean temperatures off northern Peru are 5.2\u00b0C above normal \u2014 near the warmest in 45 years of records. Warm coastal water at this level preceded the severe flooding in Lambayeque and Piura in 1998, 2017 and 2023. The warming is concentrated on the Peru coast rather than the central Pacific, the pattern behind those events. Watch the January\u2013March rain window for field access and packhouse logistics.",
+  "Seaport imports (DR/other/Peru/Colombia) moved down 38% to 2.8M lbs \u2014 watch East Coast spot pressure.",
+  "Benchmark Hass 48s FOB is below the 5th percentile of its 4-year seasonal history \u2014 historically cheap for this week.",
+  "Michoac\u00e1n (Uruapan): Wet week just ended (83 mm) \u2014 near-term crossing volumes may dip while orchards dry out."
  ],
  "kpis": [
   {
    "label": "Mexico volume \u00b7 this week",
-   "value": "54.5M lbs",
-   "delta_pct": -6.4,
+   "value": "53.7M lbs",
+   "delta_pct": -1.5,
    "sub": "vs prior week"
   },
   {
    "label": "All origins \u00b7 trailing 4 wk",
-   "value": "227.5M lbs",
+   "value": "243.9M lbs",
    "delta_pct": null,
-   "sub": "+11% vs 4-yr seasonal avg (excl. CA \u2014 season ending)"
+   "sub": "+14% vs 4-yr seasonal avg"
   },
   {
    "label": "Hass 48s FOB (TX)",
-   "value": "$25.25",
-   "delta_pct": 0.0,
-   "sub": "wk ending Oct 03 \u00b7 vs prior week"
+   "value": "$23.25",
+   "delta_pct": -7.9,
+   "sub": "wk ending Oct 10 \u00b7 vs prior week"
   },
   {
    "label": "Freight: S. Texas crossings \u2192 LA",
    "value": "$3,600\u20134,400",
-   "delta_pct": -2,
+   "delta_pct": null,
    "sub": "vs prior wk \u00b7 from S. Texas crossings (McAllen/Pharr) \u00b7 mixed-produce rate"
   },
   {
@@ -47,45 +47,45 @@
  ],
  "feeds": {
   "supply": {
-   "fetched_at": "2026-10-06T23:32:05+00:00",
+   "fetched_at": "2026-10-13T23:34:49+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "pricing": {
-   "fetched_at": "2026-10-06T23:32:05+00:00",
+   "fetched_at": "2026-10-13T23:34:49+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "freight": {
-   "fetched_at": "2026-10-06T23:32:06+00:00",
+   "fetched_at": "2026-10-13T23:34:50+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "diesel": {
-   "fetched_at": "2026-10-06T23:32:08+00:00",
+   "fetched_at": "2026-10-13T23:34:53+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "weather": {
-   "fetched_at": "2026-10-06T23:32:12+00:00",
+   "fetched_at": "2026-10-13T23:36:10+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "_stale_after_days": 8,
   "enso": {
-   "fetched_at": "2026-10-06T23:32:12+00:00",
+   "fetched_at": "2026-10-13T23:36:11+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null,
    "stale_after_days": 45
   },
   "enso_weekly": {
-   "fetched_at": "2026-10-06T23:32:12+00:00",
+   "fetched_at": "2026-10-13T23:36:11+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null,
@@ -93,48 +93,42 @@
   }
  },
  "supply": {
-  "week_end": "2026-10-03",
+  "week_end": "2026-10-10",
   "imports_agg": {
-   "lbs": 4465423,
-   "wow_pct": -21.8
+   "lbs": 2776532,
+   "wow_pct": -37.8
   },
-  "total_lbs": 58981156,
-  "total_lbs_all_regions": 58981156,
-  "total_excludes": [
-   "ca"
-  ],
-  "exclude_reasons": {
-   "ca": "season_end"
-  },
-  "total_wow_pct": -7.7,
-  "total_vs_3yr_pct": 14.0,
-  "total_roll4_lbs": 227465051,
-  "total_roll4_pct": 6.5,
-  "total_roll4_baseline_lbs": 204588163,
-  "total_roll4_vs_baseline_pct": 11.2,
+  "total_lbs": 56476999,
+  "total_lbs_all_regions": 56476999,
+  "total_excludes": [],
+  "exclude_reasons": {},
+  "total_wow_pct": -4.2,
+  "total_vs_3yr_pct": 4.5,
+  "total_roll4_lbs": 243918886,
+  "total_roll4_pct": 5.8,
+  "total_roll4_baseline_lbs": 214495196,
+  "total_roll4_vs_baseline_pct": 13.7,
   "baseline_n": 20,
   "baseline_years": 4,
-  "partial_regions": [
-   "ca"
-  ],
+  "partial_regions": [],
   "regions": [
    {
     "key": "mx",
     "name": "Mexico",
-    "lbs": 54515733,
+    "lbs": 53700467,
     "partial": false,
     "partial_reason": null,
-    "wow_pct": -6.4,
-    "roll4_lbs": 203694791,
-    "roll4_prior_lbs": 176131291,
-    "roll4_pct": 15.6,
-    "vs_3yr_pct": 18.2,
+    "wow_pct": -1.5,
+    "roll4_lbs": 218827821,
+    "roll4_prior_lbs": 168848685,
+    "roll4_pct": 29.6,
+    "vs_3yr_pct": 10.9,
     "season": {
      "status": "active",
      "message": null,
-     "last_reported": "2026-10-03"
+     "last_reported": "2026-10-10"
     },
-    "vol_share": 0.8623,
+    "vol_share": 0.8971,
     "minor": false,
     "gap_reason": null
    },
@@ -142,59 +136,59 @@
     "key": "ca",
     "name": "California",
     "lbs": 0,
-    "partial": true,
-    "partial_reason": "season_end",
+    "partial": false,
+    "partial_reason": null,
     "wow_pct": null,
-    "roll4_lbs": 8769019,
-    "roll4_prior_lbs": 35218169,
-    "roll4_pct": null,
-    "vs_3yr_pct": null,
+    "roll4_lbs": 5905013,
+    "roll4_prior_lbs": 27997180,
+    "roll4_pct": -78.9,
+    "vs_3yr_pct": -100.0,
     "season": {
-     "status": "active",
-     "message": null,
+     "status": "out_of_season",
+     "message": "California (South District) season winding down \u2014 final USDA reports may still arrive",
      "last_reported": "2026-09-26"
     },
-    "vol_share": 0.0371,
+    "vol_share": 0.0242,
     "minor": true,
     "gap_reason": null
    },
    {
     "key": "peru",
     "name": "Peru",
-    "lbs": 2613515,
+    "lbs": 1220508,
     "partial": false,
     "partial_reason": null,
-    "wow_pct": -31.4,
-    "roll4_lbs": 15530691,
-    "roll4_prior_lbs": 26830607,
-    "roll4_pct": -42.1,
-    "vs_3yr_pct": -6.1,
+    "wow_pct": -53.3,
+    "roll4_lbs": 11344289,
+    "roll4_prior_lbs": 24090104,
+    "roll4_pct": -52.9,
+    "vs_3yr_pct": -24.1,
     "season": {
      "status": "active",
      "message": null,
-     "last_reported": "2026-10-03"
+     "last_reported": "2026-10-10"
     },
-    "vol_share": 0.0657,
-    "minor": false,
+    "vol_share": 0.0465,
+    "minor": true,
     "gap_reason": null
    },
    {
     "key": "colombia",
     "name": "Colombia",
-    "lbs": 47731,
+    "lbs": 191094,
     "partial": false,
     "partial_reason": null,
-    "wow_pct": null,
-    "roll4_lbs": 47731,
-    "roll4_prior_lbs": 276061,
-    "roll4_pct": -82.7,
-    "vs_3yr_pct": -73.7,
+    "wow_pct": 300.4,
+    "roll4_lbs": 238825,
+    "roll4_prior_lbs": 95632,
+    "roll4_pct": 149.7,
+    "vs_3yr_pct": 47.0,
     "season": {
      "status": "active",
      "message": null,
-     "last_reported": "2026-10-03"
+     "last_reported": "2026-10-10"
     },
-    "vol_share": 0.0002,
+    "vol_share": 0.001,
     "minor": true,
     "gap_reason": null
    },
@@ -221,20 +215,20 @@
    {
     "key": "other",
     "name": "Other imports (mainly Dominican Republic)",
-    "lbs": 1804177,
+    "lbs": 1364930,
     "partial": false,
     "partial_reason": null,
-    "wow_pct": -4.8,
-    "roll4_lbs": 8191838,
-    "roll4_prior_lbs": 10337082,
-    "roll4_pct": -20.8,
-    "vs_3yr_pct": -11.3,
+    "wow_pct": -24.3,
+    "roll4_lbs": 7602938,
+    "roll4_prior_lbs": 9609726,
+    "roll4_pct": -20.9,
+    "vs_3yr_pct": -32.9,
     "season": {
      "status": "active",
      "message": null,
-     "last_reported": "2026-10-03"
+     "last_reported": "2026-10-10"
     },
-    "vol_share": 0.0347,
+    "vol_share": 0.0312,
     "minor": true,
     "gap_reason": null
    }
@@ -243,42 +237,32 @@
    {
     "district": "MEXICO CROSSINGS THROUGH PHARR TEXAS",
     "short": "Pharr, TX",
-    "lbs": 32003203,
-    "wow_pct": -9.7
+    "lbs": 30360443,
+    "wow_pct": -5.1
    },
    {
     "district": "MEXICO CROSSINGS THROUGH LAREDO TEXAS",
     "short": "Laredo, TX",
-    "lbs": 21396523,
-    "wow_pct": 0.5
+    "lbs": 22203309,
+    "wow_pct": 3.8
    },
    {
     "district": "MEXICO CROSSINGS THROUGH NOGALES ARIZONA",
     "short": "Nogales, AZ",
-    "lbs": 672762,
-    "wow_pct": -1.7
+    "lbs": 646309,
+    "wow_pct": -3.9
    },
    {
     "district": "MEXICO CROSSINGS THROUGH OTAY MESA CALIFORNIA",
     "short": "Otay Mesa, CA",
-    "lbs": 443245,
-    "wow_pct": -36.7
+    "lbs": 397478,
+    "wow_pct": -10.3
    }
   ],
   "trend": [
    {
-    "week": "2025-10-11",
-    "avg3yr": 51806858,
-    "mx": 57174028,
-    "ca": 3925632,
-    "peru": 1949253,
-    "colombia": 286979,
-    "chile": 0,
-    "other": 2419426
-   },
-   {
     "week": "2025-10-18",
-    "avg3yr": 53668857,
+    "avg3yr": 53887463,
     "mx": 46357443,
     "ca": 2014970,
     "peru": 1068016,
@@ -288,7 +272,7 @@
    },
    {
     "week": "2025-10-25",
-    "avg3yr": 54179274,
+    "avg3yr": 54288025,
     "mx": 60773128,
     "ca": 2684431,
     "peru": 0,
@@ -298,7 +282,7 @@
    },
    {
     "week": "2025-11-01",
-    "avg3yr": 54207586,
+    "avg3yr": 54229410,
     "mx": 58713284,
     "ca": 1727638,
     "peru": 0,
@@ -308,7 +292,7 @@
    },
    {
     "week": "2025-11-08",
-    "avg3yr": 55739582,
+    "avg3yr": 55741880,
     "mx": 55758959,
     "ca": 1388881,
     "peru": 0,
@@ -388,7 +372,7 @@
    },
    {
     "week": "2026-01-03",
-    "avg3yr": 48691762,
+    "avg3yr": 49033008,
     "mx": 36447241,
     "ca": 272391,
     "peru": 0,
@@ -398,7 +382,7 @@
    },
    {
     "week": "2026-01-10",
-    "avg3yr": 55287248,
+    "avg3yr": 56173164,
     "mx": 73783038,
     "ca": 573208,
     "peru": 0,
@@ -408,7 +392,7 @@
    },
    {
     "week": "2026-01-17",
-    "avg3yr": 59157193,
+    "avg3yr": 60203000,
     "mx": 53738433,
     "ca": 710186,
     "peru": 11,
@@ -418,7 +402,7 @@
    },
    {
     "week": "2026-01-24",
-    "avg3yr": 64902429,
+    "avg3yr": 66104666,
     "mx": 60957142,
     "ca": 732816,
     "peru": 0,
@@ -428,7 +412,7 @@
    },
    {
     "week": "2026-01-31",
-    "avg3yr": 64048575,
+    "avg3yr": 65400816,
     "mx": 92028032,
     "ca": 1037795,
     "peru": 0,
@@ -438,7 +422,7 @@
    },
    {
     "week": "2026-02-07",
-    "avg3yr": 62607565,
+    "avg3yr": 63988177,
     "mx": 76617542,
     "ca": 189809,
     "peru": 0,
@@ -448,7 +432,7 @@
    },
    {
     "week": "2026-02-14",
-    "avg3yr": 61550560,
+    "avg3yr": 62910790,
     "mx": 58203007,
     "ca": 301978,
     "peru": 0,
@@ -458,7 +442,7 @@
    },
    {
     "week": "2026-02-21",
-    "avg3yr": 58396859,
+    "avg3yr": 59815758,
     "mx": 47130259,
     "ca": 83805,
     "peru": 0,
@@ -468,7 +452,7 @@
    },
    {
     "week": "2026-02-28",
-    "avg3yr": 56177941,
+    "avg3yr": 57893541,
     "mx": 70155183,
     "ca": 1469429,
     "peru": 0,
@@ -478,7 +462,7 @@
    },
    {
     "week": "2026-03-07",
-    "avg3yr": 55716159,
+    "avg3yr": 58201902,
     "mx": 59358032,
     "ca": 2592011,
     "peru": 0,
@@ -488,7 +472,7 @@
    },
    {
     "week": "2026-03-14",
-    "avg3yr": 60161169,
+    "avg3yr": 63738008,
     "mx": 61221705,
     "ca": 3000219,
     "peru": 0,
@@ -498,7 +482,7 @@
    },
    {
     "week": "2026-03-21",
-    "avg3yr": 59570870,
+    "avg3yr": 64075141,
     "mx": 74129317,
     "ca": 4812987,
     "peru": 40695,
@@ -508,7 +492,7 @@
    },
    {
     "week": "2026-03-28",
-    "avg3yr": 59658439,
+    "avg3yr": 65679978,
     "mx": 68644170,
     "ca": 7776367,
     "peru": 41119,
@@ -518,7 +502,7 @@
    },
    {
     "week": "2026-04-04",
-    "avg3yr": 57234983,
+    "avg3yr": 65170351,
     "mx": 69732719,
     "ca": 10048544,
     "peru": 81815,
@@ -528,7 +512,7 @@
    },
    {
     "week": "2026-04-11",
-    "avg3yr": 56733043,
+    "avg3yr": 66163271,
     "mx": 75233584,
     "ca": 13613812,
     "peru": 80543,
@@ -538,7 +522,7 @@
    },
    {
     "week": "2026-04-18",
-    "avg3yr": 56007530,
+    "avg3yr": 66543018,
     "mx": 46052601,
     "ca": 13145525,
     "peru": 80967,
@@ -548,7 +532,7 @@
    },
    {
     "week": "2026-04-25",
-    "avg3yr": 54945405,
+    "avg3yr": 66612475,
     "mx": 62221887,
     "ca": 13444140,
     "peru": 83086,
@@ -558,7 +542,7 @@
    },
    {
     "week": "2026-05-02",
-    "avg3yr": 52749124,
+    "avg3yr": 65397479,
     "mx": 65103217,
     "ca": 14468853,
     "peru": 206070,
@@ -568,7 +552,7 @@
    },
    {
     "week": "2026-05-09",
-    "avg3yr": 53544817,
+    "avg3yr": 67045635,
     "mx": 59434631,
     "ca": 14146762,
     "peru": 85629,
@@ -578,7 +562,7 @@
    },
    {
     "week": "2026-05-16",
-    "avg3yr": 50290000,
+    "avg3yr": 63574190,
     "mx": 48577405,
     "ca": 0,
     "peru": 78848,
@@ -588,7 +572,7 @@
    },
    {
     "week": "2026-05-23",
-    "avg3yr": 49344935,
+    "avg3yr": 62695038,
     "mx": 50615891,
     "ca": 15722938,
     "peru": 347562,
@@ -598,7 +582,7 @@
    },
    {
     "week": "2026-05-30",
-    "avg3yr": 47643479,
+    "avg3yr": 60425753,
     "mx": 39935871,
     "ca": 16385662,
     "peru": 673869,
@@ -608,7 +592,7 @@
    },
    {
     "week": "2026-06-06",
-    "avg3yr": 45736470,
+    "avg3yr": 59307988,
     "mx": 41230361,
     "ca": 33962738,
     "peru": 2124483,
@@ -618,7 +602,7 @@
    },
    {
     "week": "2026-06-13",
-    "avg3yr": 45928846,
+    "avg3yr": 59371076,
     "mx": 48368705,
     "ca": 19824369,
     "peru": 6066105,
@@ -628,7 +612,7 @@
    },
    {
     "week": "2026-06-20",
-    "avg3yr": 45017453,
+    "avg3yr": 58538401,
     "mx": 27917879,
     "ca": 18085935,
     "peru": 6492698,
@@ -638,7 +622,7 @@
    },
    {
     "week": "2026-06-27",
-    "avg3yr": 45139758,
+    "avg3yr": 58680010,
     "mx": 33959540,
     "ca": 17687065,
     "peru": 10575668,
@@ -648,7 +632,7 @@
    },
    {
     "week": "2026-07-04",
-    "avg3yr": 46185008,
+    "avg3yr": 59760396,
     "mx": 39226911,
     "ca": 12830643,
     "peru": 13152854,
@@ -658,7 +642,7 @@
    },
    {
     "week": "2026-07-11",
-    "avg3yr": 47429834,
+    "avg3yr": 59453168,
     "mx": 35542114,
     "ca": 11610592,
     "peru": 13701236,
@@ -668,7 +652,7 @@
    },
    {
     "week": "2026-07-18",
-    "avg3yr": 47376792,
+    "avg3yr": 57959295,
     "mx": 41897985,
     "ca": 24346854,
     "peru": 11482826,
@@ -678,7 +662,7 @@
    },
    {
     "week": "2026-07-25",
-    "avg3yr": 49678278,
+    "avg3yr": 59320287,
     "mx": 36272955,
     "ca": 10854296,
     "peru": 15860146,
@@ -688,7 +672,7 @@
    },
    {
     "week": "2026-08-01",
-    "avg3yr": 49316095,
+    "avg3yr": 57723025,
     "mx": 39895434,
     "ca": 18470470,
     "peru": 9258788,
@@ -698,7 +682,7 @@
    },
    {
     "week": "2026-08-08",
-    "avg3yr": 49542763,
+    "avg3yr": 56812764,
     "mx": 43850475,
     "ca": 9741095,
     "peru": 7945698,
@@ -708,7 +692,7 @@
    },
    {
     "week": "2026-08-15",
-    "avg3yr": 50275956,
+    "avg3yr": 56712612,
     "mx": 45850043,
     "ca": 10084995,
     "peru": 8147413,
@@ -718,7 +702,7 @@
    },
    {
     "week": "2026-08-22",
-    "avg3yr": 48926782,
+    "avg3yr": 54503061,
     "mx": 29091561,
     "ca": 9077848,
     "peru": 7426314,
@@ -728,7 +712,7 @@
    },
    {
     "week": "2026-08-29",
-    "avg3yr": 50280564,
+    "avg3yr": 54994440,
     "mx": 52913805,
     "ca": 7117562,
     "peru": 5931285,
@@ -738,7 +722,7 @@
    },
    {
     "week": "2026-09-05",
-    "avg3yr": 50528843,
+    "avg3yr": 54315936,
     "mx": 48275882,
     "ca": 8937764,
     "peru": 5325595,
@@ -748,7 +732,7 @@
    },
    {
     "week": "2026-09-12",
-    "avg3yr": 49955796,
+    "avg3yr": 53112938,
     "mx": 38567437,
     "ca": 2864006,
     "peru": 5406910,
@@ -758,7 +742,7 @@
    },
    {
     "week": "2026-09-19",
-    "avg3yr": 50233880,
+    "avg3yr": 52616750,
     "mx": 52384011,
     "ca": 0,
     "peru": 3699025,
@@ -768,7 +752,7 @@
    },
    {
     "week": "2026-09-26",
-    "avg3yr": 52654096,
+    "avg3yr": 54609939,
     "mx": 58227610,
     "ca": 5905013,
     "peru": 3811241,
@@ -778,29 +762,39 @@
    },
    {
     "week": "2026-10-03",
-    "avg3yr": 51744390,
+    "avg3yr": 53203625,
     "mx": 54515733,
     "ca": 0,
     "peru": 2613515,
     "colombia": 47731,
     "chile": 0,
     "other": 1804177
+   },
+   {
+    "week": "2026-10-10",
+    "avg3yr": 54064881,
+    "mx": 53700467,
+    "ca": 0,
+    "peru": 1220508,
+    "colombia": 191094,
+    "chile": 0,
+    "other": 1364930
    }
   ]
  },
  "pricing": {
   "benchmark": {
    "label": "Hass 48s, 2-layer cartons (conventional), FOB/shipping point",
-   "mx_latest": 25.25,
+   "mx_latest": 23.25,
    "ca_latest": 34.25,
-   "wow_mx_pct": 0.0,
+   "wow_mx_pct": -7.9,
    "wow_ca_pct": -2.8,
-   "band_position_pct": 22,
+   "band_position_pct": 2,
    "baseline_n": 20,
    "baseline_years": 4,
-   "week": "2026-10-03"
+   "week": "2026-10-10"
   },
-  "report_date": "2026-10-06",
+  "report_date": "2026-10-13",
   "table": [
    {
     "district": "MEXICO CROSSINGS THROUGH TEXAS",
@@ -816,10 +810,10 @@
      },
      {
       "size": "36s",
-      "low": 30.25,
+      "low": 28.25,
       "high": 36.25,
-      "mostly_low": 30.25,
-      "mostly_high": 32.25
+      "mostly_low": 28.25,
+      "mostly_high": 30.25
      },
      {
       "size": "40s",
@@ -858,20 +852,13 @@
      }
     ],
     "tone": {
-     "market": "Conventional 32s-36s lower, others about steady.",
+     "market": null,
      "supply": null,
      "demand": "FAIRLY LIGHT"
     }
    }
   ],
   "trend": [
-   {
-    "week": "2025-10-11",
-    "mx_mid": 23.25,
-    "ca_mid": 31.75,
-    "band_low": 29.5,
-    "band_high": 50.25
-   },
    {
     "week": "2025-10-18",
     "mx_mid": 25.75,
@@ -1228,11 +1215,18 @@
     "ca_mid": null,
     "band_low": 25.625,
     "band_high": 45.5
+   },
+   {
+    "week": "2026-10-10",
+    "mx_mid": 23.25,
+    "ca_mid": null,
+    "band_low": 27.625,
+    "band_high": 43.25
    }
   ]
  },
  "freight": {
-  "report_date": "2026-09-29",
+  "report_date": "2026-10-06",
   "lanes": [
    {
     "dest": "Los Angeles",
@@ -1245,7 +1239,7 @@
     "high": 4400,
     "mostly_low": 4000,
     "mostly_high": 4200,
-    "wow_pct": -2,
+    "wow_pct": 0,
     "wow_reported": true
    },
    {
@@ -1259,7 +1253,7 @@
     "high": 2300,
     "mostly_low": 2100,
     "mostly_high": 2200,
-    "wow_pct": -7,
+    "wow_pct": 0,
     "wow_reported": true
    },
    {
@@ -1273,7 +1267,7 @@
     "high": 6300,
     "mostly_low": 5900,
     "mostly_high": 6100,
-    "wow_pct": 3,
+    "wow_pct": 0,
     "wow_reported": true
    },
    {
@@ -1296,22 +1290,22 @@
     "district": "S. Texas crossings (McAllen/Pharr)",
     "status": "Slight Surplus",
     "basis": "all loads",
-    "wow_min": -16,
-    "wow_max": 11
+    "wow_min": 0,
+    "wow_max": 3
    },
    {
     "district": "South & Central CA",
     "status": "Slight Shortage",
     "basis": "avocado loads",
-    "wow_min": -1,
-    "wow_max": 19
+    "wow_min": -9,
+    "wow_max": 16
    },
    {
     "district": "Oxnard district CA",
     "status": "Slight Shortage",
     "basis": "all loads",
-    "wow_min": 6,
-    "wow_max": 8
+    "wow_min": 1,
+    "wow_max": 2
    }
   ],
   "stale_days": 7,
@@ -1786,27 +1780,27 @@
     "role": "Primary Mexican Hass source (~80% of exports)",
     "past7": {
      "days": 7,
-     "rain_mm": 159.0,
-     "tmax_avg_c": 22.3,
-     "tmin_avg_c": 15.7,
-     "tmax_peak_c": 23.6,
-     "tmax_peak_date": "2026-09-29",
-     "tmax_peak_lead_days": 0,
-     "tmin_low_c": 13.8
+     "rain_mm": 83.4,
+     "tmax_avg_c": 22.4,
+     "tmin_avg_c": 15.6,
+     "tmax_peak_c": 24.8,
+     "tmax_peak_date": "2026-10-12",
+     "tmax_peak_lead_days": 6,
+     "tmin_low_c": 14.3
     },
     "next14": {
      "days": 14,
-     "rain_mm": 115.5,
-     "tmax_avg_c": 22.8,
-     "tmin_avg_c": 13.7,
-     "tmax_peak_c": 24.3,
-     "tmax_peak_date": "2026-10-12",
-     "tmax_peak_lead_days": 6,
-     "tmin_low_c": 10.5
+     "rain_mm": 38.7,
+     "tmax_avg_c": 23.7,
+     "tmin_avg_c": 13.1,
+     "tmax_peak_c": 25.7,
+     "tmax_peak_date": "2026-10-14",
+     "tmax_peak_lead_days": 1,
+     "tmin_low_c": 10.8
     },
     "source": "open-meteo",
     "flag": "watch",
-    "note": "Wet week just ended (159 mm) \u2014 near-term crossing volumes may dip while orchards dry out.",
+    "note": "Wet week just ended (83 mm) \u2014 near-term crossing volumes may dip while orchards dry out.",
     "flag_kind": "rain",
     "available": true,
     "stage": "flowering \u2014 Aventajada"
@@ -1818,28 +1812,28 @@
     "role": "Second Mexican export state",
     "past7": {
      "days": 7,
-     "rain_mm": 76.5,
-     "tmax_avg_c": 23.0,
-     "tmin_avg_c": 16.7,
-     "tmax_peak_c": 24.2,
-     "tmax_peak_date": "2026-10-04",
-     "tmax_peak_lead_days": 5,
-     "tmin_low_c": 15.6
+     "rain_mm": 182.4,
+     "tmax_avg_c": 22.1,
+     "tmin_avg_c": 16.1,
+     "tmax_peak_c": 25.4,
+     "tmax_peak_date": "2026-10-07",
+     "tmax_peak_lead_days": 1,
+     "tmin_low_c": 15.5
     },
     "next14": {
      "days": 14,
-     "rain_mm": 126.2,
-     "tmax_avg_c": 23.3,
-     "tmin_avg_c": 15.7,
-     "tmax_peak_c": 25.3,
-     "tmax_peak_date": "2026-10-06",
-     "tmax_peak_lead_days": 0,
+     "rain_mm": 7.0,
+     "tmax_avg_c": 24.4,
+     "tmin_avg_c": 15.1,
+     "tmax_peak_c": 26.0,
+     "tmax_peak_date": "2026-10-14",
+     "tmax_peak_lead_days": 1,
      "tmin_low_c": 14.0
     },
     "source": "open-meteo",
-    "flag": "normal",
-    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
-    "flag_kind": null,
+    "flag": "watch",
+    "note": "Wet week just ended (182 mm) \u2014 near-term crossing volumes may dip while orchards dry out.",
+    "flag_kind": "rain",
     "available": true,
     "stage": "flowering \u2014 Aventajada"
    },
@@ -1851,29 +1845,29 @@
     "past7": {
      "days": 7,
      "rain_mm": 0,
-     "tmax_avg_c": 32.3,
-     "tmin_avg_c": 17.8,
-     "tmax_peak_c": 38.4,
-     "tmax_peak_date": "2026-10-04",
-     "tmax_peak_lead_days": 5,
-     "tmin_low_c": 14.4
-    },
-    "next14": {
-     "days": 14,
-     "rain_mm": 18.9,
-     "tmax_avg_c": 28.9,
-     "tmin_avg_c": 19.0,
+     "tmax_avg_c": 26.8,
+     "tmin_avg_c": 16.5,
      "tmax_peak_c": 33.7,
      "tmax_peak_date": "2026-10-06",
      "tmax_peak_lead_days": 0,
-     "tmin_low_c": 14.5
+     "tmin_low_c": 13.0
+    },
+    "next14": {
+     "days": 14,
+     "rain_mm": 21.6,
+     "tmax_avg_c": 27.2,
+     "tmin_avg_c": 16.3,
+     "tmax_peak_c": 34.7,
+     "tmax_peak_date": "2026-10-17",
+     "tmax_peak_lead_days": 4,
+     "tmin_low_c": 10.6
     },
     "source": "open-meteo",
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "flag_kind": null,
     "available": true,
-    "nws_narrative": "This Afternoon: Sunny, with a high near 96. West southwest wind around 10 mph.",
+    "nws_narrative": "This Afternoon: Sunny, with a high near 73. West southwest wind around 10 mph.",
     "stage": "harvest"
    },
    {
@@ -1883,30 +1877,30 @@
     "role": "California southern belt",
     "past7": {
      "days": 7,
-     "rain_mm": 0,
-     "tmax_avg_c": 35.1,
-     "tmin_avg_c": 19.3,
-     "tmax_peak_c": 39.7,
-     "tmax_peak_date": "2026-10-03",
-     "tmax_peak_lead_days": 4,
-     "tmin_low_c": 14.3
+     "rain_mm": 56.0,
+     "tmax_avg_c": 30.3,
+     "tmin_avg_c": 18.3,
+     "tmax_peak_c": 39.6,
+     "tmax_peak_date": "2026-10-06",
+     "tmax_peak_lead_days": 0,
+     "tmin_low_c": 13.4
     },
     "next14": {
      "days": 14,
-     "rain_mm": 37.5,
-     "tmax_avg_c": 28.6,
-     "tmin_avg_c": 17.1,
-     "tmax_peak_c": 37.6,
-     "tmax_peak_date": "2026-10-06",
-     "tmax_peak_lead_days": 0,
-     "tmin_low_c": 12.9
+     "rain_mm": 30.9,
+     "tmax_avg_c": 25.5,
+     "tmin_avg_c": 15.4,
+     "tmax_peak_c": 32.8,
+     "tmax_peak_date": "2026-10-16",
+     "tmax_peak_lead_days": 3,
+     "tmin_low_c": 12.2
     },
     "source": "open-meteo",
-    "flag": "watch",
-    "note": "Heat spike forecast (38\u00b0C peak around Oct 6) \u2014 watch for fruit stress and accelerated maturity.",
-    "flag_kind": "heat",
+    "flag": "normal",
+    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+    "flag_kind": null,
     "available": true,
-    "nws_narrative": "This Afternoon: Sunny, with a high near 100. Southwest wind 10 to 15 mph, with gusts as high as 20 mph.",
+    "nws_narrative": "This Afternoon: Sunny, with a high near 73. Southwest wind 10 to 15 mph, with gusts as high as 25 mph.",
     "stage": "harvest"
    },
    {
@@ -1916,28 +1910,28 @@
     "role": "Own 600ha + La Loma + main packhouse \u2014 highest weight",
     "past7": {
      "days": 7,
-     "rain_mm": 47.9,
-     "tmax_avg_c": 22.0,
-     "tmin_avg_c": 13.7,
-     "tmax_peak_c": 23.9,
-     "tmax_peak_date": "2026-10-05",
-     "tmax_peak_lead_days": 6,
-     "tmin_low_c": 12.5
+     "rain_mm": 57.5,
+     "tmax_avg_c": 21.4,
+     "tmin_avg_c": 13.3,
+     "tmax_peak_c": 23.7,
+     "tmax_peak_date": "2026-10-08",
+     "tmax_peak_lead_days": 2,
+     "tmin_low_c": 12.8
     },
     "next14": {
      "days": 14,
-     "rain_mm": 151.7,
-     "tmax_avg_c": 19.9,
-     "tmin_avg_c": 13.2,
-     "tmax_peak_c": 22.3,
-     "tmax_peak_date": "2026-10-10",
-     "tmax_peak_lead_days": 4,
-     "tmin_low_c": 11.8
+     "rain_mm": 201.4,
+     "tmax_avg_c": 21.0,
+     "tmin_avg_c": 13.1,
+     "tmax_peak_c": 23.1,
+     "tmax_peak_date": "2026-10-21",
+     "tmax_peak_lead_days": 8,
+     "tmin_low_c": 11.6
     },
     "source": "open-meteo",
-    "flag": "normal",
-    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
-    "flag_kind": null,
+    "flag": "watch",
+    "note": "Heavy rain ahead (201 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+    "flag_kind": "rain",
     "available": true,
     "stage": "harvest"
    },
@@ -1948,27 +1942,27 @@
     "role": "220 contract growers across Caldas/Quind\u00edo/Risaralda",
     "past7": {
      "days": 7,
-     "rain_mm": 104.1,
+     "rain_mm": 94.8,
      "tmax_avg_c": 21.6,
-     "tmin_avg_c": 14.6,
-     "tmax_peak_c": 23.3,
-     "tmax_peak_date": "2026-09-29",
-     "tmax_peak_lead_days": 0,
-     "tmin_low_c": 13.8
+     "tmin_avg_c": 14.3,
+     "tmax_peak_c": 24.1,
+     "tmax_peak_date": "2026-10-07",
+     "tmax_peak_lead_days": 1,
+     "tmin_low_c": 13.3
     },
     "next14": {
      "days": 14,
-     "rain_mm": 222.8,
-     "tmax_avg_c": 19.9,
-     "tmin_avg_c": 14.1,
-     "tmax_peak_c": 22.8,
-     "tmax_peak_date": "2026-10-08",
-     "tmax_peak_lead_days": 2,
-     "tmin_low_c": 13.8
+     "rain_mm": 246.4,
+     "tmax_avg_c": 20.6,
+     "tmin_avg_c": 13.7,
+     "tmax_peak_c": 24.6,
+     "tmax_peak_date": "2026-10-14",
+     "tmax_peak_lead_days": 1,
+     "tmin_low_c": 12.4
     },
     "source": "open-meteo",
     "flag": "watch",
-    "note": "Heavy rain ahead (223 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+    "note": "Heavy rain ahead (246 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
     "flag_kind": "rain",
     "available": true,
     "stage": "harvest"
@@ -1980,23 +1974,23 @@
     "role": "Operational center, 370ac + packhouse",
     "past7": {
      "days": 7,
-     "rain_mm": 3.0,
-     "tmax_avg_c": 24.1,
+     "rain_mm": 3.1,
+     "tmax_avg_c": 24.9,
      "tmin_avg_c": 18.4,
-     "tmax_peak_c": 24.6,
-     "tmax_peak_date": "2026-10-05",
-     "tmax_peak_lead_days": 6,
-     "tmin_low_c": 16.9
+     "tmax_peak_c": 25.6,
+     "tmax_peak_date": "2026-10-11",
+     "tmax_peak_lead_days": 5,
+     "tmin_low_c": 18.0
     },
     "next14": {
      "days": 14,
-     "rain_mm": 2.6,
-     "tmax_avg_c": 24.7,
-     "tmin_avg_c": 19.1,
-     "tmax_peak_c": 25.3,
-     "tmax_peak_date": "2026-10-11",
-     "tmax_peak_lead_days": 5,
-     "tmin_low_c": 17.8
+     "rain_mm": 7.8,
+     "tmax_avg_c": 25.4,
+     "tmin_avg_c": 19.7,
+     "tmax_peak_c": 26.0,
+     "tmax_peak_date": "2026-10-22",
+     "tmax_peak_lead_days": 9,
+     "tmin_low_c": 17.6
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -2012,28 +2006,28 @@
     "role": "Northern coast \u2014 the El Ni\u00f1o flood corridor",
     "past7": {
      "days": 7,
-     "rain_mm": 2.9,
-     "tmax_avg_c": 29.4,
-     "tmin_avg_c": 20.4,
-     "tmax_peak_c": 33.0,
-     "tmax_peak_date": "2026-10-05",
-     "tmax_peak_lead_days": 6,
-     "tmin_low_c": 19.7
+     "rain_mm": 4.5,
+     "tmax_avg_c": 30.0,
+     "tmin_avg_c": 20.5,
+     "tmax_peak_c": 32.4,
+     "tmax_peak_date": "2026-10-06",
+     "tmax_peak_lead_days": 0,
+     "tmin_low_c": 19.6
     },
     "next14": {
      "days": 14,
-     "rain_mm": 2.2,
-     "tmax_avg_c": 32.6,
-     "tmin_avg_c": 20.3,
-     "tmax_peak_c": 34.6,
-     "tmax_peak_date": "2026-10-19",
-     "tmax_peak_lead_days": 13,
+     "rain_mm": 21.1,
+     "tmax_avg_c": 31.3,
+     "tmin_avg_c": 20.6,
+     "tmax_peak_c": 33.7,
+     "tmax_peak_date": "2026-10-13",
+     "tmax_peak_lead_days": 0,
      "tmin_low_c": 18.9
     },
     "source": "open-meteo",
-    "flag": "watch",
-    "note": "Heat spike forecast (35\u00b0C peak around Oct 19, 13 days out) \u2014 watch for fruit stress and accelerated maturity. Longer-range forecast; confirm as it nears.",
-    "flag_kind": "heat",
+    "flag": "normal",
+    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+    "flag_kind": null,
     "available": true,
     "stage": "flowering"
    },
@@ -2044,23 +2038,23 @@
     "role": "Mid-to-large partner producers",
     "past7": {
      "days": 7,
-     "rain_mm": 0.1,
-     "tmax_avg_c": 27.5,
-     "tmin_avg_c": 20.8,
-     "tmax_peak_c": 28.3,
-     "tmax_peak_date": "2026-10-03",
-     "tmax_peak_lead_days": 4,
-     "tmin_low_c": 19.9
+     "rain_mm": 0.7,
+     "tmax_avg_c": 27.7,
+     "tmin_avg_c": 22.2,
+     "tmax_peak_c": 28.4,
+     "tmax_peak_date": "2026-10-09",
+     "tmax_peak_lead_days": 3,
+     "tmin_low_c": 21.6
     },
     "next14": {
      "days": 14,
-     "rain_mm": 0.5,
-     "tmax_avg_c": 27.8,
-     "tmin_avg_c": 22.3,
-     "tmax_peak_c": 28.3,
-     "tmax_peak_date": "2026-10-13",
+     "rain_mm": 3.9,
+     "tmax_avg_c": 28.2,
+     "tmin_avg_c": 22.2,
+     "tmax_peak_c": 28.8,
+     "tmax_peak_date": "2026-10-20",
      "tmax_peak_lead_days": 7,
-     "tmin_low_c": 21.6
+     "tmin_low_c": 20.7
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -2074,27 +2068,18 @@
     "name": "Monobamba, Jun\u00edn",
     "country": "PE",
     "role": "Cloud forest, Amazon-facing \u2014 different regime",
-    "past7": {
-     "days": 7,
-     "rain_mm": 12.8,
-     "tmax_avg_c": 26.0,
-     "tmin_avg_c": 14.0,
-     "tmax_peak_c": 27.0,
-     "tmax_peak_date": "2026-10-04",
-     "tmax_peak_lead_days": 5,
-     "tmin_low_c": 11.0
-    },
+    "past7": null,
     "next14": {
-     "days": 14,
-     "rain_mm": 71.4,
-     "tmax_avg_c": 26.2,
-     "tmin_avg_c": 16.8,
-     "tmax_peak_c": 27.4,
-     "tmax_peak_date": "2026-10-07",
-     "tmax_peak_lead_days": 1,
-     "tmin_low_c": 14.3
+     "days": 11,
+     "rain_mm": 63.5,
+     "tmax_avg_c": 14.7,
+     "tmin_avg_c": 9.6,
+     "tmax_peak_c": 18.1,
+     "tmax_peak_date": null,
+     "tmax_peak_lead_days": null,
+     "tmin_low_c": 8.2
     },
-    "source": "open-meteo",
+    "source": "met.no",
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "flag_kind": null,
@@ -2559,17 +2544,12 @@
   "nino12": {
    "available": true,
    "latest": {
-    "week": "2026-09-30",
-    "nino12_anom": 5.3,
-    "nino34_anom": 3.2,
-    "divergence": 2.1
+    "week": "2026-10-07",
+    "nino12_anom": 5.2,
+    "nino34_anom": 3.3,
+    "divergence": 1.9
    },
    "series": [
-    {
-     "week": "2024-10-09",
-     "nino12_anom": -0.4,
-     "nino34_anom": -0.5
-    },
     {
      "week": "2024-10-16",
      "nino12_anom": -0.1,
@@ -3072,7 +3052,7 @@
     },
     {
      "week": "2026-09-16",
-     "nino12_anom": 4.6,
+     "nino12_anom": 4.7,
      "nino34_anom": 3.0
     },
     {
@@ -3084,6 +3064,11 @@
      "week": "2026-09-30",
      "nino12_anom": 5.3,
      "nino34_anom": 3.2
+    },
+    {
+     "week": "2026-10-07",
+     "nino12_anom": 5.2,
+     "nino34_anom": 3.3
     }
    ],
    "threshold": 1.8,
@@ -3095,8 +3080,8 @@
    "stale": false
   },
   "central_pacific_weekly": {
-   "anom": 3.2,
-   "week": "2026-09-30"
+   "anom": 3.3,
+   "week": "2026-10-07"
   },
   "origins": [
    {
@@ -3342,12 +3327,10 @@
     "weather_wet": false
    }
   ],
-  "fetched_at": "2026-10-06T23:32:12+00:00"
+  "fetched_at": "2026-10-13T23:36:11+00:00"
  },
  "meta": {
-  "notes": [
-   "California reported no movement for the latest week \u2014 consistent with the season ending (US arrival window closed Sep 30). Comparisons suppressed."
-  ],
+  "notes": [],
   "sources": [
    {
     "name": "USDA AMS Market News (MARS API)",
