@@ -1,17 +1,16 @@
 {
- "generated_at": "2026-10-28T15:39:29Z",
+ "generated_at": "2026-10-28T22:04:58Z",
  "week": {
   "end": "2026-10-24",
   "label": "Week ending Oct 24, 2026"
  },
- "headline": "Mexico 4-week volume 224.4M lbs, up 14% vs the prior four weeks; Texas-crossing Hass 48s FOB firmed 4.3% at $24.25; S. Texas\u2192LA/Dallas truck rates flat/flat wk/wk; diesel up 0.08 at $6.35/gal; Sons\u00f3n, Antioquia weather bears watching.",
+ "headline": "Mexico 4-week volume 224.4M lbs, up 14% vs the prior four weeks (latest week 61.6M, +38%); Texas-crossing Hass 48s FOB firmed 4.3% at $24.25; S. Texas\u2192LA/Dallas truck rates flat/flat wk/wk; diesel up 0.08 at $6.35/gal; Eje Cafetero, Colombia weather bears watching.",
  "headline_asof": "Supply & pricing wk ending 2026-10-24 \u00b7 Freight 2026-10-27 \u00b7 Diesel 2026-10-26",
  "signals": [
   "Central Pacific ocean temperatures are +3.4\u00b0C above normal (week of Oct 21). The three-month average reads strong El Ni\u00f1o at +1.69 for JAS 2026 and is strengthening, up from +0.49 three seasons ago; the three-month average trails a fast-developing event, so conditions are likely stronger than that label suggests. Near-term: Michoac\u00e1n / Jalisco \u2014 moisture stress on fruit sizing now \u2014 risk of a smaller size curve on the current harvest. Forward: Michoac\u00e1n / Jalisco \u2014 the Aug-Sep Loca bloom is setting the May-Sep 2027 crop.",
   "Ocean temperatures off northern Peru are 5.2\u00b0C above normal \u2014 near the warmest in 45 years of records. Warm coastal water at this level preceded the severe flooding in Lambayeque and Piura in 1998, 2017 and 2023. The warming is concentrated on the Peru coast rather than the central Pacific, the pattern behind those events. Watch the January\u2013March rain window for field access and packhouse logistics.",
   "Benchmark Hass 48s FOB is below the 5th percentile of its 4-year seasonal history \u2014 historically cheap for this week.",
-  "Sons\u00f3n, Antioquia: Heavy rain ahead (167 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
-  "Eje Cafetero (Manizales area): Heavy rain ahead (283 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks."
+  "Eje Cafetero (Manizales area), Colombia: Heavy rain ahead (276 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks."
  ],
  "kpis": [
   {
@@ -24,7 +23,7 @@
    "label": "All origins \u00b7 trailing 4 wk",
    "value": "232.7M lbs",
    "delta_pct": null,
-   "sub": "+11% vs 4-yr seasonal avg (excl. CA \u2014 pending, PERU \u2014 pending)"
+   "sub": "+11% vs 4-yr seasonal avg (excl. CA \u2014 season ending, PERU \u2014 season ending)"
   },
   {
    "label": "Hass 48s FOB (TX)",
@@ -47,45 +46,45 @@
  ],
  "feeds": {
   "supply": {
-   "fetched_at": "2026-10-28T15:39:18+00:00",
+   "fetched_at": "2026-10-28T22:04:33+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "pricing": {
-   "fetched_at": "2026-10-28T15:39:18+00:00",
+   "fetched_at": "2026-10-28T22:04:33+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "freight": {
-   "fetched_at": "2026-10-28T15:39:19+00:00",
+   "fetched_at": "2026-10-28T22:04:34+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "diesel": {
-   "fetched_at": "2026-10-28T15:39:24+00:00",
+   "fetched_at": "2026-10-28T22:04:50+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "weather": {
-   "fetched_at": "2026-10-28T15:39:28+00:00",
+   "fetched_at": "2026-10-28T22:04:57+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "_stale_after_days": 8,
   "enso": {
-   "fetched_at": "2026-10-28T15:39:29+00:00",
+   "fetched_at": "2026-10-28T22:04:57+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null,
    "stale_after_days": 45
   },
   "enso_weekly": {
-   "fetched_at": "2026-10-28T15:39:29+00:00",
+   "fetched_at": "2026-10-28T22:04:57+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null,
@@ -105,8 +104,8 @@
    "peru"
   ],
   "exclude_reasons": {
-   "ca": "low_report",
-   "peru": "low_report"
+   "ca": "season_end",
+   "peru": "season_end"
   },
   "total_wow_pct": 38.2,
   "total_vs_3yr_pct": 16.0,
@@ -146,7 +145,7 @@
     "name": "California",
     "lbs": 88773,
     "partial": true,
-    "partial_reason": "low_report",
+    "partial_reason": "season_end",
     "wow_pct": null,
     "roll4_lbs": 3446431,
     "roll4_prior_lbs": 17706783,
@@ -166,7 +165,7 @@
     "name": "Peru",
     "lbs": 89831,
     "partial": true,
-    "partial_reason": "low_report",
+    "partial_reason": "season_end",
     "wow_pct": null,
     "roll4_lbs": 4613943,
     "roll4_prior_lbs": 18242771,
@@ -223,7 +222,7 @@
    },
    {
     "key": "other",
-    "name": "Other imports (mainly Dominican Republic)",
+    "name": "Other imports",
     "lbs": 1947861,
     "partial": false,
     "partial_reason": null,
@@ -803,7 +802,7 @@
    "baseline_years": 4,
    "week": "2026-10-24"
   },
-  "report_date": "2026-10-27",
+  "report_date": "2026-10-28",
   "table": [
    {
     "district": "MEXICO CROSSINGS THROUGH TEXAS",
@@ -821,29 +820,29 @@
       "size": "36s",
       "low": 26.25,
       "high": 30.25,
-      "mostly_low": 26.25,
-      "mostly_high": 28.25
+      "mostly_low": 28.25,
+      "mostly_high": 30.25
      },
      {
       "size": "40s",
-      "low": 22.25,
-      "high": 28.25,
-      "mostly_low": 26.25,
-      "mostly_high": 28.25
+      "low": 26.25,
+      "high": 30.25,
+      "mostly_low": 28.25,
+      "mostly_high": 30.25
      },
      {
       "size": "48s",
-      "low": 22.25,
-      "high": 28.25,
-      "mostly_low": 24.25,
-      "mostly_high": 26.25
+      "low": 26.25,
+      "high": 30.25,
+      "mostly_low": 28.25,
+      "mostly_high": 30.25
      },
      {
       "size": "60s",
       "low": 22.25,
       "high": 28.25,
-      "mostly_low": 24.25,
-      "mostly_high": 26.25
+      "mostly_low": 26.25,
+      "mostly_high": 28.25
      },
      {
       "size": "70s",
@@ -861,9 +860,9 @@
      }
     ],
     "tone": {
-     "market": "About Steady",
-     "supply": "HEAVY",
-     "demand": "FAIRLY LIGHT"
+     "market": "Conventional 36s-48s Higher, Others about steady.",
+     "supply": "FAIRLY LIGHT",
+     "demand": "FAIRLY GOOD"
     }
    }
   ],
@@ -1799,13 +1798,13 @@
     },
     "next14": {
      "days": 14,
-     "rain_mm": 8.5,
-     "tmax_avg_c": 22.8,
-     "tmin_avg_c": 11.3,
+     "rain_mm": 11.4,
+     "tmax_avg_c": 23.2,
+     "tmin_avg_c": 11.2,
      "tmax_peak_c": 24.1,
      "tmax_peak_date": "2026-10-31",
      "tmax_peak_lead_days": 3,
-     "tmin_low_c": 9.5
+     "tmin_low_c": 8.5
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -1831,13 +1830,13 @@
     },
     "next14": {
      "days": 14,
-     "rain_mm": 3.7,
-     "tmax_avg_c": 24.3,
-     "tmin_avg_c": 14.2,
-     "tmax_peak_c": 26.7,
+     "rain_mm": 8.0,
+     "tmax_avg_c": 24.8,
+     "tmin_avg_c": 14.4,
+     "tmax_peak_c": 26.3,
      "tmax_peak_date": "2026-10-31",
      "tmax_peak_lead_days": 3,
-     "tmin_low_c": 11.7
+     "tmin_low_c": 12.5
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -1863,10 +1862,10 @@
     },
     "next14": {
      "days": 14,
-     "rain_mm": 1.0,
-     "tmax_avg_c": 23.4,
-     "tmin_avg_c": 16.4,
-     "tmax_peak_c": 30.3,
+     "rain_mm": 12.2,
+     "tmax_avg_c": 24.4,
+     "tmin_avg_c": 16.1,
+     "tmax_peak_c": 29.9,
      "tmax_peak_date": "2026-11-03",
      "tmax_peak_lead_days": 6,
      "tmin_low_c": 12.9
@@ -1876,7 +1875,7 @@
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "flag_kind": null,
     "available": true,
-    "nws_narrative": "Today: Patchy fog before 11am. Mostly cloudy, with a high near 73. South wind around 5 mph.",
+    "nws_narrative": "This Afternoon: Sunny, with a high near 73. West southwest wind around 5 mph.",
     "stage": "harvest"
    },
    {
@@ -1896,12 +1895,12 @@
     },
     "next14": {
      "days": 14,
-     "rain_mm": 22.9,
-     "tmax_avg_c": 21.8,
-     "tmin_avg_c": 14.9,
-     "tmax_peak_c": 26.2,
-     "tmax_peak_date": "2026-11-03",
-     "tmax_peak_lead_days": 6,
+     "rain_mm": 25.2,
+     "tmax_avg_c": 22.4,
+     "tmin_avg_c": 14.5,
+     "tmax_peak_c": 27.0,
+     "tmax_peak_date": "2026-11-09",
+     "tmax_peak_lead_days": 12,
      "tmin_low_c": 11.9
     },
     "source": "open-meteo",
@@ -1909,7 +1908,7 @@
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "flag_kind": null,
     "available": true,
-    "nws_narrative": "Today: Mostly sunny, with a high near 75. Southeast wind 0 to 10 mph, with gusts as high as 20 mph.",
+    "nws_narrative": "This Afternoon: Mostly sunny, with a high near 74. Southwest wind 5 to 10 mph, with gusts as high as 20 mph.",
     "stage": "harvest"
    },
    {
@@ -1929,18 +1928,18 @@
     },
     "next14": {
      "days": 14,
-     "rain_mm": 166.8,
+     "rain_mm": 144.9,
      "tmax_avg_c": 20.8,
-     "tmin_avg_c": 13.1,
-     "tmax_peak_c": 22.2,
-     "tmax_peak_date": "2026-11-10",
-     "tmax_peak_lead_days": 13,
-     "tmin_low_c": 12.0
+     "tmin_avg_c": 13.0,
+     "tmax_peak_c": 22.4,
+     "tmax_peak_date": "2026-11-08",
+     "tmax_peak_lead_days": 11,
+     "tmin_low_c": 11.4
     },
     "source": "open-meteo",
-    "flag": "watch",
-    "note": "Heavy rain ahead (167 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
-    "flag_kind": "rain",
+    "flag": "normal",
+    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+    "flag_kind": null,
     "available": true,
     "stage": "harvest"
    },
@@ -1961,17 +1960,17 @@
     },
     "next14": {
      "days": 14,
-     "rain_mm": 282.7,
-     "tmax_avg_c": 20.6,
-     "tmin_avg_c": 13.7,
-     "tmax_peak_c": 22.6,
+     "rain_mm": 276.3,
+     "tmax_avg_c": 20.3,
+     "tmin_avg_c": 13.4,
+     "tmax_peak_c": 22.8,
      "tmax_peak_date": "2026-10-28",
      "tmax_peak_lead_days": 0,
-     "tmin_low_c": 12.0
+     "tmin_low_c": 11.4
     },
     "source": "open-meteo",
     "flag": "watch",
-    "note": "Heavy rain ahead (283 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+    "note": "Heavy rain ahead (276 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
     "flag_kind": "rain",
     "available": true,
     "stage": "harvest"
@@ -1993,12 +1992,12 @@
     },
     "next14": {
      "days": 14,
-     "rain_mm": 7.3,
-     "tmax_avg_c": 26.3,
-     "tmin_avg_c": 20.9,
-     "tmax_peak_c": 26.9,
-     "tmax_peak_date": "2026-11-07",
-     "tmax_peak_lead_days": 10,
+     "rain_mm": 6.6,
+     "tmax_avg_c": 26.1,
+     "tmin_avg_c": 20.5,
+     "tmax_peak_c": 26.6,
+     "tmax_peak_date": "2026-10-31",
+     "tmax_peak_lead_days": 3,
      "tmin_low_c": 19.5
     },
     "source": "open-meteo",
@@ -2025,13 +2024,13 @@
     },
     "next14": {
      "days": 14,
-     "rain_mm": 22.0,
-     "tmax_avg_c": 30.9,
+     "rain_mm": 18.2,
+     "tmax_avg_c": 30.5,
      "tmin_avg_c": 21.2,
-     "tmax_peak_c": 33.1,
-     "tmax_peak_date": "2026-11-07",
-     "tmax_peak_lead_days": 10,
-     "tmin_low_c": 20.4
+     "tmax_peak_c": 33.2,
+     "tmax_peak_date": "2026-10-31",
+     "tmax_peak_lead_days": 3,
+     "tmin_low_c": 20.0
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -2057,13 +2056,13 @@
     },
     "next14": {
      "days": 14,
-     "rain_mm": 0.9,
+     "rain_mm": 1.8,
      "tmax_avg_c": 29.0,
      "tmin_avg_c": 23.2,
-     "tmax_peak_c": 30.2,
+     "tmax_peak_c": 30.1,
      "tmax_peak_date": "2026-10-28",
      "tmax_peak_lead_days": 0,
-     "tmin_low_c": 22.2
+     "tmin_low_c": 22.4
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -2089,13 +2088,13 @@
     },
     "next14": {
      "days": 14,
-     "rain_mm": 147.9,
-     "tmax_avg_c": 25.6,
-     "tmin_avg_c": 16.9,
-     "tmax_peak_c": 27.4,
-     "tmax_peak_date": "2026-11-04",
-     "tmax_peak_lead_days": 7,
-     "tmin_low_c": 15.0
+     "rain_mm": 150.0,
+     "tmax_avg_c": 26.2,
+     "tmin_avg_c": 17.1,
+     "tmax_peak_c": 29.2,
+     "tmax_peak_date": "2026-11-02",
+     "tmax_peak_lead_days": 5,
+     "tmin_low_c": 14.3
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -3345,12 +3344,12 @@
     "weather_wet": false
    }
   ],
-  "fetched_at": "2026-10-28T15:39:29+00:00"
+  "fetched_at": "2026-10-28T22:04:57+00:00"
  },
  "meta": {
   "notes": [
-   "California movement for the latest week appears partially reported by USDA; week-over-week and seasonal comparisons suppressed until revised.",
-   "Peru movement for the latest week appears partially reported by USDA; week-over-week and seasonal comparisons suppressed until revised."
+   "California volume is tapering after the season ended (US arrival window closed Sep 30); the latest week is 88,773 lbs. Comparisons suppressed.",
+   "Peru volume is tapering after the season ended (US arrival window closed Sep 15); the latest week is 89,831 lbs. Comparisons suppressed."
   ],
   "sources": [
    {

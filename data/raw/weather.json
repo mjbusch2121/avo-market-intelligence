@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-10-28T15:39:28+00:00",
+ "fetched_at": "2026-10-28T22:04:57+00:00",
  "coverage": {
   "CO": "2/2",
   "MX": "2/2",
@@ -25,13 +25,13 @@
    },
    "next14": {
     "days": 14,
-    "rain_mm": 8.5,
-    "tmax_avg_c": 22.8,
-    "tmin_avg_c": 11.3,
+    "rain_mm": 11.4,
+    "tmax_avg_c": 23.2,
+    "tmin_avg_c": 11.2,
     "tmax_peak_c": 24.1,
     "tmax_peak_date": "2026-10-31",
     "tmax_peak_lead_days": 3,
-    "tmin_low_c": 9.5
+    "tmin_low_c": 8.5
    },
    "source": "open-meteo",
    "flag": "normal",
@@ -56,13 +56,13 @@
    },
    "next14": {
     "days": 14,
-    "rain_mm": 3.7,
-    "tmax_avg_c": 24.3,
-    "tmin_avg_c": 14.2,
-    "tmax_peak_c": 26.7,
+    "rain_mm": 8.0,
+    "tmax_avg_c": 24.8,
+    "tmin_avg_c": 14.4,
+    "tmax_peak_c": 26.3,
     "tmax_peak_date": "2026-10-31",
     "tmax_peak_lead_days": 3,
-    "tmin_low_c": 11.7
+    "tmin_low_c": 12.5
    },
    "source": "open-meteo",
    "flag": "normal",
@@ -87,10 +87,10 @@
    },
    "next14": {
     "days": 14,
-    "rain_mm": 1.0,
-    "tmax_avg_c": 23.4,
-    "tmin_avg_c": 16.4,
-    "tmax_peak_c": 30.3,
+    "rain_mm": 12.2,
+    "tmax_avg_c": 24.4,
+    "tmin_avg_c": 16.1,
+    "tmax_peak_c": 29.9,
     "tmax_peak_date": "2026-11-03",
     "tmax_peak_lead_days": 6,
     "tmin_low_c": 12.9
@@ -100,7 +100,7 @@
    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
    "flag_kind": null,
    "available": true,
-   "nws_narrative": "Today: Patchy fog before 11am. Mostly cloudy, with a high near 73. South wind around 5 mph."
+   "nws_narrative": "This Afternoon: Sunny, with a high near 73. West southwest wind around 5 mph."
   },
   {
    "key": "san_diego",
@@ -119,12 +119,12 @@
    },
    "next14": {
     "days": 14,
-    "rain_mm": 22.9,
-    "tmax_avg_c": 21.8,
-    "tmin_avg_c": 14.9,
-    "tmax_peak_c": 26.2,
-    "tmax_peak_date": "2026-11-03",
-    "tmax_peak_lead_days": 6,
+    "rain_mm": 25.2,
+    "tmax_avg_c": 22.4,
+    "tmin_avg_c": 14.5,
+    "tmax_peak_c": 27.0,
+    "tmax_peak_date": "2026-11-09",
+    "tmax_peak_lead_days": 12,
     "tmin_low_c": 11.9
    },
    "source": "open-meteo",
@@ -132,7 +132,7 @@
    "note": "No weather-driven supply disruption signals in the 2-4 week window.",
    "flag_kind": null,
    "available": true,
-   "nws_narrative": "Today: Mostly sunny, with a high near 75. Southeast wind 0 to 10 mph, with gusts as high as 20 mph."
+   "nws_narrative": "This Afternoon: Mostly sunny, with a high near 74. Southwest wind 5 to 10 mph, with gusts as high as 20 mph."
   },
   {
    "key": "co_sonson",
@@ -151,18 +151,18 @@
    },
    "next14": {
     "days": 14,
-    "rain_mm": 166.8,
+    "rain_mm": 144.9,
     "tmax_avg_c": 20.8,
-    "tmin_avg_c": 13.1,
-    "tmax_peak_c": 22.2,
-    "tmax_peak_date": "2026-11-10",
-    "tmax_peak_lead_days": 13,
-    "tmin_low_c": 12.0
+    "tmin_avg_c": 13.0,
+    "tmax_peak_c": 22.4,
+    "tmax_peak_date": "2026-11-08",
+    "tmax_peak_lead_days": 11,
+    "tmin_low_c": 11.4
    },
    "source": "open-meteo",
-   "flag": "watch",
-   "note": "Heavy rain ahead (167 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
-   "flag_kind": "rain",
+   "flag": "normal",
+   "note": "No weather-driven supply disruption signals in the 2-4 week window.",
+   "flag_kind": null,
    "available": true
   },
   {
@@ -182,17 +182,17 @@
    },
    "next14": {
     "days": 14,
-    "rain_mm": 282.7,
-    "tmax_avg_c": 20.6,
-    "tmin_avg_c": 13.7,
-    "tmax_peak_c": 22.6,
+    "rain_mm": 276.3,
+    "tmax_avg_c": 20.3,
+    "tmin_avg_c": 13.4,
+    "tmax_peak_c": 22.8,
     "tmax_peak_date": "2026-10-28",
     "tmax_peak_lead_days": 0,
-    "tmin_low_c": 12.0
+    "tmin_low_c": 11.4
    },
    "source": "open-meteo",
    "flag": "watch",
-   "note": "Heavy rain ahead (283 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+   "note": "Heavy rain ahead (276 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
    "flag_kind": "rain",
    "available": true
   },
@@ -213,12 +213,12 @@
    },
    "next14": {
     "days": 14,
-    "rain_mm": 7.3,
-    "tmax_avg_c": 26.3,
-    "tmin_avg_c": 20.9,
-    "tmax_peak_c": 26.9,
-    "tmax_peak_date": "2026-11-07",
-    "tmax_peak_lead_days": 10,
+    "rain_mm": 6.6,
+    "tmax_avg_c": 26.1,
+    "tmin_avg_c": 20.5,
+    "tmax_peak_c": 26.6,
+    "tmax_peak_date": "2026-10-31",
+    "tmax_peak_lead_days": 3,
     "tmin_low_c": 19.5
    },
    "source": "open-meteo",
@@ -244,13 +244,13 @@
    },
    "next14": {
     "days": 14,
-    "rain_mm": 22.0,
-    "tmax_avg_c": 30.9,
+    "rain_mm": 18.2,
+    "tmax_avg_c": 30.5,
     "tmin_avg_c": 21.2,
-    "tmax_peak_c": 33.1,
-    "tmax_peak_date": "2026-11-07",
-    "tmax_peak_lead_days": 10,
-    "tmin_low_c": 20.4
+    "tmax_peak_c": 33.2,
+    "tmax_peak_date": "2026-10-31",
+    "tmax_peak_lead_days": 3,
+    "tmin_low_c": 20.0
    },
    "source": "open-meteo",
    "flag": "normal",
@@ -275,13 +275,13 @@
    },
    "next14": {
     "days": 14,
-    "rain_mm": 0.9,
+    "rain_mm": 1.8,
     "tmax_avg_c": 29.0,
     "tmin_avg_c": 23.2,
-    "tmax_peak_c": 30.2,
+    "tmax_peak_c": 30.1,
     "tmax_peak_date": "2026-10-28",
     "tmax_peak_lead_days": 0,
-    "tmin_low_c": 22.2
+    "tmin_low_c": 22.4
    },
    "source": "open-meteo",
    "flag": "normal",
@@ -306,13 +306,13 @@
    },
    "next14": {
     "days": 14,
-    "rain_mm": 147.9,
-    "tmax_avg_c": 25.6,
-    "tmin_avg_c": 16.9,
-    "tmax_peak_c": 27.4,
-    "tmax_peak_date": "2026-11-04",
-    "tmax_peak_lead_days": 7,
-    "tmin_low_c": 15.0
+    "rain_mm": 150.0,
+    "tmax_avg_c": 26.2,
+    "tmin_avg_c": 17.1,
+    "tmax_peak_c": 29.2,
+    "tmax_peak_date": "2026-11-02",
+    "tmax_peak_lead_days": 5,
+    "tmin_low_c": 14.3
    },
    "source": "open-meteo",
    "flag": "normal",
