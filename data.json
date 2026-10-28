@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-28T22:04:58Z",
+ "generated_at": "2026-10-28T23:58:38Z",
  "week": {
   "end": "2026-10-24",
   "label": "Week ending Oct 24, 2026"
@@ -46,45 +46,45 @@
  ],
  "feeds": {
   "supply": {
-   "fetched_at": "2026-10-28T22:04:33+00:00",
+   "fetched_at": "2026-10-28T23:58:30+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "pricing": {
-   "fetched_at": "2026-10-28T22:04:33+00:00",
+   "fetched_at": "2026-10-28T23:58:30+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "freight": {
-   "fetched_at": "2026-10-28T22:04:34+00:00",
+   "fetched_at": "2026-10-28T23:58:31+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "diesel": {
-   "fetched_at": "2026-10-28T22:04:50+00:00",
+   "fetched_at": "2026-10-28T23:58:32+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "weather": {
-   "fetched_at": "2026-10-28T22:04:57+00:00",
+   "fetched_at": "2026-10-28T23:58:37+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "_stale_after_days": 8,
   "enso": {
-   "fetched_at": "2026-10-28T22:04:57+00:00",
+   "fetched_at": "2026-10-28T23:58:38+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null,
    "stale_after_days": 45
   },
   "enso_weekly": {
-   "fetched_at": "2026-10-28T22:04:57+00:00",
+   "fetched_at": "2026-10-28T23:58:38+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null,
@@ -1862,12 +1862,12 @@
     },
     "next14": {
      "days": 14,
-     "rain_mm": 12.2,
-     "tmax_avg_c": 24.4,
-     "tmin_avg_c": 16.1,
-     "tmax_peak_c": 29.9,
-     "tmax_peak_date": "2026-11-03",
-     "tmax_peak_lead_days": 6,
+     "rain_mm": 11.4,
+     "tmax_avg_c": 25.2,
+     "tmin_avg_c": 16.9,
+     "tmax_peak_c": 31.8,
+     "tmax_peak_date": "2026-11-09",
+     "tmax_peak_lead_days": 12,
      "tmin_low_c": 12.9
     },
     "source": "open-meteo",
@@ -1895,10 +1895,10 @@
     },
     "next14": {
      "days": 14,
-     "rain_mm": 25.2,
-     "tmax_avg_c": 22.4,
-     "tmin_avg_c": 14.5,
-     "tmax_peak_c": 27.0,
+     "rain_mm": 8.3,
+     "tmax_avg_c": 23.2,
+     "tmin_avg_c": 15.0,
+     "tmax_peak_c": 28.5,
      "tmax_peak_date": "2026-11-09",
      "tmax_peak_lead_days": 12,
      "tmin_low_c": 11.9
@@ -3344,7 +3344,7 @@
     "weather_wet": false
    }
   ],
-  "fetched_at": "2026-10-28T22:04:57+00:00"
+  "fetched_at": "2026-10-28T23:58:38+00:00"
  },
  "meta": {
   "notes": [
