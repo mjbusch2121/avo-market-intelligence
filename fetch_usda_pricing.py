@@ -251,13 +251,41 @@ def fetch_pricing_current():
     print(f"Pricing current: {len(current)} rows for {latest}")
 
 
+def _record_failure(errors: list):
+    """Stamp the failure on usda_current.json WITHOUT touching fetched_at.
+
+    build_summary derives the supply and pricing feed freshness from this
+    file's fetched_at, so keeping it unchanged lets staleness show honestly.
+    """
+    path = RAW_DIR / "usda_current.json"
+    cur = load_json(path, None)
+    if cur is None:
+        cur = {"report_date": None, "rows": []}   # no fetched_at -> reads stale
+    cur["fetch_attempted"] = _now_iso()
+    cur["fetch_error"] = "; ".join(errors)
+    save_json(path, cur)
+
+
 def main():
     if not API_KEY:
         print("FATAL: MARS_API_KEY not set", file=sys.stderr)
         sys.exit(1)
-    fetch_movement()
-    fetch_pricing_history()
-    fetch_pricing_current()
+
+    errors = []
+    for label, fn in (("movement", fetch_movement),
+                      ("weekly pricing", fetch_pricing_history),
+                      ("current pricing", fetch_pricing_current)):
+        try:
+            fn()
+        except Exception as e:
+            msg = f"{label}: {type(e).__name__}: {str(e)[:200]}"
+            print(f"USDA FETCH FAILED - {msg}", file=sys.stderr)
+            errors.append(msg)
+
+    if errors:
+        _record_failure(errors)
+        print(f"fetch_usda_pricing: finished with {len(errors)} failure(s)")
+        sys.exit(1)      # the workflow decides what to do with this (Fix 3)
     print("fetch_usda_pricing: done")
 
 

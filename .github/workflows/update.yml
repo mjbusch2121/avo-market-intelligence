@@ -7,6 +7,10 @@ on:
     # The FVWTRK freight PDF shown is the latest available (published Wed
     # for the prior Tuesday), so freight always reflects last week's survey.
     - cron: "0 20 * * 2"
+    # Wednesdays 20:00 UTC: backup run. Heals a Tuesday outage (e.g. a USDA
+    # DNS failure) the next day, and picks up the fresh freight PDF posted
+    # Wednesday. A run with no changes commits nothing ("No data changes").
+    - cron: "0 20 * * 3"
   workflow_dispatch:
 
 permissions:
@@ -25,12 +29,17 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Run data pipeline
+      - name: Fetch USDA pricing and movement
+        id: usda
+        continue-on-error: true
         env:
           MARS_API_KEY: ${{ secrets.MARS_API_KEY }}
+        run: python fetch_usda_pricing.py
+
+      - name: Run remaining pipeline
+        env:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
         run: |
-          python fetch_usda_pricing.py
           python fetch_freight_pdf.py
           python fetch_diesel.py
           python fetch_weather.py
@@ -48,3 +57,9 @@ jobs:
             git commit -m "Weekly data refresh $(date -u +%F)"
             git push
           fi
+
+      - name: Fail the run if the USDA fetch failed
+        if: steps.usda.outcome == 'failure'
+        run: |
+          echo "::error::USDA fetch failed. Data published with the last good USDA data."
+          exit 1

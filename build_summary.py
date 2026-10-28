@@ -1371,7 +1371,8 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
         # in the ENSO panel with their own clocks, so none belong in this
         # weekly-cadence warning.
         lagging = [n for n, f in named.items()
-                   if f["stale"] and n not in ("freight", "enso", "enso_weekly")]
+                   if (f["stale"] or f.get("fetch_error"))
+                   and n not in ("freight", "enso", "enso_weekly")]
         if lagging:
             display = ["USDA" if n in ("supply", "pricing") else n for n in lagging]
             sig_ops.append(f"Data feeds not refreshed this cycle: {', '.join(sorted(set(display)))} "
