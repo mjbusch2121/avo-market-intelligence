@@ -199,7 +199,7 @@ function renderSupply(data) {
         "stat-row",
         `
       <span class="stat-name"><span class="dot" style="background:${dotColor}"></span>${r.name}</span>
-      <span><span class="stat-val">${fmtM(r.lbs)}</span><br><span class="stat-comps">${comps}</span></span>`,
+      <span class="stat-right"><span class="stat-val">${fmtM(r.lbs)}</span><br><span class="stat-comps">${comps}</span></span>`,
       ),
     );
   });
@@ -439,14 +439,23 @@ function renderFreight(data) {
   const fsub = document.getElementById("freight-sub");
   const staleAfter = f.stale_after_days ?? 10;
   const fStale = f.stale_days !== null && f.stale_days !== undefined && f.stale_days > staleAfter;
+  // When every lane comes from the same origin (the normal case), say the
+  // origin once here instead of repeating it on every card.
+  const origins = [...new Set(f.lanes.map((l) => l.origin_short))];
+  const common = origins.length === 1 ? f.lanes[0] : null;
+  const fromTxt = common
+    ? ` from ${common.origin_short}${common.avocado_group ? "" : "; mixed-produce rate"}`
+    : "";
+  const repDate = new Date(f.report_date + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" });
   if (fStale || f.fetch_error) {
     fsub.innerHTML =
-      `<span class="stale-warn">⚠ FVWTRK report for ${f.report_date} — ` +
+      `<span class="stale-warn">⚠ USDA truck rate report, ${repDate} — ` +
       `${f.stale_days} days old; USDA feed may be unavailable</span>`;
   } else {
     fsub.textContent =
-      `FVWTRK report for ${f.report_date} — per-load refrigerated spot rates`;
+      `USDA truck rate report, ${repDate}. Per-load refrigerated spot rates${fromTxt}.`;
   }
+  const districtStatus = Object.fromEntries((f.availability || []).map((a) => [a.district, a.status]));
 
   const lanesBox = document.getElementById("lanes");
   f.lanes.forEach((l) => {
@@ -462,9 +471,11 @@ function renderFreight(data) {
         `
       <div class="lane-dest">${l.dest}</div>
       <div class="lane-rate">$${l.low.toLocaleString()}–${l.high.toLocaleString()}</div>
-      <div class="lane-meta">${wow} vs prior week</div>
-      <div class="lane-meta">from ${l.origin_short}${l.avocado_group ? "" : " · mixed-produce rate"}</div>
-      <div class="lane-meta">trucks: ${l.availability}</div>`,
+      <div class="lane-meta">${wow} vs prior week</div>${
+        common ? "" : `
+      <div class="lane-meta">from ${l.origin_short}${l.avocado_group ? "" : " · mixed-produce rate"}</div>`}${
+        l.availability && l.availability !== districtStatus[l.origin_short] ? `
+      <div class="lane-meta">trucks on this lane: ${l.availability}</div>` : ""}`,
       ),
     );
   });
@@ -652,6 +663,8 @@ function renderWeather(data) {
 }
 
 const ENSO_COUNTRY_LABELS = { MX: "Mexico", CO: "Colombia", PE: "Peru" };
+// Short country tag shown on each ENSO origin card. Unmapped codes show nothing.
+const ENSO_COUNTRY_TAGS = { MX: "MEX", CO: "COL", PE: "PERU" };
 
 function renderEnso(data) {
   const e = data.enso;
@@ -745,6 +758,9 @@ function renderEnso(data) {
   // this is the only place ENSO appears at origin level.
   (e.origins || []).forEach((o) => {
     const sig = o.commercially_significant ? " enso-key" : "";
+    const tag = ENSO_COUNTRY_TAGS[o.country]
+      ? `<span class="enso-country">${ENSO_COUNTRY_TAGS[o.country]}</span>`
+      : "";
     const stage = `<span class="enso-stage">${o.stage || "stage n/a"}</span>`;
     const dark = o.weather_dark
       ? `<span class="enso-dark">no live ${ENSO_COUNTRY_LABELS[o.country] || o.country} weather this cycle</span>`
@@ -774,7 +790,7 @@ function renderEnso(data) {
         "div",
         "enso-origin" + sig,
         `<div class="enso-origin-head">
-           <span class="enso-origin-name">${o.name}</span>${stage}${dark}
+           ${tag}<span class="enso-origin-name">${o.name}</span>${stage}${dark}
          </div>
          ${effectHtml}
          <div class="enso-origin-meta">${tier}confidence: ${o.confidence}${lag} · watch: ${o.watch_window}</div>

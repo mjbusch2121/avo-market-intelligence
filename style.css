@@ -566,6 +566,10 @@ table.fob td.mostly { color: var(--flesh); font-weight: 600; }
   font-family: var(--mono); font-size: 9.5px; text-transform: uppercase;
   letter-spacing: 0.06em; color: var(--sky); border: 1px solid var(--line); padding: 0 6px;
 }
+.enso-country {
+  font-family: var(--mono); font-size: 9.5px; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--muted); border: 1px solid var(--line); padding: 0 6px;
+}
 .enso-dark {
   font-family: var(--mono); font-size: 9.5px; text-transform: uppercase;
   letter-spacing: 0.06em; color: var(--clay); border: 1px solid var(--clay); padding: 0 6px;
@@ -620,4 +624,13 @@ footer {
 }
 
 :focus-visible { outline: 2px solid var(--flesh); outline-offset: 2px; }
+
+/* Supply region rows: name on the left, figures right-aligned on one line. */
+#supply-regions .stat-row { align-items: flex-start; }
+#supply-regions .stat-name { flex: 1 1 auto; min-width: 0; }
+#supply-regions .stat-right { flex: 0 0 auto; text-align: right; }
+#supply-regions .stat-comps { white-space: nowrap; }
+
+/* Keep a truck-availability status ("Slight Surplus") on one line inside its chip. */
+.avail-chip span { white-space: nowrap; }
 

@@ -171,7 +171,7 @@ REGION_NAMES = {
     "peru": "Peru",
     "colombia": "Colombia",
     "chile": "Chile",
-    "other": "Other imports (mainly Dominican Republic)",
+    "other": "Other imports",
 }
 
 # Only footnote the range-basis midpoint share once it's material — at 0% the
@@ -321,12 +321,19 @@ def build_supply(movement: dict, notes: list) -> dict:
             # (excluded from totals, comparisons suppressed) stays identical.
             reg_cfg = seasons_cfg.get(key)
             past_window = bool(reg_cfg) and not in_window(reg_cfg, today)
-            if cur == 0 and past_window:
+            if past_window:
+                # Past the arrival window, a thin or zero week is the season
+                # tailing off, not a half-filed report USDA will "revise".
                 partial_reason = "season_end"
                 end = datetime.strptime(reg_cfg["window"]["end"], "%m-%d")
-                notes.append(f"{name} reported no movement for the latest week — "
-                             f"consistent with the season ending (US arrival window "
-                             f"closed {end:%b} {end.day}). Comparisons suppressed.")
+                if cur == 0:
+                    notes.append(f"{name} reported no movement for the latest week — "
+                                 f"consistent with the season ending (US arrival window "
+                                 f"closed {end:%b} {end.day}). Comparisons suppressed.")
+                else:
+                    notes.append(f"{name} volume is tapering after the season ended "
+                                 f"(US arrival window closed {end:%b} {end.day}); the "
+                                 f"latest week is {cur:,.0f} lbs. Comparisons suppressed.")
             else:
                 partial_reason = "low_report"
                 notes.append(f"{name} movement for the latest week appears "
@@ -975,8 +982,20 @@ def build_headline(supply, pricing, freight, diesel, weather) -> str:
         mx = next((r for r in supply["regions"] if r["key"] == "mx"), None)
         if mx and mx.get("roll4_lbs") is not None:
             move = direction_word(mx.get("roll4_pct"), decimals=0)
+            # The 4-week total leads; the latest week rides along in parentheses
+            # as detail (it carries reporting-timing noise, so it never leads).
+            latest = ""
+            if not mx.get("partial") and mx.get("lbs"):
+                w = mx.get("wow_pct")
+                if w is None:
+                    latest = f" (latest week {mx['lbs'] / 1e6:.1f}M)"
+                elif round(w) == 0:
+                    latest = f" (latest week {mx['lbs'] / 1e6:.1f}M, flat)"
+                else:
+                    sign = "+" if w > 0 else "−"
+                    latest = f" (latest week {mx['lbs'] / 1e6:.1f}M, {sign}{abs(w):.0f}%)"
             parts.append(f"Mexico 4-week volume {mx['roll4_lbs'] / 1e6:.1f}M lbs, "
-                         f"{move} vs the prior four weeks")
+                         f"{move} vs the prior four weeks{latest}")
     bm = (pricing or {}).get("benchmark") or {}
     if bm.get("mx_latest") is not None:
         w = bm.get("wow_mx_pct")
@@ -1014,7 +1033,10 @@ def build_headline(supply, pricing, freight, diesel, weather) -> str:
     flagged = [r for r in (weather or {}).get("regions", [])
                if r.get("flag") in ("watch", "alert")]
     if flagged:
-        parts.append(f"{flagged[0]['name'].split(' (')[0]} weather bears watching")
+        f0 = flagged[0]
+        place = f0["name"].split(" (")[0]
+        country = COUNTRY_LABELS.get(f0.get("country"))
+        parts.append(f"{place}{', ' + country if country else ''} weather bears watching")
     return "; ".join(parts) + "." if parts else "Data pending first full refresh."
 
 
@@ -1428,7 +1450,9 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
     # 7. Weather — already event-driven, left as-is
     for r in (weather or {}).get("regions", []):
         if r.get("flag") in ("watch", "alert"):
-            sig_ops.append(f"{r['name']}: {r['note']}")
+            country = COUNTRY_LABELS.get(r.get("country"))
+            who = f"{r['name']}, {country}" if country else r["name"]
+            sig_ops.append(f"{who}: {r['note']}")
 
     # 8. ENSO — seasonal-to-annual forward signal. Leads with trend/direction
     # (not the band, which understates a fast ramp), then a near-term slot and a
