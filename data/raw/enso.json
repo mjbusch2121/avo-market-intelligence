@@ -1,28 +1,23 @@
 {
- "fetched_at": "2026-10-28T23:58:38+00:00",
+ "fetched_at": "2026-11-04T00:20:57+00:00",
  "primary": "roni",
  "roni": {
   "latest": {
-   "season": "JAS",
+   "season": "ASO",
    "year": 2026,
-   "anom": 1.69,
+   "anom": 1.97,
    "phase": "strong El Ni\u00f1o"
   },
   "trend": "strengthening",
   "three_seasons_ago": {
-   "season": "AMJ",
+   "season": "MJJ",
    "year": 2026,
-   "anom": 0.49
+   "anom": 0.97
   },
-  "delta3": 1.2,
-  "consecutive_seasons": 3,
+  "delta3": 1.0,
+  "consecutive_seasons": 4,
   "established_event": false,
   "series": [
-   {
-    "season": "ASO",
-    "year": 2023,
-    "anom": 1.04
-   },
    {
     "season": "SON",
     "year": 2023,
@@ -197,31 +192,31 @@
     "season": "JAS",
     "year": 2026,
     "anom": 1.69
+   },
+   {
+    "season": "ASO",
+    "year": 2026,
+    "anom": 1.97
    }
   ]
  },
  "oni": {
   "latest": {
-   "season": "JAS",
+   "season": "ASO",
    "year": 2026,
-   "anom": 2.16,
+   "anom": 2.46,
    "phase": "very strong El Ni\u00f1o"
   },
   "trend": "strengthening",
   "three_seasons_ago": {
-   "season": "AMJ",
+   "season": "MJJ",
    "year": 2026,
-   "anom": 0.95
+   "anom": 1.39
   },
-  "delta3": 1.21,
-  "consecutive_seasons": 4,
-  "established_event": false,
+  "delta3": 1.07,
+  "consecutive_seasons": 5,
+  "established_event": true,
   "series": [
-   {
-    "season": "ASO",
-    "year": 2023,
-    "anom": 1.5
-   },
    {
     "season": "SON",
     "year": 2023,
@@ -396,6 +391,11 @@
     "season": "JAS",
     "year": 2026,
     "anom": 2.16
+   },
+   {
+    "season": "ASO",
+    "year": 2026,
+    "anom": 2.46
    }
   ]
  },
@@ -406,17 +406,12 @@
  },
  "nino12": {
   "latest": {
-   "week": "2026-10-21",
-   "nino12_anom": 5.2,
+   "week": "2026-10-28",
+   "nino12_anom": 5.4,
    "nino34_anom": 3.4,
-   "divergence": 1.8
+   "divergence": 2.0
   },
   "series": [
-   {
-    "week": "2024-10-30",
-    "nino12_anom": -0.5,
-    "nino34_anom": -0.2
-   },
    {
     "week": "2024-11-06",
     "nino12_anom": -0.2,
@@ -919,8 +914,8 @@
    },
    {
     "week": "2026-10-07",
-    "nino12_anom": 5.2,
-    "nino34_anom": 3.3
+    "nino12_anom": 5.3,
+    "nino34_anom": 3.2
    },
    {
     "week": "2026-10-14",
@@ -930,6 +925,11 @@
    {
     "week": "2026-10-21",
     "nino12_anom": 5.2,
+    "nino34_anom": 3.4
+   },
+   {
+    "week": "2026-10-28",
+    "nino12_anom": 5.4,
     "nino34_anom": 3.4
    }
   ]
