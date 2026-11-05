@@ -1,19 +1,19 @@
 {
- "fetched_at": "2026-11-04T00:20:46+00:00",
- "report_date": "2026-11-03",
+ "fetched_at": "2026-11-05T00:50:08+00:00",
+ "report_date": "2026-11-04",
  "prior_report_dates": [
+  "2026-11-03",
   "2026-11-02",
   "2026-10-30",
   "2026-10-29",
-  "2026-10-28",
-  "2026-10-27"
+  "2026-10-28"
  ],
  "rows": [
   {
    "district": "MEXICO CROSSINGS THROUGH TEXAS",
    "variety": "HASS",
    "package": "cartons 2 layer",
-   "size": "48s",
+   "size": "70s",
    "organic": "Y",
    "low": null,
    "high": null,
@@ -41,7 +41,7 @@
    "district": "MEXICO CROSSINGS THROUGH TEXAS",
    "variety": "HASS",
    "package": "cartons 2 layer",
-   "size": "70s",
+   "size": "48s",
    "organic": "Y",
    "low": null,
    "high": null,
@@ -55,21 +55,7 @@
    "district": "MEXICO CROSSINGS THROUGH TEXAS",
    "variety": "HASS",
    "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "N",
-   "low": null,
-   "high": null,
-   "mostly_low": null,
-   "mostly_high": null,
-   "market_tone": null,
-   "supply_tone": "VERY LIGHT",
-   "demand_tone": null
-  },
-  {
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "84s",
+   "size": "36s",
    "organic": "N",
    "low": null,
    "high": null,
@@ -97,7 +83,21 @@
    "district": "MEXICO CROSSINGS THROUGH TEXAS",
    "variety": "HASS",
    "package": "cartons 2 layer",
-   "size": "36s",
+   "size": "84s",
+   "organic": "N",
+   "low": null,
+   "high": null,
+   "mostly_low": null,
+   "mostly_high": null,
+   "market_tone": null,
+   "supply_tone": "VERY LIGHT",
+   "demand_tone": null
+  },
+  {
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "70s",
    "organic": "N",
    "low": null,
    "high": null,
@@ -152,6 +152,106 @@
  ],
  "recent_rows": [
   {
+   "report_date": "2026-11-04",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "70s",
+   "organic": "Y",
+   "mostly_low": null,
+   "mostly_high": null
+  },
+  {
+   "report_date": "2026-11-04",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "60s",
+   "organic": "Y",
+   "mostly_low": null,
+   "mostly_high": null
+  },
+  {
+   "report_date": "2026-11-04",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "Y",
+   "mostly_low": null,
+   "mostly_high": null
+  },
+  {
+   "report_date": "2026-11-04",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "36s",
+   "organic": "N",
+   "mostly_low": null,
+   "mostly_high": null
+  },
+  {
+   "report_date": "2026-11-04",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "32s",
+   "organic": "N",
+   "mostly_low": null,
+   "mostly_high": null
+  },
+  {
+   "report_date": "2026-11-04",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "84s",
+   "organic": "N",
+   "mostly_low": null,
+   "mostly_high": null
+  },
+  {
+   "report_date": "2026-11-04",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "70s",
+   "organic": "N",
+   "mostly_low": null,
+   "mostly_high": null
+  },
+  {
+   "report_date": "2026-11-04",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "40s",
+   "organic": "N",
+   "mostly_low": null,
+   "mostly_high": null
+  },
+  {
+   "report_date": "2026-11-04",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "48s",
+   "organic": "N",
+   "mostly_low": null,
+   "mostly_high": null
+  },
+  {
+   "report_date": "2026-11-04",
+   "district": "MEXICO CROSSINGS THROUGH TEXAS",
+   "variety": "HASS",
+   "package": "cartons 2 layer",
+   "size": "60s",
+   "organic": "N",
+   "mostly_low": null,
+   "mostly_high": null
+  },
+  {
    "report_date": "2026-11-03",
    "district": "MEXICO CROSSINGS THROUGH TEXAS",
    "variety": "HASS",
@@ -850,106 +950,6 @@
    "organic": "N",
    "mostly_low": 26.25,
    "mostly_high": 28.25
-  },
-  {
-   "report_date": "2026-10-23",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "Y",
-   "mostly_low": 32.25,
-   "mostly_high": 34.25
-  },
-  {
-   "report_date": "2026-10-23",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "Y",
-   "mostly_low": 32.25,
-   "mostly_high": 34.25
-  },
-  {
-   "report_date": "2026-10-23",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "Y",
-   "mostly_low": 34.25,
-   "mostly_high": 36.25
-  },
-  {
-   "report_date": "2026-10-23",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "32s",
-   "organic": "N",
-   "mostly_low": 28.25,
-   "mostly_high": 30.25
-  },
-  {
-   "report_date": "2026-10-23",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "36s",
-   "organic": "N",
-   "mostly_low": 26.25,
-   "mostly_high": 28.25
-  },
-  {
-   "report_date": "2026-10-23",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "40s",
-   "organic": "N",
-   "mostly_low": 24.25,
-   "mostly_high": 26.25
-  },
-  {
-   "report_date": "2026-10-23",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "48s",
-   "organic": "N",
-   "mostly_low": 24.25,
-   "mostly_high": 26.25
-  },
-  {
-   "report_date": "2026-10-23",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "60s",
-   "organic": "N",
-   "mostly_low": 22.25,
-   "mostly_high": 24.25
-  },
-  {
-   "report_date": "2026-10-23",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "70s",
-   "organic": "N",
-   "mostly_low": 20.25,
-   "mostly_high": 22.25
-  },
-  {
-   "report_date": "2026-10-23",
-   "district": "MEXICO CROSSINGS THROUGH TEXAS",
-   "variety": "HASS",
-   "package": "cartons 2 layer",
-   "size": "84s",
-   "organic": "N",
-   "mostly_low": 18.25,
-   "mostly_high": 20.25
   }
  ]
 }
