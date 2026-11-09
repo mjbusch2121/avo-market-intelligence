@@ -354,6 +354,39 @@ def build_supply(movement: dict, notes: list) -> dict:
             "season": season,
         })
 
+    # Headline baseline for Mexico: the latest week vs the average of the 4 weeks
+    # BEFORE it (excludes the latest week so a shock week can't dilute its own
+    # baseline). Built by DATE, not list position: we anchor on the latest week's
+    # ending date and look up the four dates 7/14/21/28 days earlier in `weekly`,
+    # using each only if that week exists. `weekly[w]["mx"]` is the same Mexico
+    # aggregation the region row reports, summed straight from movement_weekly.json.
+    mx_region = next((r for r in regions if r["key"] == "mx"), None)
+    if mx_region is not None:
+        # Guard: the date we anchor on (cur_w) must be the week the Mexico region
+        # row actually reports. If they ever diverge, the baseline would be built
+        # off the wrong week, so stop loudly rather than publish a silent mistake.
+        if mx_region["lbs"] != weekly[cur_w]["mx"]:
+            raise RuntimeError(
+                f"Mexico latest-week mismatch: region row reports "
+                f"{mx_region['lbs']} lbs but weekly[{cur_w}]['mx'] is "
+                f"{weekly[cur_w]['mx']}. Refusing to build the headline baseline.")
+        latest_date = date.fromisoformat(cur_w)
+        prior4 = []
+        for back in (28, 21, 14, 7):  # oldest -> newest
+            wk = (latest_date - timedelta(days=back)).isoformat()
+            if wk in weekly:
+                prior4.append(weekly[wk]["mx"])
+        mx_region["prior4_lbs"] = [round(v, 1) for v in prior4]
+        if len(prior4) >= 4:
+            avg_prior4 = sum(prior4) / len(prior4)
+            mx_region["avg_prior4_lbs"] = round(avg_prior4, 1)
+            mx_region["vs_avg_pct"] = (round((mx_region["lbs"] / avg_prior4 - 1) * 100, 1)
+                                       if avg_prior4 else None)
+        else:
+            # Fewer than 4 prior weeks in history -> no trustworthy baseline.
+            mx_region["avg_prior4_lbs"] = None
+            mx_region["vs_avg_pct"] = None
+
     # Trailing-volume share, and the minor/major split used for gap presentation.
     # A gapped MINOR origin (thin share) gets a compact one-line card and folds
     # into a single combined "what to watch" note; a gapped MAJOR origin (CA) keeps
@@ -973,6 +1006,37 @@ def direction_word(p, up="up", down="down", flat="flat", decimals=0):
     return flat
 
 
+def mexico_headline_clause(latest_lbs, prior4, partial) -> str:
+    """Headline Mexico clause: the latest week vs its recent weekly average.
+
+    `prior4` is a list of up to 4 weekly lbs values for the 4 weeks BEFORE the
+    latest week (the latest week is excluded so a shock week can't dilute its own
+    baseline). With fewer than 4 we don't have a trustworthy baseline, so we state
+    the latest week alone. `partial` only adds a caution — it never hides the
+    number, because a real supply shock (e.g. a grower strike) can look like a
+    partial USDA report, and suppressing the figure would bury the story.
+    """
+    latest_m = latest_lbs / 1e6
+    if not prior4 or len(prior4) < 4:
+        # Baseline missing: fewer than 4 prior weeks in history.
+        return f"Mexico shipped {latest_m:.1f}M lbs in the latest week"
+
+    avg = sum(prior4) / len(prior4)
+    avg_m = avg / 1e6
+    pct_vs_avg = (latest_lbs / avg - 1) * 100 if avg else 0
+    r = round(pct_vs_avg)
+    if r == 0:
+        clause = (f"Mexico shipped {latest_m:.1f}M lbs in the latest week, "
+                  f"in line with its recent weekly average ({avg_m:.1f}M)")
+    else:
+        word = "above" if r > 0 else "below"
+        clause = (f"Mexico shipped {latest_m:.1f}M lbs in the latest week, "
+                  f"{abs(r):.0f}% {word} its recent weekly average ({avg_m:.1f}M)")
+    if partial:
+        clause += " — unusually low; USDA may revise"
+    return clause
+
+
 def build_headline(supply, pricing, freight, diesel, weather) -> str:
     parts = []
     if supply:
@@ -980,22 +1044,13 @@ def build_headline(supply, pricing, freight, diesel, weather) -> str:
         # A single week (or one week vs a 4-week average) still carries the
         # attribution noise; the 4-week TOTAL vs the prior four weeks does not.
         mx = next((r for r in supply["regions"] if r["key"] == "mx"), None)
-        if mx and mx.get("roll4_lbs") is not None:
-            move = direction_word(mx.get("roll4_pct"), decimals=0)
-            # The 4-week total leads; the latest week rides along in parentheses
-            # as detail (it carries reporting-timing noise, so it never leads).
-            latest = ""
-            if not mx.get("partial") and mx.get("lbs"):
-                w = mx.get("wow_pct")
-                if w is None:
-                    latest = f" (latest week {mx['lbs'] / 1e6:.1f}M)"
-                elif round(w) == 0:
-                    latest = f" (latest week {mx['lbs'] / 1e6:.1f}M, flat)"
-                else:
-                    sign = "+" if w > 0 else "−"
-                    latest = f" (latest week {mx['lbs'] / 1e6:.1f}M, {sign}{abs(w):.0f}%)"
-            parts.append(f"Mexico 4-week volume {mx['roll4_lbs'] / 1e6:.1f}M lbs, "
-                         f"{move} vs the prior four weeks{latest}")
+        if mx and mx.get("lbs"):
+            # Lead with the latest week vs the average of the 4 weeks before it.
+            # The 4-week totals stay in the supply panel; the headline needs to
+            # surface a sudden stop (a strike week) the same week it happens, not
+            # weeks later as a 4-vs-4 block comparison would.
+            parts.append(mexico_headline_clause(
+                mx["lbs"], mx.get("prior4_lbs") or [], mx.get("partial")))
     bm = (pricing or {}).get("benchmark") or {}
     if bm.get("mx_latest") is not None:
         w = bm.get("wow_mx_pct")
