@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-11T00:24:10Z",
+ "generated_at": "2026-11-12T01:52:32Z",
  "week": {
   "end": "2026-11-07",
   "label": "Week ending Nov 07, 2026"
@@ -11,7 +11,7 @@
   "Ocean temperatures off northern Peru are 5.6\u00b0C above normal \u2014 near the warmest in 45 years of records. Warm coastal water at this level preceded the severe flooding in Lambayeque and Piura in 1998, 2017 and 2023. The warming is concentrated on the Peru coast rather than the central Pacific, the pattern behind those events. Watch the January\u2013March rain window for field access and packhouse logistics.",
   "Texas-crossing Hass 48s FOB jumped 12% week-over-week to $27.25 \u2014 an unusually large move for this point in the season (the largest same-week move in 4 seasons of history).",
   "Benchmark Hass 48s FOB is at the lower edge of its 4-year seasonal 25th\u201375th band \u2014 soft for this week.",
-  "Lambayeque (Motupe/Olmos), Peru: Heavy rain ahead (84 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks."
+  "Lambayeque (Motupe/Olmos), Peru: Heavy rain ahead (64 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks."
  ],
  "kpis": [
   {
@@ -22,9 +22,9 @@
   },
   {
    "label": "All origins \u00b7 trailing 4 wk",
-   "value": "238.3M lbs",
+   "value": "239.3M lbs",
    "delta_pct": null,
-   "sub": "+6% vs 4-yr seasonal avg"
+   "sub": "+7% vs 4-yr seasonal avg"
   },
   {
    "label": "Hass 48s FOB (TX)",
@@ -47,45 +47,45 @@
  ],
  "feeds": {
   "supply": {
-   "fetched_at": "2026-11-11T00:23:59+00:00",
+   "fetched_at": "2026-11-12T01:52:22+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "pricing": {
-   "fetched_at": "2026-11-11T00:23:59+00:00",
+   "fetched_at": "2026-11-12T01:52:22+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "freight": {
-   "fetched_at": "2026-11-11T00:24:00+00:00",
+   "fetched_at": "2026-11-12T01:52:23+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "diesel": {
-   "fetched_at": "2026-11-11T00:24:04+00:00",
+   "fetched_at": "2026-11-12T01:52:24+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "weather": {
-   "fetched_at": "2026-11-11T00:24:09+00:00",
+   "fetched_at": "2026-11-12T01:52:30+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null
   },
   "_stale_after_days": 8,
   "enso": {
-   "fetched_at": "2026-11-11T00:24:10+00:00",
+   "fetched_at": "2026-11-12T01:52:31+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null,
    "stale_after_days": 45
   },
   "enso_weekly": {
-   "fetched_at": "2026-11-11T00:24:10+00:00",
+   "fetched_at": "2026-11-12T01:52:31+00:00",
    "fetch_age_days": 0,
    "stale": false,
    "fetch_error": null,
@@ -98,16 +98,16 @@
    "lbs": 2484870,
    "wow_pct": -14.3
   },
-  "total_lbs": 60822461,
-  "total_lbs_all_regions": 60822461,
+  "total_lbs": 61825157,
+  "total_lbs_all_regions": 61825157,
   "total_excludes": [],
   "exclude_reasons": {},
-  "total_wow_pct": -7.4,
-  "total_vs_3yr_pct": 6.3,
-  "total_roll4_lbs": 238276253,
-  "total_roll4_pct": -7.5,
+  "total_wow_pct": -5.9,
+  "total_vs_3yr_pct": 8.1,
+  "total_roll4_lbs": 239278949,
+  "total_roll4_pct": -7.1,
   "total_roll4_baseline_lbs": 224381053,
-  "total_roll4_vs_baseline_pct": 6.2,
+  "total_roll4_vs_baseline_pct": 6.6,
   "baseline_n": 20,
   "baseline_years": 4,
   "partial_regions": [],
@@ -136,27 +136,27 @@
     ],
     "avg_prior4_lbs": 58078741.5,
     "vs_avg_pct": 0.4,
-    "vol_share": 0.9526,
+    "vol_share": 0.9486,
     "minor": false,
     "gap_reason": null
    },
    {
     "key": "ca",
     "name": "California",
-    "lbs": 0,
+    "lbs": 1002696,
     "partial": false,
     "partial_reason": null,
-    "wow_pct": -100.0,
-    "roll4_lbs": 1076441,
+    "wow_pct": 151.0,
+    "roll4_lbs": 2079137,
     "roll4_prior_lbs": 8674561,
-    "roll4_pct": -87.6,
-    "vs_3yr_pct": -100.0,
+    "roll4_pct": -76.0,
+    "vs_3yr_pct": 243.7,
     "season": {
      "status": "active",
      "message": null,
-     "last_reported": "2026-10-31"
+     "last_reported": "2026-11-07"
     },
-    "vol_share": 0.0045,
+    "vol_share": 0.0087,
     "minor": true,
     "gap_reason": null
    },
@@ -236,7 +236,7 @@
      "message": null,
      "last_reported": "2026-11-07"
     },
-    "vol_share": 0.0322,
+    "vol_share": 0.0321,
     "minor": true,
     "gap_reason": null
    }
@@ -782,7 +782,7 @@
     "week": "2026-11-07",
     "avg3yr": 57211129,
     "mx": 58337591,
-    "ca": 0,
+    "ca": 1002696,
     "peru": 0,
     "colombia": 231898,
     "chile": 229171,
@@ -1323,7 +1323,7 @@
     "wow_max": null
    }
   ],
-  "stale_days": 8,
+  "stale_days": 9,
   "fetch_error": null,
   "stale_after_days": 10
  },
@@ -1795,23 +1795,23 @@
     "role": "Primary Mexican Hass source (~80% of exports)",
     "past7": {
      "days": 7,
-     "rain_mm": 9.5,
+     "rain_mm": 9.7,
      "tmax_avg_c": 23.8,
      "tmin_avg_c": 11.4,
      "tmax_peak_c": 24.6,
      "tmax_peak_date": "2026-11-06",
-     "tmax_peak_lead_days": 3,
+     "tmax_peak_lead_days": 2,
      "tmin_low_c": 10.0
     },
     "next14": {
      "days": 14,
-     "rain_mm": 27.0,
-     "tmax_avg_c": 23.0,
-     "tmin_avg_c": 11.5,
-     "tmax_peak_c": 25.0,
-     "tmax_peak_date": "2026-11-21",
-     "tmax_peak_lead_days": 11,
-     "tmin_low_c": 8.6
+     "rain_mm": 28.1,
+     "tmax_avg_c": 22.4,
+     "tmin_avg_c": 11.2,
+     "tmax_peak_c": 23.4,
+     "tmax_peak_date": "2026-11-11",
+     "tmax_peak_lead_days": 0,
+     "tmin_low_c": 8.8
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -1827,23 +1827,23 @@
     "role": "Second Mexican export state",
     "past7": {
      "days": 7,
-     "rain_mm": 1.6,
+     "rain_mm": 1.2,
      "tmax_avg_c": 24.5,
-     "tmin_avg_c": 15.5,
+     "tmin_avg_c": 15.4,
      "tmax_peak_c": 25.8,
      "tmax_peak_date": "2026-11-06",
-     "tmax_peak_lead_days": 3,
+     "tmax_peak_lead_days": 2,
      "tmin_low_c": 14.6
     },
     "next14": {
      "days": 14,
-     "rain_mm": 2.4,
-     "tmax_avg_c": 24.5,
-     "tmin_avg_c": 14.3,
-     "tmax_peak_c": 27.3,
-     "tmax_peak_date": "2026-11-21",
-     "tmax_peak_lead_days": 11,
-     "tmin_low_c": 11.6
+     "rain_mm": 4.6,
+     "tmax_avg_c": 23.3,
+     "tmin_avg_c": 13.7,
+     "tmax_peak_c": 25.1,
+     "tmax_peak_date": "2026-11-20",
+     "tmax_peak_lead_days": 9,
+     "tmin_low_c": 11.4
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -1860,29 +1860,29 @@
     "past7": {
      "days": 7,
      "rain_mm": 0,
-     "tmax_avg_c": 27.6,
-     "tmin_avg_c": 13.1,
+     "tmax_avg_c": 28.8,
+     "tmin_avg_c": 13.4,
      "tmax_peak_c": 31.1,
      "tmax_peak_date": "2026-11-08",
-     "tmax_peak_lead_days": 5,
-     "tmin_low_c": 11.8
+     "tmax_peak_lead_days": 4,
+     "tmin_low_c": 12.3
     },
     "next14": {
      "days": 14,
-     "rain_mm": 9.7,
-     "tmax_avg_c": 23.5,
-     "tmin_avg_c": 14.4,
-     "tmax_peak_c": 30.7,
-     "tmax_peak_date": "2026-11-10",
+     "rain_mm": 58.3,
+     "tmax_avg_c": 20.8,
+     "tmin_avg_c": 13.9,
+     "tmax_peak_c": 27.5,
+     "tmax_peak_date": "2026-11-11",
      "tmax_peak_lead_days": 0,
-     "tmin_low_c": 12.1
+     "tmin_low_c": 11.4
     },
     "source": "open-meteo",
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "flag_kind": null,
     "available": true,
-    "nws_narrative": "This Afternoon: Sunny, with a high near 86. West northwest wind around 5 mph.",
+    "nws_narrative": "Veterans Day: Sunny, with a high near 86. West southwest wind around 5 mph.",
     "stage": null
    },
    {
@@ -1893,29 +1893,29 @@
     "past7": {
      "days": 7,
      "rain_mm": 0,
-     "tmax_avg_c": 27.5,
-     "tmin_avg_c": 13.0,
+     "tmax_avg_c": 28.5,
+     "tmin_avg_c": 13.4,
      "tmax_peak_c": 30.9,
      "tmax_peak_date": "2026-11-08",
-     "tmax_peak_lead_days": 5,
+     "tmax_peak_lead_days": 4,
      "tmin_low_c": 11.8
     },
     "next14": {
      "days": 14,
-     "rain_mm": 19.0,
-     "tmax_avg_c": 22.3,
-     "tmin_avg_c": 13.5,
-     "tmax_peak_c": 29.8,
-     "tmax_peak_date": "2026-11-10",
+     "rain_mm": 19.7,
+     "tmax_avg_c": 20.5,
+     "tmin_avg_c": 13.0,
+     "tmax_peak_c": 29.1,
+     "tmax_peak_date": "2026-11-11",
      "tmax_peak_lead_days": 0,
-     "tmin_low_c": 11.1
+     "tmin_low_c": 10.9
     },
     "source": "open-meteo",
     "flag": "normal",
     "note": "No weather-driven supply disruption signals in the 2-4 week window.",
     "flag_kind": null,
     "available": true,
-    "nws_narrative": "This Afternoon: Sunny, with a high near 86. Southwest wind 5 to 10 mph.",
+    "nws_narrative": "Veterans Day: Sunny, with a high near 84. South wind around 5 mph.",
     "stage": null
    },
    {
@@ -1925,22 +1925,22 @@
     "role": "Own 600ha + La Loma + main packhouse \u2014 highest weight",
     "past7": {
      "days": 7,
-     "rain_mm": 31.0,
+     "rain_mm": 27.9,
      "tmax_avg_c": 21.0,
-     "tmin_avg_c": 12.7,
+     "tmin_avg_c": 12.6,
      "tmax_peak_c": 22.6,
      "tmax_peak_date": "2026-11-09",
-     "tmax_peak_lead_days": 6,
+     "tmax_peak_lead_days": 5,
      "tmin_low_c": 11.1
     },
     "next14": {
      "days": 14,
-     "rain_mm": 102.8,
-     "tmax_avg_c": 21.0,
-     "tmin_avg_c": 12.1,
+     "rain_mm": 135.0,
+     "tmax_avg_c": 21.1,
+     "tmin_avg_c": 11.8,
      "tmax_peak_c": 22.4,
-     "tmax_peak_date": "2026-11-10",
-     "tmax_peak_lead_days": 0,
+     "tmax_peak_date": "2026-11-15",
+     "tmax_peak_lead_days": 4,
      "tmin_low_c": 10.0
     },
     "source": "open-meteo",
@@ -1957,23 +1957,23 @@
     "role": "220 contract growers across Caldas/Quind\u00edo/Risaralda",
     "past7": {
      "days": 7,
-     "rain_mm": 96.9,
-     "tmax_avg_c": 21.2,
-     "tmin_avg_c": 14.2,
+     "rain_mm": 81.6,
+     "tmax_avg_c": 21.6,
+     "tmin_avg_c": 14.1,
      "tmax_peak_c": 25.0,
      "tmax_peak_date": "2026-11-09",
-     "tmax_peak_lead_days": 6,
-     "tmin_low_c": 13.6
+     "tmax_peak_lead_days": 5,
+     "tmin_low_c": 13.5
     },
     "next14": {
      "days": 14,
-     "rain_mm": 158.0,
-     "tmax_avg_c": 21.7,
-     "tmin_avg_c": 13.4,
-     "tmax_peak_c": 24.1,
-     "tmax_peak_date": "2026-11-10",
+     "rain_mm": 151.4,
+     "tmax_avg_c": 21.4,
+     "tmin_avg_c": 13.7,
+     "tmax_peak_c": 23.9,
+     "tmax_peak_date": "2026-11-11",
      "tmax_peak_lead_days": 0,
-     "tmin_low_c": 11.2
+     "tmin_low_c": 12.4
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -1989,23 +1989,23 @@
     "role": "Operational center, 370ac + packhouse",
     "past7": {
      "days": 7,
-     "rain_mm": 1.5,
-     "tmax_avg_c": 26.3,
-     "tmin_avg_c": 21.3,
-     "tmax_peak_c": 26.8,
-     "tmax_peak_date": "2026-11-06",
-     "tmax_peak_lead_days": 3,
+     "rain_mm": 1.3,
+     "tmax_avg_c": 26.4,
+     "tmin_avg_c": 21.4,
+     "tmax_peak_c": 27.0,
+     "tmax_peak_date": "2026-11-10",
+     "tmax_peak_lead_days": 6,
      "tmin_low_c": 20.3
     },
     "next14": {
      "days": 14,
-     "rain_mm": 9.8,
-     "tmax_avg_c": 27.2,
-     "tmin_avg_c": 22.7,
-     "tmax_peak_c": 28.1,
-     "tmax_peak_date": "2026-11-16",
-     "tmax_peak_lead_days": 6,
-     "tmin_low_c": 21.4
+     "rain_mm": 5.9,
+     "tmax_avg_c": 27.3,
+     "tmin_avg_c": 22.8,
+     "tmax_peak_c": 28.0,
+     "tmax_peak_date": "2026-11-15",
+     "tmax_peak_lead_days": 4,
+     "tmin_low_c": 21.8
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -2021,27 +2021,27 @@
     "role": "Northern coast \u2014 the El Ni\u00f1o flood corridor",
     "past7": {
      "days": 7,
-     "rain_mm": 37.9,
-     "tmax_avg_c": 28.3,
-     "tmin_avg_c": 21.5,
-     "tmax_peak_c": 30.3,
-     "tmax_peak_date": "2026-11-08",
-     "tmax_peak_lead_days": 5,
-     "tmin_low_c": 20.7
+     "rain_mm": 29.3,
+     "tmax_avg_c": 28.7,
+     "tmin_avg_c": 21.3,
+     "tmax_peak_c": 31.0,
+     "tmax_peak_date": "2026-11-10",
+     "tmax_peak_lead_days": 6,
+     "tmin_low_c": 20.1
     },
     "next14": {
      "days": 14,
-     "rain_mm": 84.4,
+     "rain_mm": 64.1,
      "tmax_avg_c": 31.3,
-     "tmin_avg_c": 22.1,
+     "tmin_avg_c": 22.0,
      "tmax_peak_c": 33.4,
-     "tmax_peak_date": "2026-11-22",
-     "tmax_peak_lead_days": 12,
-     "tmin_low_c": 20.1
+     "tmax_peak_date": "2026-11-18",
+     "tmax_peak_lead_days": 7,
+     "tmin_low_c": 20.5
     },
     "source": "open-meteo",
     "flag": "watch",
-    "note": "Heavy rain ahead (84 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
+    "note": "Heavy rain ahead (64 mm/14d) \u2014 expect harvest and packing slowdowns hitting arrivals in 2-4 weeks.",
     "flag_kind": "rain",
     "available": true,
     "stage": "sizing"
@@ -2053,23 +2053,23 @@
     "role": "Mid-to-large partner producers",
     "past7": {
      "days": 7,
-     "rain_mm": 0.6,
-     "tmax_avg_c": 28.5,
+     "rain_mm": 0.8,
+     "tmax_avg_c": 28.6,
      "tmin_avg_c": 23.2,
      "tmax_peak_c": 29.0,
      "tmax_peak_date": "2026-11-07",
-     "tmax_peak_lead_days": 4,
+     "tmax_peak_lead_days": 3,
      "tmin_low_c": 22.9
     },
     "next14": {
      "days": 14,
-     "rain_mm": 1.1,
-     "tmax_avg_c": 29.9,
-     "tmin_avg_c": 24.2,
-     "tmax_peak_c": 30.9,
-     "tmax_peak_date": "2026-11-20",
-     "tmax_peak_lead_days": 10,
-     "tmin_low_c": 23.2
+     "rain_mm": 0.2,
+     "tmax_avg_c": 30.1,
+     "tmin_avg_c": 24.3,
+     "tmax_peak_c": 30.8,
+     "tmax_peak_date": "2026-11-22",
+     "tmax_peak_lead_days": 11,
+     "tmin_low_c": 23.9
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -2085,23 +2085,23 @@
     "role": "Cloud forest, Amazon-facing \u2014 different regime",
     "past7": {
      "days": 7,
-     "rain_mm": 84.9,
+     "rain_mm": 83.7,
      "tmax_avg_c": 25.9,
-     "tmin_avg_c": 16.8,
+     "tmin_avg_c": 16.7,
      "tmax_peak_c": 28.0,
      "tmax_peak_date": "2026-11-04",
-     "tmax_peak_lead_days": 1,
+     "tmax_peak_lead_days": 0,
      "tmin_low_c": 15.1
     },
     "next14": {
      "days": 14,
-     "rain_mm": 163.6,
-     "tmax_avg_c": 27.0,
+     "rain_mm": 144.9,
+     "tmax_avg_c": 27.1,
      "tmin_avg_c": 17.5,
-     "tmax_peak_c": 29.6,
-     "tmax_peak_date": "2026-11-18",
-     "tmax_peak_lead_days": 8,
-     "tmin_low_c": 16.5
+     "tmax_peak_c": 29.0,
+     "tmax_peak_date": "2026-11-17",
+     "tmax_peak_lead_days": 6,
+     "tmin_low_c": 15.1
     },
     "source": "open-meteo",
     "flag": "normal",
@@ -3351,7 +3351,7 @@
     "weather_wet": true
    }
   ],
-  "fetched_at": "2026-11-11T00:24:10+00:00"
+  "fetched_at": "2026-11-12T01:52:31+00:00"
  },
  "meta": {
   "notes": [],
