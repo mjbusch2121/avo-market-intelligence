@@ -235,6 +235,11 @@ def fetch_pricing_current():
             "market_tone": r.get("market_tone_comments"),
             "supply_tone": r.get("supply_tone_comments"),
             "demand_tone": r.get("demand_tone_comments"),
+            # Per-row qualifier text. On priced days it's "occasional higher"
+            # noise, but when USDA can't establish a market this is the ONLY
+            # field that says so ("Supplies insufficient ... to establish a
+            # market") — the tone fields can be null on those days.
+            "comment": r.get("comment"),
         } for r in current],
         # keep prior-day rows too so build_summary can compute day/week deltas
         "recent_rows": [{
@@ -246,6 +251,7 @@ def fetch_pricing_current():
             "organic": r.get("organic"),
             "mostly_low": r.get("mostly_low_price"),
             "mostly_high": r.get("mostly_high_price"),
+            "comment": r.get("comment"),
         } for r in rows if r["district"] in PRICE_DISTRICTS],
     })
     print(f"Pricing current: {len(current)} rows for {latest}")

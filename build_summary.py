@@ -1016,7 +1016,7 @@ def _short_date(iso: str) -> str:
     return f"{d:%b} {d.day}"
 
 
-def pricing_gap_info(pricing, supply) -> dict:
+def pricing_gap_info(pricing, supply, current=None) -> dict:
     """Is the FOB benchmark current, and how should the gap be described?
 
     "Not current" means the latest Texas-crossing benchmark week is OLDER than
@@ -1035,6 +1035,14 @@ def pricing_gap_info(pricing, supply) -> dict:
                         "vs last reported (…)" so a multi-week move isn't
                         presented as one week's move
       resumed_from      that comparison week (None unless resumed_after_gap)
+      no_market         USDA's own row comment says a market couldn't be
+                        established — only then may the wording claim it
+      comment           that comment, cleaned (single spaces, no double period;
+                        None unless no_market)
+
+    `current` is the raw usda_current.json dict; its latest-day rows carry the
+    per-row `comment` field (stored by the fetcher since Chunk 16, so it's
+    absent from files fetched before that — no_market just stays False then).
     """
     bm = (pricing or {}).get("benchmark") or {}
     pw, sw = bm.get("week"), (supply or {}).get("week_end")
@@ -1044,10 +1052,23 @@ def pricing_gap_info(pricing, supply) -> dict:
         if t.get("district") == "MEXICO CROSSINGS THROUGH TEXAS":
             tone = (t.get("tone") or {}).get("supply")
     tone = tone.lower() if tone else None
+    no_market, comment = False, None
+    for r in (current or {}).get("rows", []):
+        if (r.get("district") != "MEXICO CROSSINGS THROUGH TEXAS"
+                or "HASS" not in (r.get("variety") or "").upper()):
+            continue
+        c = " ".join((r.get("comment") or "").split())  # collapse whitespace
+        if "to establish a market" in c.lower():
+            no_market = True
+            if c.endswith(".."):
+                c = c[:-1]
+            comment = c
+            break
     prior = bm.get("prior_week")
     resumed = bool(pw and prior and
                    (date.fromisoformat(pw) - date.fromisoformat(prior)).days > 7)
     return {"stale": stale, "since": pw, "supply_tone": tone,
+            "no_market": no_market, "comment": comment,
             "resumed_after_gap": resumed,
             "resumed_from": prior if resumed else None}
 
@@ -1104,9 +1125,13 @@ def build_headline(supply, pricing, freight, diesel, weather) -> str:
         # don't repeat the last price as if current. The gap is itself market
         # intel — no established market is typical of a supply disruption.
         clause = f"no USDA Texas-crossing FOB since {_short_date(gap['since'])}"
-        if gap.get("supply_tone"):
-            # Joined with an em-dash, not "; " — dashboard.js splits headline
-            # clauses on "; ", and the tone belongs inside this clause.
+        # Joined with an em-dash, not "; " — dashboard.js splits headline
+        # clauses on "; ", and these belong inside this clause.
+        if gap.get("no_market"):
+            # USDA's own comment says the market couldn't be established —
+            # only with that sourcing may the headline claim it.
+            clause += " — too few supplies to establish a market, per USDA"
+        elif gap.get("supply_tone"):
             clause += f" — USDA rates supply {gap['supply_tone']}"
         parts.append(clause)
     elif bm.get("mx_latest") is not None:
@@ -1338,10 +1363,19 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
     price_gap = (pricing or {}).get("gap") or {}
     if price_gap.get("stale") and price_gap.get("since"):
         since = _short_date(price_gap["since"])
-        tone = (f" and rates crossing supply as {price_gap['supply_tone']}"
-                if price_gap.get("supply_tone") else "")
-        coverage_sig.append(
-            f"USDA has reported no Texas-crossing FOB since {since}{tone}.")
+        if price_gap.get("no_market") and price_gap.get("comment"):
+            # Quote USDA's own words — stronger than any paraphrase, and the
+            # only basis on which "no established market" may be claimed.
+            bullet = (f"USDA has reported no Texas-crossing FOB since {since}: "
+                      f"\"{price_gap['comment']}\"")
+            if price_gap.get("supply_tone"):
+                bullet += f" Supply rated {price_gap['supply_tone']}."
+            coverage_sig.append(bullet)
+        else:
+            tone = (f" and rates crossing supply as {price_gap['supply_tone']}"
+                    if price_gap.get("supply_tone") else "")
+            coverage_sig.append(
+                f"USDA has reported no Texas-crossing FOB since {since}{tone}.")
 
     # --- Thresholds (tune these if the box feels too noisy/quiet) ---
     PORTS_WOW = 20          # % week-over-week swing in seaport arrivals
@@ -1734,10 +1768,12 @@ def build_kpis(supply, pricing, freight, diesel) -> list:
         if gap.get("stale") and wk:
             # Keep the last price visible but muted, with no ▲/▼ arrow: it's
             # the last known level, not this week's market.
+            gap_note = ("USDA: no established market" if gap.get("no_market")
+                        else "no USDA FOB reported since")
             kpis.append({"label": "Hass 48s FOB (TX)", "value": f"${bm['mx_latest']:.2f}",
                          "delta_pct": None, "muted": True,
                          "sub": f"last reported wk ending {_short_date(wk)} · "
-                                f"no USDA FOB reported since"})
+                                f"{gap_note}"})
         else:
             cmp_note = (f"vs last reported ({_short_date(gap['resumed_from'])})"
                         if gap.get("resumed_after_gap") else "vs prior week")
@@ -1834,7 +1870,7 @@ def main():
     # as-of line, KPI card and signals. Lives on the pricing dict so it ships
     # in data.json alongside the benchmark it qualifies.
     if pricing:
-        pricing["gap"] = pricing_gap_info(pricing, supply)
+        pricing["gap"] = pricing_gap_info(pricing, supply, current)
 
     # The price WoW signal needs the full weekly benchmark series exposed on
     # pricing; the front end does not. Build signals first, then strip it so it
