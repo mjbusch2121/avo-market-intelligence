@@ -619,6 +619,10 @@ def build_pricing(price_hist: dict, current: dict, notes: list) -> dict:
             # report_date (the daily size/grade table below): the two answer
             # different questions and legitimately differ by a few days.
             "week": mx_weeks[-1] if mx_weeks else None,
+            # The week behind wow_mx_pct. Normally 7 days before "week"; after a
+            # pricing gap it's the last week USDA established a market, so the
+            # labels can say "vs last reported (…)" instead of "vs prior week".
+            "prior_week": mx_weeks[-2] if len(mx_weeks) > 1 else None,
         },
         "report_date": current.get("report_date"),
         "table": table,
@@ -1006,6 +1010,48 @@ def direction_word(p, up="up", down="down", flat="flat", decimals=0):
     return flat
 
 
+def _short_date(iso: str) -> str:
+    """'2026-10-31' -> 'Oct 31' (no leading zero on the day)."""
+    d = date.fromisoformat(iso)
+    return f"{d:%b} {d.day}"
+
+
+def pricing_gap_info(pricing, supply) -> dict:
+    """Is the FOB benchmark current, and how should the gap be described?
+
+    "Not current" means the latest Texas-crossing benchmark week is OLDER than
+    the supply week in this build (week-ending dates compared, never fetch
+    timestamps). This is distinct from a fetch failure: USDA kept publishing
+    daily reports, just with no prices in them — trading too thin to establish
+    a market. fetch_error stays reserved for real outages (Chunk 12).
+
+    Returns:
+      stale             pricing is not current
+      since             last week-ending date USDA established a market
+      supply_tone       USDA's supply tone from the latest daily report,
+                        lowercased for prose (None when USDA gave none)
+      resumed_after_gap latest price's comparison week is >7 days behind it,
+                        i.e. the first price after a gap — label the change
+                        "vs last reported (…)" so a multi-week move isn't
+                        presented as one week's move
+      resumed_from      that comparison week (None unless resumed_after_gap)
+    """
+    bm = (pricing or {}).get("benchmark") or {}
+    pw, sw = bm.get("week"), (supply or {}).get("week_end")
+    stale = bool(pw and sw and pw < sw)
+    tone = None
+    for t in (pricing or {}).get("table", []):
+        if t.get("district") == "MEXICO CROSSINGS THROUGH TEXAS":
+            tone = (t.get("tone") or {}).get("supply")
+    tone = tone.lower() if tone else None
+    prior = bm.get("prior_week")
+    resumed = bool(pw and prior and
+                   (date.fromisoformat(pw) - date.fromisoformat(prior)).days > 7)
+    return {"stale": stale, "since": pw, "supply_tone": tone,
+            "resumed_after_gap": resumed,
+            "resumed_from": prior if resumed else None}
+
+
 def mexico_headline_clause(latest_lbs, prior4, partial) -> str:
     """Headline Mexico clause: the latest week vs its recent weekly average.
 
@@ -1052,11 +1098,26 @@ def build_headline(supply, pricing, freight, diesel, weather) -> str:
             parts.append(mexico_headline_clause(
                 mx["lbs"], mx.get("prior4_lbs") or [], mx.get("partial")))
     bm = (pricing or {}).get("benchmark") or {}
-    if bm.get("mx_latest") is not None:
+    gap = (pricing or {}).get("gap") or {}
+    if gap.get("stale") and gap.get("since"):
+        # USDA kept publishing daily reports with no prices in them: say that,
+        # don't repeat the last price as if current. The gap is itself market
+        # intel — no established market is typical of a supply disruption.
+        clause = f"no USDA Texas-crossing FOB since {_short_date(gap['since'])}"
+        if gap.get("supply_tone"):
+            # Joined with an em-dash, not "; " — dashboard.js splits headline
+            # clauses on "; ", and the tone belongs inside this clause.
+            clause += f" — USDA rates supply {gap['supply_tone']}"
+        parts.append(clause)
+    elif bm.get("mx_latest") is not None:
         w = bm.get("wow_mx_pct")
         verb = "steady" if w is None or abs(w) <= 1 else ("firmed" if w > 0 else "softened")
         move = "" if verb == "steady" else f" {abs(w):.1f}%"
-        parts.append(f"Texas-crossing Hass 48s FOB {verb}{move} at ${bm['mx_latest']:.2f}")
+        clause = f"Texas-crossing Hass 48s FOB {verb}{move} at ${bm['mx_latest']:.2f}"
+        if gap.get("resumed_after_gap"):
+            # First price after a gap: the % spans the whole gap, not one week.
+            clause += f" vs last reported ({_short_date(gap['resumed_from'])})"
+        parts.append(clause)
     lanes_list = (freight or {}).get("lanes", [])
     lanes = {l["dest"]: l for l in lanes_list}
     la, dal = lanes.get("Los Angeles"), lanes.get("Dallas")
@@ -1105,8 +1166,17 @@ def build_headline_asof(supply, pricing, freight, diesel) -> str:
     """
     parts = []
     week_end = (supply or {}).get("week_end")
-    if week_end:
+    pricing_week = ((pricing or {}).get("benchmark") or {}).get("week")
+    if week_end and pricing_week and pricing_week != week_end:
+        # The benchmark is older than the supply week (a USDA pricing gap):
+        # splitting the dates is the disclosure — one combined date would
+        # stamp a stale price with the fresh supply week.
+        parts.append(f"Supply wk ending {week_end}")
+        parts.append(f"Pricing wk ending {pricing_week}")
+    elif week_end:
         parts.append(f"Supply & pricing wk ending {week_end}")
+    elif pricing_week:
+        parts.append(f"Pricing wk ending {pricing_week}")
     fr = (freight or {}).get("report_date")
     if fr:
         parts.append(f"Freight {fr}")
@@ -1261,6 +1331,18 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
     minor_gap_sig = []
     sig_ops = []
 
+    # 0. USDA pricing gap — a data-integrity caveat AND market intel in one.
+    # State only what the stored data shows (no price, USDA's tone); no gloss
+    # about why the market couldn't be established — USDA never says that.
+    # Top tier so it can't be capped away.
+    price_gap = (pricing or {}).get("gap") or {}
+    if price_gap.get("stale") and price_gap.get("since"):
+        since = _short_date(price_gap["since"])
+        tone = (f" and rates crossing supply as {price_gap['supply_tone']}"
+                if price_gap.get("supply_tone") else "")
+        coverage_sig.append(
+            f"USDA has reported no Texas-crossing FOB since {since}{tone}.")
+
     # --- Thresholds (tune these if the box feels too noisy/quiet) ---
     PORTS_WOW = 20          # % week-over-week swing in seaport arrivals
     # FOB: flagged only outside the 25-75 percentile band (see below)
@@ -1302,6 +1384,10 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
     for key, label, wow, series, week in _wow_candidates(supply, pricing):
         if wow is None or week is None:
             continue                      # partial regions already null their wow
+        if key == "price_mx" and price_gap.get("stale"):
+            # The benchmark is older than the supply week: re-announcing last
+            # week's move as if new would contradict the gap signal above.
+            continue
         floor = WOW_FLOORS.get(key)
         if floor is None or abs(wow) < floor:
             continue
@@ -1341,14 +1427,19 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
         # isolation: a big move that lands above norm is a surge; one that lands
         # at norm is a rebound. Only supply regions carry vs_3yr_pct (the FOB
         # benchmark and partial regions don't) — omit the clause when it's null.
+        # First price after a gap: the % spans the whole gap, so name the week
+        # it's measured against instead of implying a one-week move.
+        period = ("vs last reported (" + _short_date(price_gap["resumed_from"]) + ")"
+                  if key == "price_mx" and price_gap.get("resumed_after_gap")
+                  else "week-over-week")
         vs = r.get("vs_3yr_pct") if r is not None else None
         if vs is not None:
             seasonal = (f"{abs(vs):.0f}% {'above' if vs > 0 else 'below'} the "
                         f"{supply_years}-year seasonal norm")
-            sig.append(f"{label} {direction} {abs(wow):.0f}% week-over-week{level} "
+            sig.append(f"{label} {direction} {abs(wow):.0f}% {period}{level} "
                        f"— {seasonal}, and {rank_phrase}.")
         else:
-            sig.append(f"{label} {direction} {abs(wow):.0f}% week-over-week{level} "
+            sig.append(f"{label} {direction} {abs(wow):.0f}% {period}{level} "
                        f"— an unusually large move for this point in the season "
                        f"({rank_phrase}).")
 
@@ -1369,9 +1460,11 @@ def build_signals(supply, pricing, freight, diesel, weather, feeds=None, enso=No
                        f"{direction_word(w)} to {imp['lbs'] / 1e6:.1f}M lbs — "
                        "watch East Coast spot pressure.")
 
-    # 3. Benchmark FOB — only when genuinely cheap or expensive for the week
+    # 3. Benchmark FOB — only when genuinely cheap or expensive for the week.
+    # Suppressed during a pricing gap: the band position describes the LAST
+    # reported week, not this one. It returns as soon as pricing resumes.
     bm = (pricing or {}).get("benchmark") or {}
-    if bm.get("band_position_pct") is not None:
+    if bm.get("band_position_pct") is not None and not price_gap.get("stale"):
         p = bm["band_position_pct"]
         yrs_p = bm.get("baseline_years", 3)
         if p <= 5:
@@ -1631,14 +1724,25 @@ def build_kpis(supply, pricing, freight, diesel) -> list:
             "sub": sub,
         })
     bm = (pricing or {}).get("benchmark") or {}
+    gap = (pricing or {}).get("gap") or {}
     if bm.get("mx_latest") is not None:
         # Weekly benchmark — stamp the week-ending date so it's not conflated with
         # the daily size/grade table (a few days later, different figure).
         wk = bm.get("week")
         wk_note = (datetime.fromisoformat(wk).strftime("wk ending %b %d") + " · "
                    if wk else "")
-        kpis.append({"label": "Hass 48s FOB (TX)", "value": f"${bm['mx_latest']:.2f}",
-                     "delta_pct": bm.get("wow_mx_pct"), "sub": f"{wk_note}vs prior week"})
+        if gap.get("stale") and wk:
+            # Keep the last price visible but muted, with no ▲/▼ arrow: it's
+            # the last known level, not this week's market.
+            kpis.append({"label": "Hass 48s FOB (TX)", "value": f"${bm['mx_latest']:.2f}",
+                         "delta_pct": None, "muted": True,
+                         "sub": f"last reported wk ending {_short_date(wk)} · "
+                                f"no USDA FOB reported since"})
+        else:
+            cmp_note = (f"vs last reported ({_short_date(gap['resumed_from'])})"
+                        if gap.get("resumed_after_gap") else "vs prior week")
+            kpis.append({"label": "Hass 48s FOB (TX)", "value": f"${bm['mx_latest']:.2f}",
+                         "delta_pct": bm.get("wow_mx_pct"), "sub": f"{wk_note}{cmp_note}"})
     la = next((l for l in (freight or {}).get("lanes", []) if l["dest"] == "Los Angeles"), None)
     if la:
         origin_label = la["origin_short"].split(" (")[0]
@@ -1725,6 +1829,12 @@ def main():
     week_end = supply.get("week_end")
     label = (datetime.fromisoformat(week_end).strftime("Week ending %b %d, %Y")
              if week_end else "—")
+
+    # Pricing-gap state (Chunk 15): computed once here, read by the headline,
+    # as-of line, KPI card and signals. Lives on the pricing dict so it ships
+    # in data.json alongside the benchmark it qualifies.
+    if pricing:
+        pricing["gap"] = pricing_gap_info(pricing, supply)
 
     # The price WoW signal needs the full weekly benchmark series exposed on
     # pricing; the front end does not. Build signals first, then strip it so it

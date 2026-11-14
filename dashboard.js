@@ -120,7 +120,9 @@ function renderKpis(data) {
     wrap.appendChild(
       el(
         "div",
-        "kpi",
+        // muted: the value is a last-known level, not this week's market
+        // (e.g. a USDA pricing gap) — dim it so it can't read as current.
+        "kpi" + (k.muted ? " kpi-muted" : ""),
         `
       <div class="kpi-label">${k.label}</div>
       <div class="kpi-value">${k.value}</div>
