@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-11-12T01:52:31+00:00",
+ "fetched_at": "2026-11-18T02:04:21+00:00",
  "primary": "roni",
  "roni": {
   "latest": {
@@ -406,17 +406,12 @@
  },
  "nino12": {
   "latest": {
-   "week": "2026-11-04",
-   "nino12_anom": 5.6,
-   "nino34_anom": 3.3,
-   "divergence": 2.3
+   "week": "2026-11-11",
+   "nino12_anom": 5.4,
+   "nino34_anom": 3.2,
+   "divergence": 2.2
   },
   "series": [
-   {
-    "week": "2024-11-13",
-    "nino12_anom": 0.2,
-    "nino34_anom": 0.0
-   },
    {
     "week": "2024-11-20",
     "nino12_anom": 0.8,
@@ -919,8 +914,8 @@
    },
    {
     "week": "2026-10-21",
-    "nino12_anom": 5.2,
-    "nino34_anom": 3.4
+    "nino12_anom": 5.3,
+    "nino34_anom": 3.3
    },
    {
     "week": "2026-10-28",
@@ -931,6 +926,11 @@
     "week": "2026-11-04",
     "nino12_anom": 5.6,
     "nino34_anom": 3.3
+   },
+   {
+    "week": "2026-11-11",
+    "nino12_anom": 5.4,
+    "nino34_anom": 3.2
    }
   ]
  }
